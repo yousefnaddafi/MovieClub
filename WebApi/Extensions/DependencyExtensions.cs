@@ -1,7 +1,10 @@
-﻿using App.Core.ApplicationService.ApplicationSerrvices.Actor;
+﻿
+using App.Core.ApplicationService.ApplicationSerrvices.ActorMovies;
 using App.Core.ApplicationService.ApplicationSerrvices.Actors;
 using App.Core.ApplicationService.ApplicationSerrvices.Countries;
+using App.Core.ApplicationService.ApplicationSerrvices.CountryMovies;
 using App.Core.ApplicationService.ApplicationSerrvices.Directors;
+using App.Core.ApplicationService.ApplicationSerrvices.GenreMovies;
 using App.Core.ApplicationService.ApplicationSerrvices.Genres;
 using App.Core.ApplicationService.ApplicationSerrvices.Movies;
 using App.Core.ApplicationService.ApplicationSerrvices.Products;
@@ -45,6 +48,9 @@ namespace WebApi.Extensions
             services.AddTransient<ICountryService, CountryService>();
             services.AddTransient<IDirectorService, DirectorService>();
             services.AddTransient<IActorMovieService, ActorMovieService>();
+            services.AddTransient<ICountryMovieService, CountryMovieService>();
+            services.AddTransient<IGenreMovieService, GenreMovieService>();
+
         }
     }
 }

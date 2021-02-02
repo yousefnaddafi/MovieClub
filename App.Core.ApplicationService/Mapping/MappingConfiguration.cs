@@ -12,7 +12,8 @@ namespace App.Core.ApplicationService.Mapping
         public MappingConfiguration()
         {
             CreateMap<MovieOutputDto, Movie>().
-                ForMember(x => x.Title, o => o.MapFrom(z => z.Title));
+                ForMember(x => x.Title, o => o.MapFrom(z => z.Title)).
+                ForMember(x => x.Id, o => o.MapFrom(z => z.Id));
         }
     }
 }
