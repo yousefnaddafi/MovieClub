@@ -1,4 +1,5 @@
-﻿using App.Core.ApplicationService.Dtos.MovieDtos;
+﻿//using App.Core.ApplicationService.Dtos.ActorDtos;
+using App.Core.ApplicationService.Dtos.MovieDtos;
 using App.Core.ApplicationService.Dtos.UserDto;
 using App.Core.Entities.Model;
 using AutoMapper;
@@ -12,13 +13,15 @@ namespace App.Core.ApplicationService.Mapping
     {
         public MappingConfiguration()
         {
-            CreateMap<MovieOutputDto, Movie>().
-                ForMember(x => x.Title, o => o.MapFrom(z => z.Title)).
-                ForMember(x => x.Id, o => o.MapFrom(z => z.Id));
-            CreateMap<UserInputDto, User>().
-                ForMember(x => x.Email, o => o.MapFrom(z => z.Email)).
-                ForMember(x => x.Password, o => o.MapFrom(z => z.Password)).
-                ForMember(x=>x.Token, o=>o.MapFrom(z=>z.Token));
+            CreateMap<MovieOutputDto, Movie>()
+                .ForMember(x => x.Title, o => o.MapFrom(z => z.Title))
+                .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
+                ;
+            CreateMap<UserInputDto, User>()
+                .ForMember(x => x.Email, o => o.MapFrom(z => z.Email))
+                .ForMember(x => x.Password, o => o.MapFrom(z => z.Password))
+                //ForMember(x=>x.Token, o=>o.MapFrom(z=>z.Token)).
+                ;
         }
     }
 }

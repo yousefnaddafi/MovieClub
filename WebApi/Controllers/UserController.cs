@@ -28,6 +28,7 @@ namespace WebApi.Controllers
             NEWUser.Token = token;
             NEWUser.Password = inputDto.Password;
             NEWUser.Email = inputDto.Email;
+            NEWUser.ExpireMembershipDate = DateTime.UtcNow.AddDays(3);
             UserService.Create(NEWUser);
             return token;
         }

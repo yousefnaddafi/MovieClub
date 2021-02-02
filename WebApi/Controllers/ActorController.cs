@@ -1,5 +1,7 @@
 ﻿using App.Core.ApplicationService.ApplicationSerrvices.Actors;
+//using App.Core.ApplicationService.Dtos.ActorDtos;
 using App.Core.Entities.Model;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;

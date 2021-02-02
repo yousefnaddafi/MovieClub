@@ -43,14 +43,14 @@ namespace WebApi.Controllers
         {
             return MovieService.Get(id);
         }
-        [HttpPost]
-        public int Compare(Movie inputDto)
-        {
-            var query = GenreMovie.GetQuery()
-                .Include(x => x.Genre)
-                .Include(x => x.Movie)
-                .ThenInclude(x => x.GenreMovies).ThenInclude(x => x.Category)
-                .Where(x => inputDto.Authors.Contains(x.Author.FullName));
-        }
+        //[HttpPost]
+        //public int Compare(Movie inputDto)
+        //{
+        //    var query = GenreMovie.GetQuery()
+        //        .Include(x => x.Genre)
+        //        .Include(x => x.Movie)
+        //        .ThenInclude(x => x.GenreMovies).ThenInclude(x => x.Category)
+        //        .Where(x => inputDto.Authors.Contains(x.Author.FullName));
+        //}
     }
 }

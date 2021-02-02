@@ -1,4 +1,6 @@
+using App.Core.ApplicationService.Mapping;
 using App.Infrastucture.EF.Database;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using WebApi.Extensions;
 
@@ -30,10 +33,12 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDependency();
-            services.AddControllers();
             services.AddSwaggerGen(c=>c.SwaggerDoc("MovieClub",new Microsoft.OpenApi.Models.OpenApiInfo {Title="WebApi",Version="MovieClub" }));
             services.AddDbContext<MovieDbContext>(o =>
             { o.UseSqlServer(Configuration.GetConnectionString("MovieDbConections")); });
+
+            services.AddAutoMapper(Assembly.GetAssembly(typeof(MappingConfiguration)));
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

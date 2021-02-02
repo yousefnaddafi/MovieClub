@@ -7,6 +7,7 @@ namespace App.Core.Entities.Model
     {
         public int Id { get; set; }
         public string GenreName { get; set; }
+
         public List<GenreMovie> GenreMovies { get; set; }
     }
 }

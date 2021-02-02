@@ -52,6 +52,7 @@ namespace App.Infrastucture.EF.Repositories
             this.dbContext.Update(item);
             return item;
         }
+
         public IQueryable<T> GetQuery()
         {
             return dbContext.Set<T>().AsQueryable();
