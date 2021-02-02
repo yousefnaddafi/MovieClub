@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace App.Core.Entities.Model
 {
-    public class Movie
+    public class Movie : IHasIdentity
     {
         public int Id { get; set; }
         public string Title { get; set; }

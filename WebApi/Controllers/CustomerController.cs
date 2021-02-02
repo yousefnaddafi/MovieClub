@@ -1,5 +1,6 @@
 ﻿using App.Core.ApplicationService.ApplicationSerrvices.Products;
 using App.Core.ApplicationService.Dtos.ProductDtos;
+using App.Core.Entities.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,14 +14,14 @@ namespace WebApi.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        private readonly IProductService productService;
+        private readonly IMovieService productService;
 
-        public CustomerController(IProductService productService)
+        public CustomerController(IMovieService productService)
         {
             this.productService = productService;
         }
         [HttpPost]
-        public void Create(ProductInsertInputDto inputDto)
+        public void Create(Movie inputDto)
         {
             productService.Create(inputDto);
         }

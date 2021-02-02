@@ -1,12 +1,13 @@
 ﻿using App.Core.ApplicationService.Dtos.ProductDtos;
+using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.Products
 {
-    public interface IProductService
+    public interface IMovieService
     {
-        int Create(ProductInsertInputDto inputDto);
+        int Create(Movie inputDto);
     }
 }

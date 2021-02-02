@@ -1,6 +1,9 @@
 ﻿using App.Core.ApplicationService.ApplicationSerrvices.Products;
 using App.Core.ApplicationService.IRepositories;
+using App.Core.Entities.Model;
+using App.Infrastucture.EF.Database;
 using App.Infrastucture.EF.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -18,11 +21,12 @@ namespace WebApi.Extensions
         }
         private  static void AddRepositories(IServiceCollection services)
         {
-            services.AddTransient<IProductRepository, ProductEfRepository>();
+            services.AddTransient<IProductRepository<Movie>, ProductEfRepository<Movie>>();
         }
         private static void AddServices(IServiceCollection services)
         {
-            services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IMovieService, MovieService>();
+            
         }
     }
 }

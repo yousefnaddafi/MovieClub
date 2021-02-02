@@ -1,27 +1,28 @@
 ﻿using App.Core.ApplicationService.Dtos.ProductDtos;
 using App.Core.ApplicationService.IRepositories;
+using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.Products
 {
-    public class ProductService : IProductService
+    public class MovieService : IMovieService
     {
-        private readonly IProductRepository productRepository;
+        private readonly IProductRepository<Movie> MovieRepository;
 
-        public ProductService(IProductRepository productRepository)
+        public MovieService(IProductRepository<Movie> MovieRepository)
         {
-            this.productRepository = productRepository;
+            this.MovieRepository = MovieRepository;
         }
-        public int Create(ProductInsertInputDto inputDto)
+        public int Create(Movie inputDto)
         {
             var model = new Entities.Product()
             {
                 Title = inputDto.Title
             };
-            productRepository.Insert(model);
-            productRepository.Save();
+            MovieRepository.Insert(inputDto);
+            MovieRepository.Save();
             return model.Id;
         }
     }
