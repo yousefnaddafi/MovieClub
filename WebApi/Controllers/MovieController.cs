@@ -42,5 +42,10 @@ namespace WebApi.Controllers
         {
             return MovieService.Get(id);
         }
+        [HttpPost]
+        public int Compare(Movie movie)
+        {
+
+        }
     }
 }
