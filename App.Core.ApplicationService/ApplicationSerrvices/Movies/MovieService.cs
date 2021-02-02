@@ -1,4 +1,5 @@
-﻿using App.Core.ApplicationService.Dtos.ProductDtos;
+﻿using App.Core.ApplicationService.ApplicationSerrvices.Movies;
+using App.Core.ApplicationService.Dtos.ProductDtos;
 using App.Core.ApplicationService.IRepositories;
 using App.Core.Entities.Model;
 using System;

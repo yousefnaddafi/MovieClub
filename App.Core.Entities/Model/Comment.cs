@@ -1,7 +1,7 @@
 ﻿using System;
 namespace App.Core.Entities.Model
 {
-    public class Comment
+    public class Comment:IHasIdentity
     {
         public int Id { get; set; }
         public string Text { get; set; }

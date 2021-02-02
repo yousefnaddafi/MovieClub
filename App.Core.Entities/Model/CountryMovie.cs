@@ -1,7 +1,7 @@
 ﻿using System;
 namespace App.Core.Entities.Model
 {
-    public class CountryMovie
+    public class CountryMovie:IHasIdentity
     {
         public int Id { get; set; }
 

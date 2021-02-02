@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace App.Core.ApplicationService.ApplicationSerrvices.Products
+namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 {
     public interface IMovieService
     {

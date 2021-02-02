@@ -1,7 +1,7 @@
 ﻿using System;
 namespace App.Core.Entities.Model
 {
-    public class GenreMovie
+    public class GenreMovie:IHasIdentity
     {
         public int Id { get; set; }
 
