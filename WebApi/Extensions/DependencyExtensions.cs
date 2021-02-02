@@ -4,6 +4,7 @@ using App.Core.ApplicationService.ApplicationSerrvices.Actors;
 using App.Core.ApplicationService.ApplicationSerrvices.Countries;
 using App.Core.ApplicationService.ApplicationSerrvices.CountryMovies;
 using App.Core.ApplicationService.ApplicationSerrvices.Directors;
+using App.Core.ApplicationService.ApplicationSerrvices.GenreMovies;
 using App.Core.ApplicationService.ApplicationSerrvices.Genres;
 using App.Core.ApplicationService.ApplicationSerrvices.Movies;
 using App.Core.ApplicationService.ApplicationSerrvices.Products;
