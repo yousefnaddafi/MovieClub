@@ -17,13 +17,31 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Products
         }
         public int Create(Movie inputDto)
         {
-            var model = new Entities.Model.Movie()
-            {
-                Title = inputDto.Title
-            };
+            
             MovieRepository.Insert(inputDto);
             MovieRepository.Save();
-            return model.Id;
+            return inputDto.Id;
+        }
+        public Movie Update(Movie item)
+        {
+            this.MovieRepository.Update(item);
+            MovieRepository.Save();
+            return item;
+        }
+        public int Delete(int id)
+        {
+            MovieRepository.Delete(id);
+            return id;
+        }
+
+        public Movie Get(int id)
+        {
+            return MovieRepository.Get(id);
+        }
+
+        public List<Movie> GetAll()
+        {
+            return MovieRepository.GetAll();
         }
     }
 }

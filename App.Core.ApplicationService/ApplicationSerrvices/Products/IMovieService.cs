@@ -9,5 +9,10 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Products
     public interface IMovieService
     {
         int Create(Movie inputDto);
+        Movie Update(Movie item);
+        int Delete(int id);
+        Movie Get(int id);
+        List<Movie> GetAll();
+        
     }
 }

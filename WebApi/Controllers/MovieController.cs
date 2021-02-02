@@ -14,18 +14,33 @@ namespace WebApi.Controllers
     [ApiController]
     public class MovieController : ControllerBase
     {
-        private readonly IMovieService productService;
+        private readonly IMovieService MovieService;
 
-        public MovieController(IMovieService productService)
+        public MovieController(IMovieService MovieService)
         {
-            this.productService = productService;
+            this.MovieService = MovieService;
         }
         [HttpPost]
         public void Create(Movie inputDto)
         {
-            productService.Create(inputDto);
+            MovieService.Create(inputDto);
         }
         [HttpPut]
-        public 
+        public Movie Update(Movie item)
+        {
+            this.MovieService.Update(item);
+            return item;
+        }
+        [HttpDelete]
+        public int Delete(int id)
+        {
+            MovieService.Delete(id);
+            return id;
+        }
+        [HttpGet]
+        public Movie Get(int id)
+        {
+            return MovieService.Get(id);
+        }
     }
 }
