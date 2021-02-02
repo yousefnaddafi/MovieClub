@@ -17,7 +17,7 @@ namespace App.Infrastucture.EF.Database
         public DbSet<Comment> Comments { get; set; }
         public DbSet<GenreMovie> GenreMovies { get; set; }
         public DbSet<Director> Directors { get; set; }
-
+        public DbSet<User> Users { get; set; }
 
 
         public MovieDbContext()
@@ -40,6 +40,8 @@ namespace App.Infrastucture.EF.Database
             modelbuilder.Entity<CountryMovie>(x => x.ToTable("CountryMovie"));
             modelbuilder.Entity<GenreMovie>(x => x.ToTable("GenreMovie"));
             modelbuilder.Entity<Actor>(x => x.ToTable("Actor"));
+
+            modelbuilder.Entity<User>(x => x.ToTable("User"));
         }
     }
 }
