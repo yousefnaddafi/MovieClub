@@ -43,7 +43,7 @@ namespace WebApi
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/MovieClub/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/MovieClub/swagger.json", "Movie Club");
             });
             
             if (env.IsDevelopment())
