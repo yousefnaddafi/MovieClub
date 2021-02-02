@@ -34,10 +34,7 @@ namespace App.Infrastucture.EF.Repositories
             return this.dbContext.Set<T>().ToList();
         }
 
-        public IQueryable<T> GetQuery()
-        {
-            return dbContext.Set<T>().AsQueryable();
-        }
+        public IQueryable<T> Query => dbContext.Set<T>().AsQueryable();
 
         public void Insert(T item)
         {
@@ -55,5 +52,10 @@ namespace App.Infrastucture.EF.Repositories
             this.dbContext.Update(item);
             return item;
         }
+        public IQueryable<T> GetQuery()
+        {
+            return dbContext.Set<T>().AsQueryable();
+        }
+
     }
 }
