@@ -23,9 +23,12 @@ namespace WebApi.Controllers
         [HttpPost]
         public string Create([FromBody]UserInputDto inputDto)
         {
+            var NEWUser = new User();
             var token = Guid.NewGuid().ToString();
-            inputDto.Token = token;
-            UserService.Create(inputDto);
+            NEWUser.Token = token;
+            NEWUser.Password = inputDto.Password;
+            NEWUser.Email = inputDto.Email;
+            UserService.Create(NEWUser);
             return token;
         }
         [HttpPut]
