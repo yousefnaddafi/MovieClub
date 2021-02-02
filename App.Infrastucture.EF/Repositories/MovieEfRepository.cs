@@ -9,11 +9,11 @@ using System.Text;
 
 namespace App.Infrastucture.EF.Repositories
 {
-    public class ProductEfRepository<T> : IProductRepository<T> where T: class, IHasIdentity
+    public class MovieEfRepository<T> : IMovieRepository<T> where T: class, IHasIdentity
     {
         private readonly MovieDbContext dbContext;
 
-        public ProductEfRepository(MovieDbContext dbContext)
+        public MovieEfRepository(MovieDbContext dbContext)
         {
             this.dbContext = dbContext;
         }

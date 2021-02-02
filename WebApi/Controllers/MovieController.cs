@@ -12,11 +12,11 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomerController : ControllerBase
+    public class MovieController : ControllerBase
     {
         private readonly IMovieService productService;
 
-        public CustomerController(IMovieService productService)
+        public MovieController(IMovieService productService)
         {
             this.productService = productService;
         }
@@ -25,5 +25,7 @@ namespace WebApi.Controllers
         {
             productService.Create(inputDto);
         }
+        [HttpPut]
+        public 
     }
 }

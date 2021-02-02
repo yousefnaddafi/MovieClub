@@ -9,15 +9,15 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Products
 {
     public class MovieService : IMovieService
     {
-        private readonly IProductRepository<Movie> MovieRepository;
+        private readonly IMovieRepository<Movie> MovieRepository;
 
-        public MovieService(IProductRepository<Movie> MovieRepository)
+        public MovieService(IMovieRepository<Movie> MovieRepository)
         {
             this.MovieRepository = MovieRepository;
         }
         public int Create(Movie inputDto)
         {
-            var model = new Entities.Product()
+            var model = new Entities.Model.Movie()
             {
                 Title = inputDto.Title
             };

@@ -21,7 +21,7 @@ namespace WebApi.Extensions
         }
         private  static void AddRepositories(IServiceCollection services)
         {
-            services.AddTransient<IProductRepository<Movie>, ProductEfRepository<Movie>>();
+            services.AddTransient<IMovieRepository<Movie>, MovieEfRepository<Movie>>();
         }
         private static void AddServices(IServiceCollection services)
         {

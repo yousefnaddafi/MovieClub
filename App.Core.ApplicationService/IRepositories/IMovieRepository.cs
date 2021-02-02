@@ -7,7 +7,7 @@ using System.Text;
 
 namespace App.Core.ApplicationService.IRepositories
 {
-    public interface IProductRepository<T>
+    public interface IMovieRepository<T>
     {
         void Insert(T item);
         
