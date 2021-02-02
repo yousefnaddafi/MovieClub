@@ -44,6 +44,7 @@ namespace WebApi.Extensions
             services.AddTransient<IGenreService, GenreService>();
             services.AddTransient<ICountryService, CountryService>();
             services.AddTransient<IDirectorService, DirectorService>();
+            services.AddTransient<IActorMovieService, ActorMovieService>();
         }
     }
 }
