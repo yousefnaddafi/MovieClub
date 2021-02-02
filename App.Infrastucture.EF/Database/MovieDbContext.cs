@@ -21,6 +21,7 @@ namespace App.Infrastucture.EF.Database
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
             modelbuilder.Entity<Movie>(x => x.ToTable("Movie"));
+            modelbuilder.Entity<Genre>(x => x.ToTable("Genre"));
         }
     }
 }
