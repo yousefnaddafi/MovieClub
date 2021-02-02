@@ -1,4 +1,5 @@
 ﻿using App.Core.ApplicationService.ApplicationSerrvices.Users;
+using App.Core.ApplicationService.Dtos.UserDto;
 using App.Core.Entities.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +21,7 @@ namespace WebApi.Controllers
             this.UserService = UserService;
         }
         [HttpPost]
-        public string Create(User inputDto)
+        public string Create([FromBody]UserInputDto inputDto)
         {
             var token = Guid.NewGuid().ToString();
             inputDto.Token = token;
