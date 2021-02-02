@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace App.Core.Entities.Model
 {
-    public class Genre
+    public class Genre:IHasIdentity
     {
         public int Id { get; set; }
         public string GenreName { get; set; }

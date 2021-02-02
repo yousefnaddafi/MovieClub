@@ -1,5 +1,6 @@
-﻿using App.Core.ApplicationService.ApplicationSerrvices.Products;
-using App.Core.ApplicationService.Dtos.ProductDtos;
+﻿using App.Core.ApplicationService.ApplicationSerrvices.Movies;
+
+
 using App.Core.Entities.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
