@@ -45,7 +45,7 @@ namespace WebApi.Controllers
             return id;
         }
         [HttpGet]
-        public User Get(int id)
+        public Task<User> Get(int id)
         {
             return UserService.Get(id);
         }
