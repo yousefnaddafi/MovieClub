@@ -77,18 +77,13 @@ namespace WebApi.Controllers
         public Task<List<MovieCompairOutputDto>> Compare(MovieCompareInputDto inputDto)
         {
             
-            var lst = MoviesService.GetQuery().Where(x =>x.Title==inputDto.Movie1).Select(x=>inputDto.movieRelatedDtos[0])
-                .Include(x => x.Movie).Where(x => inputDto.Genres).
-            ContainsAsync(x.Genre.GenreName));
-            var lst2 = lst.Include(x => x.Movie).
-              Select(x => inputDto.RateByUsers).SelectAsync(x => inputDto.VisitCounts);
-            var CompareResponse =lst2.
-        return 
+            var lst = GenreMovieService.GetQuery().Where(x=>x.Genre
+      
         }
         [HttpGet]
         public async Task<IActionResult> GetNewComing()
         {
-            var newMovie = MoviesService.GetAll().
+           // var newMovie = MoviesService.GetAll().
 
         }
         [HttpPost]
@@ -104,14 +99,14 @@ namespace WebApi.Controllers
                 .Include(x => x.Genre)
                 .Where(x => searchInput.genres.Contains(x.Genre.GenreName))
                 .Select(x => x.Movie);
-            var bookList = (from b in bQuery
+            var movieList = (from b in bQuery
                             join c in cquery on b.Id equals c.Id
                             select b).ToList();
 
-            var searchDtoDetails = mapper.Map<List<MovieDetailDto>>(MovieList);
+            var searchDtoDetails = mapper.Map<List<MovieDetailDto>>(movieList);
             return new SearchMovieOutputDto()
             {
-                Movies = MovieDetailDto.ToArray()
+                Movies = searchDtoDetails.ToArray()
             };
 
         }
@@ -119,10 +114,15 @@ namespace WebApi.Controllers
     }
 }
 //return newMovie
- //}(x => x.ProductYear == m.ProductYear).Select(x =>
-        //                 new { Name = x.FullName, x.NationalCode });
-        //        foreach (var item in result)
-        //        {
-        //            Console.WriteLine($"{item.Name} has {item.NationalCode}");
-        //       //foreach(var item in newMovie )
-
+//}(x => x.ProductYear == m.ProductYear).Select(x =>
+//                 new { Name = x.FullName, x.NationalCode });
+//        foreach (var item in result)
+//        {
+//            Console.WriteLine($"{item.Name} has {item.NationalCode}");
+//       //foreach(var item in newMovie )
+//x => x.Movie).Select(x => inputDto.movieRelatedDtos[0])
+  //      .Include(x => x.Movie).Where(x => inputDto.Genres).
+    // ContainsAsync(x.Genre.GenreName));
+//var lst2 = lst.Include(x => x.Movie).
+  //Select(x => inputDto.RateByUsers).SelectAsync(x => inputDto.VisitCounts);
+//var CompareResponse = lst2.

@@ -39,7 +39,7 @@ namespace WebApi.Controllers
             return id;
         }
         [HttpGet]
-        public Actor Get(int id)
+        public Task<Actor> Get(int id)
         {
             return ActorService.Get(id);
         }

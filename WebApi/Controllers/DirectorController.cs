@@ -37,7 +37,7 @@ namespace WebApi.Controllers
             return id;
         }
         [HttpGet]
-        public Director Get(int id)
+        public Task<Director> Get(int id)
         {
             return DirectorService.Get(id);
         }
