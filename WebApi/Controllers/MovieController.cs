@@ -89,7 +89,7 @@ namespace WebApi.Controllers
 
             return FinalCompare;
         }
-        [HttpGet]
+        [HttpGet("Recently")]
         public void GetNewComing()
         {
 
