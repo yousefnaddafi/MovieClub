@@ -97,7 +97,7 @@ namespace WebApi.Controllers
             return newincomemovie;  
 
         }
-        [HttpPost]
+        [HttpPost("Search")]
         public SearchMovieOutputDto SearchMovie(SearchMovieInputDto searchInput)
         {
             var query=ActorMovieService.GetQuery().Include(x=>x.Actor).Include(x=>x.Movie).ThenInclude(x => x.GenreMovies).
