@@ -7,7 +7,7 @@ using App.Core.ApplicationService.ApplicationSerrvices.Directors;
 using App.Core.ApplicationService.ApplicationSerrvices.GenreMovies;
 using App.Core.ApplicationService.ApplicationSerrvices.Genres;
 using App.Core.ApplicationService.ApplicationSerrvices.Movies;
-using App.Core.ApplicationService.ApplicationSerrvices.Products;
+
 using App.Core.ApplicationService.ApplicationSerrvices.Users;
 using App.Core.ApplicationService.IRepositories;
 using App.Core.Entities.Model;

@@ -3,6 +3,7 @@ using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 {
@@ -33,14 +34,14 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
             return id;
         }
 
-        public User Get(int id)
+        public Task<User> Get(int id)
         {
             return UserRepository.GetAsync(id);
         }
 
-        public List<User> GetAll()
+        public Task<List<User>> GetAll()
         {
-            return UserRepository.GetAll();
+            return UserRepository.GetAllAsync();
         }
     }
 }

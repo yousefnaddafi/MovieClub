@@ -79,8 +79,6 @@ namespace WebApi.Controllers
 
             var Mov1 = MoviesService.GetQuery().FirstOrDefault(x => x.Title == inputDto.Movie1); 
             var Mov2 = MoviesService.GetQuery().FirstOrDefault(x => x.Title == inputDto.Movie2);
-
-            
             var FinalCompare = new List<MovieRelatedDto>();
             FinalCompare.Add(Mov1);
             
