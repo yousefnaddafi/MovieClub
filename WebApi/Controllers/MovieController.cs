@@ -93,7 +93,7 @@ namespace WebApi.Controllers
         public void GetNewComing()
         {
 
-            var newincomemovie = MoviesService.GetQuery().OrderByDescending(x => x.ProductYear).Take(5);
+            var newincomemovie = MoviesService.GetQuery().OrderByDescending(x => x.ProductYear).Take(20);
                 
 
         }
