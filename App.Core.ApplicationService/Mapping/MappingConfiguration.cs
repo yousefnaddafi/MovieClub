@@ -19,11 +19,13 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.RateByUsers, o => o.MapFrom(z => z.RateByUser))
                 .ForMember(x => x.VisitCounts, o => o.MapFrom(z => z.VisitCount))
                 ;
+
             CreateMap<UserInputDto, User>()
                 .ForMember(x => x.Email, o => o.MapFrom(z => z.Email))
-                .ForMember(x => x.Password, o => o.MapFrom(z => z.Password))
+                .ForMember(x => x.Password, o => o.MapFrom(z => z.Password));
+            
+            CreateMap<Movie, MovieRelatedDto >
                 
-                ;
         }
     }
 }

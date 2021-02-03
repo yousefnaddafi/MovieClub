@@ -97,6 +97,14 @@ namespace WebApi.Controllers
             return newincomemovie;  
 
         }
+        [HttpGet("Popular")]
+        public List<Movie> GetPopular()
+        {
+
+        }
+
+
+
         [HttpPost("Search")]
         public SearchMovieOutputDto SearchMovie(SearchMovieInputDto searchInput)
         {
