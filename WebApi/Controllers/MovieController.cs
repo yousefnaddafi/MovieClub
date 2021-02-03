@@ -90,17 +90,32 @@ namespace WebApi.Controllers
             return FinalCompare;
         }
         [HttpGet("Recently")]
-        public List<Movie> GetNewComing()
+        public List<MovieRelatedDto> GetNewComing()
         {
 
             var newincomemovie = MoviesService.GetQuery().OrderByDescending(x => x.ProductYear).Take(5).ToList();
-            return newincomemovie;  
+
+            var Recently = new List<MovieRelatedDto>();
+            foreach(var item in newincomemovie)
+            {
+                var Mov = IMapper.Map<MovieRelatedDto>(item);
+                Recently.Add(Mov);
+            }
+            return Recently;  
 
         }
         [HttpGet("Popular")]
-        public List<Movie> GetPopular()
+        public List<MovieRelatedDto> GetPopular()
         {
+            var MostPopular = MoviesService.GetQuery().OrderByDescending(z => z.RateByUser).Take(5).ToList();
 
+            var MPop = new List<MovieRelatedDto>();
+            foreach (var item in MPop)
+            {
+                var Mov = IMapper.Map<MovieRelatedDto>(item);
+                MPop.Add(Mov);
+            }
+            return MPop;
         }
 
 
