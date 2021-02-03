@@ -3,6 +3,7 @@ using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
 {
@@ -33,14 +34,14 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
             return id;
         }
 
-        public Genre Get(int id)
+        public Task<Genre> Get(int id)
         {
-            return GenreRepository.Get(id);
+            return GenreRepository.GetAsync(id);
         }
 
-        public List<Genre> GetAll()
+        public Task<List<Genre>> GetAll()
         {
-            return GenreRepository.GetAll();
+            return GenreRepository.GetAllAsync();
         }
     }
 }

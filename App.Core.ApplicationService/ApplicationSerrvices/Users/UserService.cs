@@ -35,7 +35,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 
         public User Get(int id)
         {
-            return UserRepository.Get(id);
+            return UserRepository.GetAsync(id);
         }
 
         public List<User> GetAll()

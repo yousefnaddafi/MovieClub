@@ -2,8 +2,9 @@
 using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
 {
@@ -12,7 +13,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
         int Create(Actor inputDto);
         Actor Update(Actor item);
         int Delete(int id);
-        Actor Get(int id);
-        List<Actor> GetAll();
+        Task<Actor> Get(int id);
+       Task<List<Actor>> GetAll();
+        IQueryable<Actor> GetQuery();
     }
 }

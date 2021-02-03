@@ -20,12 +20,12 @@ namespace WebApi.Controllers
             this.GenreMovieService = GenreMovieService;
         }
         [HttpPost]
-        public void Create(GenreMovie inputDto)
+        public void Create(CountryMovie inputDto)
         {
             GenreMovieService.Create(inputDto);
         }
         [HttpPut]
-        public GenreMovie Update(GenreMovie item)
+        public CountryMovie Update(CountryMovie item)
         {
             this.GenreMovieService.Update(item);
             return item;

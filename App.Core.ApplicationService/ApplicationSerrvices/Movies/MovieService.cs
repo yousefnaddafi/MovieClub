@@ -4,13 +4,16 @@ using App.Core.ApplicationService.IRepositories;
 using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace App.Core.ApplicationService.ApplicationSerrvices.Products
+namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 {
     public class MovieService : IMovieService
     {
         private readonly IMovieRepository<Movie> MovieRepository;
+
 
         public MovieService(IMovieRepository<Movie> MovieRepository)
         {
@@ -35,14 +38,22 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Products
             return id;
         }
 
-        public Movie Get(int id)
+        public Task<Movie> Get(int id)
         {
-            return MovieRepository.Get(id);
+            return MovieRepository.GetAsync(id);
         }
 
-        public List<Movie> GetAll()
+        public async Task<List<Movie>> GetAll()
         {
-            return MovieRepository.GetAll();
+            return await MovieRepository.GetAllAsync();
         }
+        IQueryable<Movie> IMovieService.GetQuery()
+        {
+            return MovieRepository.GetQuery();
+        }
+
+   
+
+       
     }
 }

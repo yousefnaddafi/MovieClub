@@ -1,9 +1,17 @@
-﻿using App.Core.ApplicationService.ApplicationSerrvices.Movies;
-
-
+﻿using App.Core.ApplicationService.ApplicationSerrvices.ActorMovies;
+using App.Core.ApplicationService.ApplicationSerrvices.Actors;
+using App.Core.ApplicationService.ApplicationSerrvices.Countries;
+using App.Core.ApplicationService.ApplicationSerrvices.CountryMovies;
+using App.Core.ApplicationService.ApplicationSerrvices.Directors;
+using App.Core.ApplicationService.ApplicationSerrvices.GenreMovies;
+using App.Core.ApplicationService.ApplicationSerrvices.Genres;
+using App.Core.ApplicationService.ApplicationSerrvices.Movies;
+using App.Core.ApplicationService.Dtos.MovieDtos;
 using App.Core.Entities.Model;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,42 +23,106 @@ namespace WebApi.Controllers
     [ApiController]
     public class MovieController : ControllerBase
     {
-        private readonly IMovieService MovieService;
+        private readonly IMovieService MoviesService;
+
+        private readonly IActorService actorService;
+        private readonly IDirectorService directorService;
+        private readonly IGenreService genreService;
+        private readonly IGenreMovieService GenreMovieService;
+       
+        private readonly IActorMovieService ActorMovieService;
+       // private readonly ICountryMovieService CountryMovieService;
+
+        private readonly IMapper mapper;
+        public MovieController(IMovieService MovieService, IActorService actorService
+           , IDirectorService directorService
+           , IGenreService genreService
+           , IGenreMovieService genreMovieService,IMapper mapper)
+        {
+            this.actorService = actorService;
+            this.MoviesService = MovieService;
+            this.genreService = genreService;
+            this.directorService = directorService;
+            this.GenreMovieService = genreMovieService;
+            this.mapper = mapper;
+        }
 
         public MovieController(IMovieService MovieService)
         {
-            this.MovieService = MovieService;
+            this.MoviesService = MovieService;
         }
         [HttpPost]
         public void Create(Movie inputDto)
         {
-            MovieService.Create(inputDto);
+            MoviesService.Create(inputDto);
         }
         [HttpPut]
         public Movie Update(Movie item)
         {
-            this.MovieService.Update(item);
+            this.MoviesService.Update(item);
             return item;
         }
         [HttpDelete]
         public int Delete(int id)
         {
-            MovieService.Delete(id);
+            MoviesService.Delete(id);
             return id;
         }
         [HttpGet]
-        public Movie Get(int id)
+        public Task<Movie> Get(int id)
         {
-            return MovieService.Get(id);
+            return MoviesService.Get(id);
         }
-        //[HttpPost]
-        //public int Compare(Movie inputDto)
-        //{
-        //    var query = GenreMovie.GetQuery()
-        //        .Include(x => x.Genre)
-        //        .Include(x => x.Movie)
-        //        .ThenInclude(x => x.GenreMovies).ThenInclude(x => x.Category)
-        //        .Where(x => inputDto.Authors.Contains(x.Author.FullName));
-        //}
+        [HttpGet]
+        public Task<List<MovieCompairOutputDto>> Compare(MovieCompareInputDto inputDto)
+        {
+            
+            var lst = MoviesService.GetQuery().Where(x =>x.Title==inputDto.Movie1).Select(x=>inputDto.movieRelatedDtos[0])
+                .Include(x => x.Movie).Where(x => inputDto.Genres).
+            ContainsAsync(x.Genre.GenreName));
+            var lst2 = lst.Include(x => x.Movie).
+              Select(x => inputDto.RateByUsers).SelectAsync(x => inputDto.VisitCounts);
+            var CompareResponse =lst2.
+        return 
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetNewComing()
+        {
+            var newMovie = MoviesService.GetAll().
+
+        }
+        [HttpPost]
+        public SearchMovieOutputDto SearchMovie(SearchMovieInputDto searchInput)
+        {
+            var query=ActorMovieService.GetQuery().Include(x=>x.Actor).Include(x=>x.Movie).ThenInclude(x => x.GenreMovies).
+                ThenInclude(x=>x.Genre).
+                Where(x => searchInput.actors.Contains(x.Actor.ActorName));
+            var bQuery = query.Include(x => x.Movie)
+                         .ThenInclude(x => x.DirectorName)
+                         .Where(x => x.Movie.DirectorName.DirectorName.Contains(searchInput.directors)).Select(x => x.Movie);
+            var cquery = GenreMovieService.GetQuery()
+                .Include(x => x.Genre)
+                .Where(x => searchInput.genres.Contains(x.Genre.GenreName))
+                .Select(x => x.Movie);
+            var bookList = (from b in bQuery
+                            join c in cquery on b.Id equals c.Id
+                            select b).ToList();
+
+            var searchDtoDetails = mapper.Map<List<MovieDetailDto>>(MovieList);
+            return new SearchMovieOutputDto()
+            {
+                Movies = MovieDetailDto.ToArray()
+            };
+
+        }
+       
     }
 }
+//return newMovie
+ //}(x => x.ProductYear == m.ProductYear).Select(x =>
+        //                 new { Name = x.FullName, x.NationalCode });
+        //        foreach (var item in result)
+        //        {
+        //            Console.WriteLine($"{item.Name} has {item.NationalCode}");
+        //       //foreach(var item in newMovie )
+

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace App.Core.ApplicationService.IRepositories
 {
@@ -11,13 +12,13 @@ namespace App.Core.ApplicationService.IRepositories
     {
         void Insert(T item);
         
-        T Get(int id);
-        List<T> GetAll();
+        Task<T> GetAsync(int id);
+        Task<List<T>> GetAllAsync();
         
         T Update(T item);
         void Delete(int id);
-        
+        IQueryable<T> GetQuery();
 
-        void Save();
+        Task Save();
     }
 }

@@ -2,7 +2,9 @@
 using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.CountryMovies
 {
@@ -33,14 +35,18 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.CountryMovies
             return id;
         }
 
-        public CountryMovie Get(int id)
+        public Task<CountryMovie> GetAsync(int id)
         {
-            return CountryMovieRepository.Get(id);
+            return CountryMovieRepository.GetAsync(id);
         }
 
-        public List<CountryMovie> GetAll()
+        public Task<List<CountryMovie>> GetAllAsync()
         {
-            return CountryMovieRepository.GetAll();
+            return CountryMovieRepository.GetAllAsync();
+        }
+        public IQueryable<CountryMovie> GetQuery()
+        {
+            return CountryMovieRepository.GetQuery();
         }
     }
 }

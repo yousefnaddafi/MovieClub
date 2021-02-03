@@ -3,7 +3,9 @@ using App.Core.ApplicationService.IRepositories;
 using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
 {
@@ -34,14 +36,18 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
             return id;
         }
 
-        public Actor Get(int id)
+        public Task<Actor> Get(int id)
         {
-            return ActorRepository.Get(id);
+            return ActorRepository.GetAsync(id);
         }
 
-        public List<Actor> GetAll()
+        public Task<List<Actor>> GetAll()
         {
-            return ActorRepository.GetAll();
+            return ActorRepository.GetAllAsync();
+        }
+        public IQueryable<Actor> GetQuery()
+        {
+            return ActorRepository.GetQuery();
         }
     }
 }

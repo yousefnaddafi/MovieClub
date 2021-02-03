@@ -2,10 +2,12 @@
 using App.Core.Entities;
 using App.Core.Entities.Model;
 using App.Infrastucture.EF.Database;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace App.Infrastucture.EF.Repositories
 {
@@ -24,14 +26,14 @@ namespace App.Infrastucture.EF.Repositories
             this.dbContext.Remove(item);
         }
 
-        public T Get(int id)
+        public Task<T> GetAsync(int id)
         {
-            return this.dbContext.Set<T>().FirstOrDefault(x => x.Id == id);
+            return this.dbContext.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public List<T> GetAll()
+        public Task<List<T>> GetAllAsync()
         {
-            return this.dbContext.Set<T>().ToList();
+            return this.dbContext.Set<T>().ToListAsync();
         }
 
         public IQueryable<T> Query => dbContext.Set<T>().AsQueryable();
@@ -42,9 +44,9 @@ namespace App.Infrastucture.EF.Repositories
 
         }
 
-        public void Save()
+        public Task Save()
         {
-            this.dbContext.SaveChanges();
+           return this.dbContext.SaveChangesAsync();
         }
 
         public T Update(T item)
@@ -58,5 +60,6 @@ namespace App.Infrastucture.EF.Repositories
             return dbContext.Set<T>().AsQueryable();
         }
 
+        
     }
 }

@@ -37,9 +37,9 @@ namespace WebApi.Extensions
             services.AddTransient<IMovieRepository<Country>, MovieEfRepository<Country>>();
             
             services.AddTransient<IMovieRepository<Director>, MovieEfRepository<Director>>();
-            services.AddTransient<IMovieRepository<ActorMovie>, MovieEfRepository<ActorMovie>>();
+            services.AddTransient<IMovieRepository<Country>, MovieEfRepository<Country>>();
             services.AddTransient<IMovieRepository<CountryMovie>, MovieEfRepository<CountryMovie>>();
-            services.AddTransient<IMovieRepository<GenreMovie>, MovieEfRepository<GenreMovie>>();
+            services.AddTransient<IMovieRepository<CountryMovie>, MovieEfRepository<CountryMovie>>();
 
             services.AddTransient<IMovieRepository<User>, MovieEfRepository<User>>();
         }

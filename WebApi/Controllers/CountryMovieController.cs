@@ -37,9 +37,9 @@ namespace WebApi.Controllers
             return id;
         }
         [HttpGet]
-        public CountryMovie Get(int id)
+        public Task<CountryMovie> Get(int id)
         {
-            return CountryMovieService.Get(id);
+            return CountryMovieService.GetAsync(id);
         }
     }
 }

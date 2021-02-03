@@ -1,12 +1,15 @@
-﻿using System;
+﻿using App.Core.Entities.Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace App.Core.ApplicationService.Dtos.MovieDtos
 {
-    class MovieCompareInputDto
+ public class MovieCompareInputDto
     {
-        public string ImdbRate { get; set; }
-        public int VisitCount { get; set; }
+       public string Movie1 { get; set; }
+        public string Movie2 { get; set; }
+
+        public List<MovieRelatedDto> movieRelatedDtos;
     }
 }

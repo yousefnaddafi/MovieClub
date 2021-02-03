@@ -1,7 +1,9 @@
 ﻿using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.Countries
 {
@@ -10,7 +12,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Countries
         int Create(Country inputDto);
         Country Update(Country item);
         int Delete(int id);
-        Country Get(int id);
-        List<Country> GetAll();
+        Task<Country> Get(int id);
+        Task<List<Country>> GetAll();
+        IQueryable<Country> GetQuery();
     }
 }

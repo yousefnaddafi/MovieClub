@@ -2,7 +2,9 @@
 using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.Countries
 {
@@ -33,14 +35,18 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Countries
             return id;
         }
 
-        public Country Get(int id)
+        public Task<Country> Get(int id)
         {
-            return CountryRepository.Get(id);
+            return CountryRepository.GetAsync(id);
         }
 
-        public List<Country> GetAll()
+        public Task<List<Country>> GetAll()
         {
-            return CountryRepository.GetAll();
+            return CountryRepository.GetAllAsync();
+        }
+        public IQueryable<Country> GetQuery()
+        {
+            return CountryRepository.GetQuery();
         }
     }
 }

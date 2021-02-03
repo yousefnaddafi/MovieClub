@@ -2,26 +2,28 @@
 using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.GenreMovies
 {
     public class GenreMovieService : IGenreMovieService
     {
-        private readonly IMovieRepository<GenreMovie> GenreMovieRepository;
+        private readonly IMovieRepository<CountryMovie> GenreMovieRepository;
 
-        public GenreMovieService(IMovieRepository<GenreMovie> GenreMovieRepository)
+        public GenreMovieService(IMovieRepository<CountryMovie> GenreMovieRepository)
         {
             this.GenreMovieRepository = GenreMovieRepository;
         }
-        public int Create(GenreMovie inputDto)
+        public int Create(CountryMovie inputDto)
         {
 
             GenreMovieRepository.Insert(inputDto);
             GenreMovieRepository.Save();
             return inputDto.Id;
         }
-        public GenreMovie Update(GenreMovie item)
+        public CountryMovie Update(CountryMovie item)
         {
             this.GenreMovieRepository.Update(item);
             GenreMovieRepository.Save();
@@ -33,14 +35,18 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.GenreMovies
             return id;
         }
 
-        public GenreMovie Get(int id)
+        public Task<CountryMovie> Get(int id)
         {
-            return GenreMovieRepository.Get(id);
+            return GenreMovieRepository.GetAsync(id);
         }
 
-        public List<GenreMovie> GetAll()
+        public Task<List<CountryMovie>> GetAll()
         {
-            return GenreMovieRepository.GetAll();
+            return GenreMovieRepository.GetAllAsync();
+        }
+        public IQueryable<CountryMovie> GetQuery()
+        {
+            return GenreMovieRepository.GetQuery();
         }
     }
 }

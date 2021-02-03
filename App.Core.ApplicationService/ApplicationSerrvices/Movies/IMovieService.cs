@@ -2,7 +2,9 @@
 using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 {
@@ -11,8 +13,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         int Create(Movie inputDto);
         Movie Update(Movie item);
         int Delete(int id);
-        Movie Get(int id);
-        List<Movie> GetAll();
-        
+        Task<Movie> Get(int id);
+        Task<List<Movie>> GetAll();
+        IQueryable<Movie> GetQuery();
     }
 }

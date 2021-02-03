@@ -1,7 +1,9 @@
 ﻿using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.CountryMovies
 {
@@ -10,7 +12,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.CountryMovies
         int Create(CountryMovie inputDto);
         CountryMovie Update(CountryMovie item);
         int Delete(int id);
-        CountryMovie Get(int id);
-        List<CountryMovie> GetAll();
+        Task<CountryMovie> GetAsync(int id);
+        Task<List<CountryMovie>> GetAllAsync();
+        IQueryable<CountryMovie> GetQuery();
     }
 }

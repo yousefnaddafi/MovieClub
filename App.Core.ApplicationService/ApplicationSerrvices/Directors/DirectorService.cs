@@ -2,7 +2,9 @@
 using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
 {
@@ -33,14 +35,18 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
             return id;
         }
 
-        public Director Get(int id)
+        public Task<Director> Get(int id)
         {
-            return DirectorRepository.Get(id);
+            return DirectorRepository.GetAsync(id);
         }
 
-        public List<Director> GetAll()
+        public Task<List<Director>> GetAll()
         {
-            return DirectorRepository.GetAll();
+            return DirectorRepository.GetAllAsync();
+        }
+        public IQueryable<Director> GetQuery()
+        {
+            return DirectorRepository.GetQuery();
         }
     }
 }

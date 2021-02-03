@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
 {
@@ -10,7 +11,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
         int Create(Genre inputDto);
         Genre Update(Genre item);
         int Delete(int id);
-        Genre Get(int id);
-        List<Genre> GetAll();
+        Task<Genre> Get(int id);
+        Task<List<Genre>> GetAll();
+
     }
 }
