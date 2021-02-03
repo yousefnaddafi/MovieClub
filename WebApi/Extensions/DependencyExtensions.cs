@@ -7,7 +7,7 @@ using App.Core.ApplicationService.ApplicationSerrvices.Directors;
 using App.Core.ApplicationService.ApplicationSerrvices.GenreMovies;
 using App.Core.ApplicationService.ApplicationSerrvices.Genres;
 using App.Core.ApplicationService.ApplicationSerrvices.Movies;
-using App.Core.ApplicationService.ApplicationSerrvices.Products;
+
 using App.Core.ApplicationService.ApplicationSerrvices.Users;
 using App.Core.ApplicationService.IRepositories;
 using App.Core.Entities.Model;
@@ -38,8 +38,8 @@ namespace WebApi.Extensions
             
             services.AddTransient<IMovieRepository<Director>, MovieEfRepository<Director>>();
             services.AddTransient<IMovieRepository<Country>, MovieEfRepository<Country>>();
-            services.AddTransient<IMovieRepository<CountryMovie>, MovieEfRepository<CountryMovie>>();
-            services.AddTransient<IMovieRepository<CountryMovie>, MovieEfRepository<CountryMovie>>();
+            services.AddTransient<IMovieRepository<GenreMovie>, MovieEfRepository<GenreMovie>>();
+            services.AddTransient<IMovieRepository<GenreMovie>, MovieEfRepository<GenreMovie>>();
 
             services.AddTransient<IMovieRepository<User>, MovieEfRepository<User>>();
         }

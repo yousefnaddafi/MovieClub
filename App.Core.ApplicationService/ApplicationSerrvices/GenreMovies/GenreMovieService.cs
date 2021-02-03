@@ -10,20 +10,20 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.GenreMovies
 {
     public class GenreMovieService : IGenreMovieService
     {
-        private readonly IMovieRepository<CountryMovie> GenreMovieRepository;
+        private readonly IMovieRepository<GenreMovie> GenreMovieRepository;
 
-        public GenreMovieService(IMovieRepository<CountryMovie> GenreMovieRepository)
+        public GenreMovieService(IMovieRepository<GenreMovie> GenreMovieRepository)
         {
             this.GenreMovieRepository = GenreMovieRepository;
         }
-        public int Create(CountryMovie inputDto)
+        public int Create(GenreMovie inputDto)
         {
 
             GenreMovieRepository.Insert(inputDto);
             GenreMovieRepository.Save();
             return inputDto.Id;
         }
-        public CountryMovie Update(CountryMovie item)
+        public GenreMovie Update(GenreMovie item)
         {
             this.GenreMovieRepository.Update(item);
             GenreMovieRepository.Save();
@@ -35,16 +35,16 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.GenreMovies
             return id;
         }
 
-        public Task<CountryMovie> Get(int id)
+        public Task<GenreMovie> Get(int id)
         {
             return GenreMovieRepository.GetAsync(id);
         }
 
-        public Task<List<CountryMovie>> GetAll()
+        public Task<List<GenreMovie>> GetAll()
         {
             return GenreMovieRepository.GetAllAsync();
         }
-        public IQueryable<CountryMovie> GetQuery()
+        public IQueryable<GenreMovie> GetQuery()
         {
             return GenreMovieRepository.GetQuery();
         }

@@ -73,24 +73,29 @@ namespace WebApi.Controllers
         {
             return MoviesService.Get(id);
         }
-        [HttpGet]
-        public Task<List<MovieCompairOutputDto>> CompareMovie(MovieCompareInputDto inputDto)
+        [HttpGet("Compare")]
+        public List<MovieCompareOutputDto> Compare(MovieCompareInputDto inputDto)
         {
+
+            var Mov1 = MoviesService.GetQuery().FirstOrDefault(x => x.Title == inputDto.Movie1); 
+            var Mov2 = MoviesService.GetQuery().FirstOrDefault(x => x.Title == inputDto.Movie2);
+            var FinalCompare = new List<MovieCompareOutputDto>();
+            var MovM1=mapper.Map<MovieCompareOutputDto>(Mov1);
+            var MovM2= mapper.Map<MovieCompareOutputDto>(Mov2);
             
-          
-      
+            FinalCompare.Add(MovM1);
+            FinalCompare.Add(MovM2);
+
+
+            return FinalCompare;
         }
         [HttpGet]
-        public async Task<IActionResult> GetNewComing()
+        public void GetNewComing()
         {
-           
-            var newincomemovie = await 
-                
-                
-                //MoviesService.GetQuery().Select(x => x.Title).OrderBy(x=>x.M)
 
-            
-        
+            var newincomemovie = MoviesService.GetQuery().OrderByDescending(x => x.ProductYear).Take(5);
+                
+
         }
         [HttpPost]
         public SearchMovieOutputDto SearchMovie(SearchMovieInputDto searchInput)

@@ -10,6 +10,6 @@ namespace App.Core.ApplicationService.Dtos.MovieDtos
        public string Movie1 { get; set; }
         public string Movie2 { get; set; }
 
-        public List<MovieRelatedDto> movieRelatedDtos;
+        
     }
 }

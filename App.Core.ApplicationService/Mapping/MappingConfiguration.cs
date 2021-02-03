@@ -5,6 +5,7 @@ using App.Core.Entities.Model;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace App.Core.ApplicationService.Mapping
@@ -13,14 +14,15 @@ namespace App.Core.ApplicationService.Mapping
     {
         public MappingConfiguration()
         {
-            CreateMap<MovieOutputDto, Movie>()
-                .ForMember(x => x.Title, o => o.MapFrom(z => z.Title))
-                .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
+            CreateMap<Movie, MovieCompareOutputDto>()
+                .ForMember(x => x.Genres, o => o.MapFrom(z => z.GenreMovies.Select(z=>z.Genre.GenreName)))
+                .ForMember(x => x.RateByUsers, o => o.MapFrom(z => z.RateByUser))
+                .ForMember(x => x.VisitCounts, o => o.MapFrom(z => z.VisitCount))
                 ;
             CreateMap<UserInputDto, User>()
                 .ForMember(x => x.Email, o => o.MapFrom(z => z.Email))
                 .ForMember(x => x.Password, o => o.MapFrom(z => z.Password))
-                //ForMember(x=>x.Token, o=>o.MapFrom(z=>z.Token)).
+                
                 ;
         }
     }

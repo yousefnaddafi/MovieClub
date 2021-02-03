@@ -4,7 +4,7 @@ using System.Text;
 
 namespace App.Core.ApplicationService.Dtos.MovieDtos
 {
-   public class MovieCompairOutputDto
+   public class MovieCompareOutputDto
     {
         public string[] Genres { get; set; }
         public float RateByUsers { get; set; }
