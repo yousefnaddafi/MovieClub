@@ -15,10 +15,9 @@ namespace App.Core.ApplicationService.Mapping
         public MappingConfiguration()
         {
             CreateMap<Movie, MovieCompareOutputDto>()
-                .ForMember(x => x.Genres, o => o.MapFrom(z => z.GenreMovies.Select(z=>z.Genre)))
-                .ForMember(x => x.GenreMovies, o => o.MapFrom(p => p.Genres.Select(x => x)))
-                .ForMember(x => x.Id, o => o.MapFrom(z => z.RateByUsers))
-                .ForMember(x => x.Summary, o => o.MapFrom(z => z.VisitCounts))
+                .ForMember(x => x.Genres, o => o.MapFrom(z => z.GenreMovies.Select(z=>z.Genre.GenreName)))
+                .ForMember(x => x.RateByUsers, o => o.MapFrom(z => z.RateByUser))
+                .ForMember(x => x.VisitCounts, o => o.MapFrom(z => z.VisitCount))
                 ;
             CreateMap<UserInputDto, User>()
                 .ForMember(x => x.Email, o => o.MapFrom(z => z.Email))
