@@ -23,9 +23,15 @@ namespace App.Core.ApplicationService.Mapping
             CreateMap<UserInputDto, User>()
                 .ForMember(x => x.Email, o => o.MapFrom(z => z.Email))
                 .ForMember(x => x.Password, o => o.MapFrom(z => z.Password));
-            
-            CreateMap<Movie, MovieRelatedDto >
-                
+
+            CreateMap<Movie, MovieRelatedDto>()
+                .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
+                .ForMember(x => x.ImdbRate, o => o.MapFrom(z => z.ImdbRate))
+                .ForMember(x => x.Director, o => o.MapFrom(z => z.Director.DirectorName))
+                .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
+                .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
+
+
         }
     }
 }

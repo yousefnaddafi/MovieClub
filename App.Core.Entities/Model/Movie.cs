@@ -15,7 +15,7 @@ namespace App.Core.Entities.Model
         public int RateCounter { get; set; }
 
         public int DirectorId { get; set; }
-        public Director DirectorName { get; set; }
+        public Director Director { get; set; }
 
         public List<Comment> Comments { get; set; }
 
