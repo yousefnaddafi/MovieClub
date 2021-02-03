@@ -90,11 +90,11 @@ namespace WebApi.Controllers
             return FinalCompare;
         }
         [HttpGet("Recently")]
-        public void GetNewComing()
+        public List<Movie> GetNewComing()
         {
 
-            var newincomemovie = MoviesService.GetQuery().OrderByDescending(x => x.ProductYear).Take(5);
-                
+            var newincomemovie = MoviesService.GetQuery().OrderByDescending(x => x.ProductYear).Take(5).ToList();
+            return newincomemovie;  
 
         }
         [HttpPost]
