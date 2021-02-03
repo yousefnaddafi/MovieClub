@@ -98,7 +98,7 @@ namespace WebApi.Controllers
             var Recently = new List<MovieRelatedDto>();
             foreach(var item in newincomemovie)
             {
-                var Mov = IMapper.Map<MovieRelatedDto>(item);
+                var Mov = mapper.Map<MovieRelatedDto>(item);
                 Recently.Add(Mov);
             }
             return Recently;  
@@ -112,7 +112,7 @@ namespace WebApi.Controllers
             var MPop = new List<MovieRelatedDto>();
             foreach (var item in MPop)
             {
-                var Mov = IMapper.Map<MovieRelatedDto>(item);
+                var Mov = mapper.Map<MovieRelatedDto>(item);
                 MPop.Add(Mov);
             }
             return MPop;
@@ -127,8 +127,8 @@ namespace WebApi.Controllers
                 ThenInclude(x=>x.Genre).
                 Where(x => searchInput.actors.Contains(x.Actor.ActorName));
             var bQuery = query.Include(x => x.Movie)
-                         .ThenInclude(x => x.DirectorName)
-                         .Where(x => x.Movie.DirectorName.DirectorName.Contains(searchInput.directors)).Select(x => x.Movie);
+                         .ThenInclude(x => x.Director)
+                         .Where(x => x.Movie.Director.DirectorName.Contains(searchInput.directors)).Select(x => x.Movie);
             var cquery = GenreMovieService.GetQuery()
                 .Include(x => x.Genre)
                 .Where(x => searchInput.genres.Contains(x.Genre.GenreName))
