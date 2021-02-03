@@ -74,17 +74,23 @@ namespace WebApi.Controllers
             return MoviesService.Get(id);
         }
         [HttpGet]
-        public Task<List<MovieCompairOutputDto>> Compare(MovieCompareInputDto inputDto)
+        public Task<List<MovieCompairOutputDto>> CompareMovie(MovieCompareInputDto inputDto)
         {
             
-            var lst = GenreMovieService.GetQuery().Where(x=>x.Genre
+          
       
         }
         [HttpGet]
         public async Task<IActionResult> GetNewComing()
         {
-           // var newMovie = MoviesService.GetAll().
+           
+            var newincomemovie = await 
+                
+                
+                //MoviesService.GetQuery().Select(x => x.Title).OrderBy(x=>x.M)
 
+            
+        
         }
         [HttpPost]
         public SearchMovieOutputDto SearchMovie(SearchMovieInputDto searchInput)
