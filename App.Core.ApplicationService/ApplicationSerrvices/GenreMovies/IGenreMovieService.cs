@@ -9,11 +9,11 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.GenreMovies
 {
     public interface IGenreMovieService
     {
-        int Create(CountryMovie inputDto);
-        CountryMovie Update(CountryMovie item);
+        int Create(GenreMovie inputDto);
+        GenreMovie Update(GenreMovie item);
         int Delete(int id);
-        Task<CountryMovie> Get(int id);
-        Task<List<CountryMovie>> GetAll();
-        IQueryable<CountryMovie> GetQuery();
+        Task<GenreMovie> Get(int id);
+        Task<List<GenreMovie>> GetAll();
+        IQueryable<GenreMovie> GetQuery();
     }
 }

@@ -8,7 +8,7 @@ namespace App.Core.Entities.Model
         public int Id { get; set; }
         public string CountryName { get; set; }
 
-        public List<CountryMovie> CountryMovies { get; set; }
+        public List<GenreMovie> CountryMovies { get; set; }
 
     }
 }

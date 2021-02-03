@@ -10,20 +10,20 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.CountryMovies
 {
     public class CountryMovieService : ICountryMovieService
     {
-        private readonly IMovieRepository<CountryMovie> CountryMovieRepository;
+        private readonly IMovieRepository<GenreMovie> CountryMovieRepository;
 
-        public CountryMovieService(IMovieRepository<CountryMovie> CountryMovieRepository)
+        public CountryMovieService(IMovieRepository<GenreMovie> CountryMovieRepository)
         {
             this.CountryMovieRepository = CountryMovieRepository;
         }
-        public int Create(CountryMovie inputDto)
+        public int Create(GenreMovie inputDto)
         {
 
             CountryMovieRepository.Insert(inputDto);
             CountryMovieRepository.Save();
             return inputDto.Id;
         }
-        public CountryMovie Update(CountryMovie item)
+        public GenreMovie Update(GenreMovie item)
         {
             this.CountryMovieRepository.Update(item);
             CountryMovieRepository.Save();
@@ -35,16 +35,16 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.CountryMovies
             return id;
         }
 
-        public Task<CountryMovie> GetAsync(int id)
+        public Task<GenreMovie> GetAsync(int id)
         {
             return CountryMovieRepository.GetAsync(id);
         }
 
-        public Task<List<CountryMovie>> GetAllAsync()
+        public Task<List<GenreMovie>> GetAllAsync()
         {
             return CountryMovieRepository.GetAllAsync();
         }
-        public IQueryable<CountryMovie> GetQuery()
+        public IQueryable<GenreMovie> GetQuery()
         {
             return CountryMovieRepository.GetQuery();
         }
