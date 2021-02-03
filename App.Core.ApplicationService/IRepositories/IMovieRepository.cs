@@ -16,7 +16,7 @@ namespace App.Core.ApplicationService.IRepositories
         
         T Update(T item);
         void Delete(int id);
-        IQueryable<T> Query { get; }
+        
 
         void Save();
     }
