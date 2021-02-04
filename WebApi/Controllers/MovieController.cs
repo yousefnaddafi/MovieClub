@@ -46,7 +46,7 @@ namespace WebApi.Controllers
             this.genreService = genreService;
             this.directorService = directorService;
             this.GenreMovieService = genreMovieService;
-            this.ActorMovieService=ActorMovieService,
+            this.ActorMovieService = ActorMovieService;
             this.mapper = mapper;
         }
 
