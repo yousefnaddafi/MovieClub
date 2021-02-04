@@ -50,9 +50,10 @@ namespace WebApi.Controllers
             this.mapper = mapper;
         }
 
-        public MovieController(IMovieService MovieService)
+        public MovieController(IMovieService MovieService,IActorMovieService actorMovieService)
         {
             this.MoviesService = MovieService;
+            this.ActorMovieService = actorMovieService;
         }
         [HttpPost]
         public void Create(Movie inputDto)
