@@ -34,7 +34,9 @@ namespace WebApi.Controllers
        // private readonly ICountryMovieService CountryMovieService;
 
         private readonly IMapper mapper;
-        public MovieController(IMovieService MovieService, IActorService actorService
+        public MovieController(IMovieService MovieService,
+            IActorMovieService ActorMovieService,
+            IActorService actorService
            , IDirectorService directorService
            , IGenreService genreService
            , IGenreMovieService genreMovieService,IMapper mapper)
@@ -44,12 +46,14 @@ namespace WebApi.Controllers
             this.genreService = genreService;
             this.directorService = directorService;
             this.GenreMovieService = genreMovieService;
+            this.ActorMovieService = ActorMovieService;
             this.mapper = mapper;
         }
 
-        public MovieController(IMovieService MovieService)
+        public MovieController(IMovieService MovieService,IActorMovieService actorMovieService)
         {
             this.MoviesService = MovieService;
+            this.ActorMovieService = actorMovieService;
         }
         [HttpPost]
         public void Create(Movie inputDto)
