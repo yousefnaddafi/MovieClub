@@ -15,6 +15,6 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         int Delete(int id);
         Task<Movie> Get(int id);
         Task<List<Movie>> GetAll();
-        IQueryable<Movie> GetQuery();
+        List<Movie> GetQuery();
     }
 }

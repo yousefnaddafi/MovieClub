@@ -45,9 +45,9 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
         {
             return ActorRepository.GetAllAsync();
         }
-        public IQueryable<Actor> GetQuery()
+        public List<Actor> GetQuery()
         {
-            return ActorRepository.GetQuery();
+            return ActorRepository.GetQuery().ToList();
         }
     }
 }

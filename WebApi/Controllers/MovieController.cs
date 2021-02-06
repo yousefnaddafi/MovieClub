@@ -151,16 +151,28 @@ namespace WebApi.Controllers
        
     }
 }
-//return newMovie
-//}(x => x.ProductYear == m.ProductYear).Select(x =>
-//                 new { Name = x.FullName, x.NationalCode });
-//        foreach (var item in result)
-//        {
-//            Console.WriteLine($"{item.Name} has {item.NationalCode}");
-//       //foreach(var item in newMovie )
-//x => x.Movie).Select(x => inputDto.movieRelatedDtos[0])
-  //      .Include(x => x.Movie).Where(x => inputDto.Genres).
-    // ContainsAsync(x.Genre.GenreName));
-//var lst2 = lst.Include(x => x.Movie).
-  //Select(x => inputDto.RateByUsers).SelectAsync(x => inputDto.VisitCounts);
-//var CompareResponse = lst2.
+/*[HttpPost]
+public SearchListBookResponse Search([FromBody] SearchRequest input)
+{
+
+
+
+    var resp1 = bookCategoryRepository.GetQuery()
+        .Include(x => x.Book)
+        .Include(x => x.Category)
+        .Include(x => x.Book.publisherr)
+        .Include(x => x.Book.BookAuthors).ThenInclude(x => x.Author)
+
+        .Where(x => input.categories.Contains(x.Category.Name)
+                   || input.authors.Contains(x.Book.BookAuthors.Select(z => z.Author.FullName).FirstOrDefault())
+                   || x.Book.publisherr.Name == input.publication)
+       .Select(x => new SearchResponse()
+       {
+           title = x.Book.Title,
+           authors = x.Book.BookAuthors.Select(x => x.Author.FullName).ToList(),
+           publishDate = x.Book.PublishDate,
+           publisher = x.Book.publisherr.Name,
+           ISBN = x.Book.ISBN
+       }).ToList();
+    return new SearchListBookResponse() { Books = resp1 };*/
+

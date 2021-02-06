@@ -5,11 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\App.Core.Entities\App.Core.Entities.csproj" />
+    <Compile Remove="Dtos\MovieDtos\Input\**" />
+    <EmbeddedResource Remove="Dtos\MovieDtos\Input\**" />
+    <None Remove="Dtos\MovieDtos\Input\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\MovieDtos\Input\" />
+    <ProjectReference Include="..\App.Core.Entities\App.Core.Entities.csproj" />
   </ItemGroup>
 
 </Project>

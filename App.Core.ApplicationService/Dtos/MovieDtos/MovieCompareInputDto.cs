@@ -8,8 +8,6 @@ namespace App.Core.ApplicationService.Dtos.MovieDtos
  public class MovieCompareInputDto
     {
        public string Movie1 { get; set; }
-        public string Movie2 { get; set; }
-
-        
+        public string Movie2 { get; set; }   
     }
 }

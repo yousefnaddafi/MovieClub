@@ -44,9 +44,9 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.ActorMovies
         {
             return ActorMovieRepository.GetAllAsync();
         }
-        public IQueryable<ActorMovie> GetQuery()
+        public List<ActorMovie> GetQuery()
         {
-            return ActorMovieRepository.GetQuery();
+            return ActorMovieRepository.GetQuery().ToList();
         }
 
         public List<ActorMovie> GetAllMovie()

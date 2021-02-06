@@ -15,6 +15,6 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
         int Delete(int id);
         Task<Actor> Get(int id);
        Task<List<Actor>> GetAll();
-        IQueryable<Actor> GetQuery();
+        List<Actor> GetQuery();
     }
 }

@@ -44,9 +44,9 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Countries
         {
             return CountryRepository.GetAllAsync();
         }
-        public IQueryable<Country> GetQuery()
+        public List<Country> GetQuery()
         {
-            return CountryRepository.GetQuery();
+            return CountryRepository.GetQuery().ToList();
         }
     }
 }

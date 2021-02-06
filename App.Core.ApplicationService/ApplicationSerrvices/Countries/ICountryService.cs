@@ -14,6 +14,6 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Countries
         int Delete(int id);
         Task<Country> Get(int id);
         Task<List<Country>> GetAll();
-        IQueryable<Country> GetQuery();
+        List<Country> GetQuery();
     }
 }

@@ -14,7 +14,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
         int Delete(int id);
         Task<Director> Get(int id);
         Task<List<Director>> GetAll();
-        IQueryable<Director> GetQuery();
+        List<Director> GetQuery();
 
     }
 }

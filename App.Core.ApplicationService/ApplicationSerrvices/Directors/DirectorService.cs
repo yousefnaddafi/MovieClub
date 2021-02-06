@@ -44,9 +44,9 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
         {
             return DirectorRepository.GetAllAsync();
         }
-        public IQueryable<Director> GetQuery()
+        public List<Director> GetQuery()
         {
-            return DirectorRepository.GetQuery();
+            return DirectorRepository.GetQuery().ToList();
         }
     }
 }

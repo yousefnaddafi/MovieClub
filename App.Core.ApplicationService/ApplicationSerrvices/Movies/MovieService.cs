@@ -47,9 +47,9 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         {
             return await MovieRepository.GetAllAsync();
         }
-        IQueryable<Movie> IMovieService.GetQuery()
+        List<Movie> IMovieService.GetQuery()
         {
-            return MovieRepository.GetQuery();
+            return MovieRepository.GetQuery().ToList();
         }
 
    

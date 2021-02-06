@@ -7,7 +7,7 @@ namespace App.Core.Entities.Model
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public string[] ProductYear { get; set; }
+        public string ProductYear { get; set; }
         public string Summary { get; set; }
         public string ImdbRate { get; set; }
         public int VisitCount { get; set; }

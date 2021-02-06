@@ -44,9 +44,9 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.GenreMovies
         {
             return GenreMovieRepository.GetAllAsync();
         }
-        public IQueryable<GenreMovie> GetQuery()
+        public List<GenreMovie> GetQuery()
         {
-            return GenreMovieRepository.GetQuery();
+            return GenreMovieRepository.GetQuery().ToList();
         }
     }
 }
