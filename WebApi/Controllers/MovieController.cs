@@ -24,21 +24,18 @@ namespace WebApi.Controllers
     public class MovieController : ControllerBase
     {
         private readonly IMovieService MoviesService;
-        private readonly IActorMovieService ActorMovieService;
         private readonly IMapper mapper;
         public MovieController(IMovieService MovieService,
             IActorMovieService ActorMovieService,
             IMapper mapper)
         {
             this.MoviesService = MovieService;
-            this.ActorMovieService = ActorMovieService;
             this.mapper = mapper;
         }
 
         public MovieController(IMovieService MovieService,IActorMovieService actorMovieService)
         {
             this.MoviesService = MovieService;
-            this.ActorMovieService = actorMovieService;
         }
         [HttpPost]
         public void Create(Movie inputDto)
@@ -110,10 +107,10 @@ namespace WebApi.Controllers
 
 
         [HttpPost("Search")]
-        public SearchMovieOutputDto SearchMovies([FromBody]SearchMovieInputDto searchInput)
+        public  SearchMovieOutputDto SearchMovies([FromBody]SearchMovieInputDto searchInput)
         {
 
-            return MoviesService.Search(searchInput);
+            return  MoviesService.Search(searchInput);
 
         }
        

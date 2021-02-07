@@ -38,12 +38,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
 
         public Task<Actor> Get(int id)
         {
-            return ActorRepository.GetAsync(id);
+            return ActorRepository.Get(id);
         }
 
         public Task<List<Actor>> GetAll()
         {
-            return ActorRepository.GetAllAsync();
+            return ActorRepository.GetAll();
         }
         public List<Actor> GetQuery()
         {

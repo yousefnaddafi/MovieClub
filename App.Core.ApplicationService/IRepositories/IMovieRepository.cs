@@ -12,8 +12,8 @@ namespace App.Core.ApplicationService.IRepositories
     {
         void Insert(T item);
         
-        Task<T> GetAsync(int id);
-        Task<List<T>> GetAllAsync();  
+        Task<T> Get(int id);
+        Task<List<T>> GetAll();  
         T Update(T item);
         void Delete(int id);
         IQueryable<T> GetQuery();

@@ -37,12 +37,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Countries
 
         public Task<Country> Get(int id)
         {
-            return CountryRepository.GetAsync(id);
+            return CountryRepository.Get(id);
         }
 
         public Task<List<Country>> GetAll()
         {
-            return CountryRepository.GetAllAsync();
+            return CountryRepository.GetAll();
         }
         public List<Country> GetQuery()
         {

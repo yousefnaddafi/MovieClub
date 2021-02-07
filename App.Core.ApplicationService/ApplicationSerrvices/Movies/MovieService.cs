@@ -43,19 +43,19 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 
         public Task<Movie> Get(int id)
         {
-            return MovieRepository.GetAsync(id);
+            return MovieRepository.Get(id);
         }
 
         public async Task<List<Movie>> GetAll()
         {
-            return await MovieRepository.GetAllAsync();
+            return await MovieRepository.GetAll();
         }
 
         public List<Movie> GetQuery()
         {
             return MovieRepository.GetQuery().ToList();
         }
-        public SearchMovieOutputDto Search(SearchMovieInputDto input)
+        public  SearchMovieOutputDto Search(SearchMovieInputDto input)
         {
 
             var ResultSearch = ActorMovieRepository.GetQuery().Include(x => x.Actor).Include(x => x.Movie).
@@ -74,33 +74,10 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 
                          }).ToList();
 
-            return new SearchMovieOutputDto { Movies = ResultSearch.ToArray() };
+            return  new SearchMovieOutputDto { Movies = ResultSearch.ToArray() };
            
         }
 
     }
 }
-/*[HttpPost]
-public SearchListBookResponse Search([FromBody] SearchRequest input)
-{
 
-
-
-    var resp1 = bookCategoryRepository.GetQuery()
-        .Include(x => x.Book)
-        .Include(x => x.Category)
-        .Include(x => x.Book.publisherr)
-        .Include(x => x.Book.BookAuthors).ThenInclude(x => x.Author)
-
-        .Where(x => input.categories.Contains(x.Category.Name)
-                   || input.authors.Contains(x.Book.BookAuthors.Select(z => z.Author.FullName).FirstOrDefault())
-                   || x.Book.publisherr.Name == input.publication)
-       .Select(x => new SearchResponse()
-       {
-           title = x.Book.Title,
-           authors = x.Book.BookAuthors.Select(x => x.Author.FullName).ToList(),
-           publishDate = x.Book.PublishDate,
-           publisher = x.Book.publisherr.Name,
-           ISBN = x.Book.ISBN
-       }).ToList();
-    return new SearchListBookResponse() { Books = resp1 };*/

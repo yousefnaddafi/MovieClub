@@ -26,12 +26,12 @@ namespace App.Infrastucture.EF.Repositories
             this.dbContext.Remove(item);
         }
 
-        public Task<T> GetAsync(int id)
+        public Task<T> Get(int id)
         {
             return this.dbContext.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<List<T>> GetAllAsync()
+        public Task<List<T>> GetAll()
         {
             return this.dbContext.Set<T>().ToListAsync();
         }

@@ -37,12 +37,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.GenreMovies
 
         public Task<GenreMovie> Get(int id)
         {
-            return GenreMovieRepository.GetAsync(id);
+            return GenreMovieRepository.Get(id);
         }
 
         public Task<List<GenreMovie>> GetAll()
         {
-            return GenreMovieRepository.GetAllAsync();
+            return GenreMovieRepository.GetAll();
         }
         public List<GenreMovie> GetQuery()
         {

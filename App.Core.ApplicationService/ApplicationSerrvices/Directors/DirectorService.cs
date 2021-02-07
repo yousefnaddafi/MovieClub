@@ -37,12 +37,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
 
         public Task<Director> Get(int id)
         {
-            return DirectorRepository.GetAsync(id);
+            return DirectorRepository.Get(id);
         }
 
         public Task<List<Director>> GetAll()
         {
-            return DirectorRepository.GetAllAsync();
+            return DirectorRepository.GetAll();
         }
         public List<Director> GetQuery()
         {

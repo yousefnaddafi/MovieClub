@@ -36,12 +36,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 
         public Task<User> Get(int id)
         {
-            return UserRepository.GetAsync(id);
+            return UserRepository.Get(id);
         }
 
         public Task<List<User>> GetAll()
         {
-            return UserRepository.GetAllAsync();
+            return UserRepository.GetAll();
         }
     }
 }

@@ -37,12 +37,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.ActorMovies
 
         public Task<ActorMovie> GetAsync(int id)
         {
-            return ActorMovieRepository.GetAsync(id);
+            return ActorMovieRepository.Get(id);
         }
 
         public Task<List<ActorMovie>> GetAll()
         {
-            return ActorMovieRepository.GetAllAsync();
+            return ActorMovieRepository.GetAll();
         }
         public List<ActorMovie> GetQuery()
         {

@@ -36,12 +36,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
 
         public Task<Genre> Get(int id)
         {
-            return GenreRepository.GetAsync(id);
+            return GenreRepository.Get(id);
         }
 
         public Task<List<Genre>> GetAll()
         {
-            return GenreRepository.GetAllAsync();
+            return GenreRepository.GetAll();
         }
     }
 }
