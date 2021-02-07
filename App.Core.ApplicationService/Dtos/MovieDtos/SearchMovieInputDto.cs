@@ -9,7 +9,8 @@ namespace App.Core.ApplicationService.Dtos.MovieDtos
     {
         
         public string[] actors { get; set; }
-        public string directors { get; set; }
+        public string rateByUser { get; set; }
         public string[] genres { get; set; }
+
     }
 }

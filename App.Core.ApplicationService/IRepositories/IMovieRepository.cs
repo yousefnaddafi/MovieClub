@@ -13,12 +13,10 @@ namespace App.Core.ApplicationService.IRepositories
         void Insert(T item);
         
         Task<T> GetAsync(int id);
-        Task<List<T>> GetAllAsync();
-        
+        Task<List<T>> GetAllAsync();  
         T Update(T item);
         void Delete(int id);
         IQueryable<T> GetQuery();
-
         Task Save();
     }
 }

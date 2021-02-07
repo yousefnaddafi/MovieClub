@@ -24,28 +24,13 @@ namespace WebApi.Controllers
     public class MovieController : ControllerBase
     {
         private readonly IMovieService MoviesService;
-
-        private readonly IActorService actorService;
-        private readonly IDirectorService directorService;
-        private readonly IGenreService genreService;
-        private readonly IGenreMovieService GenreMovieService;
-       
         private readonly IActorMovieService ActorMovieService;
-       // private readonly ICountryMovieService CountryMovieService;
-
         private readonly IMapper mapper;
         public MovieController(IMovieService MovieService,
             IActorMovieService ActorMovieService,
-            IActorService actorService
-           , IDirectorService directorService
-           , IGenreService genreService
-           , IGenreMovieService genreMovieService,IMapper mapper)
+            IMapper mapper)
         {
-            this.actorService = actorService;
             this.MoviesService = MovieService;
-            this.genreService = genreService;
-            this.directorService = directorService;
-            this.GenreMovieService = genreMovieService;
             this.ActorMovieService = ActorMovieService;
             this.mapper = mapper;
         }
@@ -125,54 +110,14 @@ namespace WebApi.Controllers
 
 
         [HttpPost("Search")]
-        public SearchMovieOutputDto SearchMovie(SearchMovieInputDto searchInput)
+        public SearchMovieOutputDto SearchMovies([FromBody]SearchMovieInputDto searchInput)
         {
-            var query=ActorMovieService.GetQuery().Include(x=>x.Actor).Include(x=>x.Movie).ThenInclude(x => x.GenreMovies).
-                ThenInclude(x=>x.Genre).
-                Where(x => searchInput.actors.Contains(x.Actor.ActorName));
-            var bQuery = query.Include(x => x.Movie)
-                         .ThenInclude(x => x.Director)
-                         .Where(x => x.Movie.Director.DirectorName.Contains(searchInput.directors)).Select(x => x.Movie);
-            var cquery = GenreMovieService.GetQuery()
-                .Include(x => x.Genre)
-                .Where(x => searchInput.genres.Contains(x.Genre.GenreName))
-                .Select(x => x.Movie);
-            var movieList = (from b in bQuery
-                            join c in cquery on b.Id equals c.Id
-                            select b).ToList();
 
-            var searchDtoDetails = mapper.Map<List<MovieDetailDto>>(movieList);
-            return new SearchMovieOutputDto()
-            {
-                Movies = searchDtoDetails.ToArray()
-            };
+            return MoviesService.Search(searchInput);
 
         }
        
     }
 }
-/*[HttpPost]
-public SearchListBookResponse Search([FromBody] SearchRequest input)
-{
 
-
-
-    var resp1 = bookCategoryRepository.GetQuery()
-        .Include(x => x.Book)
-        .Include(x => x.Category)
-        .Include(x => x.Book.publisherr)
-        .Include(x => x.Book.BookAuthors).ThenInclude(x => x.Author)
-
-        .Where(x => input.categories.Contains(x.Category.Name)
-                   || input.authors.Contains(x.Book.BookAuthors.Select(z => z.Author.FullName).FirstOrDefault())
-                   || x.Book.publisherr.Name == input.publication)
-       .Select(x => new SearchResponse()
-       {
-           title = x.Book.Title,
-           authors = x.Book.BookAuthors.Select(x => x.Author.FullName).ToList(),
-           publishDate = x.Book.PublishDate,
-           publisher = x.Book.publisherr.Name,
-           ISBN = x.Book.ISBN
-       }).ToList();
-    return new SearchListBookResponse() { Books = resp1 };*/
 

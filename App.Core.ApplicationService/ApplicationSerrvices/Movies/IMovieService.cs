@@ -1,4 +1,5 @@
-﻿using App.Core.ApplicationService.Dtos.ProductDtos;
+﻿using App.Core.ApplicationService.Dtos.MovieDtos;
+using App.Core.ApplicationService.Dtos.ProductDtos;
 using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,6 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         Task<Movie> Get(int id);
         Task<List<Movie>> GetAll();
         List<Movie> GetQuery();
+        SearchMovieOutputDto Search(SearchMovieInputDto input);
     }
 }

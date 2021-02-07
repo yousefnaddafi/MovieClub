@@ -20,7 +20,7 @@ namespace App.Core.Entities.Model
         public List<Comment> Comments { get; set; }
 
         public List<GenreMovie> GenreMovies { get; set; }
-        public List<GenreMovie> CountryMovies { get; set; }
-        public List<Country> ActorMovie { get; set; }
+        public List<CountryMovie> CountryMovies { get; set; }
+        public List<ActorMovie> ActorMovie { get; set; }
     }
 }

@@ -36,7 +36,7 @@ namespace App.Infrastucture.EF.Repositories
             return this.dbContext.Set<T>().ToListAsync();
         }
 
-        public IQueryable<T> Query => dbContext.Set<T>().AsQueryable();
+       
 
         public void Insert(T item)
         {
