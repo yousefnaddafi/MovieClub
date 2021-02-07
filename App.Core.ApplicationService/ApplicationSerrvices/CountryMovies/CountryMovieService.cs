@@ -1,29 +1,31 @@
-﻿using App.Core.ApplicationService.IRepositories;
+﻿using App.Core.ApplicationService.Dtos.CountryBasedDtos;
+using App.Core.ApplicationService.IRepositories;
 using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.CountryMovies
 {
     public class CountryMovieService : ICountryMovieService
     {
-        private readonly IMovieRepository<GenreMovie> CountryMovieRepository;
+        private readonly IMovieRepository<CountryMovie> CountryMovieRepository;
 
-        public CountryMovieService(IMovieRepository<GenreMovie> CountryMovieRepository)
+        public CountryMovieService(IMovieRepository<CountryMovie> CountryMovieRepository)
         {
             this.CountryMovieRepository = CountryMovieRepository;
         }
-        public int Create(GenreMovie inputDto)
+        public int Create(CountryMovie inputDto)
         {
 
             CountryMovieRepository.Insert(inputDto);
             CountryMovieRepository.Save();
             return inputDto.Id;
         }
-        public GenreMovie Update(GenreMovie item)
+        public CountryMovie Update(CountryMovie item)
         {
             this.CountryMovieRepository.Update(item);
             CountryMovieRepository.Save();
@@ -35,18 +37,25 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.CountryMovies
             return id;
         }
 
-        public Task<GenreMovie> GetAsync(int id)
+        public Task<CountryMovie> GetAsync(int id)
         {
             return CountryMovieRepository.Get(id);
         }
 
-        public Task<List<GenreMovie>> GetAllAsync()
+        public Task<List<CountryMovie>> GetAllAsync()
         {
             return CountryMovieRepository.GetAll();
         }
-        public List<GenreMovie> GetQuery()
+        public List<CountryMovie> GetQuery()
         {
             return CountryMovieRepository.GetQuery().ToList();
+        }
+       public CountryOutputDtos GetCountries(CountryInputDto input)
+        {
+            var lst = CountryMovieRepository.GetQuery().Include(x => x.Movie).Include(x => x.Country).
+                ThenInclude(x => x.CountryName).Where(x => input.countryNames.Contains(x.Country.CountryName)).
+                Select(x => x.Movie.Title).ToList();
+                return new CountryOutputDtos { movieTitles = lst.ToArray() };
         }
     }
 }

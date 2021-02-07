@@ -6,6 +6,7 @@ using App.Core.ApplicationService.ApplicationSerrvices.Directors;
 using App.Core.ApplicationService.ApplicationSerrvices.GenreMovies;
 using App.Core.ApplicationService.ApplicationSerrvices.Genres;
 using App.Core.ApplicationService.ApplicationSerrvices.Movies;
+using App.Core.ApplicationService.Dtos.CountryBasedDtos;
 using App.Core.ApplicationService.Dtos.MovieDtos;
 using App.Core.Entities.Model;
 using AutoMapper;
@@ -24,18 +25,21 @@ namespace WebApi.Controllers
     public class MovieController : ControllerBase
     {
         private readonly IMovieService MoviesService;
+        private readonly ICountryMovieService countryMovieService;
         private readonly IMapper mapper;
         public MovieController(IMovieService MovieService,
-            IActorMovieService ActorMovieService,
+            ICountryMovieService CountryMovieService,
             IMapper mapper)
         {
             this.MoviesService = MovieService;
+            this.countryMovieService = CountryMovieService;
             this.mapper = mapper;
         }
 
-        public MovieController(IMovieService MovieService,IActorMovieService actorMovieService)
+        public MovieController(IMovieService MovieService,ICountryMovieService CountryMovieService)
         {
             this.MoviesService = MovieService;
+            this.countryMovieService = CountryMovieService;
         }
         [HttpPost]
         public void Create(Movie inputDto)
@@ -103,17 +107,20 @@ namespace WebApi.Controllers
             }
             return MPop;
         }
-
-
-
+        
         [HttpPost("Search")]
         public  SearchMovieOutputDto SearchMovies([FromBody]SearchMovieInputDto searchInput)
         {
 
             return  MoviesService.Search(searchInput);
-
         }
-       
+
+       // list mikham bargarde 
+        [HttpGet("CountryBase")]
+        public CountryOutputDtos MovieBaseOnCountry([FromBody] CountryInputDto countryInput)
+        {
+            return countryMovieService.GetCountries(countryInput);
+        }
     }
 }
 

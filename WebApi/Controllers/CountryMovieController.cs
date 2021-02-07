@@ -20,12 +20,12 @@ namespace WebApi.Controllers
             this.CountryMovieService = CountryMovieService;
         }
         [HttpPost]
-        public void Create(GenreMovie inputDto)
+        public void Create(CountryMovie inputDto)
         {
             CountryMovieService.Create(inputDto);
         }
         [HttpPut]
-        public GenreMovie Update(GenreMovie item)
+        public CountryMovie Update(CountryMovie item)
         {
             this.CountryMovieService.Update(item);
             return item;
@@ -37,7 +37,7 @@ namespace WebApi.Controllers
             return id;
         }
         [HttpGet]
-        public Task<GenreMovie> Get(int id)
+        public Task<CountryMovie> Get(int id)
         {
             return CountryMovieService.GetAsync(id);
         }

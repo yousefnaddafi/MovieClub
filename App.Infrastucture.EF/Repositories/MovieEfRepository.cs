@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace App.Infrastucture.EF.Repositories
 {
-    public class MovieEfRepository<T> : IMovieRepository<T> where T: class, IHasIdentity
+    public class MovieEfRepository<T> : IMovieRepository<T> where T : class, IHasIdentity
     {
         private readonly MovieDbContext dbContext;
 
@@ -25,7 +25,7 @@ namespace App.Infrastucture.EF.Repositories
             var item = this.dbContext.Set<T>().FirstOrDefault(x => x.Id == id);
             this.dbContext.Remove(item);
         }
-
+         
         public Task<T> Get(int id)
         {
             return this.dbContext.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
@@ -36,8 +36,6 @@ namespace App.Infrastucture.EF.Repositories
             return this.dbContext.Set<T>().ToListAsync();
         }
 
-       
-
         public void Insert(T item)
         {
             this.dbContext.Add<T>(item);
@@ -46,7 +44,7 @@ namespace App.Infrastucture.EF.Repositories
 
         public Task Save()
         {
-           return this.dbContext.SaveChangesAsync();
+            return this.dbContext.SaveChangesAsync();
         }
 
         public T Update(T item)
@@ -59,7 +57,5 @@ namespace App.Infrastucture.EF.Repositories
         {
             return dbContext.Set<T>().AsQueryable();
         }
-
-        
     }
 }

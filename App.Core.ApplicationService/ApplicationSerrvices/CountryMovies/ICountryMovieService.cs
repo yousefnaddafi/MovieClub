@@ -1,4 +1,5 @@
-﻿using App.Core.Entities.Model;
+﻿using App.Core.ApplicationService.Dtos.CountryBasedDtos;
+using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,13 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.CountryMovies
 {
     public interface ICountryMovieService
     {
-        int Create(GenreMovie inputDto);
-        GenreMovie Update(GenreMovie item);
+        int Create(CountryMovie inputDto);
+        CountryMovie Update(CountryMovie item);
         int Delete(int id);
-        Task<GenreMovie> GetAsync(int id);
-        Task<List<GenreMovie>> GetAllAsync();
-        List<GenreMovie> GetQuery();
+        Task<CountryMovie> GetAsync(int id);
+        Task<List<CountryMovie>> GetAllAsync();
+        List<CountryMovie> GetQuery();
+        CountryOutputDtos GetCountries(CountryInputDto input);
+
     }
 }
