@@ -10,11 +10,11 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 {
     public class UserService : IUserService
     {
-        private readonly IMovieRepository<User> repository;
+        private readonly IMovieRepository<User> userRepository;
 
         public UserService(IMovieRepository<User> _repository)
         {
-            repository = _repository;
+            userRepository = _repository;
         }
 
         public int Create(UserInputDto inputDto)
@@ -23,45 +23,36 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
             tempUser.Email = inputDto.Email;
             tempUser.Password = inputDto.Password;
 
-            repository.Insert(tempUser);
-            repository.Save();
+            userRepository.Insert(tempUser);
+            userRepository.Save();
             return tempUser.Id;
         }
 
         public User Update(UserInputDto inputDto)
         {
-
-
             User tempUser = new User();
             tempUser.Email = inputDto.Email;
             tempUser.Password = inputDto.Password;
 
-            this.repository.Update(tempUser);
-            repository.Save();
+            this.userRepository.Update(tempUser);
+            userRepository.Save();
             return tempUser;
         }
 
         public int Delete(int id)
         {
-            repository.Delete(id);
+            userRepository.Delete(id);
             return id;
         }
 
         public Task<User> Get(int id)
         {
-<<<<<<< HEAD
-            return UserRepository.Get(id);
-=======
-            return repository.GetAsync(id);
->>>>>>> b51f7fe... Clean Code Solid Change Services to use Dto
+            return userRepository.Get(id);
         }
 
         public Task<List<User>> GetAll()
         {
-<<<<<<< HEAD
-            return UserRepository.GetAll();
-=======
-            return repository.GetAllAsync();
+            return userRepository.GetAll();
         }
 
         public string Insert(UserInputDto inputDto)
@@ -72,9 +63,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
             newUser.Password = inputDto.Password;
             newUser.Email = inputDto.Email;
             newUser.ExpireMembershipDate = DateTime.UtcNow.AddDays(1);
-            //UserRepository.Create(newUser);
             return token;
->>>>>>> b51f7fe... Clean Code Solid Change Services to use Dto
         }
     }
 }

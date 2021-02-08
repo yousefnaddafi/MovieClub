@@ -16,15 +16,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         int Delete(int id);
         Task<Movie> Get(int id);
         Task<List<Movie>> GetAll();
-<<<<<<< HEAD
         List<Movie> GetQuery();
+
         SearchMovieOutputDto Search(SearchMovieInputDto input);
         MovieOutputDetailDto GetPopular(RecommendPopularInputDto inputMovie);
-=======
-        IQueryable<Movie> GetQuery();
         public List<MovieRelatedDto> GetPopular();
         public List<MovieRelatedDto> GetNewComing();
         public List<MovieCompareOutputDto> Compare(MovieCompareInputDto inputDto);
->>>>>>> b51f7fe... Clean Code Solid Change Services to use Dto
     }
 }

@@ -11,51 +11,45 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
 {
     public class ActorService: IActorService
     {
-        private readonly IMovieRepository<Actor> ActorRepository;
+        private readonly IMovieRepository<Actor> actorRepository;
 
-        public ActorService(IMovieRepository<Actor> ActorRepository)
+        public ActorService(IMovieRepository<Actor> _actorRepository)
         {
-            this.ActorRepository = ActorRepository;
+            this.actorRepository = _actorRepository;
         }
 
         public int Create(Actor inputDto)
         {
-
-            ActorRepository.Insert(inputDto);
-            ActorRepository.Save();
+            actorRepository.Insert(inputDto);
+            actorRepository.Save();
             return inputDto.Id;
         }
 
         public Actor Update(Actor item)
         {
-            this.ActorRepository.Update(item);
-            ActorRepository.Save();
+            this.actorRepository.Update(item);
+            actorRepository.Save();
             return item;
         }
 
         public int Delete(int id)
         {
-            ActorRepository.Delete(id);
+            actorRepository.Delete(id);
             return id;
         }
 
         public Task<Actor> Get(int id)
         {
-            return ActorRepository.Get(id);
+            return actorRepository.Get(id);
         }
 
         public Task<List<Actor>> GetAll()
         {
-            return ActorRepository.GetAll();
+            return actorRepository.GetAll();
         }
-<<<<<<< HEAD
-        public List<Actor> GetQuery()
-=======
 
-        public IQueryable<Actor> GetQuery()
->>>>>>> b51f7fe... Clean Code Solid Change Services to use Dto
-        {
-            return ActorRepository.GetQuery().ToList();
+        public List<Actor> GetQuery() {
+            return actorRepository.GetQuery().ToList();
         }
     }
 }

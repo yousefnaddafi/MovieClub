@@ -10,43 +10,46 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.GenreMovies
 {
     public class GenreMovieService : IGenreMovieService
     {
-        private readonly IMovieRepository<GenreMovie> GenreMovieRepository;
+        private readonly IMovieRepository<GenreMovie> genreMovieRepository;
 
-        public GenreMovieService(IMovieRepository<GenreMovie> GenreMovieRepository)
+        public GenreMovieService(IMovieRepository<GenreMovie> _genreMovieRepository)
         {
-            this.GenreMovieRepository = GenreMovieRepository;
+            this.genreMovieRepository = _genreMovieRepository;
         }
+
         public int Create(GenreMovie inputDto)
         {
-
-            GenreMovieRepository.Insert(inputDto);
-            GenreMovieRepository.Save();
+            genreMovieRepository.Insert(inputDto);
+            genreMovieRepository.Save();
             return inputDto.Id;
         }
+
         public GenreMovie Update(GenreMovie item)
         {
-            this.GenreMovieRepository.Update(item);
-            GenreMovieRepository.Save();
+            this.genreMovieRepository.Update(item);
+            genreMovieRepository.Save();
             return item;
         }
+
         public int Delete(int id)
         {
-            GenreMovieRepository.Delete(id);
+            genreMovieRepository.Delete(id);
             return id;
         }
 
         public Task<GenreMovie> Get(int id)
         {
-            return GenreMovieRepository.Get(id);
+            return genreMovieRepository.Get(id);
         }
 
         public Task<List<GenreMovie>> GetAll()
         {
-            return GenreMovieRepository.GetAll();
+            return genreMovieRepository.GetAll();
         }
+
         public List<GenreMovie> GetQuery()
         {
-            return GenreMovieRepository.GetQuery().ToList();
+            return genreMovieRepository.GetQuery().ToList();
         }
     }
 }

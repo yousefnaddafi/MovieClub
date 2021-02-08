@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace WebApi.Controllers
 {
- 
     [ApiController]
     [Route("api/[controller]")]
     public class ActorController : ControllerBase

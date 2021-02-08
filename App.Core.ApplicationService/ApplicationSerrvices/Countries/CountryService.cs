@@ -10,43 +10,45 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Countries
 {
     public class CountryService : ICountryService
     {
-        private readonly IMovieRepository<Country> CountryRepository;
+        private readonly IMovieRepository<Country> countryRepository;
 
-        public CountryService(IMovieRepository<Country> CountryRepository)
+        public CountryService(IMovieRepository<Country> _countryRepository)
         {
-            this.CountryRepository = CountryRepository;
+            this.countryRepository = _countryRepository;
         }
+
         public int Create(Country inputDto)
         {
-
-            CountryRepository.Insert(inputDto);
-            CountryRepository.Save();
+            countryRepository.Insert(inputDto);
+            countryRepository.Save();
             return inputDto.Id;
         }
+
         public Country Update(Country item)
         {
-            this.CountryRepository.Update(item);
-            CountryRepository.Save();
+            this.countryRepository.Update(item);
+            countryRepository.Save();
             return item;
         }
+
         public int Delete(int id)
         {
-            CountryRepository.Delete(id);
+            countryRepository.Delete(id);
             return id;
         }
 
         public Task<Country> Get(int id)
         {
-            return CountryRepository.Get(id);
+            return countryRepository.Get(id);
         }
 
         public Task<List<Country>> GetAll()
         {
-            return CountryRepository.GetAll();
+            return countryRepository.GetAll();
         }
         public List<Country> GetQuery()
         {
-            return CountryRepository.GetQuery().ToList();
+            return countryRepository.GetQuery().ToList();
         }
     }
 }
