@@ -55,7 +55,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         {
             return MovieRepository.GetQuery().ToList();
         }
-        public  SearchMovieOutputDto Search(SearchMovieInputDto input)
+        public SearchMovieOutputDto Search(SearchMovieInputDto input)
         {
 
             var ResultSearch = ActorMovieRepository.GetQuery().Include(x => x.Actor).Include(x => x.Movie).
@@ -74,10 +74,19 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 
                          }).ToList();
 
-            return  new SearchMovieOutputDto { Movies = ResultSearch.ToArray() };
-           
-        }
+            return new SearchMovieOutputDto { Movies = ResultSearch.ToArray() };
 
+        }
+        public MovieOutputDetailDto GetPopular(RecommendPopularInputDto inputMovie)
+        {
+            var Popular = MovieRepository.GetQuery().
+                Where(x => x.RateByUser >= 7.5).Select(x => new MovieDetailDto()
+                {
+                    Title = x.Title
+                }).
+                OrderByDescending(x => inputMovie.visted).Take(3).ToArray();
+            return new MovieOutputDetailDto { movieDetailDtos = Popular };
+        }
     }
 }
 

@@ -6,6 +6,6 @@ namespace App.Core.ApplicationService.Dtos.MovieDtos
 {
     public class MovieOutputDetailDto
     {
-        MovieDetailDto[] movieDetailDtos { get; set; }
+       public MovieDetailDto[] movieDetailDtos { get; set; }
     }
 }

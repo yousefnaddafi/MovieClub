@@ -8,8 +8,5 @@ namespace App.Core.ApplicationService.Dtos.CountryBasedDtos
     {
         public string[] movieTitles { get; set; }
     }
-    public class Titles
-    {
-        public string movieTitle { get; set; }
-    }
+    
 }

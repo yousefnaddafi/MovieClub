@@ -36,7 +36,7 @@ namespace WebApi.Controllers
             this.mapper = mapper;
         }
 
-        public MovieController(IMovieService MovieService,ICountryMovieService CountryMovieService)
+        public MovieController(IMovieService MovieService, ICountryMovieService CountryMovieService)
         {
             this.MoviesService = MovieService;
             this.countryMovieService = CountryMovieService;
@@ -67,15 +67,14 @@ namespace WebApi.Controllers
         public List<MovieCompareOutputDto> Compare(MovieCompareInputDto inputDto)
         {
 
-            var Mov1 = MoviesService.GetQuery().FirstOrDefault(x => x.Title == inputDto.Movie1); 
+            var Mov1 = MoviesService.GetQuery().FirstOrDefault(x => x.Title == inputDto.Movie1);
             var Mov2 = MoviesService.GetQuery().FirstOrDefault(x => x.Title == inputDto.Movie2);
             var FinalCompare = new List<MovieCompareOutputDto>();
-            var MovM1=mapper.Map<MovieCompareOutputDto>(Mov1);
-            var MovM2= mapper.Map<MovieCompareOutputDto>(Mov2);
-            
+            var MovM1 = mapper.Map<MovieCompareOutputDto>(Mov1);
+            var MovM2 = mapper.Map<MovieCompareOutputDto>(Mov2);
+
             FinalCompare.Add(MovM1);
             FinalCompare.Add(MovM2);
-
 
             return FinalCompare;
         }
@@ -83,15 +82,15 @@ namespace WebApi.Controllers
         public List<MovieRelatedDto> GetNewComing()
         {
 
-            var newincomemovie = MoviesService.GetQuery().OrderByDescending(x => x.ProductYear).Take(5).ToList();
+            var NewIncomeMovie = MoviesService.GetQuery().OrderByDescending(x => x.ProductYear).Take(5).ToList();
 
             var Recently = new List<MovieRelatedDto>();
-            foreach(var item in newincomemovie)
+            foreach (var item in NewIncomeMovie)
             {
                 var Mov = mapper.Map<MovieRelatedDto>(item);
                 Recently.Add(Mov);
             }
-            return Recently;  
+            return Recently;
 
         }
         [HttpGet("Popular")]
@@ -107,19 +106,24 @@ namespace WebApi.Controllers
             }
             return MPop;
         }
-        
-        [HttpPost("Search")]
-        public  SearchMovieOutputDto SearchMovies([FromBody]SearchMovieInputDto searchInput)
-        {
 
-            return  MoviesService.Search(searchInput);
+        [HttpPost("Search")]
+        public SearchMovieOutputDto SearchMovies([FromBody] SearchMovieInputDto searchInput)
+        {
+            return MoviesService.Search(searchInput);
         }
 
-       // list mikham bargarde 
+        // *********list mikham bargarde 
         [HttpGet("CountryBase")]
-        public CountryOutputDtos MovieBaseOnCountry([FromBody] CountryInputDto countryInput)
+        public CountryOutputDtos MovieBasedOnCountry([FromBody] CountryInputDto countryInput)
         {
             return countryMovieService.GetCountries(countryInput);
+        }
+       [HttpGet]
+       public MovieOutputDetailDto BestRateMovie([FromBody] RecommendPopularInputDto recommend)
+        {
+            return MoviesService.GetPopular(recommend);
+
         }
     }
 }

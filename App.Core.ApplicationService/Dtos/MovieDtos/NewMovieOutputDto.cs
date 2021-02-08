@@ -6,6 +6,6 @@ namespace App.Core.ApplicationService.Dtos.MovieDtos
 {
   public class NewMovieOutputDto
     {
-
+       
     }
 }

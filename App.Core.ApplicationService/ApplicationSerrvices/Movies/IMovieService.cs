@@ -18,5 +18,6 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         Task<List<Movie>> GetAll();
         List<Movie> GetQuery();
         SearchMovieOutputDto Search(SearchMovieInputDto input);
+        MovieOutputDetailDto GetPopular(RecommendPopularInputDto inputMovie);
     }
 }

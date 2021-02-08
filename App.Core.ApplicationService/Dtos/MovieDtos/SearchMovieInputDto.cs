@@ -13,4 +13,5 @@ namespace App.Core.ApplicationService.Dtos.MovieDtos
         public string[] genres { get; set; }
 
     }
+    
 }

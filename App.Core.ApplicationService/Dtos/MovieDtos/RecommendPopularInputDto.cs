@@ -4,8 +4,9 @@ using System.Text;
 
 namespace App.Core.ApplicationService.Dtos.MovieDtos
 {
-  public class NewMovieInputDto
+    public class RecommendPopularInputDto
     {
-
+        public string title { get; set; }
+        public int visted { get; set; }
     }
 }
