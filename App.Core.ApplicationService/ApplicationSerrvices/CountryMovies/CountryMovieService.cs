@@ -55,7 +55,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.CountryMovies
             var lst = CountryMovieRepository.GetQuery().Include(x => x.Movie).Include(x => x.Country).
                 ThenInclude(x => x.CountryName).Where(x => input.countryNames.Contains(x.Country.CountryName)).
                 Select(x => x.Movie.Title).ToList();
-                return new CountryOutputDtos { movieTitles = lst.ToArray() };
+           
+            return new CountryOutputDtos { movieTitles = lst.ToArray() };
         }
     }
 }

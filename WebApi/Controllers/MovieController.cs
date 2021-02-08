@@ -108,7 +108,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("Search")]
-        public SearchMovieOutputDto SearchMovies([FromBody] SearchMovieInputDto searchInput)
+        public List<SearchDetailFilterDto> SearchMovies([FromBody] SearchMovieInputDto searchInput)
         {
             return MoviesService.Search(searchInput);
         }
@@ -119,10 +119,10 @@ namespace WebApi.Controllers
         {
             return countryMovieService.GetCountries(countryInput);
         }
-       [HttpGet]
+       [HttpGet("HighRate")]
        public MovieOutputDetailDto BestRateMovie([FromBody] RecommendPopularInputDto recommend)
         {
-            return MoviesService.GetPopular(recommend);
+            return MoviesService.GetHighRate(recommend);
 
         }
     }

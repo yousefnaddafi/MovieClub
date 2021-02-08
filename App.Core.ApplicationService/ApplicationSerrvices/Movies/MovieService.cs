@@ -3,6 +3,7 @@ using App.Core.ApplicationService.Dtos.MovieDtos;
 using App.Core.ApplicationService.Dtos.ProductDtos;
 using App.Core.ApplicationService.IRepositories;
 using App.Core.Entities.Model;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,11 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
     {
         private readonly IMovieRepository<Movie> MovieRepository;
         private readonly IMovieRepository<ActorMovie> ActorMovieRepository;
-
-        public MovieService(IMovieRepository<Movie> MovieRepository)
+        private readonly IMapper mapper;
+        public MovieService(IMovieRepository<Movie> MovieRepository, IMapper mapper)
         {
             this.MovieRepository = MovieRepository;
+            this.mapper = mapper;
         }
         public int Create(Movie inputDto)
         {
@@ -55,7 +57,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         {
             return MovieRepository.GetQuery().ToList();
         }
-        public SearchMovieOutputDto Search(SearchMovieInputDto input)
+        public List<SearchDetailFilterDto> Search(SearchMovieInputDto input)
         {
 
             var ResultSearch = ActorMovieRepository.GetQuery().Include(x => x.Actor).Include(x => x.Movie).
@@ -74,10 +76,11 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 
                          }).ToList();
 
-            return new SearchMovieOutputDto { Movies = ResultSearch.ToArray() };
+
+            return ResultSearch;
 
         }
-        public MovieOutputDetailDto GetPopular(RecommendPopularInputDto inputMovie)
+        public MovieOutputDetailDto GetHighRate(RecommendPopularInputDto inputMovie)
         {
             var Popular = MovieRepository.GetQuery().
                 Where(x => x.RateByUser >= 7.5).Select(x => new MovieDetailDto()
@@ -85,8 +88,10 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
                     Title = x.Title
                 }).
                 OrderByDescending(x => inputMovie.visted).Take(3).ToArray();
+
             return new MovieOutputDetailDto { movieDetailDtos = Popular };
         }
     }
 }
+
 

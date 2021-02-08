@@ -33,7 +33,7 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.Summery, o => o.MapFrom(z => z.Summary))
                 .ForMember(x => x.Title, o => o.MapFrom(z => z.Title));
                 
-
+            
 
         }
     }
