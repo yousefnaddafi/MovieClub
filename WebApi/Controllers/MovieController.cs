@@ -1,5 +1,6 @@
 ﻿using App.Core.ApplicationService.ApplicationSerrvices.ActorMovies;
 using App.Core.ApplicationService.ApplicationSerrvices.Actors;
+using App.Core.ApplicationService.ApplicationSerrvices.Comments;
 using App.Core.ApplicationService.ApplicationSerrvices.Countries;
 using App.Core.ApplicationService.ApplicationSerrvices.CountryMovies;
 using App.Core.ApplicationService.ApplicationSerrvices.Directors;
@@ -20,49 +21,80 @@ using System.Threading.Tasks;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class MovieController : ControllerBase
     {
         private readonly IMovieService MoviesService;
+<<<<<<< HEAD
         private readonly ICountryMovieService countryMovieService;
+=======
+
+        private readonly IActorService actorService;
+        private readonly IDirectorService directorService;
+        private readonly IGenreService genreService;
+        private readonly IGenreMovieService GenreMovieService;
+        private readonly ICommentService commentService;
+        private readonly IActorMovieService ActorMovieService;
+       // private readonly ICountryMovieService CountryMovieService;
+
+>>>>>>> b51f7fe... Clean Code Solid Change Services to use Dto
         private readonly IMapper mapper;
+
         public MovieController(IMovieService MovieService,
+<<<<<<< HEAD
             ICountryMovieService CountryMovieService,
             IMapper mapper)
+=======
+                               IActorMovieService ActorMovieService,
+                               IActorService actorService,
+                               IDirectorService directorService, 
+                               IGenreService genreService,
+                               IGenreMovieService genreMovieService,
+                               IMapper mapper)
+>>>>>>> b51f7fe... Clean Code Solid Change Services to use Dto
         {
             this.MoviesService = MovieService;
             this.countryMovieService = CountryMovieService;
             this.mapper = mapper;
         }
 
+<<<<<<< HEAD
         public MovieController(IMovieService MovieService, ICountryMovieService CountryMovieService)
         {
             this.MoviesService = MovieService;
             this.countryMovieService = CountryMovieService;
         }
+=======
+        
+
+>>>>>>> b51f7fe... Clean Code Solid Change Services to use Dto
         [HttpPost]
-        public void Create(Movie inputDto)
+        public void Create(MovieInputDto inputDto)
         {
             MoviesService.Create(inputDto);
         }
+
         [HttpPut]
-        public Movie Update(Movie item)
+        public Movie Update(MovieInputDto inputDto)
         {
-            this.MoviesService.Update(item);
-            return item;
+            this.MoviesService.Update(inputDto);
+            return mapper.Map<Movie>(inputDto); ;
         }
+
         [HttpDelete]
         public int Delete(int id)
         {
             MoviesService.Delete(id);
             return id;
         }
+
         [HttpGet]
         public Task<Movie> Get(int id)
         {
             return MoviesService.Get(id);
         }
+<<<<<<< HEAD
         [HttpGet("Compare")]
         public List<MovieCompareOutputDto> Compare(MovieCompareInputDto inputDto)
         {
@@ -77,10 +109,19 @@ namespace WebApi.Controllers
             FinalCompare.Add(MovM2);
 
             return FinalCompare;
+=======
+
+        [HttpPost("Compare")]
+        public List<MovieCompareOutputDto> Compare([FromBody] MovieCompareInputDto inputDto)
+        {
+            return MoviesService.Compare(inputDto);
+>>>>>>> b51f7fe... Clean Code Solid Change Services to use Dto
         }
+
         [HttpGet("Recently")]
         public List<MovieRelatedDto> GetNewComing()
         {
+<<<<<<< HEAD
 
             var NewIncomeMovie = MoviesService.GetQuery().OrderByDescending(x => x.ProductYear).Take(5).ToList();
 
@@ -92,24 +133,21 @@ namespace WebApi.Controllers
             }
             return Recently;
 
+=======
+            return MoviesService.GetNewComing();  
+>>>>>>> b51f7fe... Clean Code Solid Change Services to use Dto
         }
+
         [HttpGet("Popular")]
         public List<MovieRelatedDto> GetPopular()
         {
-            var MostPopular = MoviesService.GetQuery().OrderByDescending(z => z.RateByUser).Take(5).ToList();
-
-            var MPop = new List<MovieRelatedDto>();
-            foreach (var item in MPop)
-            {
-                var Mov = mapper.Map<MovieRelatedDto>(item);
-                MPop.Add(Mov);
-            }
-            return MPop;
+            return MoviesService.GetPopular();
         }
 
         [HttpPost("Search")]
         public SearchMovieOutputDto SearchMovies([FromBody] SearchMovieInputDto searchInput)
         {
+<<<<<<< HEAD
             return MoviesService.Search(searchInput);
         }
 
@@ -129,3 +167,27 @@ namespace WebApi.Controllers
 }
 
 
+=======
+            var query=ActorMovieService.GetQuery().Include(x=>x.Actor).Include(x=>x.Movie).ThenInclude(x => x.GenreMovies).
+                ThenInclude(x=>x.Genre).
+                Where(x => searchInput.Actors.Contains(x.Actor.ActorName));
+            var bQuery = query.Include(x => x.Movie)
+                         .ThenInclude(x => x.Director)
+                         .Where(x => x.Movie.Director.DirectorName.Contains(searchInput.Directors)).Select(x => x.Movie);
+            var cquery = GenreMovieService.GetQuery()
+                .Include(x => x.Genre)
+                .Where(x => searchInput.Genres.Contains(x.Genre.GenreName))
+                .Select(x => x.Movie);
+            var movieList = (from b in bQuery
+                            join c in cquery on b.Id equals c.Id
+                            select b).ToList();
+
+            var searchDtoDetails = mapper.Map<List<MovieDetailDto>>(movieList);
+            return new SearchMovieOutputDto()
+            {
+                Movies = searchDtoDetails.ToArray()
+            };
+        }
+    }
+}
+>>>>>>> b51f7fe... Clean Code Solid Change Services to use Dto

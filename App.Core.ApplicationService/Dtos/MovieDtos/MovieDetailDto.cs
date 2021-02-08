@@ -14,6 +14,10 @@ namespace App.Core.ApplicationService.Dtos.MovieDtos
         public string ProductorYear { get; set; }
         public string Summery { get; set; }
         public string ImdbRate { get; set; }
+<<<<<<< HEAD
         public float Rate { get; set; } 
+=======
+        public float Rate { get; set; }
+>>>>>>> b51f7fe... Clean Code Solid Change Services to use Dto
     }
 }

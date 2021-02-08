@@ -9,6 +9,5 @@ namespace App.Core.ApplicationService.Dtos.MovieDtos
         public string[] Genres { get; set; }
         public float RateByUsers { get; set; }
         public int VisitCounts { get; set; }
-
     }
 }

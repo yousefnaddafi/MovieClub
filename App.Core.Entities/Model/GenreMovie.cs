@@ -5,8 +5,12 @@ namespace App.Core.Entities.Model
     {
         public int Id { get; set; }
         public int GenreId { get; set; }
+<<<<<<< HEAD
         public Genre Genre { get; set; }
+=======
+>>>>>>> b51f7fe... Clean Code Solid Change Services to use Dto
         public int MovieId { get; set; }
         public Movie Movie { get; set; }
+        public Genre Genre { get; set; }
     }
 }

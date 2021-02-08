@@ -1,5 +1,6 @@
 ﻿using App.Core.ApplicationService.IRepositories;
 using App.Core.Entities.Model;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.ActorMovies
         {
             this.ActorMovieRepository = ActorMovieRepository;
         }
+
         public int Create(ActorMovie inputDto)
         {
 
@@ -23,19 +25,21 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.ActorMovies
             ActorMovieRepository.Save();
             return inputDto.Id;
         }
+
         public ActorMovie Update(ActorMovie item)
         {
             this.ActorMovieRepository.Update(item);
             ActorMovieRepository.Save();
             return item;
         }
+
         public int Delete(int id)
         {
             ActorMovieRepository.Delete(id);
             return id;
         }
 
-        public Task<ActorMovie> GetAsync(int id)
+        public Task<ActorMovie> Get(int id)
         {
             return ActorMovieRepository.Get(id);
         }
@@ -49,5 +53,9 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.ActorMovies
             return ActorMovieRepository.GetQuery().ToList();
         }
 
+<<<<<<< HEAD
+=======
+        
+>>>>>>> b51f7fe... Clean Code Solid Change Services to use Dto
     }
 }

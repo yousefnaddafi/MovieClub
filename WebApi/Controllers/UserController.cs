@@ -1,6 +1,7 @@
 ﻿using App.Core.ApplicationService.ApplicationSerrvices.Users;
 using App.Core.ApplicationService.Dtos.UserDto;
 using App.Core.Entities.Model;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,44 +11,42 @@ using System.Threading.Tasks;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly IUserService UserService;
+        private readonly IUserService userService;
+        private readonly IMapper mapper;
 
-        public UserController(IUserService UserService)
+        public UserController(IUserService _userService)
         {
-            this.UserService = UserService;
+            userService = _userService;
         }
+
         [HttpPost]
-        public string Create([FromBody]UserInputDto inputDto)
-        {
-            var NEWUser = new User();
-            var token = Guid.NewGuid().ToString();
-            NEWUser.Token = token;
-            NEWUser.Password = inputDto.Password;
-            NEWUser.Email = inputDto.Email;
-            NEWUser.ExpireMembershipDate = DateTime.UtcNow.AddDays(3);
-            UserService.Create(NEWUser);
-            return token;
+        public string Insert([FromBody]UserInputDto inputDto)
+        { 
+            return userService.Insert(inputDto);
         }
+
         [HttpPut]
-        public User Update(User item)
+        public User Update(UserInputDto inputDto)
         {
-            this.UserService.Update(item);
-            return item;
+            this.userService.Update(inputDto);
+            return mapper.Map<User>(inputDto);
         }
+
         [HttpDelete]
         public int Delete(int id)
         {
-            UserService.Delete(id);
+            userService.Delete(id);
             return id;
         }
+
         [HttpGet]
         public Task<User> Get(int id)
         {
-            return UserService.Get(id);
+            return userService.Get(id);
         }
     }
 }

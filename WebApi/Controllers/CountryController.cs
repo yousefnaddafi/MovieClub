@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class CountryController : ControllerBase
     {
         private readonly ICountryService CountryService;
@@ -19,23 +19,27 @@ namespace WebApi.Controllers
         {
             this.CountryService = CountryService;
         }
+
         [HttpPost]
         public void Create(Country inputDto)
         {
             CountryService.Create(inputDto);
         }
+
         [HttpPut]
         public Country Update(Country item)
         {
             this.CountryService.Update(item);
             return item;
         }
+
         [HttpDelete]
         public int Delete(int id)
         {
             CountryService.Delete(id);
             return id;
         }
+
         [HttpGet]
         public Task<Country> Get(int id)
         {

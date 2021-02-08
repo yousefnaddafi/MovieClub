@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class GenreMovieController : ControllerBase
     {
         private readonly IGenreMovieService GenreMovieService;
@@ -19,23 +19,27 @@ namespace WebApi.Controllers
         {
             this.GenreMovieService = GenreMovieService;
         }
+
         [HttpPost]
         public void Create(GenreMovie inputDto)
         {
             GenreMovieService.Create(inputDto);
         }
+
         [HttpPut]
         public GenreMovie Update(GenreMovie item)
         {
             this.GenreMovieService.Update(item);
             return item;
         }
+
         [HttpDelete]
         public int Delete(int id)
         {
             GenreMovieService.Delete(id);
             return id;
         }
+
         [HttpGet]
         public Task<GenreMovie> Get(int id)
         {

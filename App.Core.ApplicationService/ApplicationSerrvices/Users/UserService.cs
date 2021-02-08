@@ -1,4 +1,5 @@
-﻿using App.Core.ApplicationService.IRepositories;
+﻿using App.Core.ApplicationService.Dtos.UserDto;
+using App.Core.ApplicationService.IRepositories;
 using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
@@ -9,39 +10,71 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 {
     public class UserService : IUserService
     {
-        private readonly IMovieRepository<User> UserRepository;
+        private readonly IMovieRepository<User> repository;
 
-        public UserService(IMovieRepository<User> UserRepository)
+        public UserService(IMovieRepository<User> _repository)
         {
-            this.UserRepository = UserRepository;
+            repository = _repository;
         }
-        public int Create(User inputDto)
+
+        public int Create(UserInputDto inputDto)
+        {
+            User tempUser = new User();
+            tempUser.Email = inputDto.Email;
+            tempUser.Password = inputDto.Password;
+
+            repository.Insert(tempUser);
+            repository.Save();
+            return tempUser.Id;
+        }
+
+        public User Update(UserInputDto inputDto)
         {
 
-            UserRepository.Insert(inputDto);
-            UserRepository.Save();
-            return inputDto.Id;
+
+            User tempUser = new User();
+            tempUser.Email = inputDto.Email;
+            tempUser.Password = inputDto.Password;
+
+            this.repository.Update(tempUser);
+            repository.Save();
+            return tempUser;
         }
-        public User Update(User item)
-        {
-            this.UserRepository.Update(item);
-            UserRepository.Save();
-            return item;
-        }
+
         public int Delete(int id)
         {
-            UserRepository.Delete(id);
+            repository.Delete(id);
             return id;
         }
 
         public Task<User> Get(int id)
         {
+<<<<<<< HEAD
             return UserRepository.Get(id);
+=======
+            return repository.GetAsync(id);
+>>>>>>> b51f7fe... Clean Code Solid Change Services to use Dto
         }
 
         public Task<List<User>> GetAll()
         {
+<<<<<<< HEAD
             return UserRepository.GetAll();
+=======
+            return repository.GetAllAsync();
+        }
+
+        public string Insert(UserInputDto inputDto)
+        {
+            var newUser = new User();
+            var token = Guid.NewGuid().ToString();
+            newUser.Token = token;
+            newUser.Password = inputDto.Password;
+            newUser.Email = inputDto.Email;
+            newUser.ExpireMembershipDate = DateTime.UtcNow.AddDays(1);
+            //UserRepository.Create(newUser);
+            return token;
+>>>>>>> b51f7fe... Clean Code Solid Change Services to use Dto
         }
     }
 }

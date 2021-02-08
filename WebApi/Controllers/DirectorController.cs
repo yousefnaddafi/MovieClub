@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class DirectorController : ControllerBase
     {
         private readonly IDirectorService DirectorService;
@@ -19,23 +19,27 @@ namespace WebApi.Controllers
         {
             this.DirectorService = DirectorService;
         }
+
         [HttpPost]
         public void Create(Director inputDto)
         {
             DirectorService.Create(inputDto);
         }
+
         [HttpPut]
         public Director Update(Director item)
         {
             this.DirectorService.Update(item);
             return item;
         }
+
         [HttpDelete]
         public int Delete(int id)
         {
             DirectorService.Delete(id);
             return id;
         }
+
         [HttpGet]
         public Task<Director> Get(int id)
         {

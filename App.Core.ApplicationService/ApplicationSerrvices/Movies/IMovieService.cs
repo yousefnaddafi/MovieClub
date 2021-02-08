@@ -11,13 +11,20 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 {
     public interface IMovieService
     {
-        int Create(Movie inputDto);
-        Movie Update(Movie item);
+        int Create(MovieInputDto inputDto);
+        Movie Update(MovieInputDto item);
         int Delete(int id);
         Task<Movie> Get(int id);
         Task<List<Movie>> GetAll();
+<<<<<<< HEAD
         List<Movie> GetQuery();
         SearchMovieOutputDto Search(SearchMovieInputDto input);
         MovieOutputDetailDto GetPopular(RecommendPopularInputDto inputMovie);
+=======
+        IQueryable<Movie> GetQuery();
+        public List<MovieRelatedDto> GetPopular();
+        public List<MovieRelatedDto> GetNewComing();
+        public List<MovieCompareOutputDto> Compare(MovieCompareInputDto inputDto);
+>>>>>>> b51f7fe... Clean Code Solid Change Services to use Dto
     }
 }

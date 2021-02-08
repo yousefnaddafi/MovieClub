@@ -1,5 +1,4 @@
-﻿
-using App.Core.ApplicationService.ApplicationSerrvices.ActorMovies;
+﻿using App.Core.ApplicationService.ApplicationSerrvices.ActorMovies;
 using App.Core.ApplicationService.ApplicationSerrvices.Actors;
 using App.Core.ApplicationService.ApplicationSerrvices.Countries;
 using App.Core.ApplicationService.ApplicationSerrvices.CountryMovies;
@@ -7,7 +6,6 @@ using App.Core.ApplicationService.ApplicationSerrvices.Directors;
 using App.Core.ApplicationService.ApplicationSerrvices.GenreMovies;
 using App.Core.ApplicationService.ApplicationSerrvices.Genres;
 using App.Core.ApplicationService.ApplicationSerrvices.Movies;
-
 using App.Core.ApplicationService.ApplicationSerrvices.Users;
 using App.Core.ApplicationService.IRepositories;
 using App.Core.Entities.Model;
@@ -29,20 +27,20 @@ namespace WebApi.Extensions
             AddRepositories(services);
             AddServices(services);
         }
+
         private  static void AddRepositories(IServiceCollection services)
         {
             services.AddTransient<IMovieRepository<Movie>, MovieEfRepository<Movie>>();
             services.AddTransient<IMovieRepository<Actor>, MovieEfRepository<Actor>>();
             services.AddTransient<IMovieRepository<Genre>, MovieEfRepository<Genre>>();
             services.AddTransient<IMovieRepository<Country>, MovieEfRepository<Country>>();
-            
             services.AddTransient<IMovieRepository<Director>, MovieEfRepository<Director>>();
             services.AddTransient<IMovieRepository<Country>, MovieEfRepository<Country>>();
             services.AddTransient<IMovieRepository<GenreMovie>, MovieEfRepository<GenreMovie>>();
             services.AddTransient<IMovieRepository<ActorMovie>, MovieEfRepository<ActorMovie>>();
-
             services.AddTransient<IMovieRepository<User>, MovieEfRepository<User>>();
         }
+
         private static void AddServices(IServiceCollection services)
         {
             services.AddTransient<IMovieService, MovieService>();
@@ -53,7 +51,6 @@ namespace WebApi.Extensions
             services.AddTransient<IActorMovieService, ActorMovieService>();
             services.AddTransient<ICountryMovieService, CountryMovieService>();
             services.AddTransient<IGenreMovieService, GenreMovieService>();
-
             services.AddTransient<IUserService, UserService>();
         }
     }

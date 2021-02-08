@@ -17,6 +17,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
         {
             this.ActorRepository = ActorRepository;
         }
+
         public int Create(Actor inputDto)
         {
 
@@ -24,12 +25,14 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
             ActorRepository.Save();
             return inputDto.Id;
         }
+
         public Actor Update(Actor item)
         {
             this.ActorRepository.Update(item);
             ActorRepository.Save();
             return item;
         }
+
         public int Delete(int id)
         {
             ActorRepository.Delete(id);
@@ -45,7 +48,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
         {
             return ActorRepository.GetAll();
         }
+<<<<<<< HEAD
         public List<Actor> GetQuery()
+=======
+
+        public IQueryable<Actor> GetQuery()
+>>>>>>> b51f7fe... Clean Code Solid Change Services to use Dto
         {
             return ActorRepository.GetQuery().ToList();
         }

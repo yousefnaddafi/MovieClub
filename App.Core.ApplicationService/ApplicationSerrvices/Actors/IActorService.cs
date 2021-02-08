@@ -14,7 +14,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
         Actor Update(Actor item);
         int Delete(int id);
         Task<Actor> Get(int id);
+<<<<<<< HEAD
        Task<List<Actor>> GetAll();
         List<Actor> GetQuery();
+=======
+        Task<List<Actor>> GetAll();
+        IQueryable<Actor> GetQuery();
+>>>>>>> b51f7fe... Clean Code Solid Change Services to use Dto
     }
 }

@@ -17,6 +17,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using WebApi.Extensions;
+using WebApi.Middlewares;
 
 namespace WebApi
 {
@@ -33,7 +34,8 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDependency();
-            services.AddSwaggerGen(c=>c.SwaggerDoc("MovieClub",new Microsoft.OpenApi.Models.OpenApiInfo {Title="WebApi",Version="MovieClub" }));
+            services.AddSwaggerGen(c=>c.SwaggerDoc("MovieClub",new Microsoft.OpenApi.Models
+                .OpenApiInfo {Title="WebApi",Version="MovieClub" }));
             services.AddDbContext<MovieDbContext>(o =>
             { o.UseSqlServer(Configuration.GetConnectionString("MovieDbConections")); });
 
@@ -61,6 +63,8 @@ namespace WebApi
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseMiddleware<CustomExceptionHandlerMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
