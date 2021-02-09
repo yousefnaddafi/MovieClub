@@ -16,7 +16,7 @@ namespace App.Core.Entities.Model
         public string Password { get; set; }
         
         public UserLogin UserLogin { get; set; }
-        public int UserLoginId { get; set; }
+        
 
     }
 }
