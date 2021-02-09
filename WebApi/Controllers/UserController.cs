@@ -1,4 +1,6 @@
 ﻿using App.Core.ApplicationService.ApplicationSerrvices.Users;
+using App.Core.ApplicationService.ApplicationSerrvices.UsersLogin;
+using App.Core.ApplicationService.Dtos.LoginDto;
 using App.Core.ApplicationService.Dtos.UserDto;
 using App.Core.Entities.Model;
 using AutoMapper;
@@ -16,24 +18,19 @@ namespace WebApi.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService userService;
+        private readonly IUserLoginService userLoginService;
         private readonly IMapper mapper;
 
-        public UserController(IUserService _userService)
+        public UserController(IUserService _userService, IUserLoginService _userLoginService)
         {
             userService = _userService;
+            userLoginService = _userLoginService;
         }
 
         [HttpPost]
         public void Create([FromBody]UserInputDto inputDto)
         {
-            var NEWUser = new User();
-           // var token = Guid.NewGuid().ToString();
-          //  NEWUser.Token = token;
-            NEWUser.Password = inputDto.Password;
-            NEWUser.Email = inputDto.Email;
-          //  NEWUser.ExpireMembershipDate = DateTime.UtcNow.AddDays(3);
-            UserService.Create(NEWUser);
-            
+                      this.userService.Create(inputDto);    
         }
 
         [HttpPut]
@@ -55,5 +52,13 @@ namespace WebApi.Controllers
         {
             return userService.Get(id);
         }
+        [HttpPost]
+        public UserLogin LoginUser(UserLoginInputDto inputDto)
+        {
+            
+             this.userLoginService.Login(inputDto);
+            return mapper.Map<UserLogin>(inputDto);
+        }
+        //*******khoroji
     }
 }

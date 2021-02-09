@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace App.Core.Entities.Model
 {
    public class UserLogin: IHasIdentity

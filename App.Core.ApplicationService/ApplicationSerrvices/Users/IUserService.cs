@@ -14,6 +14,6 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
         int Delete(int id);
         Task<User> Get(int id);
         Task<List<User>> GetAll();
-        string Insert(UserInputDto inputDto);
+        void Insert(UserInputDto inputDto);
     }
 }

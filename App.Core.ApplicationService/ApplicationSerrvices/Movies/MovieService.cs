@@ -81,8 +81,6 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
                              genres = x.Movie.GenreMovies.Select(z => z.Genre.GenreName).ToList()
 
                          }).ToList();
-
-
             return ResultSearch;
 
         }
@@ -129,7 +127,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         public List<MovieCompareOutputDto> Compare(MovieCompareInputDto inputDto)
         {
             var AllMoviesTitle = movieRepository.GetQuery().ToList();
-            if (AllMoviesTitle.Select(x=> x.Title != inputDto.Movie1).FirstOrDefault())
+            if (AllMoviesTitle.Select(x => x.Title != inputDto.Movie1).FirstOrDefault())
             {
                 throw new InvalidTitleNameException("Wrong Title");
             }
