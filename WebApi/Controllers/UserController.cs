@@ -23,6 +23,7 @@ namespace WebApi.Controllers
 
         public UserController(IUserService _userService, IUserLoginService _userLoginService)
         {
+            this.mapper = mapper;
             userService = _userService;
             userLoginService = _userLoginService;
         }
