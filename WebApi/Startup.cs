@@ -33,8 +33,8 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDependency();
-            services.AddSwaggerGen(c=>c.SwaggerDoc("MovieClub",new Microsoft.OpenApi.Models
-                .OpenApiInfo {Title="WebApi",Version="MovieClub" }));
+            services.AddSwaggerGen(c=>c.SwaggerDoc("Movie Club",new Microsoft.OpenApi.Models
+                .OpenApiInfo {Title="WebApi",Version="Movie Club" }));
             services.AddDbContext<MovieDbContext>(o =>
             { o.UseSqlServer(Configuration.GetConnectionString("MovieDbConections")); });
 
@@ -49,7 +49,7 @@ namespace WebApi
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/MovieClub/swagger.json", "Movie Club");
+                c.SwaggerEndpoint("/swagger/Movie Club/swagger.json", "Movie Club");
             });
             
             if (env.IsDevelopment())
