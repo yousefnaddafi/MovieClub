@@ -18,8 +18,9 @@ namespace WebApi.Controllers
         private readonly IUserService userService;
         private readonly IMapper mapper;
 
-        public UserController(IUserService _userService)
+        public UserController(IUserService _userService,IMapper mapper)
         {
+            this.mapper = mapper;
             userService = _userService;
         }
 
@@ -32,7 +33,7 @@ namespace WebApi.Controllers
             NEWUser.Password = inputDto.Password;
             NEWUser.Email = inputDto.Email;
           //  NEWUser.ExpireMembershipDate = DateTime.UtcNow.AddDays(3);
-            UserService.Create(NEWUser);
+           // UserService.Create(NEWUser);
             
         }
 

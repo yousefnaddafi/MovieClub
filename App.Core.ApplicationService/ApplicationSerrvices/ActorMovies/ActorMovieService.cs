@@ -35,7 +35,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.ActorMovies
             return id;
         }
 
-        public Task<ActorMovie> GetAsync(int id)
+        public Task<ActorMovie> Get(int id)
         {
             return ActorMovieRepository.Get(id);
         }
@@ -49,5 +49,6 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.ActorMovies
             return ActorMovieRepository.GetQuery().ToList();
         }
 
+        
     }
 }

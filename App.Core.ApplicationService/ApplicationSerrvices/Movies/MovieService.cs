@@ -5,7 +5,6 @@ using App.Core.ApplicationService.IRepositories;
 using App.Core.Entities.Model;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +20,10 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         private readonly IMovieRepository<Movie> movieRepository;
         private readonly IMovieRepository<ActorMovie> ActorMovieRepository;
         private readonly IMapper mapper;
-        public MovieService(IMovieRepository<Movie> MovieRepository, IMapper mapper)
+        public MovieService(IMovieRepository<Movie> MovieRepository,
+            IMovieRepository<ActorMovie>ActorMovieRepository, IMapper mapper)
         {
+            this.ActorMovieRepository = ActorMovieRepository;
             this.movieRepository = MovieRepository;
             this.mapper = mapper;
         }

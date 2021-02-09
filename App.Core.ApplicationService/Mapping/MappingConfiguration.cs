@@ -41,7 +41,7 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.Summary, o => o.MapFrom(z => z.Summary))
                 .ForMember(x => x.ImdbRate, o => o.MapFrom(z => z.ImdbRate))
                 .ForMember(x => x.DirectorId, o => o.MapFrom(z => z.DirectorId))
-                ;
+                
 
                 .ForMember(x => x.Title, o => o.MapFrom(z => z.Title));
                 

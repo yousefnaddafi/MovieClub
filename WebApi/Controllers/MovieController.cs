@@ -29,12 +29,7 @@ namespace WebApi.Controllers
         private readonly ICountryMovieService countryMovieService;
         private readonly IMapper mapper;
 
-        private readonly IActorService actorService;
-        private readonly IDirectorService directorService;
-        private readonly IGenreService genreService;
-        private readonly IGenreMovieService genreMovieService;
-        private readonly ICommentService commentService;
-        private readonly IActorMovieService actorMovieService;
+       
 
         public MovieController(IMovieService _movieService, ICountryMovieService _countryMovieService, IMapper _mapper)
         {
@@ -101,7 +96,7 @@ namespace WebApi.Controllers
        [HttpGet("HighRate")]
        public MovieOutputDetailDto BestRateMovie([FromBody] RecommendPopularInputDto recommend)
         {
-            return MoviesService.GetPopular(recommend);
+            return moviesService.GetHighRate(recommend);
 
         }
     }
