@@ -31,7 +31,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public void Create([FromBody]UserInputDto inputDto)
         {
-                      this.userService.Create(inputDto);    
+             this.userService.Create(inputDto);    
         }
 
         [HttpPut]
@@ -53,7 +53,7 @@ namespace WebApi.Controllers
         {
             return userService.Get(id);
         }
-        [HttpPost]
+        [HttpPost("Login")]
         public UserLogin LoginUser(UserLoginInputDto inputDto)
         {
             
