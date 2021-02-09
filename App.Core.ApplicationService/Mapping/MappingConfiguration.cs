@@ -25,14 +25,10 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.Email, o => o.MapFrom(z => z.Email))
                 .ForMember(x => x.Password, o => o.MapFrom(z => z.Password))
                 ;           
-            CreateMap<UserLoginInputDto, UserLogin>()
+            CreateMap<UserLogin, UserLoginInputDto>()
                 .ForMember(x => x.Token, o => o.MapFrom(z => z.Token))
-                .ForMember(x => x.ExpireMembershipDate, o => o.MapFrom(z => z.ExpireMembershipDate))
                 ;
-            CreateMap<User , UserLoginInputDto>()
-                .ForMember(x=>x.Email , o => o.MapFrom(z => z.Email))
-                .ForMember(x => x.Password, o => o.MapFrom(z => z.Password))
-                ;           
+                      
 
             CreateMap<Movie, MovieRelatedDto>()
                 .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))

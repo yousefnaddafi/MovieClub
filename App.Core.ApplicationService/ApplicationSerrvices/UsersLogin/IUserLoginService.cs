@@ -15,6 +15,6 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.UsersLogin
         int Delete(int id);
         Task<UserLogin> Get(int id);
         Task<List<UserLogin>> GetAll();
-        string Login(UserLoginInputDto user);
+        string Login(UserInputDto user);
     }
 }

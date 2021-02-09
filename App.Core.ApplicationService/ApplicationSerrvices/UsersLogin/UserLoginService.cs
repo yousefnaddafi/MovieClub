@@ -3,6 +3,7 @@ using App.Core.ApplicationService.Dtos.UserDto;
 using App.Core.ApplicationService.IRepositories;
 using App.Core.Entities.Model;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,18 +53,31 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.UsersLogin
         {
             return UserLoginRepository.GetAll();
         }
-        public string Login(UserLoginInputDto inputDto)
+        public string Login(UserInputDto inputDto)
         {
             var newUser = UserRepository.GetQuery().
                 Where(x => x.Email == inputDto.Email && x.Password == inputDto.Password).FirstOrDefault();
                 var token = Guid.NewGuid().ToString();
-                UserLoginRepository.Insert(new UserLogin()
-                {
-                    Id = newUser.Id,
-                    Token = token,
-                    ExpireMembershipDate = DateTime.UtcNow.AddDays(1)
-                });
+            UserLoginRepository.Insert(new UserLogin()
+            {
+                Id = newUser.Id,
+                Token = token,
+                ExpireMembershipDate = DateTime.UtcNow.AddDays(1),
+                UserId = UserRepository.GetQuery().FirstOrDefault(x => x.Email == inputDto.Email).Id
+            }); 
                 return token;           
+        }
+        public bool CheckToken(UserLoginInputDto inputDto)
+        {
+            var Exp =UserLoginRepository.GetQuery().FirstOrDefault(x => x.Token == inputDto.Token).ExpireMembershipDate;
+            
+            if (Exp > DateTime.UtcNow)
+            {
+                return true;
+            }
+            else
+                return false;
+            
         }
     }
 
