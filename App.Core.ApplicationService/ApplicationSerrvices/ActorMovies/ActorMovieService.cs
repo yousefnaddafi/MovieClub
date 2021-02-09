@@ -48,7 +48,5 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.ActorMovies
         {
             return ActorMovieRepository.GetQuery().ToList();
         }
-
-        
     }
 }

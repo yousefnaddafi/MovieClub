@@ -1,4 +1,5 @@
 ﻿using App.Core.ApplicationService.Dtos.LoginDto;
+using App.Core.ApplicationService.Dtos.UserDto;
 using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,11 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.UsersLogin
 {
   public interface IUserLoginService
     {
-        int Create(UserLogin inputDto);
-        UserLogin Update(UserLogin item);
+        int Create(UserLoginInputDto inputDto);
+        UserLoginInputDto Update(UserLoginInputDto item);
         int Delete(int id);
         Task<UserLogin> Get(int id);
         Task<List<UserLogin>> GetAll();
-        string Login(UserLoginDto user);
+        string Login(UserLoginInputDto user);
     }
 }

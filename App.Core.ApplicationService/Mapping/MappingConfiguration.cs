@@ -1,4 +1,5 @@
 ﻿//using App.Core.ApplicationService.Dtos.ActorDtos;
+using App.Core.ApplicationService.Dtos.LoginDto;
 using App.Core.ApplicationService.Dtos.MovieDtos;
 using App.Core.ApplicationService.Dtos.UserDto;
 using App.Core.Entities.Model;
@@ -23,7 +24,15 @@ namespace App.Core.ApplicationService.Mapping
             CreateMap<UserInputDto, User>()
                 .ForMember(x => x.Email, o => o.MapFrom(z => z.Email))
                 .ForMember(x => x.Password, o => o.MapFrom(z => z.Password))
+                ;           
+            CreateMap<UserLoginInputDto, UserLogin>()
+                .ForMember(x => x.Token, o => o.MapFrom(z => z.Token))
+                .ForMember(x => x.ExpireMembershipDate, o => o.MapFrom(z => z.ExpireMembershipDate))
                 ;
+            CreateMap<User , UserLoginInputDto>()
+                .ForMember(x=>x.Email , o => o.MapFrom(z => z.Email))
+                .ForMember(x => x.Password, o => o.MapFrom(z => z.Password))
+                ;           
 
             CreateMap<Movie, MovieRelatedDto>()
                 .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
@@ -43,7 +52,7 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.DirectorId, o => o.MapFrom(z => z.DirectorId))
                 
 
-                .ForMember(x => x.Title, o => o.MapFrom(z => z.Title));
+                //.ForMember(x => x.Title, o => o.MapFrom(z => z.Title));
                 
             
 

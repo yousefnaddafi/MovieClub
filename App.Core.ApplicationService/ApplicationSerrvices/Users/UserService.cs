@@ -54,16 +54,20 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
         {
             return userRepository.GetAll();
         }
-
-        public string Insert(UserInputDto inputDto)
+        //
+        public void Insert(UserInputDto inputDto)
         {
-            var newUser = new User();
-            var token = Guid.NewGuid().ToString();
-            newUser.Token = token;
+            var newUser = new User();           
             newUser.Password = inputDto.Password;
             newUser.Email = inputDto.Email;
-            newUser.ExpireMembershipDate = DateTime.UtcNow.AddDays(1);
-            return token;
         }
+
     }
 }
+
+
+
+            
+        
+    
+
