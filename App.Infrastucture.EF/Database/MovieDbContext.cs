@@ -11,7 +11,7 @@ namespace App.Infrastucture.EF.Database
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Actor> Actors { get; set; }
         public DbSet<Country> Countries { get; set; }
-        public DbSet<Country> ActorMovies { get; set; }
+        public DbSet<ActorMovie> ActorMovies { get; set; }
         public DbSet<GenreMovie> CountryMovies { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Comment> Comments { get; set; }
