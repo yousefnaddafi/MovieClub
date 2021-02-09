@@ -1,4 +1,5 @@
-﻿using App.Core.ApplicationService.IRepositories;
+﻿using App.Core.ApplicationService.Dtos.UserDto;
+using App.Core.ApplicationService.IRepositories;
 using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
@@ -9,45 +10,60 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 {
     public class UserService : IUserService
     {
-        private readonly IMovieRepository<User> UserRepository;
+        private readonly IMovieRepository<User> userRepository;
 
-        public UserService(IMovieRepository<User> UserRepository)
+        public UserService(IMovieRepository<User> _repository)
         {
-            this.UserRepository = UserRepository;
+            userRepository = _repository;
         }
-        public int Create(User inputDto)
-        {
 
-            UserRepository.Insert(inputDto);
-            UserRepository.Save();
-            return inputDto.Id;
-            var NEWUser = new User();
-            // var token = Guid.NewGuid().ToString();
-            //  NEWUser.Token = token;
-            NEWUser.Password = inputDto.Password;
-            NEWUser.Email = inputDto.Email;
-            //  NEWUser.ExpireMembershipDate = DateTime.UtcNow.AddDays(3);
-        }
-        public User Update(User item)
+        public int Create(UserInputDto inputDto)
         {
-            this.UserRepository.Update(item);
-            UserRepository.Save();
-            return item;
+            User tempUser = new User();
+            tempUser.Email = inputDto.Email;
+            tempUser.Password = inputDto.Password;
+
+            userRepository.Insert(tempUser);
+            userRepository.Save();
+            return tempUser.Id;
         }
+
+        public User Update(UserInputDto inputDto)
+        {
+            User tempUser = new User();
+            tempUser.Email = inputDto.Email;
+            tempUser.Password = inputDto.Password;
+
+            this.userRepository.Update(tempUser);
+            userRepository.Save();
+            return tempUser;
+        }
+
         public int Delete(int id)
         {
-            UserRepository.Delete(id);
+            userRepository.Delete(id);
             return id;
         }
 
         public Task<User> Get(int id)
         {
-            return UserRepository.Get(id);
+            return userRepository.Get(id);
         }
 
         public Task<List<User>> GetAll()
         {
-            return UserRepository.GetAll();
+            return userRepository.GetAll();
+        }
+
+        public string Insert(UserInputDto inputDto)
+        {
+            var newUser = new User();
+            var token = Guid.NewGuid().ToString();
+            newUser.Token = token;
+            newUser.Password = inputDto.Password;
+            newUser.Email = inputDto.Email;
+            newUser.ExpireMembershipDate = DateTime.UtcNow.AddDays(1);
+            return token;
         }
     }
 }

@@ -9,39 +9,41 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
 {
     public class GenreService :IGenreService
     {
-        private readonly IMovieRepository<Genre> GenreRepository;
+        private readonly IMovieRepository<Genre> genreRepository;
 
-        public GenreService(IMovieRepository<Genre> GenreRepository)
+        public GenreService(IMovieRepository<Genre> genreRepository)
         {
-            this.GenreRepository = GenreRepository;
+            this.genreRepository = genreRepository;
         }
+
         public int Create(Genre inputDto)
         {
-
-            GenreRepository.Insert(inputDto);
-            GenreRepository.Save();
+            genreRepository.Insert(inputDto);
+            genreRepository.Save();
             return inputDto.Id;
         }
+
         public Genre Update(Genre item)
         {
-            this.GenreRepository.Update(item);
-            GenreRepository.Save();
+            this.genreRepository.Update(item);
+            genreRepository.Save();
             return item;
         }
+
         public int Delete(int id)
         {
-            GenreRepository.Delete(id);
+            genreRepository.Delete(id);
             return id;
         }
 
         public Task<Genre> Get(int id)
         {
-            return GenreRepository.Get(id);
+            return genreRepository.Get(id);
         }
 
         public Task<List<Genre>> GetAll()
         {
-            return GenreRepository.GetAll();
+            return genreRepository.GetAll();
         }
     }
 }

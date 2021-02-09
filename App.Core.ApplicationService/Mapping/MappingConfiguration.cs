@@ -22,7 +22,8 @@ namespace App.Core.ApplicationService.Mapping
 
             CreateMap<UserInputDto, User>()
                 .ForMember(x => x.Email, o => o.MapFrom(z => z.Email))
-                .ForMember(x => x.Password, o => o.MapFrom(z => z.Password));
+                .ForMember(x => x.Password, o => o.MapFrom(z => z.Password))
+                ;
 
             CreateMap<Movie, MovieRelatedDto>()
                 .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
@@ -31,6 +32,17 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.ProductorYear, o => o.MapFrom(z => z.ProductYear))
                 .ForMember(x => x.Rate, o => o.MapFrom(z => z.RateByUser))
                 .ForMember(x => x.Summery, o => o.MapFrom(z => z.Summary))
+                .ForMember(x => x.Title, o => o.MapFrom(z => z.Title))
+                ;
+
+            CreateMap<MovieInputDto, Movie>()
+                .ForMember(x => x.Title, o => o.MapFrom(z => z.Title))
+                .ForMember(x => x.ProductYear, o => o.MapFrom(z => z.ProductYear))
+                .ForMember(x => x.Summary, o => o.MapFrom(z => z.Summary))
+                .ForMember(x => x.ImdbRate, o => o.MapFrom(z => z.ImdbRate))
+                .ForMember(x => x.DirectorId, o => o.MapFrom(z => z.DirectorId))
+                ;
+
                 .ForMember(x => x.Title, o => o.MapFrom(z => z.Title));
                 
             

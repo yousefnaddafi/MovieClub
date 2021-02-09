@@ -13,6 +13,5 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
         int Delete(int id);
         Task<Genre> Get(int id);
         Task<List<Genre>> GetAll();
-
     }
 }

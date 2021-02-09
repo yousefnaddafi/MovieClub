@@ -11,12 +11,18 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 {
     public interface IMovieService
     {
-        int Create(Movie inputDto);
-        Movie Update(Movie item);
+        int Create(MovieInputDto inputDto);
+        Movie Update(MovieInputDto item);
         int Delete(int id);
         Task<Movie> Get(int id);
         Task<List<Movie>> GetAll();
         List<Movie> GetQuery();
+
+        SearchMovieOutputDto Search(SearchMovieInputDto input);
+        MovieOutputDetailDto GetPopular(RecommendPopularInputDto inputMovie);
+        public List<MovieRelatedDto> GetPopular();
+        public List<MovieRelatedDto> GetNewComing();
+        public List<MovieCompareOutputDto> Compare(MovieCompareInputDto inputDto);
         List<SearchDetailFilterDto> Search(SearchMovieInputDto input);
         MovieOutputDetailDto GetHighRate(RecommendPopularInputDto inputMovie);
     }

@@ -8,5 +8,6 @@ namespace App.Core.ApplicationService.Dtos.MovieDtos
     public class SearchMovieOutputDto
     {
         public SearchDetailFilterDto[] Movies { get; set; }
+        //public MovieDetailDto[] Movies { get; set; }
     }   
 }

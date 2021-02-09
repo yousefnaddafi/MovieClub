@@ -10,43 +10,46 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
 {
     public class DirectorService : IDirectorService
     {
-        private readonly IMovieRepository<Director> DirectorRepository;
+        private readonly IMovieRepository<Director> directorRepository;
 
-        public DirectorService(IMovieRepository<Director> DirectorRepository)
+        public DirectorService(IMovieRepository<Director> _directorRepository)
         {
-            this.DirectorRepository = DirectorRepository;
+            this.directorRepository = _directorRepository;
         }
+
         public int Create(Director inputDto)
         {
-
-            DirectorRepository.Insert(inputDto);
-            DirectorRepository.Save();
+            directorRepository.Insert(inputDto);
+            directorRepository.Save();
             return inputDto.Id;
         }
+
         public Director Update(Director item)
         {
-            this.DirectorRepository.Update(item);
-            DirectorRepository.Save();
+            this.directorRepository.Update(item);
+            directorRepository.Save();
             return item;
         }
+
         public int Delete(int id)
         {
-            DirectorRepository.Delete(id);
+            directorRepository.Delete(id);
             return id;
         }
 
         public Task<Director> Get(int id)
         {
-            return DirectorRepository.Get(id);
+            return directorRepository.Get(id);
         }
 
         public Task<List<Director>> GetAll()
         {
-            return DirectorRepository.GetAll();
+            return directorRepository.GetAll();
         }
+
         public List<Director> GetQuery()
         {
-            return DirectorRepository.GetQuery().ToList();
+            return directorRepository.GetQuery().ToList();
         }
     }
 }

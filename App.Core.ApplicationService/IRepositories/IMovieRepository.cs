@@ -11,9 +11,8 @@ namespace App.Core.ApplicationService.IRepositories
     public interface IMovieRepository<T>
     {
         void Insert(T item);
-        
         Task<T> Get(int id);
-        Task<List<T>> GetAll();  
+        Task<List<T>> GetAll();
         T Update(T item);
         void Delete(int id);
         IQueryable<T> GetQuery();

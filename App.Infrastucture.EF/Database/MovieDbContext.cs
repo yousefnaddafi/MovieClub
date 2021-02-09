@@ -19,16 +19,16 @@ namespace App.Infrastucture.EF.Database
         public DbSet<Director> Directors { get; set; }
         public DbSet<User> Users { get; set; }
 
-
         public MovieDbContext()
         {
 
         }
-        public MovieDbContext(DbContextOptions<MovieDbContext> options)
-            : base(options)
+
+        public MovieDbContext(DbContextOptions<MovieDbContext> options) : base(options)
         {
 
         }
+
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
             modelbuilder.Entity<Movie>(x => x.ToTable("Movie"));
@@ -40,7 +40,6 @@ namespace App.Infrastucture.EF.Database
             modelbuilder.Entity<GenreMovie>(x => x.ToTable("GenreMovie"));
             modelbuilder.Entity<GenreMovie>(x => x.ToTable("GenreMovie"));
             modelbuilder.Entity<Actor>(x => x.ToTable("Actor"));
-
             modelbuilder.Entity<User>(x => x.ToTable("User"));
         }
     }

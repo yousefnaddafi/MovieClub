@@ -11,37 +11,41 @@ using System.Threading.Tasks;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class ActorController : ControllerBase
     {
-        private readonly IActorService ActorService;
+        private readonly IActorService actorService;
 
-        public ActorController(IActorService ActorService)
+        public ActorController(IActorService actorService)
         {
-            this.ActorService = ActorService;
+            this.actorService = actorService;
         }
+
         [HttpPost]
         public void Create(Actor inputDto)
         {
-            ActorService.Create(inputDto);
+            actorService.Create(inputDto);
         }
+
         [HttpPut]
         public Actor Update(Actor item)
         {
-            this.ActorService.Update(item);
+            this.actorService.Update(item);
             return item;
         }
+
         [HttpDelete]
         public int Delete(int id)
         {
-            ActorService.Delete(id);
+            actorService.Delete(id);
             return id;
         }
+
         [HttpGet]
         public Task<Actor> Get(int id)
         {
-            return ActorService.Get(id);
+            return actorService.Get(id);
         }
     }
 }

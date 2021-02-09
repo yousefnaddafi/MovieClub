@@ -1,5 +1,6 @@
 ﻿using App.Core.ApplicationService.ApplicationSerrvices.ActorMovies;
 using App.Core.ApplicationService.ApplicationSerrvices.Actors;
+using App.Core.ApplicationService.ApplicationSerrvices.Comments;
 using App.Core.ApplicationService.ApplicationSerrvices.Countries;
 using App.Core.ApplicationService.ApplicationSerrvices.CountryMovies;
 using App.Core.ApplicationService.ApplicationSerrvices.Directors;
@@ -20,100 +21,78 @@ using System.Threading.Tasks;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class MovieController : ControllerBase
     {
-        private readonly IMovieService MoviesService;
+        private readonly IMovieService moviesService;
         private readonly ICountryMovieService countryMovieService;
         private readonly IMapper mapper;
-        public MovieController(IMovieService MovieService,
-            ICountryMovieService CountryMovieService,
-            IMapper mapper)
+
+        private readonly IActorService actorService;
+        private readonly IDirectorService directorService;
+        private readonly IGenreService genreService;
+        private readonly IGenreMovieService genreMovieService;
+        private readonly ICommentService commentService;
+        private readonly IActorMovieService actorMovieService;
+
+        public MovieController(IMovieService _movieService, ICountryMovieService _countryMovieService, IMapper _mapper)
         {
-            this.MoviesService = MovieService;
-            this.countryMovieService = CountryMovieService;
-            this.mapper = mapper;
+            moviesService = _movieService;
+            countryMovieService = _countryMovieService;
+            mapper = _mapper;
         }
 
-        public MovieController(IMovieService MovieService, ICountryMovieService CountryMovieService)
-        {
-            this.MoviesService = MovieService;
-            this.countryMovieService = CountryMovieService;
-        }
         [HttpPost]
-        public void Create(Movie inputDto)
+        public void Create(MovieInputDto inputDto)
         {
-            MoviesService.Create(inputDto);
+            moviesService.Create(inputDto);
         }
+
         [HttpPut]
-        public Movie Update(Movie item)
+        public Movie Update(MovieInputDto inputDto)
         {
-            this.MoviesService.Update(item);
-            return item;
+            moviesService.Update(inputDto);
+            return mapper.Map<Movie>(inputDto); ;
         }
+
         [HttpDelete]
         public int Delete(int id)
         {
-            MoviesService.Delete(id);
+            moviesService.Delete(id);
             return id;
         }
+
         [HttpGet]
         public Task<Movie> Get(int id)
         {
-            return MoviesService.Get(id);
+            return moviesService.Get(id);
         }
-        [HttpGet("Compare")]
-        public List<MovieCompareOutputDto> Compare(MovieCompareInputDto inputDto)
+
+        [HttpPost("Compare")]
+        public List<MovieCompareOutputDto> Compare([FromBody] MovieCompareInputDto inputDto)
         {
-
-            var Mov1 = MoviesService.GetQuery().FirstOrDefault(x => x.Title == inputDto.Movie1);
-            var Mov2 = MoviesService.GetQuery().FirstOrDefault(x => x.Title == inputDto.Movie2);
-            var FinalCompare = new List<MovieCompareOutputDto>();
-            var MovM1 = mapper.Map<MovieCompareOutputDto>(Mov1);
-            var MovM2 = mapper.Map<MovieCompareOutputDto>(Mov2);
-
-            FinalCompare.Add(MovM1);
-            FinalCompare.Add(MovM2);
-
-            return FinalCompare;
+            return moviesService.Compare(inputDto);
         }
+
         [HttpGet("Recently")]
         public List<MovieRelatedDto> GetNewComing()
         {
-
-            var NewIncomeMovie = MoviesService.GetQuery().OrderByDescending(x => x.ProductYear).Take(5).ToList();
-
-            var Recently = new List<MovieRelatedDto>();
-            foreach (var item in NewIncomeMovie)
-            {
-                var Mov = mapper.Map<MovieRelatedDto>(item);
-                Recently.Add(Mov);
-            }
-            return Recently;
-
+            return moviesService.GetNewComing();  
         }
+
         [HttpGet("Popular")]
         public List<MovieRelatedDto> GetPopular()
         {
-            var MostPopular = MoviesService.GetQuery().OrderByDescending(z => z.RateByUser).Take(5).ToList();
-
-            var MPop = new List<MovieRelatedDto>();
-            foreach (var item in MPop)
-            {
-                var Mov = mapper.Map<MovieRelatedDto>(item);
-                MPop.Add(Mov);
-            }
-            return MPop;
+            return moviesService.GetPopular();
         }
 
         [HttpPost("Search")]
         public List<SearchDetailFilterDto> SearchMovies([FromBody] SearchMovieInputDto searchInput)
         {
-            return MoviesService.Search(searchInput);
+            return moviesService.Search(searchInput);
         }
 
-        // *********list mikham bargarde 
         [HttpGet("CountryBase")]
         public CountryOutputDtos MovieBasedOnCountry([FromBody] CountryInputDto countryInput)
         {
@@ -122,10 +101,8 @@ namespace WebApi.Controllers
        [HttpGet("HighRate")]
        public MovieOutputDetailDto BestRateMovie([FromBody] RecommendPopularInputDto recommend)
         {
-            return MoviesService.GetHighRate(recommend);
+            return MoviesService.GetPopular(recommend);
 
         }
     }
 }
-
-
