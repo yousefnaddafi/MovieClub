@@ -21,7 +21,7 @@ namespace WebApi.Controllers
         private readonly IUserLoginService userLoginService;
         private readonly IMapper mapper;
 
-        public UserController(IUserService _userService, IUserLoginService _userLoginService)
+        public UserController(IUserService _userService, IUserLoginService _userLoginService,IMapper mapper)
         {
             this.mapper = mapper;
             userService = _userService;
