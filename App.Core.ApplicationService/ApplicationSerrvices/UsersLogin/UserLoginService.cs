@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.UsersLogin
 {
-    public class UserLoginSrvice : IUserLoginService
+    public class UserLoginService : IUserLoginService
     {
         private readonly IMovieRepository<UserLogin> UserLoginRepository;
         private readonly IMovieRepository<User> UserRepository;
         private readonly IMapper mapper;
-        public UserLoginSrvice(IMovieRepository<UserLogin> UserLoginRepository,
+        public UserLoginService(IMovieRepository<UserLogin> UserLoginRepository,
             IMovieRepository<User> UserRepository, IMapper mapper )
         {
             this.UserLoginRepository = UserLoginRepository;

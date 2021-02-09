@@ -14,8 +14,9 @@ namespace App.Core.Entities.Model
 
         [Required]
         public string Password { get; set; }
-       //public string Token { get; set; }
-       // public DateTime ExpireMembershipDate { get; set; }
+        
+        public UserLogin UserLogin { get; set; }
+        public int UserLoginId { get; set; }
 
     }
 }
