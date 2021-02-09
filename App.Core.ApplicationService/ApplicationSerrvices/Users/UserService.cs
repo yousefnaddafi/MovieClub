@@ -21,6 +21,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
             UserRepository.Insert(inputDto);
             UserRepository.Save();
             return inputDto.Id;
+            var NEWUser = new User();
+            // var token = Guid.NewGuid().ToString();
+            //  NEWUser.Token = token;
+            NEWUser.Password = inputDto.Password;
+            NEWUser.Email = inputDto.Email;
+            //  NEWUser.ExpireMembershipDate = DateTime.UtcNow.AddDays(3);
         }
         public User Update(User item)
         {

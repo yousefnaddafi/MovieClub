@@ -21,16 +21,16 @@ namespace WebApi.Controllers
             this.UserService = UserService;
         }
         [HttpPost]
-        public string Create([FromBody]UserInputDto inputDto)
+        public void Create([FromBody]UserInputDto inputDto)
         {
             var NEWUser = new User();
-            var token = Guid.NewGuid().ToString();
-            NEWUser.Token = token;
+           // var token = Guid.NewGuid().ToString();
+          //  NEWUser.Token = token;
             NEWUser.Password = inputDto.Password;
             NEWUser.Email = inputDto.Email;
-            NEWUser.ExpireMembershipDate = DateTime.UtcNow.AddDays(3);
+          //  NEWUser.ExpireMembershipDate = DateTime.UtcNow.AddDays(3);
             UserService.Create(NEWUser);
-            return token;
+            
         }
         [HttpPut]
         public User Update(User item)
