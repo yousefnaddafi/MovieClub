@@ -54,7 +54,7 @@ namespace WebApi.Controllers
             return userService.Get(id);
         }
         [HttpPost("Login")]
-        public UserLogin LoginUser(UserLoginInputDto inputDto)
+        public UserLogin LoginUser(UserInputDto inputDto)
         {
             
             userLoginService.Login(inputDto);

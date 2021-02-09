@@ -19,9 +19,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 
         public int Create(UserInputDto inputDto)
         {
-            User tempUser = new User();
-            tempUser.Email = inputDto.Email;
-            tempUser.Password = inputDto.Password;
+            User tempUser = new User()
+            {
+                Email = inputDto.Email,
+                Password = inputDto.Password
+            };
+            
 
             userRepository.Insert(tempUser);
             userRepository.Save();
@@ -30,9 +33,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 
         public User Update(UserInputDto inputDto)
         {
-            User tempUser = new User();
-            tempUser.Email = inputDto.Email;
-            tempUser.Password = inputDto.Password;
+            User tempUser = new User()
+            {
+                Email = inputDto.Email,
+                Password = inputDto.Password
+            };
+            
 
             this.userRepository.Update(tempUser);
             userRepository.Save();
@@ -57,9 +63,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
         //
         public void Insert(UserInputDto inputDto)
         {
-            var newUser = new User();           
-            newUser.Password = inputDto.Password;
-            newUser.Email = inputDto.Email;
+             new User()
+            {
+              Password = inputDto.Password,
+              Email = inputDto.Email
+            };           
+            
         }
 
     }
