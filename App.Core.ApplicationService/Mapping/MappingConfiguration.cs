@@ -29,7 +29,6 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.Token, o => o.MapFrom(z => z.Token))
                 ;
                       
-
             CreateMap<Movie, MovieRelatedDto>()
                 .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
                 .ForMember(x => x.ImdbRate, o => o.MapFrom(z => z.ImdbRate))
@@ -45,13 +44,8 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.ProductYear, o => o.MapFrom(z => z.ProductYear))
                 .ForMember(x => x.Summary, o => o.MapFrom(z => z.Summary))
                 .ForMember(x => x.ImdbRate, o => o.MapFrom(z => z.ImdbRate))
-                .ForMember(x => x.DirectorId, o => o.MapFrom(z => z.DirectorId));
-                
-
-                //.ForMember(x => x.Title, o => o.MapFrom(z => z.Title));
-                
-            
-
+                .ForMember(x => x.DirectorId, o => o.MapFrom(z => z.DirectorId));              
+                            
         }
     }
 }

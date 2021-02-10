@@ -25,7 +25,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         private readonly IMapper mapper;
         public MovieService(IMovieRepository<Movie> MovieRepository,
             IMovieRepository<ActorMovie> ActorMovieRepository, IMovieRepository<Comment> CommentRepository,
-            IMapper mapper , IMovieRepository<UserLogin> userRepository)
+            IMapper mapper, IMovieRepository<UserLogin> userRepository)
         {
             this.ActorMovieRepository = ActorMovieRepository;
             this.movieRepository = MovieRepository;
@@ -70,10 +70,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         {
             return movieRepository.GetQuery().ToList();
         }
-        public string CreatComment(CommentsInputDto comment, int movieId)
+        public string CreatComment(CommentsInputDto comment, int movieId, UserLoginInputDto input)
         {            
-           // var UserId = UserRepository.GetQuery().FirstOrDefault();
-                      
             CommentRepository.Insert(new Comment()
             {
                 Text = comment.Text,
@@ -105,7 +103,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         public MovieOutputDetailDto GetHighRate(RecommendPopularInputDto inputMovie)
         {
             var Popular = movieRepository.GetQuery().
-                Where(x => x.RateByUser >=7).Select(x => new MovieDetailDto()
+                Where(x => x.RateByUser >= 7).Select(x => new MovieDetailDto()
                 {
                     Title = x.Title
                 }).
@@ -160,7 +158,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             FinalCompare.Add(MappedSecondMovie);
 
             return FinalCompare;
-        }       
+        }
     }
 }
 
