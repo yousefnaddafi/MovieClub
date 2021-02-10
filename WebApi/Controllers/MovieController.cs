@@ -69,7 +69,7 @@ namespace WebApi.Controllers
         [HttpPost("Comments")]
         public string CommentByUser([FromBody] CommentsInputDto comment, int Id, [FromHeader] string token)
         {
-            return  moviesService.CreatComment(comment, Id);             
+            return moviesService.CreatComment(comment, Id);
         }
 
         [HttpPost("Compare")]
