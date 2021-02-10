@@ -55,11 +55,10 @@ namespace WebApi.Controllers
         }
         [HttpPost("Login")]
         public UserLogin LoginUser(UserInputDto inputDto)
-        {
-            
+        {           
             userLoginService.Login(inputDto);
             return mapper.Map<UserLogin>(inputDto);
         }
-        //*******khoroji
+        
     }
 }

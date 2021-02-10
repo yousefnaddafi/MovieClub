@@ -48,7 +48,6 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.UsersLogin
         {
             return UserLoginRepository.Get(id);
         }
-
         public Task<List<UserLogin>> GetAll()
         {
             return UserLoginRepository.GetAll();
@@ -76,8 +75,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.UsersLogin
                 return true;
             }
             else
-                return false;
-            
+                return false;            
         }
     }
 

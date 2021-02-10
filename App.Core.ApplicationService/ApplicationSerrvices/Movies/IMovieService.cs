@@ -1,4 +1,5 @@
-﻿using App.Core.ApplicationService.Dtos.MovieDtos;
+﻿using App.Core.ApplicationService.Dtos.CommentDtos;
+using App.Core.ApplicationService.Dtos.MovieDtos;
 using App.Core.ApplicationService.Dtos.ProductDtos;
 using App.Core.Entities.Model;
 using System;
@@ -17,6 +18,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         Task<Movie> Get(int id);
         Task<List<Movie>> GetAll();
         List<Movie> GetQuery();
+        string CreatComment(CommentsInputDto comment, int movieId);
         List<MovieRelatedDto> GetPopular();
         List<MovieRelatedDto> GetNewComing();
         List<MovieCompareOutputDto> Compare(MovieCompareInputDto inputDto);
