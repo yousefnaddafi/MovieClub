@@ -29,7 +29,7 @@ namespace WebApi.Controllers
     {
         private readonly IMovieService moviesService;
         private readonly ICountryMovieService countryMovieService;
-        //private readonly ICommentService commentService; 
+        
         private readonly IMapper mapper;
 
         public MovieController(IMovieService _movieService, ICountryMovieService _countryMovieService, IMapper _mapper)
@@ -67,9 +67,9 @@ namespace WebApi.Controllers
         }
 
         //[HttpPost("Comments")]
-       // public string CommentByUser([FromBody] CommentsInputDto comment, int Id, [FromHeader] string token)
+        //public string CommentByUser([FromBody] CommentsInputDto comment, int Id, [FromHeader] string token)
         //{
-          //  return  moviesService.CreatComment(comment, Id);             
+        //    return moviesService.CreatComment(comment, Id);
         //}
 
         [HttpPost("Compare")]
