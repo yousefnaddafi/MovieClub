@@ -7,23 +7,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using App.Core.ApplicationService.Dtos.CountryMovieDtos;
+using AutoMapper;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.CountryMovies
 {
     public class CountryMovieService : ICountryMovieService
     {
         private readonly IMovieRepository<CountryMovie> countryMovieRepository;
+        private readonly IMapper mapper;
 
         public CountryMovieService(IMovieRepository<CountryMovie> _countryMovieRepository)
         {
             this.countryMovieRepository = _countryMovieRepository;
         }
 
-        public int Create(CountryMovie inputDto)
+        public int Create(CountryMovieInputDto inputDto)
         {
-            countryMovieRepository.Insert(inputDto);
+            var temp = mapper.Map<CountryMovie>(inputDto);
+            countryMovieRepository.Insert(temp);
             countryMovieRepository.Save();
-            return inputDto.Id;
+            return temp.Id;
         }
 
         public CountryMovie Update(CountryMovie item)

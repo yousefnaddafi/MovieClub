@@ -1,5 +1,9 @@
-﻿//using App.Core.ApplicationService.Dtos.ActorDtos;
+﻿using App.Core.ApplicationService.Dtos.ActorDtos;
+using App.Core.ApplicationService.Dtos.ActorMovieDtos;
+using App.Core.ApplicationService.Dtos.CountryDtos;
+using App.Core.ApplicationService.Dtos.CountryMovieDtos;
 using App.Core.ApplicationService.Dtos.DirectorDtos;
+using App.Core.ApplicationService.Dtos.GenreDto;
 using App.Core.ApplicationService.Dtos.LoginDto;
 using App.Core.ApplicationService.Dtos.MovieDtos;
 using App.Core.ApplicationService.Dtos.UserDto;
@@ -50,6 +54,32 @@ namespace App.Core.ApplicationService.Mapping
             
             CreateMap<DirectorInputDto,Director>()
                 .ForMember(x=>x.DirectorName,o=>o.MapFrom(z=>z.FullName));
+
+
+
+
+
+            CreateMap<ActorInputDto, Actor>()
+                .ForMember(x => x.ActorName, o => o.MapFrom(z => z.ActorName))
+                .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
+                ;
+
+            CreateMap<CountryInputDto, Country>()
+                .ForMember(x => x.CountryName, o => o.MapFrom(z => z.CountryName))
+                ;
+
+            CreateMap<GenreInputDtos, Genre>()
+                .ForMember(x => x.GenreName, o => o.MapFrom(z => z.GenreName))
+                ;
+
+            CreateMap<ActorMovieInputDto, ActorMovie>()
+                .ForMember(x => x.ActorId, o => o.MapFrom(z => z.ActorId))
+                .ForMember(x => x.MovieId, o => o.MapFrom(z => z.MovieId))
+                ;
+            CreateMap<CountryMovieInputDto, CountryMovie>()
+                .ForMember(x => x.MovieId, o => o.MapFrom(z => z.MovieId))
+                .ForMember(x => x.CountryId, o => o.MapFrom(z => z.CountryId))
+                ;
         }
     }
 }

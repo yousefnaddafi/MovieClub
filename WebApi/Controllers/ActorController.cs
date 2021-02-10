@@ -1,4 +1,5 @@
 ﻿using App.Core.ApplicationService.ApplicationSerrvices.Actors;
+using App.Core.ApplicationService.Dtos.ActorDtos;
 //using App.Core.ApplicationService.Dtos.ActorDtos;
 using App.Core.Entities.Model;
 using AutoMapper;
@@ -17,22 +18,21 @@ namespace WebApi.Controllers
     {
         private readonly IActorService actorService;
 
-        public ActorController(IActorService actorService)
+        public ActorController(IActorService _actorService)
         {
-            this.actorService = actorService;
+            this.actorService = _actorService;
         }
 
         [HttpPost]
-        public void Create(Actor inputDto)
+        public void Create(ActorInputDto inputDto)
         {
             actorService.Create(inputDto);
         }
 
         [HttpPut]
-        public Actor Update(Actor item)
+        public Actor Update(Actor inputDto)
         {
-            this.actorService.Update(item);
-            return item;
+            return actorService.Update(inputDto);
         }
 
         [HttpDelete]

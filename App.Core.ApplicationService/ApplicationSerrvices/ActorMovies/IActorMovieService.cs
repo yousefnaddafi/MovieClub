@@ -1,4 +1,5 @@
-﻿using App.Core.Entities.Model;
+﻿using App.Core.ApplicationService.Dtos.ActorMovieDtos;
+using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.ActorMovies
 {
     public interface IActorMovieService
     {
-        int Create(ActorMovie inputDto);
+        int Create(ActorMovieInputDto inputDto);
         ActorMovie Update(ActorMovie item);
         int Delete(int id);
         Task<ActorMovie> Get(int id);

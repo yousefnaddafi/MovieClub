@@ -1,4 +1,5 @@
 ﻿using App.Core.ApplicationService.ApplicationSerrvices.Countries;
+using App.Core.ApplicationService.Dtos.CountryDtos;
 using App.Core.Entities.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,37 +14,37 @@ namespace WebApi.Controllers
     [Route("api/[controller]")]
     public class CountryController : ControllerBase
     {
-        private readonly ICountryService CountryService;
+        private readonly ICountryService countryService;
 
-        public CountryController(ICountryService CountryService)
+        public CountryController(ICountryService _countryService)
         {
-            this.CountryService = CountryService;
+            countryService = _countryService;
         }
 
         [HttpPost]
-        public void Create(Country inputDto)
+        public void Create(CountryInputDto inputDto)
         {
-            CountryService.Create(inputDto);
+            countryService.Create(inputDto);
         }
 
         [HttpPut]
-        public Country Update(Country item)
+        public Country Update(Country inputDto)
         {
-            this.CountryService.Update(item);
-            return item;
+            countryService.Update(inputDto);
+            return inputDto;
         }
 
         [HttpDelete]
         public int Delete(int id)
         {
-            CountryService.Delete(id);
+            countryService.Delete(id);
             return id;
         }
 
         [HttpGet]
         public Task<Country> Get(int id)
         {
-            return CountryService.Get(id);
+            return countryService.Get(id);
         }
     }
 }

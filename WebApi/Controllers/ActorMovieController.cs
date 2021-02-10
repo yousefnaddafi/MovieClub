@@ -1,4 +1,5 @@
 ﻿using App.Core.ApplicationService.ApplicationSerrvices.ActorMovies;
+using App.Core.ApplicationService.Dtos.ActorMovieDtos;
 using App.Core.Entities.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +22,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public void Create(ActorMovie inputDto)
+        public void Create(ActorMovieInputDto inputDto)
         {
             ActorMovieService.Create(inputDto);
         }

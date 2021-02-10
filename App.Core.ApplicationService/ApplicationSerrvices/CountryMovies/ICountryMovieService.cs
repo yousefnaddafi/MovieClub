@@ -1,4 +1,5 @@
 ﻿using App.Core.ApplicationService.Dtos.CountryBasedDtos;
+using App.Core.ApplicationService.Dtos.CountryMovieDtos;
 using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.CountryMovies
 {
     public interface ICountryMovieService
     {
-        int Create(CountryMovie inputDto);
+        int Create(CountryMovieInputDto inputDto);
         CountryMovie Update(CountryMovie item);
         int Delete(int id);
         Task<CountryMovie> GetAsync(int id);

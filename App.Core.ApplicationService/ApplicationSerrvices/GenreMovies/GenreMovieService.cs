@@ -1,5 +1,7 @@
-﻿using App.Core.ApplicationService.IRepositories;
+﻿using App.Core.ApplicationService.Dtos.GenreMovieDtos;
+using App.Core.ApplicationService.IRepositories;
 using App.Core.Entities.Model;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,17 +13,19 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.GenreMovies
     public class GenreMovieService : IGenreMovieService
     {
         private readonly IMovieRepository<GenreMovie> genreMovieRepository;
+        private readonly IMapper mapper;
 
         public GenreMovieService(IMovieRepository<GenreMovie> _genreMovieRepository)
         {
             this.genreMovieRepository = _genreMovieRepository;
         }
 
-        public int Create(GenreMovie inputDto)
+        public int Create(GenreMovieInputDto inputDto)
         {
-            genreMovieRepository.Insert(inputDto);
+            var temp = mapper.Map<GenreMovie>(inputDto);
+            genreMovieRepository.Insert(temp);
             genreMovieRepository.Save();
-            return inputDto.Id;
+            return temp.Id;
         }
 
         public GenreMovie Update(GenreMovie item)
