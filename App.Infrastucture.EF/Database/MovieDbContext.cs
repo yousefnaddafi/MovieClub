@@ -42,8 +42,8 @@ namespace App.Infrastucture.EF.Database
             modelbuilder.Entity<Movie>(x => x.ToTable("Movie"));
             modelbuilder.Entity<User>(x => x.ToTable("User"));
             modelbuilder.Entity<UserLogin>(x => x.ToTable("UserLogin"));
-            //modelbuilder.Entity<Favorite>(x => x.ToTable("Favorite"));
-            //modelbuilder.Entity<ActorMovie>(x => x.ToTable("ActorMovie"));
+            modelbuilder.Entity<Favorite>(x => x.ToTable("Favorite"));
+            modelbuilder.Entity<ActorMovie>(x => x.ToTable("ActorMovie"));
         }
     }
 }
