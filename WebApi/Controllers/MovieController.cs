@@ -95,7 +95,7 @@ namespace WebApi.Controllers
             return moviesService.Search(searchInput);
         }
 
-        [HttpGet("CountryBase")]
+        [HttpPost("CountryBase")]
         public CountryOutputDtos MovieBasedOnCountry([FromBody] CountryInputDto countryInput)
         {
             return countryMovieService.GetCountries(countryInput);
