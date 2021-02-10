@@ -64,7 +64,7 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
                 ;
 
-            CreateMap<CountryInputDto, Country>()
+            CreateMap<CountryInputDTO, Country>()
                 .ForMember(x => x.CountryName, o => o.MapFrom(z => z.CountryName))
                 ;
 

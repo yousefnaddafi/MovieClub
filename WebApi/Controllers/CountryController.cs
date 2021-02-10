@@ -22,7 +22,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public void Create(CountryInputDto inputDto)
+        public void Create(CountryInputDTO inputDto)
         {
             countryService.Create(inputDto);
         }

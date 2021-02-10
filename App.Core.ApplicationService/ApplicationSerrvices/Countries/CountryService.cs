@@ -21,12 +21,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Countries
             this.mapper = mapper;
         }
 
-        public int Create(CountryInputDto inputDto)
+        public string Create(CountryInputDTO inputDto)
         {
             var temp = mapper.Map<Country>(inputDto);
             countryRepository.Insert(temp);
             countryRepository.Save();
-            return temp.Id;
+            return inputDto.CountryName;
         }
 
         public Country Update(Country inputDto)

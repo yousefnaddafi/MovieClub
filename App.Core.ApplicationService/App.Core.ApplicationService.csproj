@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Folder Include="Dtos\ActorDtos\" />
-    <Folder Include="Dtos\CountryDtos\" />
     <Folder Include="Dtos\ActorMovieDtos\" />
     <Folder Include="Dtos\CountryMovieDtos\" />
     <Folder Include="Dtos\GenreMovieDtos\" />
