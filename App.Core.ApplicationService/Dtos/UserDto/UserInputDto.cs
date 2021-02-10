@@ -14,6 +14,6 @@ namespace App.Core.ApplicationService.Dtos.UserDto
         [Required]
         public string Password { get; set; }
 
-        public List<string> Favorites { get; set; }
+        public string[] Favorites { get; set; }
     }
 }
