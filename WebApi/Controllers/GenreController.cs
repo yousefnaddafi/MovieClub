@@ -1,4 +1,5 @@
 ﻿using App.Core.ApplicationService.ApplicationSerrvices.Genres;
+using App.Core.ApplicationService.Dtos.GenreDto;
 using App.Core.Entities.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +22,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public void Create(Genre inputDto)
+        public void Create(GenreInputDtos inputDto)
         {
             GenreService.Create(inputDto);
         }

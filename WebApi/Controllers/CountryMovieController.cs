@@ -1,4 +1,5 @@
 ﻿using App.Core.ApplicationService.ApplicationSerrvices.CountryMovies;
+using App.Core.ApplicationService.Dtos.CountryMovieDtos;
 using App.Core.Entities.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +22,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public void Create(CountryMovie inputDto)
+        public void Create(CountryMovieInputDto inputDto)
         {
             CountryMovieService.Create(inputDto);
         }

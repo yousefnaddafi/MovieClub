@@ -29,7 +29,6 @@ namespace WebApi.Controllers
     {
         private readonly IMovieService moviesService;
         private readonly ICountryMovieService countryMovieService;
-        
         private readonly IMapper mapper;
 
         public MovieController(IMovieService _movieService, ICountryMovieService _countryMovieService, IMapper _mapper)
