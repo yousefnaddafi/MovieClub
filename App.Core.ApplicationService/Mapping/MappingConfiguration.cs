@@ -24,7 +24,7 @@ namespace App.Core.ApplicationService.Mapping
             CreateMap<User, UserInputDto>()
                 .ForMember(x => x.Email, o => o.MapFrom(z => z.Email))
                 .ForMember(x => x.Password, o => o.MapFrom(z => z.Password))
-                .ForMember(x=>x.Favorites, o=>o.MapFrom(z=>z.Favorites.Select(x => x.MovieTitle)))
+                .ForMember(x=>x.Favorites, o=>o.MapFrom(z=>z.Favorites.Select(x => x.MovieTitle).ToList()))
                 ;           
             CreateMap<UserLogin, UserLoginInputDto>()
                 .ForMember(x => x.Token, o => o.MapFrom(z => z.Token))
