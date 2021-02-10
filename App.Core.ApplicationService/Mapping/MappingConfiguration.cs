@@ -41,14 +41,14 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.Director, o => o.MapFrom(z => z.Director.DirectorName))
                 .ForMember(x => x.ProductorYear, o => o.MapFrom(z => z.ProductYear))
                 .ForMember(x => x.Rate, o => o.MapFrom(z => z.RateByUser))
-                .ForMember(x => x.Summery, o => o.MapFrom(z => z.Summary))
+                .ForMember(x => x.Summery, o => o.MapFrom(z => z.Summery))
                 .ForMember(x => x.Title, o => o.MapFrom(z => z.Title))
                 ;
 
             CreateMap<MovieInputDto, Movie>()
                 .ForMember(x => x.Title, o => o.MapFrom(z => z.Title))
                 .ForMember(x => x.ProductYear, o => o.MapFrom(z => z.ProductYear))
-                .ForMember(x => x.Summary, o => o.MapFrom(z => z.Summary))
+                .ForMember(x => x.Summery, o => o.MapFrom(z => z.Summary))
                 .ForMember(x => x.ImdbRate, o => o.MapFrom(z => z.ImdbRate))
                 .ForMember(x => x.DirectorId, o => o.MapFrom(z => z.DirectorId));              
             
