@@ -1,4 +1,5 @@
 ﻿//using App.Core.ApplicationService.Dtos.ActorDtos;
+using App.Core.ApplicationService.Dtos.DirectorDtos;
 using App.Core.ApplicationService.Dtos.LoginDto;
 using App.Core.ApplicationService.Dtos.MovieDtos;
 using App.Core.ApplicationService.Dtos.UserDto;
@@ -21,10 +22,10 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.VisitCounts, o => o.MapFrom(z => z.VisitCount))
                 ;
 
-            CreateMap<User, UserInputDto>()
+            CreateMap<UserInputDto, User>()
                 .ForMember(x => x.Email, o => o.MapFrom(z => z.Email))
                 .ForMember(x => x.Password, o => o.MapFrom(z => z.Password))
-                .ForMember(x => x.Favorites, o => o.MapFrom(z => z.Favorites.Select(z => z.MovieTitle)))
+                //.ForMember(x => x.Favorites, o => o.MapFrom(z => z.Favorites.Select(z=>z.MovieTitle)))
                 ;           
             CreateMap<UserLogin, UserLoginInputDto>()
                 .ForMember(x => x.Token, o => o.MapFrom(z => z.Token))
@@ -46,7 +47,9 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.Summary, o => o.MapFrom(z => z.Summary))
                 .ForMember(x => x.ImdbRate, o => o.MapFrom(z => z.ImdbRate))
                 .ForMember(x => x.DirectorId, o => o.MapFrom(z => z.DirectorId));              
-                            
+            
+            CreateMap<DirectorInputDto,Director>()
+                .ForMember(x=>x.DirectorName,o=>o.MapFrom(z=>z.FullName));
         }
     }
 }

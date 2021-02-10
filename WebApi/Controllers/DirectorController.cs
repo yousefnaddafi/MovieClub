@@ -1,4 +1,5 @@
 ﻿using App.Core.ApplicationService.ApplicationSerrvices.Directors;
+using App.Core.ApplicationService.Dtos.DirectorDtos;
 using App.Core.Entities.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +22,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public void Create(Director inputDto)
+        public void Create(DirectorInputDto inputDto)
         {
             DirectorService.Create(inputDto);
         }

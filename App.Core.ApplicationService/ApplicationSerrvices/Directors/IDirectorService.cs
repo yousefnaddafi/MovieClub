@@ -1,4 +1,5 @@
-﻿using App.Core.Entities.Model;
+﻿using App.Core.ApplicationService.Dtos.DirectorDtos;
+using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
 {
     public interface IDirectorService
     {
-        int Create(Director inputDto);
+        string Create(DirectorInputDto inputDto);
         Director Update(Director item);
         int Delete(int id);
         Task<Director> Get(int id);

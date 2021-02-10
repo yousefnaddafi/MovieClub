@@ -5,23 +5,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using App.Core.ApplicationService.Dtos.DirectorDtos;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
 {
     public class DirectorService : IDirectorService
     {
         private readonly IMovieRepository<Director> directorRepository;
-
-        public DirectorService(IMovieRepository<Director> _directorRepository)
+        private readonly IMapper mapper;
+        public DirectorService(IMovieRepository<Director> _directorRepository,IMapper mapper)
         {
             this.directorRepository = _directorRepository;
+            this.mapper = mapper;
         }
 
-        public int Create(Director inputDto)
+        public string Create(DirectorInputDto inputDto)
         {
-            directorRepository.Insert(inputDto);
+            directorRepository.Insert(mapper.Map<Director>(inputDto));
             directorRepository.Save();
-            return inputDto.Id;
+            return inputDto.FullName;
         }
 
         public Director Update(Director item)
