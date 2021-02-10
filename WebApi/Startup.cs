@@ -32,11 +32,12 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<MovieDbContext>(o =>
+            { o.UseSqlServer(Configuration.GetConnectionString("MovieDbConections")); });
             services.AddDependency();
             services.AddSwaggerGen(c=>c.SwaggerDoc("Movie Club",new Microsoft.OpenApi.Models
                 .OpenApiInfo {Title="WebApi",Version="Movie Club" }));
-            services.AddDbContext<MovieDbContext>(o =>
-            { o.UseSqlServer(Configuration.GetConnectionString("MovieDbConections")); });
+            
 
             services.AddAutoMapper(Assembly.GetAssembly(typeof(MappingConfiguration)));
             services.AddControllers();
