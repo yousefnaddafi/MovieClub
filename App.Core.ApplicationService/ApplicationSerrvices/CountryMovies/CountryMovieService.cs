@@ -53,11 +53,13 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.CountryMovies
         {
             return countryMovieRepository.GetAll();
         }
+
         public List<CountryMovie> GetQuery()
         {
             return countryMovieRepository.GetQuery().ToList();
         }
-       public CountryOutputDtos GetCountries(CountryInputDto input)
+
+        public CountryOutputDtos GetCountries(CountryInputDto input)
         {
             var lst = countryMovieRepository.GetQuery().Include(x => x.Movie).Include(x => x.Country).
                 ThenInclude(x => x.CountryName).Where(x => input.countryNames.Contains(x.Country.CountryName)).
