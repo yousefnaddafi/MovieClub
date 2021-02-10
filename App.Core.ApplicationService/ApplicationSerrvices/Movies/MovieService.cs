@@ -20,16 +20,16 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
     {
         private readonly IMovieRepository<Movie> movieRepository;
         private readonly IMovieRepository<ActorMovie> ActorMovieRepository;
-        private readonly IMovieRepository<Comment> CommentRepository;
+      //  private readonly IMovieRepository<Comment> CommentRepository;
         private readonly IMovieRepository<UserLogin> UserRepository;
         private readonly IMapper mapper;
         public MovieService(IMovieRepository<Movie> MovieRepository,
-            IMovieRepository<ActorMovie> ActorMovieRepository, IMovieRepository<Comment> CommentRepository,
+            IMovieRepository<ActorMovie> ActorMovieRepository,
             IMapper mapper, IMovieRepository<UserLogin> userRepository)
         {
             this.ActorMovieRepository = ActorMovieRepository;
             this.movieRepository = MovieRepository;
-            this.CommentRepository = CommentRepository;
+           // this.CommentRepository = CommentRepository;
             this.UserRepository = userRepository;
             this.mapper = mapper;
         }
@@ -70,17 +70,17 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         {
             return movieRepository.GetQuery().ToList();
         }
-        public string CreatComment(CommentsInputDto comment, int movieId, UserLoginInputDto input)
-        {            
-            CommentRepository.Insert(new Comment()
-            {
-                Text = comment.Text,
-                MovieId = movieId
-            });
-            CommentRepository.Save();
+       // public string CreatComment(CommentsInputDto comment, int movieId)
+        //{            
+          //  CommentRepository.Insert(new Comment()
+            //{
+              //  Text = comment.Text,
+                //MovieId = movieId
+            //});
+            //CommentRepository.Save();
 
-            return comment.Text;
-        }
+           // return comment.Text;
+        //}
         public List<SearchDetailFilterDto> Search(SearchMovieInputDto input)
         {
             var ResultSearch = ActorMovieRepository.GetQuery().Include(x => x.Actor).Include(x => x.Movie).
