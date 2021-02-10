@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace App.Core.Entities.Model
+{
+    public class Favorite
+    {
+        public int Id { get; set; }
+        public string MovieTitle { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
+    }
+}
