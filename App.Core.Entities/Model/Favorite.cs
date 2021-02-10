@@ -4,7 +4,7 @@ using System.Text;
 
 namespace App.Core.Entities.Model
 {
-    public class Favorite
+    public class Favorite:IHasIdentity
     {
         public int Id { get; set; }
         public string MovieTitle { get; set; }
