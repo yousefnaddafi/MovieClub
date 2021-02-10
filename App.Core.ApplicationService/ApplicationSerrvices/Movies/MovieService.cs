@@ -114,10 +114,10 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 
         public List<MovieRelatedDto> GetPopular()
         {
-            var MostPopular = movieRepository.GetQuery().OrderByDescending(z => z.RateByUser).Take(5).ToList();
+            var MostPopular = movieRepository.GetQuery().OrderByDescending(z=> z.RateByUser);
             var Popular = new List<MovieRelatedDto>();
 
-            foreach (var item in Popular)
+            foreach (var item in MostPopular)
             {
                 var MappedMovie = mapper.Map<MovieRelatedDto>(item);
                 Popular.Add(MappedMovie);
@@ -128,7 +128,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 
         public List<MovieRelatedDto> GetNewComing()
         {
-            var NewIncomeMovie = movieRepository.GetQuery().OrderByDescending(x => x.ProductYear).Take(5).ToList();
+            var NewIncomeMovie = movieRepository.GetQuery().OrderBy(x => x.ProductYear).Take(5).ToList();
             var Recently = new List<MovieRelatedDto>();
 
             foreach (var item in NewIncomeMovie)

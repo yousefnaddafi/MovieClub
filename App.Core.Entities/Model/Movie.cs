@@ -11,7 +11,7 @@ namespace App.Core.Entities.Model
         public string Summery { get; set; }
         public string ImdbRate { get; set; }
         public int VisitCount { get; set; }
-        public float RateByUser { get; set; }
+        public double RateByUser { get; set; }
         public int RateCounter { get; set; }
         public int DirectorId { get; set; }
         public Director Director { get; set; }
