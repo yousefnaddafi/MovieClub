@@ -1,6 +1,7 @@
 ﻿using App.Core.ApplicationService.Dtos.UserDto;
 using App.Core.ApplicationService.IRepositories;
 using App.Core.Entities.Model;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,39 +11,35 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 {
     public class UserService : IUserService
     {
+        private readonly IMapper mapper;
         private readonly IMovieRepository<User> userRepository;
+        
 
-        public UserService(IMovieRepository<User> _repository)
+        public UserService(IMovieRepository<User> _repository,IMapper mapper)
         {
             userRepository = _repository;
+            this.mapper = mapper;
         }
 
         public int Create(UserInputDto inputDto)
         {
-            User tempUser = new User()
-            {
-                Email = inputDto.Email,
-                Password = inputDto.Password
-            };
-            
 
-            userRepository.Insert(tempUser);
+            var RegisterUser = mapper.Map<User>(inputDto);
+
+            userRepository.Insert(RegisterUser);
             userRepository.Save();
-            return tempUser.Id;
+            return RegisterUser.Id;
         }
 
         public User Update(UserInputDto inputDto)
         {
-            User tempUser = new User()
-            {
-                Email = inputDto.Email,
-                Password = inputDto.Password
-            };
-            
 
-            this.userRepository.Update(tempUser);
+            var RegisterUser = mapper.Map<User>(inputDto);
+
+
+            this.userRepository.Update(RegisterUser);
             userRepository.Save();
-            return tempUser;
+            return RegisterUser;
         }
 
         public int Delete(int id)
@@ -63,12 +60,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
         //
         public void Insert(UserInputDto inputDto)
         {
-             new User()
-            {
-              Password = inputDto.Password,
-              Email = inputDto.Email
-            };           
-            
+            var RegisterUser = mapper.Map<User>(inputDto);
+
         }
 
     }
