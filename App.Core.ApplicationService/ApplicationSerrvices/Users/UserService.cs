@@ -61,7 +61,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
         public void Insert(UserInputDto inputDto)
         {
             var RegisterUser = mapper.Map<User>(inputDto);
-
+            userRepository.Insert(RegisterUser);
+            userRepository.Save();
         }
 
     }
