@@ -15,9 +15,10 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Countries
         private readonly IMovieRepository<Country> countryRepository;
         private readonly IMapper mapper;
 
-        public CountryService(IMovieRepository<Country> _countryRepository)
+        public CountryService(IMovieRepository<Country> _countryRepository,IMapper mapper)
         {
             this.countryRepository = _countryRepository;
+            this.mapper = mapper;
         }
 
         public int Create(CountryInputDto inputDto)

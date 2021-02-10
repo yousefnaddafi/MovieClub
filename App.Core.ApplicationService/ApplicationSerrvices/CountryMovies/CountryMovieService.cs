@@ -17,9 +17,10 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.CountryMovies
         private readonly IMovieRepository<CountryMovie> countryMovieRepository;
         private readonly IMapper mapper;
 
-        public CountryMovieService(IMovieRepository<CountryMovie> _countryMovieRepository)
+        public CountryMovieService(IMovieRepository<CountryMovie> _countryMovieRepository,IMapper mapper)
         {
             this.countryMovieRepository = _countryMovieRepository;
+            this.mapper = mapper;
         }
 
         public int Create(CountryMovieInputDto inputDto)

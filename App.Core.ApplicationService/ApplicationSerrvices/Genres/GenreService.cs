@@ -14,9 +14,10 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
         private readonly IMovieRepository<Genre> genreRepository;
         private readonly IMapper mapper;
 
-        public GenreService(IMovieRepository<Genre> genreRepository)
+        public GenreService(IMovieRepository<Genre> genreRepository,IMapper mapper)
         {
             this.genreRepository = genreRepository;
+            this.mapper = mapper;
         }
         public int Create(GenreInputDtos inputDto)
         {

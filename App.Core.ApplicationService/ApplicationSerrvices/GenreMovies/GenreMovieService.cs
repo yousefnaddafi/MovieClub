@@ -15,9 +15,10 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.GenreMovies
         private readonly IMovieRepository<GenreMovie> genreMovieRepository;
         private readonly IMapper mapper;
 
-        public GenreMovieService(IMovieRepository<GenreMovie> _genreMovieRepository)
+        public GenreMovieService(IMovieRepository<GenreMovie> _genreMovieRepository,IMapper mapper)
         {
             this.genreMovieRepository = _genreMovieRepository;
+            this.mapper = mapper;
         }
 
         public int Create(GenreMovieInputDto inputDto)

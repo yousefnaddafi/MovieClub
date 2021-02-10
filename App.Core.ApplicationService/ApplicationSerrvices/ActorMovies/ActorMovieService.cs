@@ -15,9 +15,10 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.ActorMovies
         private readonly IMovieRepository<ActorMovie> ActorMovieRepository;
         private readonly IMapper mapper;
 
-        public ActorMovieService(IMovieRepository<ActorMovie> ActorMovieRepository)
+        public ActorMovieService(IMovieRepository<ActorMovie> ActorMovieRepository,IMapper mapper)
         {
             this.ActorMovieRepository = ActorMovieRepository;
+            this.mapper = mapper;
         }
         public int Create(ActorMovieInputDto inputDto)
         {
