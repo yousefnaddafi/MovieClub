@@ -15,32 +15,27 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
         {
             this.genreRepository = genreRepository;
         }
-
         public int Create(Genre inputDto)
         {
             genreRepository.Insert(inputDto);
             genreRepository.Save();
             return inputDto.Id;
         }
-
         public Genre Update(Genre item)
         {
             this.genreRepository.Update(item);
             genreRepository.Save();
             return item;
         }
-
         public int Delete(int id)
         {
             genreRepository.Delete(id);
             return id;
         }
-
         public Task<Genre> Get(int id)
         {
             return genreRepository.Get(id);
         }
-
         public Task<List<Genre>> GetAll()
         {
             return genreRepository.GetAll();

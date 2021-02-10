@@ -11,7 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using App.Core.Entities.Exceptions;
-
+using App.Core.ApplicationService.Dtos.CommentDtos;
+using App.Core.ApplicationService.Dtos.LoginDto;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 {
@@ -19,12 +20,17 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
     {
         private readonly IMovieRepository<Movie> movieRepository;
         private readonly IMovieRepository<ActorMovie> ActorMovieRepository;
+        private readonly IMovieRepository<Comment> CommentRepository;
+        private readonly IMovieRepository<UserLogin> UserRepository;
         private readonly IMapper mapper;
         public MovieService(IMovieRepository<Movie> MovieRepository,
-            IMovieRepository<ActorMovie>ActorMovieRepository, IMapper mapper)
+            IMovieRepository<ActorMovie> ActorMovieRepository, IMovieRepository<Comment> CommentRepository,
+            IMapper mapper, IMovieRepository<UserLogin> userRepository)
         {
             this.ActorMovieRepository = ActorMovieRepository;
             this.movieRepository = MovieRepository;
+            this.CommentRepository = CommentRepository;
+            this.UserRepository = userRepository;
             this.mapper = mapper;
         }
 
@@ -64,9 +70,19 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         {
             return movieRepository.GetQuery().ToList();
         }
+        public string CreatComment(CommentsInputDto comment, int movieId, UserLoginInputDto input)
+        {            
+            CommentRepository.Insert(new Comment()
+            {
+                Text = comment.Text,
+                MovieId = movieId
+            });
+            CommentRepository.Save();
+
+            return comment.Text;
+        }
         public List<SearchDetailFilterDto> Search(SearchMovieInputDto input)
         {
-
             var ResultSearch = ActorMovieRepository.GetQuery().Include(x => x.Actor).Include(x => x.Movie).
                        Include(x => x.Movie.ProductYear).Include(x => x.Movie.ImdbRate).
                        Include(x => x.Movie.GenreMovies).ThenInclude(x => x.Genre).
@@ -83,12 +99,11 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 
                          }).ToList();
             return ResultSearch;
-
         }
         public MovieOutputDetailDto GetHighRate(RecommendPopularInputDto inputMovie)
         {
             var Popular = movieRepository.GetQuery().
-                Where(x => x.RateByUser >= 7.5).Select(x => new MovieDetailDto()
+                Where(x => x.RateByUser >= 7).Select(x => new MovieDetailDto()
                 {
                     Title = x.Title
                 }).

@@ -1,13 +1,15 @@
 ﻿using App.Core.ApplicationService.ApplicationSerrvices.ActorMovies;
 using App.Core.ApplicationService.ApplicationSerrvices.Actors;
-using App.Core.ApplicationService.ApplicationSerrvices.Comments;
 using App.Core.ApplicationService.ApplicationSerrvices.Countries;
 using App.Core.ApplicationService.ApplicationSerrvices.CountryMovies;
 using App.Core.ApplicationService.ApplicationSerrvices.Directors;
 using App.Core.ApplicationService.ApplicationSerrvices.GenreMovies;
 using App.Core.ApplicationService.ApplicationSerrvices.Genres;
 using App.Core.ApplicationService.ApplicationSerrvices.Movies;
+using App.Core.ApplicationService.ApplicationSerrvices.UsersLogin;
+using App.Core.ApplicationService.Dtos.CommentDtos;
 using App.Core.ApplicationService.Dtos.CountryBasedDtos;
+using App.Core.ApplicationService.Dtos.LoginDto;
 using App.Core.ApplicationService.Dtos.MovieDtos;
 using App.Core.Entities.Model;
 using AutoMapper;
@@ -27,6 +29,7 @@ namespace WebApi.Controllers
     {
         private readonly IMovieService moviesService;
         private readonly ICountryMovieService countryMovieService;
+        //private readonly ICommentService commentService; 
         private readonly IMapper mapper;
 
         public MovieController(IMovieService _movieService, ICountryMovieService _countryMovieService, IMapper _mapper)
@@ -34,6 +37,7 @@ namespace WebApi.Controllers
             moviesService = _movieService;
             countryMovieService = _countryMovieService;
             mapper = _mapper;
+            // commentService = _commentService;
         }
 
         [HttpPost]
@@ -62,6 +66,12 @@ namespace WebApi.Controllers
             return moviesService.Get(id);
         }
 
+        [HttpPost("Comments")]
+        public string CommentByUser([FromBody] CommentsInputDto comment, int Id, [FromHeader] string token)
+        {
+            return  moviesService.CreatComment(comment, Id);             
+        }
+
         [HttpPost("Compare")]
         public List<MovieCompareOutputDto> Compare([FromBody] MovieCompareInputDto inputDto)
         {
@@ -71,7 +81,7 @@ namespace WebApi.Controllers
         [HttpGet("Recently")]
         public List<MovieRelatedDto> GetNewComing()
         {
-            return moviesService.GetNewComing();  
+            return moviesService.GetNewComing();
         }
 
         [HttpGet("Popular")]
@@ -91,11 +101,10 @@ namespace WebApi.Controllers
         {
             return countryMovieService.GetCountries(countryInput);
         }
-       [HttpGet("HighRate")]
-       public MovieOutputDetailDto BestRateMovie([FromBody] RecommendPopularInputDto recommend)
+        [HttpGet("HighRate")]
+        public MovieOutputDetailDto BestRateMovie([FromBody] RecommendPopularInputDto recommend)
         {
             return moviesService.GetHighRate(recommend);
-
         }
     }
 }
