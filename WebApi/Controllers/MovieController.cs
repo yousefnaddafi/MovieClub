@@ -66,11 +66,11 @@ namespace WebApi.Controllers
             return moviesService.Get(id);
         }
 
-        [HttpPost("Comments")]
-        public string CommentByUser([FromBody] CommentsInputDto comment, int Id, [FromHeader] string token)
-        {
-            return moviesService.CreatComment(comment, Id);
-        }
+        //[HttpPost("Comments")]
+       // public string CommentByUser([FromBody] CommentsInputDto comment, int Id, [FromHeader] string token)
+        //{
+          //  return  moviesService.CreatComment(comment, Id);             
+        //}
 
         [HttpPost("Compare")]
         public List<MovieCompareOutputDto> Compare([FromBody] MovieCompareInputDto inputDto)
