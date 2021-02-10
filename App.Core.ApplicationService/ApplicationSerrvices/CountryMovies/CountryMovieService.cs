@@ -63,8 +63,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.CountryMovies
         {
             
             
-            var lst = countryMovieRepository.GetQuery().Include(x => x.Movie).Include(x => x.Country).
-                ThenInclude(x => x.CountryName==input.countryNames).Select(x=>x.Movie.Title).
+            var lst = countryMovieRepository.GetQuery().Include(x => x.Country).
+                Where(x=> input.countryNames==x.Country.CountryName).Select(x=>x.Movie.Title).
                 ToList();
            
             
