@@ -114,7 +114,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 
         public List<MovieRelatedDto> GetPopular()
         {
-            var MostPopular = movieRepository.GetQuery().OrderByDescending(z=> z.RateByUser);
+            var MostPopular = movieRepository.GetQuery().OrderByDescending(z=> z.RateByUser).Take(5);
             var Popular = new List<MovieRelatedDto>();
 
             foreach (var item in MostPopular)
