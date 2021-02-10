@@ -32,18 +32,18 @@ namespace App.Infrastucture.EF.Database
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
-            modelbuilder.Entity<Movie>(x => x.ToTable("Movie"));
-            modelbuilder.Entity<Genre>(x => x.ToTable("Genre"));
+            modelbuilder.Entity<Actor>(x => x.ToTable("Actors"));
+            modelbuilder.Entity<Comment>(x => x.ToTable("Comments"));
             modelbuilder.Entity<Country>(x => x.ToTable("Country"));
-            modelbuilder.Entity<Director>(x => x.ToTable("Director"));
-            modelbuilder.Entity<Comment>(x => x.ToTable("Comment"));
-            modelbuilder.Entity<Favorite>(x => x.ToTable("Favorite"));
-            modelbuilder.Entity<ActorMovie>(x => x.ToTable("ActorMovie"));
             modelbuilder.Entity<CountryMovie>(x => x.ToTable("CountryMovie"));
-            modelbuilder.Entity<GenreMovie>(x => x.ToTable("GenreMovie"));
-            modelbuilder.Entity<Actor>(x => x.ToTable("Actor"));
+            modelbuilder.Entity<Director>(x => x.ToTable("Directors"));
+            modelbuilder.Entity<Genre>(x => x.ToTable("Genre"));
+            modelbuilder.Entity<GenreMovie>(x => x.ToTable("GenreMovies"));
+            modelbuilder.Entity<Movie>(x => x.ToTable("Movie"));
             modelbuilder.Entity<User>(x => x.ToTable("User"));
             modelbuilder.Entity<UserLogin>(x => x.ToTable("UserLogin"));
+            //modelbuilder.Entity<Favorite>(x => x.ToTable("Favorite"));
+            //modelbuilder.Entity<ActorMovie>(x => x.ToTable("ActorMovie"));
         }
     }
 }
