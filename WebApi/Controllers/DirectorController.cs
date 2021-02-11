@@ -22,9 +22,9 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public void Create(DirectorInputDto inputDto)
+        public Task Create(DirectorInputDto inputDto)
         {
-            DirectorService.Create(inputDto);
+           return DirectorService.Create(inputDto);
         }
 
         [HttpPut]

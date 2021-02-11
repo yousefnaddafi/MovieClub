@@ -10,7 +10,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
 {
     public interface IDirectorService
     {
-        string Create(DirectorInputDto inputDto);
+        Task<string> Create(DirectorInputDto inputDto);
         Director Update(Director item);
         int Delete(int id);
         Task<Director> Get(int id);

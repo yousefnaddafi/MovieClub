@@ -20,20 +20,20 @@ namespace App.Infrastucture.EF.Repositories
             this.dbContext = dbContext;
         }
 
-        public void Delete(int id)
+        public  async Task Delete(int id)
         {
-            var item = this.dbContext.Set<T>().FirstOrDefault(x => x.Id == id);
-            this.dbContext.Remove(item);
+            var item =await this.dbContext.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
+             this.dbContext.Remove(item);
         }
          
-        public Task<T> Get(int id)
+        public async Task<T> Get(int id)
         {
-            return this.dbContext.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
+            return await this.dbContext.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<List<T>> GetAll()
+        public async Task<List<T>> GetAll()
         {
-            return this.dbContext.Set<T>().ToListAsync();
+            return await this.dbContext.Set<T>().ToListAsync();
         }
 
         public void Insert(T item)
@@ -42,15 +42,15 @@ namespace App.Infrastucture.EF.Repositories
 
         }
 
-        public Task Save()
+        public async Task Save()
         {
-            return this.dbContext.SaveChangesAsync();
+             await this.dbContext.SaveChangesAsync();
         }
 
         public T Update(T item)
         {
             this.dbContext.Update(item);
-            return item;
+            return  item;
         }
 
         public IQueryable<T> GetQuery()

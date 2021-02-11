@@ -20,11 +20,19 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
             this.mapper = mapper;
         }
 
-        public string Create(DirectorInputDto inputDto)
+        public async Task<string> Create(DirectorInputDto inputDto)
         {
-            directorRepository.Insert(mapper.Map<Director>(inputDto));
-            directorRepository.Save();
-            return inputDto.FullName;
+            try
+            {
+                var director = mapper.Map<Director>(inputDto);
+                directorRepository.Insert(director);
+                await directorRepository.Save();
+                return inputDto.FullName;
+            }
+         catch(Exception ex)
+            {
+                throw;
+            }
         }
 
         public Director Update(Director item)

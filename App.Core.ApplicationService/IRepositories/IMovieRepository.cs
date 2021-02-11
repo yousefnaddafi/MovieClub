@@ -14,7 +14,7 @@ namespace App.Core.ApplicationService.IRepositories
         Task<T> Get(int id);
         Task<List<T>> GetAll();
         T Update(T item);
-        void Delete(int id);
+        Task Delete(int id);
         IQueryable<T> GetQuery();
         Task Save();
     }
