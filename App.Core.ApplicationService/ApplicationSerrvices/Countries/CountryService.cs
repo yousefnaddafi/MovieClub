@@ -21,11 +21,11 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Countries
             this.mapper = mapper;
         }
 
-        public string Create(CountryInputDTO inputDto)
+        public async Task<string> Create(CountryInputDTO inputDto)
         {
             var temp = mapper.Map<Country>(inputDto);
             countryRepository.Insert(temp);
-            countryRepository.Save();
+           await countryRepository.Save();
             return inputDto.CountryName;
         }
 
@@ -43,14 +43,14 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Countries
             return id;
         }
 
-        public Task<Country> Get(int id)
+        public async Task<Country> Get(int id)
         {
-            return countryRepository.Get(id);
+            return await countryRepository.Get(id);
         }
 
-        public Task<List<Country>> GetAll()
+        public async Task<List<Country>> GetAll()
         {
-            return countryRepository.GetAll();
+            return await countryRepository.GetAll();
         }
         public List<Country> GetQuery()
         {

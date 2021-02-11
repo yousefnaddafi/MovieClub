@@ -1,5 +1,6 @@
 ﻿//using App.Core.ApplicationService.Dtos.ActorDtos;
 using App.Core.ApplicationService.Dtos.ActorDtos;
+using App.Core.ApplicationService.Dtos.ActorMovieDtos;
 using App.Core.ApplicationService.IRepositories;
 using App.Core.Entities.Model;
 using AutoMapper;
@@ -22,20 +23,16 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
             this.mapper = mapper;
         }
 
-        public int Create(ActorInputDto inputDto)
+        public async Task<int> Create(ActorInputDto inputDto)
         {
             var temp = mapper.Map<Actor>(inputDto);
-            //Actor temp = new Actor();
-            //temp.ActorName = inputDto.ActorName;
-            //temp.Id = inputDto.Id;
             actorRepository.Insert(temp);
-            actorRepository.Save();
+           await actorRepository.Save();
             return temp.Id;
         }
 
         public Actor Update(Actor inputDto)
         {
-            //var temp = mapper.Map<Actor>(inputDto);
             actorRepository.Update(inputDto);
             actorRepository.Save();
             return inputDto;
@@ -47,14 +44,14 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
             return id;
         }
 
-        public Task<Actor> Get(int id)
+        public async Task<Actor> Get(int id)
         {
-            return actorRepository.Get(id);
+            return await actorRepository.Get(id);
         }
 
-        public Task<List<Actor>> GetAll()
+        public async Task<List<Actor>> GetAll()
         {
-            return actorRepository.GetAll();
+            return await actorRepository.GetAll();
         }
 
         public List<Actor> GetQuery() {

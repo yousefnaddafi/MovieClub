@@ -10,7 +10,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Countries
 {
     public interface ICountryService
     {
-        string Create(CountryInputDTO inputDto);
+        Task<string> Create(CountryInputDTO inputDto);
         Country Update(Country item);
         int Delete(int id);
         Task<Country> Get(int id);

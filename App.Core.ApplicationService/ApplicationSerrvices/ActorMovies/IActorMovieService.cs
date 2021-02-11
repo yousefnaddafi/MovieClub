@@ -10,7 +10,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.ActorMovies
 {
     public interface IActorMovieService
     {
-        int Create(ActorMovieInputDto inputDto);
+        Task<int> Create(ActorMovieInputDto inputDto);
         ActorMovie Update(ActorMovie item);
         int Delete(int id);
         Task<ActorMovie> Get(int id);
