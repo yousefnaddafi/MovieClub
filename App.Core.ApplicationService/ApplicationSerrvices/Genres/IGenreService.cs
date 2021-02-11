@@ -9,7 +9,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
 {
     public interface IGenreService
     {
-        int Create(GenreInputDtos inputDto);
+        Task<int> Create(GenreInputDtos inputDto);
         Genre Update(Genre item);
         int Delete(int id);
         Task<Genre> Get(int id);

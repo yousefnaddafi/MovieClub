@@ -19,11 +19,11 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
             this.genreRepository = genreRepository;
             this.mapper = mapper;
         }
-        public int Create(GenreInputDtos inputDto)
+        public async Task<int> Create(GenreInputDtos inputDto)
         {
             var temp = mapper.Map<Genre>(inputDto);
             genreRepository.Insert(temp);
-            genreRepository.Save();
+            await genreRepository.Save();
             return temp.Id;
         }
         public Genre Update(Genre item)
