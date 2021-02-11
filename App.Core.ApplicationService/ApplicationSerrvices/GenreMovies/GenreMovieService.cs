@@ -21,11 +21,11 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.GenreMovies
             this.mapper = mapper;
         }
 
-        public int Create(GenreMovieInputDto inputDto)
+        public async Task<int> Create(GenreMovieInputDto inputDto)
         {
             var temp = mapper.Map<GenreMovie>(inputDto);
             genreMovieRepository.Insert(temp);
-            genreMovieRepository.Save();
+            await genreMovieRepository.Save();
             return temp.Id;
         }
 

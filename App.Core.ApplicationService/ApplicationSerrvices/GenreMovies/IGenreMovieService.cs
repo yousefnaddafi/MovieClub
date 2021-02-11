@@ -10,7 +10,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.GenreMovies
 {
     public interface IGenreMovieService
     {
-        int Create(GenreMovieInputDto inputDto);
+        Task<int> Create(GenreMovieInputDto inputDto);
         GenreMovie Update(GenreMovie item);
         int Delete(int id);
         Task<GenreMovie> Get(int id);
