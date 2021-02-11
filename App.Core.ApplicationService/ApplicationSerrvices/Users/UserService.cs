@@ -21,13 +21,13 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
             this.mapper = mapper;
         }
 
-        public int Create(UserInputDto inputDto)
+        public async Task<int> Create(UserInputDto inputDto)
         {
 
             var RegisterUser = mapper.Map<User>(inputDto);
 
             userRepository.Insert(RegisterUser);
-            userRepository.Save();
+            await userRepository.Save();
             return RegisterUser.Id;
         }
 
@@ -58,11 +58,11 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
             return userRepository.GetAll();
         }
         //
-        public void Insert(UserInputDto inputDto)
+        public async Task Insert(UserInputDto inputDto)
         {
             var RegisterUser = mapper.Map<User>(inputDto);
             userRepository.Insert(RegisterUser);
-            userRepository.Save();
+            await userRepository.Save();
         }
 
     }
