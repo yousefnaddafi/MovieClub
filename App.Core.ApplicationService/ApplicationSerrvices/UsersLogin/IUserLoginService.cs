@@ -10,11 +10,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.UsersLogin
 {
   public interface IUserLoginService
     {
-        int Create(UserLoginInputDto inputDto);
+        Task<int> Create(UserLoginInputDto inputDto);
         UserLoginInputDto Update(UserLoginInputDto item);
         int Delete(int id);
         Task<UserLogin> Get(int id);
         Task<List<UserLogin>> GetAll();
-        string Login(UserInputDto user);
+        Task<string> Login(UserInputDto user);
+        bool CheckToken(UserLoginInputDto inputDto);
     }
 }

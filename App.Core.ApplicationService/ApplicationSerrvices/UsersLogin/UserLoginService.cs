@@ -24,11 +24,11 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.UsersLogin
             this.UserRepository = UserRepository;
             this.mapper = mapper;
     }
-        public int Create(UserLoginInputDto inputDto)
+        public async Task<int> Create(UserLoginInputDto inputDto)
         {
             var userLogin = mapper.Map<UserLogin>(inputDto);
             UserLoginRepository.Insert(userLogin);
-            UserLoginRepository.Save();
+            await  UserLoginRepository.Save();
             return userLogin.Id;
         }
         public UserLoginInputDto Update(UserLoginInputDto item)
@@ -44,29 +44,30 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.UsersLogin
             return id;
         }
 
-        public Task<UserLogin> Get(int id)
+        public async Task<UserLogin> Get(int id)
         {
-            return UserLoginRepository.Get(id);
+            return await UserLoginRepository.Get(id);
         }
-        public Task<List<UserLogin>> GetAll()
+        public async Task<List<UserLogin>> GetAll()
         {
-            return UserLoginRepository.GetAll();
+            return await UserLoginRepository.GetAll();
         }
-        public string Login(UserInputDto inputDto)
+        public async Task<string> Login(UserInputDto inputDto)
         {
-            var newUser = UserRepository.GetQuery().
+            var newUser =  UserRepository.GetQuery().
                 Where(x => x.Email == inputDto.Email && x.Password == inputDto.Password).FirstOrDefault();
                 var token = Guid.NewGuid().ToString();
             UserLoginRepository.Insert(new UserLogin()
             {
-                Id = newUser.Id,
+                Id =  newUser.Id,
                 Token = token,
                 ExpireMembershipDate = DateTime.UtcNow.AddDays(1),
                 UserId = UserRepository.GetQuery().FirstOrDefault(x => x.Email == inputDto.Email).Id
-            }); 
+            });
+            await UserLoginRepository.Save();
                 return token;           
         }
-        public bool CheckToken(UserLoginInputDto inputDto)
+        public  bool CheckToken(UserLoginInputDto inputDto)
         {
             var Exp =UserLoginRepository.GetQuery().FirstOrDefault(x => x.Token == inputDto.Token).ExpireMembershipDate;
             
