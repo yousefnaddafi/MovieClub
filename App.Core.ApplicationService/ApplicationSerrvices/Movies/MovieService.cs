@@ -146,12 +146,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 
         public async Task<List<MovieCompareOutputDto>> Compare(MovieCompareInputDto inputDto)
         {
-            var AllMoviesTitle = movieRepository.GetQuery().ToList();
-            if (AllMoviesTitle.Select(x => x.Title != inputDto.Movie1).FirstOrDefault())
-            {
-                throw new InvalidTitleNameException("Wrong Title");
-            }
 
+<<<<<<< Updated upstream
             var FirstMovie = movieRepository.GetQuery().FirstOrDefault(x => x.Title == inputDto.Movie1);
             var SecondMovie = movieRepository.GetQuery().FirstOrDefault(x => x.Title == inputDto.Movie2);
             var FinalCompare = new List<MovieCompareOutputDto>();
@@ -161,8 +157,43 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             FinalCompare.Add(MappedFirstMovie);
             FinalCompare.Add(MappedSecondMovie);
             await movieRepository.Save();
+=======
+            List<MovieCompareOutputDto> temp = new List<MovieCompareOutputDto>();
+            MovieCompareOutputDto firstMovie = new MovieCompareOutputDto();
+            MovieCompareOutputDto secondMovie = new MovieCompareOutputDto();
+            var firstInputMovie = await movieRepository.Get(inputDto.MovieId1);
+            var secondInputMovie = await movieRepository.Get(inputDto.MovieId2);
+            firstMovie = mapper.Map<MovieCompareOutputDto>(firstInputMovie);
+            secondMovie = mapper.Map<MovieCompareOutputDto>(secondInputMovie);
+            temp.Add(firstMovie);
+            temp.Add(secondMovie);
+            return temp;
 
-            return FinalCompare;
+
+            //List<MovieCompareOutputDto> temp = new List<MovieCompareOutputDto>();
+            //var firstMovie = movieRepository.GetQuery().Where(x => x.Title == inputDto.Movie1).ToList();
+            //var secondMovie = movieRepository.GetQuery().Where(x => x.Title == inputDto.Movie2).ToList();
+            //temp.Add(mapper.Map<MovieCompareOutputDto>(firstMovie));
+            //temp.Add(mapper.Map<MovieCompareOutputDto>(secondMovie));
+            //return temp;
+>>>>>>> Stashed changes
+
+
+            //var AllMoviesTitle = movieRepository.GetQuery();
+            //if (AllMoviesTitle.Select(x => x.Title != inputDto.Movie1).FirstOrDefault())
+            //{
+            //    throw new InvalidTitleNameException("Wrong Title");
+            //}
+            //var FirstMovie = movieRepository.GetQuery().Select(x => x.Title == inputDto.Movie1);
+            //var SecondMovie = movieRepository.GetQuery().Select(x => x.Title == inputDto.Movie2);
+            //var FinalCompare = new List<MovieCompareOutputDto>();
+            //var MappedFirstMovie = mapper.Map<MovieCompareOutputDto>(FirstMovie);
+            //var MappedSecondMovie = mapper.Map<MovieCompareOutputDto>(SecondMovie);
+
+            //FinalCompare.Add(MappedFirstMovie);
+            //FinalCompare.Add(MappedSecondMovie);
+
+            //return FinalCompare;
         }
     }
 }

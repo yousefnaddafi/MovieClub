@@ -72,9 +72,9 @@ namespace WebApi.Controllers
         //}
 
         [HttpPost("Compare")]
-        public List<MovieCompareOutputDto> Compare([FromBody] MovieCompareInputDto inputDto)
+        public async Task<List<MovieCompareOutputDto>> Compare([FromBody] MovieCompareInputDto inputDto)
         {
-            return moviesService.Compare(inputDto);
+            return await moviesService.Compare(inputDto);
         }
 
         [HttpGet("Recently")]

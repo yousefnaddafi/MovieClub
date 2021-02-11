@@ -20,8 +20,13 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         Task<List<Movie>> GetAll();
         List<Movie> GetQuery();
        // string CreatComment(CommentsInputDto comment, int movieId);
+<<<<<<< Updated upstream
         Task<List<MovieRelatedDto>> GetPopular();
         Task<List<MovieRelatedDto>> GetNewComing();
+=======
+        List<MovieRelatedDto> GetPopular();
+        List<MovieRelatedDto> GetNewComing();
+>>>>>>> Stashed changes
         Task<List<MovieCompareOutputDto>> Compare(MovieCompareInputDto inputDto);
         List<SearchDetailFilterDto> Search(SearchMovieInputDto input);
         Task<MovieOutputDetailDto> GetHighRate(RecommendPopularInputDto inputMovie);
