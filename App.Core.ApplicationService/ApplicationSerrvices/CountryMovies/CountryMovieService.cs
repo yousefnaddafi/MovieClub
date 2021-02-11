@@ -23,11 +23,11 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.CountryMovies
             this.mapper = mapper;
         }
 
-        public int Create(CountryMovieInputDto inputDto)
+        public async Task<int> Create(CountryMovieInputDto inputDto)
         {
             var temp = mapper.Map<CountryMovie>(inputDto);
             countryMovieRepository.Insert(temp);
-            countryMovieRepository.Save();
+            await countryMovieRepository.Save();
             return temp.Id;
         }
 
@@ -69,7 +69,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.CountryMovies
            
             
             
-            return new CountryOutputDtos { movieTitles = lst.ToArray() };
+            return  new CountryOutputDtos { movieTitles = lst.ToArray() };
         }
     }
 }

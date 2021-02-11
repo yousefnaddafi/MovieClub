@@ -11,7 +11,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.CountryMovies
 {
     public interface ICountryMovieService
     {
-        int Create(CountryMovieInputDto inputDto);
+        Task<int> Create(CountryMovieInputDto inputDto);
         CountryMovie Update(CountryMovie item);
         int Delete(int id);
         Task<CountryMovie> GetAsync(int id);
