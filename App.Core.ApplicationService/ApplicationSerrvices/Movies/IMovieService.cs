@@ -13,17 +13,17 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 {
     public interface IMovieService
     {
-        int Create(MovieInputDto inputDto);
+        Task<int> Create(MovieInputDto inputDto);
         Movie Update(MovieInputDto item);
         int Delete(int id);
         Task<Movie> Get(int id);
         Task<List<Movie>> GetAll();
         List<Movie> GetQuery();
        // string CreatComment(CommentsInputDto comment, int movieId);
-        List<MovieRelatedDto> GetPopular();
-        List<MovieRelatedDto> GetNewComing();
-        List<MovieCompareOutputDto> Compare(MovieCompareInputDto inputDto);
+        Task<List<MovieRelatedDto>> GetPopular();
+        Task<List<MovieRelatedDto>> GetNewComing();
+        Task<List<MovieCompareOutputDto>> Compare(MovieCompareInputDto inputDto);
         List<SearchDetailFilterDto> Search(SearchMovieInputDto input);
-        MovieOutputDetailDto GetHighRate(RecommendPopularInputDto inputMovie);
+        Task<MovieOutputDetailDto> GetHighRate(RecommendPopularInputDto inputMovie);
     }
 }
