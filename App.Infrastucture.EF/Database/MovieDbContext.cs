@@ -32,13 +32,13 @@ namespace App.Infrastucture.EF.Database
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
-            modelbuilder.Entity<Actor>(x => x.ToTable("Actors"));
-            modelbuilder.Entity<Comment>(x => x.ToTable("Comments"));
+            modelbuilder.Entity<Actor>(x => x.ToTable("Actor"));
+            modelbuilder.Entity<Comment>(x => x.ToTable("Comment"));
             modelbuilder.Entity<Country>(x => x.ToTable("Country"));
             modelbuilder.Entity<CountryMovie>(x => x.ToTable("CountryMovie"));
-            modelbuilder.Entity<Director>(x => x.ToTable("Directors"));
+            modelbuilder.Entity<Director>(x => x.ToTable("Director"));
             modelbuilder.Entity<Genre>(x => x.ToTable("Genre"));
-            modelbuilder.Entity<GenreMovie>(x => x.ToTable("GenreMovies"));
+            modelbuilder.Entity<GenreMovie>(x => x.ToTable("GenreMovie"));
             modelbuilder.Entity<Movie>(x => x.ToTable("Movie"));
             modelbuilder.Entity<User>(x => x.ToTable("User"));
             modelbuilder.Entity<UserLogin>(x => x.ToTable("UserLogin"));
