@@ -53,23 +53,23 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.CountryMovies
         {
             return countryMovieRepository.GetAll();
         }
-
+        
         public List<CountryMovie> GetQuery()
         {
             return countryMovieRepository.GetQuery().ToList();
         }
 
-        public CountryOutputDtos GetCountries(CountryInputDto input)
+        public List<Movie> GetCountries(CountryInputDto input)
         {
             var temp = countryMovieRepository.GetQuery().Include(x => x.Country)
-                .Include(z => z.Movie).Where(u => u.Country.CountryName == input.CountryNames).Select(z=>z.Movie).ToList();
+                .Include(z => z.Movie).Where(u => u.Country.CountryName == input.CountryNames).Select(x =>x.Movie).ToList();
 
-            CountryOutputDtos list = new CountryOutputDtos();
-            foreach (var item in temp) { 
-                list.movieTitles.Add(item.Title);
-            }
+            //CountryOutputDtos list = new CountryOutputDtos();
+            //foreach (var item in temp) { 
+            //    list.movieTitles.Add(item);
+            //}
 
-            return list;
+            return temp;
             
         }
     }

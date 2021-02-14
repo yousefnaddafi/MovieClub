@@ -96,7 +96,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("CountryBase")]
-        public CountryOutputDtos MovieBasedOnCountry([FromBody] CountryInputDto countryInput)
+        public List<Movie> MovieBasedOnCountry([FromBody] CountryInputDto countryInput)
         {
             return countryMovieService.GetCountries(countryInput);
         }

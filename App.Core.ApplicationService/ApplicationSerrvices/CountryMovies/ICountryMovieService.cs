@@ -17,7 +17,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.CountryMovies
         Task<CountryMovie> GetAsync(int id);
         Task<List<CountryMovie>> GetAllAsync();
         List<CountryMovie> GetQuery();
-        CountryOutputDtos GetCountries(CountryInputDto input);
+        List<Movie> GetCountries(CountryInputDto input);
 
     }
 }
