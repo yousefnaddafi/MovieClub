@@ -61,15 +61,16 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.CountryMovies
 
         public CountryOutputDtos GetCountries(CountryInputDto input)
         {
+            var temp = countryMovieRepository.GetQuery().Include(x => x.Country)
+                .Include(z => z.Movie).Where(u => u.Country.CountryName == input.CountryNames).ToList();
+
+            CountryOutputDtos list = new CountryOutputDtos();
+            foreach (var item in temp) { 
+                list.movieTitles.Add(item.Movie.Title);
+            }
+
+            return list;
             
-            
-            var lst = countryMovieRepository.GetQuery().Include(x => x.Country).
-                Where(x=> input.countryNames==x.Country.CountryName).Select(x=>x.Movie.Title).
-                ToList();
-           
-            
-            
-            return  new CountryOutputDtos { movieTitles = lst.ToArray() };
         }
     }
 }
