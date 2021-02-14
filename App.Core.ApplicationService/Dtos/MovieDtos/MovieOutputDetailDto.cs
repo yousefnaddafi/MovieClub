@@ -4,8 +4,8 @@ using System.Text;
 
 namespace App.Core.ApplicationService.Dtos.MovieDtos
 {
-    public class MovieOutputDetailDto
+    public class MovieOutputListDto
     {
-       public MovieDetailDto[] movieDetailDtos { get; set; }
+       public MovieDetailDto[] MovieDetailDtos { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using App.Core.ApplicationService.Dtos.LoginDto;
 using App.Core.ApplicationService.Dtos.UserDto;
+using App.Core.ApplicationService.Dtos.UserLoginDtos;
 using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.UsersLogin
         int Delete(int id);
         Task<UserLogin> Get(int id);
         Task<List<UserLogin>> GetAll();
-        Task<string> Login(UserInputDto user);
+        Task<UserLoginOutputDto> Login(UserInputDto inputDto);
         bool CheckToken(UserLoginInputDto inputDto);
     }
 }

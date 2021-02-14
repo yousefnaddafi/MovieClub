@@ -6,12 +6,10 @@ namespace App.Core.ApplicationService.Dtos.MovieDtos
 {
     public class SearchMovieInputDto
     {
-        public string[] actors { get; set; }
-        public string rateByUser { get; set; }
-        public string[] genres { get; set; }
-        public string[] Actors { get; set; }
-        public string Directors { get; set; }
-        public string[] Genres { get; set; }
+        public string Actor { get; set; }
+        public double RateByUser { get; set; }
+        public string Genre { get; set; }
+        public string Director { get; set; }
     }
     
 }

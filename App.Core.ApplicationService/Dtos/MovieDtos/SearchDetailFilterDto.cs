@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using App.Core.Entities.Model;
 
 namespace App.Core.ApplicationService.Dtos.MovieDtos
 {
     public class SearchDetailFilterDto
     {
-        public string title { get; set; }
-        public string productYear { get; set; }
-        public double rateByUser { get; set; }
-        public List<string> actors { get; set; }
-        public List<string> genres { get; set; }
+        public string Title { get; set; }
+        public string ProductYear { get; set; }
+        public double RateByUser { get; set; }
+        public List<Actor> Actors { get; set; }
+        public List<Genre> Genres { get; set; }
+        public Director Director { get; set; }
     }
     
 }

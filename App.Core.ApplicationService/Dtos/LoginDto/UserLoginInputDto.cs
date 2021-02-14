@@ -5,9 +5,9 @@ using System.Text;
 
 namespace App.Core.ApplicationService.Dtos.LoginDto
 {
-   public class UserLoginInputDto
-    {
-        public string Token { get; set; }
+   //public class UserLoginInputDto
+   // {
+   //     public string Token { get; set; }
         
-    }
+   // }
 }

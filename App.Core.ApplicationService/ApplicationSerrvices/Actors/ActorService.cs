@@ -27,7 +27,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
         {
             var temp = mapper.Map<Actor>(inputDto);
             actorRepository.Insert(temp);
-           await actorRepository.Save();
+            await actorRepository.Save();
             return temp.Id;
         }
 

@@ -9,7 +9,7 @@ using App.Core.ApplicationService.ApplicationSerrvices.Movies;
 using App.Core.ApplicationService.ApplicationSerrvices.UsersLogin;
 using App.Core.ApplicationService.Dtos.CommentDtos;
 using App.Core.ApplicationService.Dtos.CountryBasedDtos;
-using App.Core.ApplicationService.Dtos.LoginDto;
+//using App.Core.ApplicationService.Dtos.LoginDto;
 using App.Core.ApplicationService.Dtos.MovieDtos;
 using App.Core.Entities.Model;
 using AutoMapper;
@@ -102,9 +102,9 @@ namespace WebApi.Controllers
             return countryMovieService.GetCountries(countryInput);
         }
         [HttpGet("HighRate")]
-        public Task<MovieOutputDetailDto> BestRateMovie([FromBody] RecommendPopularInputDto recommend)
+        public Task<List<MovieOutputDto>> BestRateMovie()
         {
-            return moviesService.GetHighRate(recommend);
+            return moviesService.GetHighRate();
         }
     }
 }

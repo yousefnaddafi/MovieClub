@@ -1,5 +1,6 @@
 ﻿using App.Core.ApplicationService.Dtos.LoginDto;
 using App.Core.ApplicationService.Dtos.UserDto;
+using App.Core.ApplicationService.Dtos.UserLoginDtos;
 using App.Core.ApplicationService.IRepositories;
 using App.Core.Entities.Model;
 using AutoMapper;
@@ -14,62 +15,74 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.UsersLogin
 {
     public class UserLoginService : IUserLoginService
     {
-        private readonly IMovieRepository<UserLogin> UserLoginRepository;
-        private readonly IMovieRepository<User> UserRepository;
+        private readonly IMovieRepository<UserLogin> userLoginRepository;
+        private readonly IMovieRepository<User> userRepository;
         private readonly IMapper mapper;
-        public UserLoginService(IMovieRepository<UserLogin> UserLoginRepository,
-            IMovieRepository<User> UserRepository, IMapper mapper )
+
+        public UserLoginService(IMovieRepository<UserLogin> _userLoginRepository,
+            IMovieRepository<User> _userRepository, IMapper _mapper )
         {
-            this.UserLoginRepository = UserLoginRepository;
-            this.UserRepository = UserRepository;
-            this.mapper = mapper;
-    }
+            this.userLoginRepository = _userLoginRepository;
+            this.userRepository = _userRepository;
+            this.mapper = _mapper;
+        }
+
         public async Task<int> Create(UserLoginInputDto inputDto)
         {
             var userLogin = mapper.Map<UserLogin>(inputDto);
-            UserLoginRepository.Insert(userLogin);
-            await  UserLoginRepository.Save();
+            userLoginRepository.Insert(userLogin);
+            await  userLoginRepository.Save();
             return userLogin.Id;
         }
         public UserLoginInputDto Update(UserLoginInputDto item)
         {
             var usersLogin = mapper.Map<UserLogin>(item);
-            UserLoginRepository.Insert(usersLogin);
-            UserLoginRepository.Save();
+            userLoginRepository.Insert(usersLogin);
+            userLoginRepository.Save();
             return item;
         }
         public int Delete(int id)
         {
-            UserLoginRepository.Delete(id);
+            userLoginRepository.Delete(id);
             return id;
         }
 
         public async Task<UserLogin> Get(int id)
         {
-            return await UserLoginRepository.Get(id);
+            return await userLoginRepository.Get(id);
         }
         public async Task<List<UserLogin>> GetAll()
         {
-            return await UserLoginRepository.GetAll();
+            return await userLoginRepository.GetAll();
         }
-        public async Task<string> Login(UserInputDto inputDto)
+        public async Task<UserLoginOutputDto> Login(UserInputDto inputDto)
         {
-            var getUser =  UserRepository.GetQuery().
+            var getUser =  userRepository.GetQuery().
                 Where(x => x.Email == inputDto.Email && x.Password == inputDto.Password).FirstOrDefault();
-                var token = Guid.NewGuid().ToString();
-            UserLoginRepository.Insert(new UserLogin()
-            {
-                //Id =  newUser.Id,
-                Token = token,
-                ExpireMembershipDate = DateTime.UtcNow.AddDays(1),
-                UserId = getUser.Id
-            });
-            await UserLoginRepository.Save();
-                return token;           
+
+            var token = Guid.NewGuid().ToString();
+            var expireLoginDate = DateTime.UtcNow.AddDays(1);
+
+            UserLoginInputDto tempUserLogin = new UserLoginInputDto();
+            tempUserLogin.UserId = getUser.Id;
+            tempUserLogin.Token = token;
+            tempUserLogin.ExpireLoginDate = expireLoginDate;
+
+            var mappedUserLogin = mapper.Map<UserLogin>(tempUserLogin);
+
+            userLoginRepository.Insert(mappedUserLogin);
+
+            await userLoginRepository.Save();
+
+            var mappedUserLoginOutput = mapper.Map<UserLoginOutputDto>(mappedUserLogin);
+
+            return mappedUserLoginOutput;           
         }
+
+
         public  bool CheckToken(UserLoginInputDto inputDto)
         {
-            var Exp =UserLoginRepository.GetQuery().FirstOrDefault(x => x.Token == inputDto.Token).ExpireMembershipDate;
+            var Exp =userLoginRepository.GetQuery().FirstOrDefault(x => x.Token == inputDto.Token).ExpireMembershipDate;
             
             if (Exp > DateTime.UtcNow)
             {
