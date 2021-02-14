@@ -54,15 +54,15 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.UsersLogin
         }
         public async Task<string> Login(UserInputDto inputDto)
         {
-            var newUser =  UserRepository.GetQuery().
+            var getUser =  UserRepository.GetQuery().
                 Where(x => x.Email == inputDto.Email && x.Password == inputDto.Password).FirstOrDefault();
                 var token = Guid.NewGuid().ToString();
             UserLoginRepository.Insert(new UserLogin()
             {
-                Id =  newUser.Id,
+                //Id =  newUser.Id,
                 Token = token,
                 ExpireMembershipDate = DateTime.UtcNow.AddDays(1),
-                UserId = UserRepository.GetQuery().FirstOrDefault(x => x.Email == inputDto.Email).Id
+                UserId = getUser.Id
             });
             await UserLoginRepository.Save();
                 return token;           

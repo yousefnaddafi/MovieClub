@@ -31,30 +31,30 @@ namespace WebApi.Extensions
 
         private  static void AddRepositories(IServiceCollection services)
         {
-            services.AddTransient<IMovieRepository<Movie>, MovieEfRepository<Movie>>();
-            services.AddTransient<IMovieRepository<Actor>, MovieEfRepository<Actor>>();
-            services.AddTransient<IMovieRepository<Genre>, MovieEfRepository<Genre>>();
-            services.AddTransient<IMovieRepository<Director>, MovieEfRepository<Director>>();
-            services.AddTransient<IMovieRepository<Country>, MovieEfRepository<Country>>();
-            services.AddTransient<IMovieRepository<GenreMovie>, MovieEfRepository<GenreMovie>>();
-            services.AddTransient<IMovieRepository<ActorMovie>, MovieEfRepository<ActorMovie>>();
-            services.AddTransient<IMovieRepository<CountryMovie>, MovieEfRepository<CountryMovie>>();
-            services.AddTransient<IMovieRepository<User>, MovieEfRepository<User>>();
-            services.AddTransient<IMovieRepository<UserLogin>, MovieEfRepository<UserLogin>>();
+            services.AddScoped<IMovieRepository<Movie>, MovieEfRepository<Movie>>();
+            services.AddScoped<IMovieRepository<Actor>, MovieEfRepository<Actor>>();
+            services.AddScoped<IMovieRepository<Genre>, MovieEfRepository<Genre>>();
+            services.AddScoped<IMovieRepository<Director>, MovieEfRepository<Director>>();
+            services.AddScoped<IMovieRepository<Country>, MovieEfRepository<Country>>();
+            services.AddScoped<IMovieRepository<GenreMovie>, MovieEfRepository<GenreMovie>>();
+            services.AddScoped<IMovieRepository<ActorMovie>, MovieEfRepository<ActorMovie>>();
+            services.AddScoped<IMovieRepository<CountryMovie>, MovieEfRepository<CountryMovie>>();
+            services.AddScoped<IMovieRepository<User>, MovieEfRepository<User>>();
+            services.AddScoped<IMovieRepository<UserLogin>, MovieEfRepository<UserLogin>>();
         }
 
         private static void AddServices(IServiceCollection services)
         {
-            services.AddTransient<IMovieService, MovieService>();
-            services.AddTransient<IActorService, ActorService>();
-            services.AddTransient<IGenreService, GenreService>();
-            services.AddTransient<ICountryService, CountryService>();
-            services.AddTransient<IDirectorService, DirectorService>();
-            services.AddTransient<IActorMovieService, ActorMovieService>();
-            services.AddTransient<ICountryMovieService, CountryMovieService>();
-            services.AddTransient<IGenreMovieService, GenreMovieService>();
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IUserLoginService, UserLoginService>();
+            services.AddScoped<IMovieService, MovieService>();
+            services.AddScoped<IActorService, ActorService>();
+            services.AddScoped<IGenreService, GenreService>();
+            services.AddScoped<ICountryService, CountryService>();
+            services.AddScoped<IDirectorService, DirectorService>();
+            services.AddScoped<IActorMovieService, ActorMovieService>();
+            services.AddScoped<ICountryMovieService, CountryMovieService>();
+            services.AddScoped<IGenreMovieService, GenreMovieService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserLoginService, UserLoginService>();
         }
     }
 }

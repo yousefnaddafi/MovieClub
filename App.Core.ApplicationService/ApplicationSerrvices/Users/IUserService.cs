@@ -9,7 +9,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 {
     public interface IUserService
     {
-        Task<int> Create(UserInputDto inputDto);
+        Task Create(UserInputDto inputDto);
         User Update(UserInputDto item);
         int Delete(int id);
         Task<User> Get(int id);

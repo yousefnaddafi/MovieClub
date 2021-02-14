@@ -96,6 +96,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("CountryBase")]
+        //az model nabayad bargardoone
         public List<Movie> MovieBasedOnCountry([FromBody] CountryInputDto countryInput)
         {
             return countryMovieService.GetCountries(countryInput);

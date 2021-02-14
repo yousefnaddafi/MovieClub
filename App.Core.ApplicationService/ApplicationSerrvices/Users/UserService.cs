@@ -21,14 +21,22 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
             this.mapper = mapper;
         }
 
-        public async Task<int> Create(UserInputDto inputDto)
+        public async Task Create(UserInputDto inputDto)
         {
+            try
+            {
+                var RegisterUser = mapper.Map<User>(inputDto);
 
-            var RegisterUser = mapper.Map<User>(inputDto);
+                userRepository.Insert(RegisterUser);
+                await userRepository.Save();
+              //  return RegisterUser.Id;
+            }
+            catch (Exception ex)
+            {
 
-            userRepository.Insert(RegisterUser);
-            await userRepository.Save();
-            return RegisterUser.Id;
+                throw;
+            }
+
         }
 
         public User Update(UserInputDto inputDto)

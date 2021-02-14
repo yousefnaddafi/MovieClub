@@ -21,7 +21,7 @@ namespace WebApi.Controllers
         private readonly IUserLoginService userLoginService;
         private readonly IMapper mapper;
 
-        public UserController(IUserService _userService, IUserLoginService _userLoginService,IMapper mapper)
+        public UserController(IUserService _userService, IUserLoginService _userLoginService, IMapper mapper)
         {
             this.mapper = mapper;
             userService = _userService;
@@ -29,9 +29,9 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public void Create([FromBody]UserInputDto inputDto)
+        public async Task Create([FromBody] UserInputDto inputDto)
         {
-             this.userService.Create(inputDto);    
+           await this.userService.Create(inputDto);
         }
 
         [HttpPut]
@@ -54,11 +54,11 @@ namespace WebApi.Controllers
             return userService.Get(id);
         }
         [HttpPost("Login")]
-        public UserLogin LoginUser(UserInputDto inputDto)
-        {           
-            userLoginService.Login(inputDto);
-            return mapper.Map<UserLogin>(inputDto);
+        public async Task<string> LoginUser(UserInputDto inputDto)
+        {
+            await userLoginService.Login(inputDto);
+            return "token";
         }
-        
+
     }
 }
