@@ -7,6 +7,6 @@ namespace App.Core.ApplicationService.Dtos.CountryBasedDtos
 {
    public class CountryInputDto
     {
-        public string countryNames { get; set; }
+        public string CountryNames { get; set; }
     }
 }

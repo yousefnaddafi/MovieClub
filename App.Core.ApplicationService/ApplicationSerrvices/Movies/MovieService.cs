@@ -92,7 +92,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
                          Select (x => new SearchDetailFilterDto()
                          {
                              title = x.Movie.Title,
-                             actors = x.Movie.ActorMovie.Select(c => c.Actor.ActorName).ToList(),
+                             actors = x.Movie.ActorMovies.Select(c => c.Actor.ActorName).ToList(),
                              productYear = x.Movie.ProductYear,
                              rateByUser = x.Movie.RateByUser,
                              genres = x.Movie.GenreMovies.Select(z => z.Genre.GenreName).ToList()
@@ -159,6 +159,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             temp.Add(secondMovie);
             return temp;
 
+<<<<<<< Updated upstream
 
             //List<MovieCompareOutputDto> temp = new List<MovieCompareOutputDto>();
             //var firstMovie = movieRepository.GetQuery().Where(x => x.Title == inputDto.Movie1).ToList();
@@ -184,6 +185,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             //FinalCompare.Add(MappedSecondMovie);
 
             //return FinalCompare;
+=======
+>>>>>>> Stashed changes
         }
     }
 }

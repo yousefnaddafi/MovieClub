@@ -6,7 +6,7 @@ namespace App.Core.ApplicationService.Dtos.CountryBasedDtos
 {
     public class CountryOutputDtos
     {
-        public string[] movieTitles { get; set; }
+        public List<string> movieTitles { get; set; }
     }
     
 }
