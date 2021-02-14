@@ -159,7 +159,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             temp.Add(secondMovie);
             return temp;
 
-<<<<<<< Updated upstream
+
 
             //List<MovieCompareOutputDto> temp = new List<MovieCompareOutputDto>();
             //var firstMovie = movieRepository.GetQuery().Where(x => x.Title == inputDto.Movie1).ToList();
@@ -185,8 +185,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             //FinalCompare.Add(MappedSecondMovie);
 
             //return FinalCompare;
-=======
->>>>>>> Stashed changes
+
         }
     }
 }
