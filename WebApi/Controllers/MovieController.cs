@@ -78,13 +78,13 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("Recently")]
-        public List<MovieRelatedDto> GetNewComing()
+        public Task<List<MovieRelatedDto>> GetNewComing()
         {
             return moviesService.GetNewComing();
         }
 
         [HttpGet("Popular")]
-        public List<MovieRelatedDto> GetPopular()
+        public Task<List<MovieRelatedDto>> GetPopular()
         {
             return moviesService.GetPopular();
         }
@@ -101,7 +101,7 @@ namespace WebApi.Controllers
             return countryMovieService.GetCountries(countryInput);
         }
         [HttpGet("HighRate")]
-        public MovieOutputDetailDto BestRateMovie([FromBody] RecommendPopularInputDto recommend)
+        public Task<MovieOutputDetailDto> BestRateMovie([FromBody] RecommendPopularInputDto recommend)
         {
             return moviesService.GetHighRate(recommend);
         }

@@ -147,17 +147,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         public async Task<List<MovieCompareOutputDto>> Compare(MovieCompareInputDto inputDto)
         {
 
-<<<<<<< Updated upstream
-            var FirstMovie = movieRepository.GetQuery().FirstOrDefault(x => x.Title == inputDto.Movie1);
-            var SecondMovie = movieRepository.GetQuery().FirstOrDefault(x => x.Title == inputDto.Movie2);
-            var FinalCompare = new List<MovieCompareOutputDto>();
-            var MappedFirstMovie =  mapper.Map<MovieCompareOutputDto>(FirstMovie);
-            var MappedSecondMovie = mapper.Map<MovieCompareOutputDto>(SecondMovie);
 
-            FinalCompare.Add(MappedFirstMovie);
-            FinalCompare.Add(MappedSecondMovie);
-            await movieRepository.Save();
-=======
             List<MovieCompareOutputDto> temp = new List<MovieCompareOutputDto>();
             MovieCompareOutputDto firstMovie = new MovieCompareOutputDto();
             MovieCompareOutputDto secondMovie = new MovieCompareOutputDto();
@@ -176,7 +166,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             //temp.Add(mapper.Map<MovieCompareOutputDto>(firstMovie));
             //temp.Add(mapper.Map<MovieCompareOutputDto>(secondMovie));
             //return temp;
->>>>>>> Stashed changes
+
 
 
             //var AllMoviesTitle = movieRepository.GetQuery();
