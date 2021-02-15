@@ -22,9 +22,9 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public void Create(GenreInputDtos inputDto)
+        public Task Create(GenreInputDtos inputDto)
         {
-            GenreService.Create(inputDto);
+            return GenreService.Create(inputDto);
         }
 
         [HttpPut]

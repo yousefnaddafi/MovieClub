@@ -22,9 +22,9 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public void Create(CountryInputDTO inputDto)
+        public async Task Create(CountryInputDTO inputDto)
         {
-            countryService.Create(inputDto);
+            await countryService.Create(inputDto);
         }
 
         [HttpPut]

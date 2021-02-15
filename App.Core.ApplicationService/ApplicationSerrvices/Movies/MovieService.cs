@@ -100,7 +100,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
                          }).ToList();
             return ResultSearch;
         }
-        public async Task<MovieOutputDetailDto> GetHighRate(RecommendPopularInputDto inputMovie)
+        public async Task<MovieOutputDetailDto> GetHighRate()
         {
             var Popular = movieRepository.GetQuery().
                 Where(x => x.RateByUser >= 7).Select(x => new MovieDetailDto()
