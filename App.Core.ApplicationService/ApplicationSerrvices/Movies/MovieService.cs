@@ -19,19 +19,25 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
     public class MovieService : IMovieService
     {
         private readonly IMovieRepository<Movie> movieRepository;
-        private readonly IMovieRepository<ActorMovie> ActorMovieRepository;
+        private readonly IMovieRepository<ActorMovie> actorMovieRepository;
       //  private readonly IMovieRepository<Comment> CommentRepository;
-        private readonly IMovieRepository<UserLogin> UserRepository;
+        private readonly IMovieRepository<UserLogin> userRepository;
         private readonly IMapper mapper;
-        public MovieService(IMovieRepository<Movie> MovieRepository,
-            IMovieRepository<ActorMovie> ActorMovieRepository,
-            IMapper mapper, IMovieRepository<UserLogin> userRepository)
+        private readonly IMovieRepository<GenreMovie> genreMovieRepository;
+
+        public MovieService(IMovieRepository<Movie> _movieRepository,
+            IMovieRepository<ActorMovie> _actorMovieRepository,
+            IMapper _mapper,
+            IMovieRepository<UserLogin> _userRepository,
+            IMovieRepository<GenreMovie> _genreMovieRepository
+            )
         {
-            this.ActorMovieRepository = ActorMovieRepository;
-            this.movieRepository = MovieRepository;
+            this.actorMovieRepository = _actorMovieRepository;
+            this.movieRepository = _movieRepository;
            // this.CommentRepository = CommentRepository;
-            this.UserRepository = userRepository;
-            this.mapper = mapper;
+            this.userRepository = _userRepository;
+            this.mapper = _mapper;
+            genreMovieRepository = _genreMovieRepository;
         }
 
         public async Task<int> Create(MovieInputDto inputDto)
@@ -70,47 +76,87 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         {
             return  movieRepository.GetQuery().ToList();
         }
-       // public string CreatComment(CommentsInputDto comment, int movieId)
+        // public string CreatComment(CommentsInputDto comment, int movieId)
         //{            
-          //  CommentRepository.Insert(new Comment()
-            //{
-              //  Text = comment.Text,
-                //MovieId = movieId
-            //});
-            //CommentRepository.Save();
+        //  CommentRepository.Insert(new Comment()
+        //{
+        //  Text = comment.Text,
+        //MovieId = movieId
+        //});
+        //CommentRepository.Save();
 
-           // return comment.Text;
+        // return comment.Text;
         //}
-        public List<SearchDetailFilterDto> Search(SearchMovieInputDto input)
-        {
-            var ResultSearch = ActorMovieRepository.GetQuery().Include(x => x.Actor).Include(x => x.Movie).
-                       Include(x => x.Movie.ProductYear).Include(x => x.Movie.ImdbRate).
-                       Include(x => x.Movie.GenreMovies).ThenInclude(x => x.Genre).
-                       Where(x => input.actors.Contains(x.Actor.ActorName)
-                         || input.genres.Contains(x.Movie.GenreMovies.Select(c => c.Genre.GenreName).FirstOrDefault())
-                         || x.Movie.RateByUser.ToString() == input.rateByUser).
-                         Select (x => new SearchDetailFilterDto()
-                         {
-                             title = x.Movie.Title,
-                             actors = x.Movie.ActorMovies.Select(c => c.Actor.ActorName).ToList(),
-                             productYear = x.Movie.ProductYear,
-                             rateByUser = x.Movie.RateByUser,
-                             genres = x.Movie.GenreMovies.Select(z => z.Genre.GenreName).ToList()
 
-                         }).ToList();
-            return ResultSearch;
+
+
+
+
+        public List<SearchDetailFilterDto> Search(SearchMovieInputDto inputDto) {
+            List<SearchDetailFilterDto> result = new List<SearchDetailFilterDto>();
+
+            var tempSearchedByRateByUser = movieRepository.GetQuery().Where(x => x.RateByUser == inputDto.RateByUser).ToList();
+            foreach (var item in tempSearchedByRateByUser) {
+                var mappedTemp = mapper.Map<SearchDetailFilterDto>(item);
+                result.Add(mappedTemp);
+            }
+
+            var tempSearchedByGenre = genreMovieRepository.GetQuery().Include(x => x.Genre).Include(y => y.Movie)
+                    .Where(z => z.Genre.GenreName == inputDto.Genre).ToList();
+            foreach (var item in tempSearchedByGenre) {
+                var mappedTemp = mapper.Map<SearchDetailFilterDto>(item);
+                result.Add(mappedTemp);
+            }
+
+            var tempSearchedByActor = actorMovieRepository.GetQuery().Include(x => x.Actor).Include(y => y.Movie)
+                    .Where(z => z.Actor.ActorName == inputDto.Actor).ToList();
+            foreach (var item in tempSearchedByActor) {
+                var mappedTemp = mapper.Map<SearchDetailFilterDto>(item);
+                result.Add(mappedTemp);
+            }
+
+            var tempSearchedByDirector = movieRepository.GetQuery().Include(x => x.Director)
+                    .Where(y => y.Director.DirectorName == inputDto.Director).ToList();
+            foreach (var item in tempSearchedByDirector) {
+                var mappedTemp = mapper.Map<SearchDetailFilterDto>(item);
+                result.Add(mappedTemp);
+            }
+
+            return result;
         }
-        public async Task<MovieOutputDetailDto> GetHighRate()
-        {
-            var Popular = movieRepository.GetQuery().
-                Where(x => x.RateByUser >= 7).Select(x => new MovieDetailDto()
-                {
-                    Title = x.Title
-                }).
-                OrderByDescending(x => inputMovie.visted).Take(3).ToArray();
-            await movieRepository.Save();
 
-            return new MovieOutputDetailDto { movieDetailDtos = Popular };
+        //public List<SearchDetailFilterDto> Search(SearchMovieInputDto input)
+        //{
+        //    var ResultSearch = ActorMovieRepository.GetQuery().Include(x => x.Actor).Include(x => x.Movie).
+        //               Include(x => x.Movie.ProductYear).Include(x => x.Movie.ImdbRate).
+        //               Include(x => x.Movie.GenreMovies).ThenInclude(x => x.Genre).
+        //               Where(x => input.Actor.Contains(x.Actor.ActorName)
+        //                 || input.Genre.Contains(x.Movie.GenreMovies.Select(c => c.Genre.GenreName).FirstOrDefault())
+        //                 || x.Movie.RateByUser.ToString() == input.RateByUser).
+        //                 Select (x => new SearchDetailFilterDto()
+        //                 {
+        //                     Title = x.Movie.Title,
+        //                     Actors = x.Movie.ActorMovies.Select(c => c.Actor.ActorName).ToList(),
+        //                     ProductYear = x.Movie.ProductYear,
+        //                     RateByUser = x.Movie.RateByUser,
+        //                     Genres = x.Movie.GenreMovies.Select(z => z.Genre.GenreName).ToList()
+
+        //                 }).ToList();
+        //    return ResultSearch;
+        //}
+        public async Task<List<MovieOutputDto>> GetHighRate()
+        {
+            var highRateMovies = movieRepository.GetQuery().Where(x => x.RateByUser >= 4)
+                    .OrderByDescending(y=> y.RateByUser).Take(3);
+
+            List<MovieOutputDto> result = new List<MovieOutputDto>();
+
+            foreach (var item in highRateMovies) {
+                var mappedHighRateMovies = mapper.Map<MovieOutputDto>(item);
+                result.Add(mappedHighRateMovies);
+            }
+
+            return result;
         }
 
         public async Task<List<MovieRelatedDto>> GetPopular()
@@ -124,14 +170,14 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
                 Popular.Add(MappedMovie);
             }
 
-            await movieRepository.Save();
+            //await movieRepository.Save();
 
             return Popular;
         }
 
         public async Task<List<MovieRelatedDto>> GetNewComing()
         {
-            var NewIncomeMovie = movieRepository.GetQuery().OrderBy(x => x.ProductYear).Take(5).ToList();
+            var NewIncomeMovie = movieRepository.GetQuery().OrderByDescending(x => x.ProductYear).Take(5).ToList();
             var Recently = new List<MovieRelatedDto>();
 
             foreach (var item in NewIncomeMovie)
@@ -139,15 +185,13 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
                 var MappedMovie = mapper.Map<MovieRelatedDto>(item);
                 Recently.Add(MappedMovie);
             }
-            await movieRepository.Save();
+            //await movieRepository.Save();
 
             return Recently;
         }
 
         public async Task<List<MovieCompareOutputDto>> Compare(MovieCompareInputDto inputDto)
         {
-
-
             List<MovieCompareOutputDto> temp = new List<MovieCompareOutputDto>();
             MovieCompareOutputDto firstMovie = new MovieCompareOutputDto();
             MovieCompareOutputDto secondMovie = new MovieCompareOutputDto();
@@ -158,34 +202,6 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             temp.Add(firstMovie);
             temp.Add(secondMovie);
             return temp;
-
-
-
-            //List<MovieCompareOutputDto> temp = new List<MovieCompareOutputDto>();
-            //var firstMovie = movieRepository.GetQuery().Where(x => x.Title == inputDto.Movie1).ToList();
-            //var secondMovie = movieRepository.GetQuery().Where(x => x.Title == inputDto.Movie2).ToList();
-            //temp.Add(mapper.Map<MovieCompareOutputDto>(firstMovie));
-            //temp.Add(mapper.Map<MovieCompareOutputDto>(secondMovie));
-            //return temp;
-
-
-
-            //var AllMoviesTitle = movieRepository.GetQuery();
-            //if (AllMoviesTitle.Select(x => x.Title != inputDto.Movie1).FirstOrDefault())
-            //{
-            //    throw new InvalidTitleNameException("Wrong Title");
-            //}
-            //var FirstMovie = movieRepository.GetQuery().Select(x => x.Title == inputDto.Movie1);
-            //var SecondMovie = movieRepository.GetQuery().Select(x => x.Title == inputDto.Movie2);
-            //var FinalCompare = new List<MovieCompareOutputDto>();
-            //var MappedFirstMovie = mapper.Map<MovieCompareOutputDto>(FirstMovie);
-            //var MappedSecondMovie = mapper.Map<MovieCompareOutputDto>(SecondMovie);
-
-            //FinalCompare.Add(MappedFirstMovie);
-            //FinalCompare.Add(MappedSecondMovie);
-
-            //return FinalCompare;
-
         }
     }
 }

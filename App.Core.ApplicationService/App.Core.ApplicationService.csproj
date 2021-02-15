@@ -24,5 +24,6 @@
     <Folder Include="Dtos\ActorMovieDtos\" />
     <Folder Include="Dtos\CountryMovieDtos\" />
     <Folder Include="Dtos\GenreMovieDtos\" />
+    <Folder Include="Dtos\UserLoginDtos\" />
   </ItemGroup>
 </Project>

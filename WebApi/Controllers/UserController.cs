@@ -1,7 +1,8 @@
 ﻿using App.Core.ApplicationService.ApplicationSerrvices.Users;
 using App.Core.ApplicationService.ApplicationSerrvices.UsersLogin;
-using App.Core.ApplicationService.Dtos.LoginDto;
+//using App.Core.ApplicationService.Dtos.LoginDto;
 using App.Core.ApplicationService.Dtos.UserDto;
+using App.Core.ApplicationService.Dtos.UserLoginDtos;
 using App.Core.Entities.Model;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
@@ -54,10 +55,9 @@ namespace WebApi.Controllers
             return userService.Get(id);
         }
         [HttpPost("Login")]
-        public async Task<string> LoginUser(UserInputDto inputDto)
+        public async Task<UserLoginOutputDto> LoginUser(UserInputDto inputDto)
         {
-            await userLoginService.Login(inputDto);
-            return "token";
+            return await userLoginService.Login(inputDto);
         }
 
     }

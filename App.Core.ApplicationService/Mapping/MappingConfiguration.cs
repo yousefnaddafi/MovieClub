@@ -7,6 +7,7 @@ using App.Core.ApplicationService.Dtos.GenreDto;
 using App.Core.ApplicationService.Dtos.LoginDto;
 using App.Core.ApplicationService.Dtos.MovieDtos;
 using App.Core.ApplicationService.Dtos.UserDto;
+using App.Core.ApplicationService.Dtos.UserLoginDtos;
 using App.Core.Entities.Model;
 using AutoMapper;
 using System;
@@ -31,9 +32,9 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.Password, o => o.MapFrom(z => z.Password))
                 //.ForMember(x => x.Favorites.Select(z => z.MovieTitle), o => o.MapFrom(z => z.Favorites))
                 ;           
-            CreateMap<UserLogin, UserLoginInputDto>()
-                .ForMember(x => x.Token, o => o.MapFrom(z => z.Token))
-                ;
+            //CreateMap<UserLogin, UserLoginInputDto>()
+            //    .ForMember(x => x.Token, o => o.MapFrom(z => z.Token))
+            //    ;
                       
             CreateMap<Movie, MovieRelatedDto>()
                 .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
@@ -79,6 +80,48 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.MovieId, o => o.MapFrom(z => z.MovieId))
                 .ForMember(x => x.CountryId, o => o.MapFrom(z => z.CountryId))
                 ;
+            CreateMap<Movie, MovieOutputDto>()
+                .ForMember(x => x.Title, o => o.MapFrom(z => z.Title))
+                .ForMember(x => x.ProductYear, o => o.MapFrom(z => z.ProductYear))
+                .ForMember(x => x.VisitCount, o => o.MapFrom(z => z.VisitCount))
+                .ForMember(x => x.ImdbRate, o => o.MapFrom(z => z.ImdbRate))
+                .ForMember(x => x.Summery, o => o.MapFrom(z => z.Summery))
+                .ForMember(x => x.DirectorId, o => o.MapFrom(z => z.Director))
+                .ForMember(x => x.RateByUser, o => o.MapFrom(z => z.RateByUser))
+                ;
+            CreateMap<Movie, SearchDetailFilterDto>()
+                .ForMember(x => x.Title, o => o.MapFrom(z => z.Title))
+                .ForMember(x => x.RateByUser, o => o.MapFrom(z => z.RateByUser))
+                .ForMember(x => x.ProductYear, o => o.MapFrom(z => z.ProductYear))
+                .ForMember(x => x.Genres, o => o.MapFrom(z => z.GenreMovies.Select(y => y.Genre)))
+                .ForMember(x => x.Director, o => o.MapFrom(z => z.Director.DirectorName))
+                .ForMember(x => x.Actors, o => o.MapFrom(z => z.ActorMovies.Select(y => y.Actor.ActorName)))
+                ;
+            CreateMap<GenreMovie, SearchDetailFilterDto>()
+                .ForMember(x => x.Title, o => o.MapFrom(z => z.Movie.Title))
+                .ForMember(x => x.RateByUser, o => o.MapFrom(z => z.Movie.RateByUser))
+                .ForMember(x => x.ProductYear, o => o.MapFrom(z => z.Movie.ProductYear))
+                .ForMember(x => x.Genres, o => o.MapFrom(z => z.Genre))
+                .ForMember(x => x.Director, o => o.MapFrom(z => z.Movie.Director.DirectorName))
+                .ForMember(x => x.Actors, o => o.MapFrom(z => z.Movie.ActorMovies.Select(y=> y.Actor.ActorName)))
+                ;
+            CreateMap<ActorMovie, SearchDetailFilterDto>()
+                .ForMember(x => x.Title, o => o.MapFrom(z => z.Movie.Title))
+                .ForMember(x => x.RateByUser, o => o.MapFrom(z => z.Movie.RateByUser))
+                .ForMember(x => x.ProductYear, o => o.MapFrom(z => z.Movie.ProductYear))
+                .ForMember(x => x.Genres, o => o.MapFrom(z => z.Movie.GenreMovies.Select(y=> y.Genre)))
+                .ForMember(x => x.Director, o => o.MapFrom(z => z.Movie.Director.DirectorName))
+                .ForMember(x => x.Actors, o => o.MapFrom(z => z.Actor.ActorName))
+                ;
+            CreateMap<UserLoginInputDto, UserLogin>()
+                .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
+                .ForMember(x => x.Token, o => o.MapFrom(z => z.Token))
+                .ForMember(x => x.ExpireMembershipDate, o => o.MapFrom(z => z.ExpireLoginDate))
+                ;
+            CreateMap<UserLogin, UserLoginOutputDto>()
+                .ForMember(x => x.Token, o => o.MapFrom(z => z.Token))
+                ;
+            
         }
     }
 }

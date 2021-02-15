@@ -25,7 +25,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Countries
         {
             var temp = mapper.Map<Country>(inputDto);
             countryRepository.Insert(temp);
-           await countryRepository.Save();
+            await countryRepository.Save();
             return inputDto.CountryName;
         }
 
