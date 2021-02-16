@@ -64,10 +64,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.CountryMovies
             var temp = countryMovieRepository.GetQuery().Include(x => x.Country)
                 .Include(z => z.Movie).Where(u => u.Country.CountryName == input.CountryNames).Select(x =>x.Movie).ToList();
 
-            //CountryOutputDtos list = new CountryOutputDtos();
-            //foreach (var item in temp) { 
-            //    list.movieTitles.Add(item);
-            //}
+            
 
             return temp;
             

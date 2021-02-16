@@ -170,7 +170,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
                 Popular.Add(MappedMovie);
             }
 
-            //await movieRepository.Save();
+            
 
             return Popular;
         }
@@ -185,7 +185,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
                 var MappedMovie = mapper.Map<MovieRelatedDto>(item);
                 Recently.Add(MappedMovie);
             }
-            //await movieRepository.Save();
+            
 
             return Recently;
         }
