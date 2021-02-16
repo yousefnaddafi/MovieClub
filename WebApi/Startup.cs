@@ -16,6 +16,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using WebApi.Extensions;
+using WebApi.HttpServices;
 using WebApi.Middlewares;
 
 namespace WebApi
@@ -35,6 +36,7 @@ namespace WebApi
             services.AddDbContext<MovieDbContext>(o =>
             { o.UseSqlServer(Configuration.GetConnectionString("MovieDbConections")); });
             services.AddDependency();
+            services.AddHttpClient<HttpGetMovie>();
             services.AddSwaggerGen(c=>c.SwaggerDoc("Movie Club",new Microsoft.OpenApi.Models
                 .OpenApiInfo {Title="WebApi",Version="Movie Club" }));
             
