@@ -64,6 +64,10 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 
         public async Task<Movie> Get(int id)
         {
+            if (movieRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            {
+                throw new InvalidIdException("Wrong Id");
+            }
             movieRepository.GetQuery().FirstOrDefault(x => x.Id == id).VisitCount += 1;
             await movieRepository.Save();
             return await movieRepository.Get(id);
@@ -163,7 +167,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         public async Task<List<MovieCompareOutputDto>> Compare(MovieCompareInputDto inputDto)
         {
             List<MovieCompareOutputDto> temp = new List<MovieCompareOutputDto>();
-       
+            
             var firstInputMovie = await movieRepository.Get(inputDto.MovieId1);
             var secondInputMovie = await movieRepository.Get(inputDto.MovieId2);
             var firstMovie = mapper.Map<MovieCompareOutputDto>(firstInputMovie);
