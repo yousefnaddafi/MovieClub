@@ -1,5 +1,6 @@
 ﻿using App.Core.ApplicationService.ApplicationSerrvices.ActorMovies;
 using App.Core.ApplicationService.ApplicationSerrvices.Actors;
+using App.Core.ApplicationService.ApplicationSerrvices.Commentts;
 using App.Core.ApplicationService.ApplicationSerrvices.Countries;
 using App.Core.ApplicationService.ApplicationSerrvices.CountryMovies;
 using App.Core.ApplicationService.ApplicationSerrvices.Directors;
@@ -42,6 +43,7 @@ namespace WebApi.Extensions
             services.AddScoped<IMovieRepository<User>, MovieEfRepository<User>>();
             services.AddScoped<IMovieRepository<UserLogin>, MovieEfRepository<UserLogin>>();
             services.AddScoped<IMovieRepository<Favorite>, MovieEfRepository<Favorite>>();
+            services.AddScoped<IMovieRepository<Comment>, MovieEfRepository<Comment>>();
         }
 
         private static void AddServices(IServiceCollection services)
@@ -56,6 +58,7 @@ namespace WebApi.Extensions
             services.AddScoped<IGenreMovieService, GenreMovieService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserLoginService, UserLoginService>();
+            services.AddScoped<ICommentService, CommentService>();
         }
     }
 }

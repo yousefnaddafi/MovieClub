@@ -1,12 +1,9 @@
 ﻿using App.Core.ApplicationService.IRepositories;
-using App.Core.Entities;
 using App.Core.Entities.Model;
 using App.Infrastucture.EF.Database;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace App.Infrastucture.EF.Repositories
