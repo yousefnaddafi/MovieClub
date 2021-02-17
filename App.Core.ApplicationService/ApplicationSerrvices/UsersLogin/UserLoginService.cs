@@ -66,6 +66,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.UsersLogin
         }
         public async Task<UserLoginOutputDto> Login(UserInputDto inputDto)
         {
+            if(userRepository.GetQuery().Select(x => x.Email != inputDto.Email).FirstOrDefault())
+            {
+                throw new InvalidValuesException("Wrong Email");
+            }
+
+
             var getUser =  userRepository.GetQuery().
                 Where(x => x.Email == inputDto.Email && x.Password == inputDto.Password).FirstOrDefault();
 
