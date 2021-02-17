@@ -180,6 +180,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 
         public async Task<List<MovieCompareOutputDto>> Compare(MovieCompareInputDto inputDto)
         {
+            if (movieRepository.GetQuery().Select(x => x.Id != inputDto.MovieId1).FirstOrDefault()||
+                movieRepository.GetQuery().Select(x => x.Id != inputDto.MovieId2).FirstOrDefault())
+            {
+                throw new InvalidIdException("Wrong Id");
+            }
+
             List<MovieCompareOutputDto> temp = new List<MovieCompareOutputDto>();
             
             var firstInputMovie = await movieRepository.Get(inputDto.MovieId1);
