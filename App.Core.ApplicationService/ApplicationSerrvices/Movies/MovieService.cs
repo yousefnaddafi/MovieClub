@@ -97,7 +97,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
                     (z => z.Genre.GenreName != inputDto.Genre).FirstOrDefault() ||
                 movieRepository.GetQuery().Select(x => x.RateByUser != inputDto.RateByUser).FirstOrDefault() ||   
                 movieRepository.GetQuery().Include(x => x.Director).Select
-                    (y => y.Director.DirectorName == inputDto.Director).FirstOrDefault())
+                    (y => y.Director.DirectorName != inputDto.Director).FirstOrDefault())
             {
                 throw new InvalidValuesException("Wrong Value");
             }
