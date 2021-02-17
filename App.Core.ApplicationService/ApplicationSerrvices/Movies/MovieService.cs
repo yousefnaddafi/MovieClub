@@ -163,12 +163,11 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         public async Task<List<MovieCompareOutputDto>> Compare(MovieCompareInputDto inputDto)
         {
             List<MovieCompareOutputDto> temp = new List<MovieCompareOutputDto>();
-            MovieCompareOutputDto firstMovie = new MovieCompareOutputDto();
-            MovieCompareOutputDto secondMovie = new MovieCompareOutputDto();
+       
             var firstInputMovie = await movieRepository.Get(inputDto.MovieId1);
             var secondInputMovie = await movieRepository.Get(inputDto.MovieId2);
-            firstMovie = mapper.Map<MovieCompareOutputDto>(firstInputMovie);
-            secondMovie = mapper.Map<MovieCompareOutputDto>(secondInputMovie);
+            var firstMovie = mapper.Map<MovieCompareOutputDto>(firstInputMovie);
+            var secondMovie = mapper.Map<MovieCompareOutputDto>(secondInputMovie);
             temp.Add(firstMovie);
             temp.Add(secondMovie);
             return temp;
