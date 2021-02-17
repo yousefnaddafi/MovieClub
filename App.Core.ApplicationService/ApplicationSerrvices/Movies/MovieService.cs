@@ -138,25 +138,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             }
         }
 
-        //public List<SearchDetailFilterDto> Search(SearchMovieInputDto input)
-        //{
-        //    var ResultSearch = ActorMovieRepository.GetQuery().Include(x => x.Actor).Include(x => x.Movie).
-        //               Include(x => x.Movie.ProductYear).Include(x => x.Movie.ImdbRate).
-        //               Include(x => x.Movie.GenreMovies).ThenInclude(x => x.Genre).
-        //               Where(x => input.Actor.Contains(x.Actor.ActorName)
-        //                 || input.Genre.Contains(x.Movie.GenreMovies.Select(c => c.Genre.GenreName).FirstOrDefault())
-        //                 || x.Movie.RateByUser.ToString() == input.RateByUser).
-        //                 Select(x => new SearchDetailFilterDto()
-        //                 {
-        //                     Title = x.Movie.Title,
-        //                     Actors = x.Movie.ActorMovies.Select(c => c.Actor.ActorName).ToList(),
-        //                     ProductYear = x.Movie.ProductYear,
-        //                     RateByUser = x.Movie.RateByUser,
-        //                     Genres = x.Movie.GenreMovies.Select(z => z.Genre.GenreName).ToList()
-
-        //                 }).ToList();
-        //    return ResultSearch;
-        //}
+        
 
 
         public async Task<List<MovieOutputDto>> GetHighRate()
