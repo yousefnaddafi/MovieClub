@@ -41,6 +41,7 @@ namespace WebApi.Extensions
             services.AddScoped<IMovieRepository<CountryMovie>, MovieEfRepository<CountryMovie>>();
             services.AddScoped<IMovieRepository<User>, MovieEfRepository<User>>();
             services.AddScoped<IMovieRepository<UserLogin>, MovieEfRepository<UserLogin>>();
+            services.AddScoped<IMovieRepository<Favorite>, MovieEfRepository<Favorite>>();
         }
 
         private static void AddServices(IServiceCollection services)
