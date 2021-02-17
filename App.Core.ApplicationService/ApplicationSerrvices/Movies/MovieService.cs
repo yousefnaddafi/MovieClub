@@ -20,7 +20,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
     {
         private readonly IMovieRepository<Movie> movieRepository;
         private readonly IMovieRepository<ActorMovie> actorMovieRepository;
-      //  private readonly IMovieRepository<Comment> CommentRepository;
+      
         private readonly IMovieRepository<UserLogin> userRepository;
         private readonly IMapper mapper;
         private readonly IMovieRepository<GenreMovie> genreMovieRepository;
@@ -34,7 +34,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         {
             this.actorMovieRepository = _actorMovieRepository;
             this.movieRepository = _movieRepository;
-           // this.CommentRepository = CommentRepository;
+           
             this.userRepository = _userRepository;
             this.mapper = _mapper;
             genreMovieRepository = _genreMovieRepository;
@@ -78,20 +78,6 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         {
             return  movieRepository.GetQuery().ToList();
         }
-        // public string CreatComment(CommentsInputDto comment, int movieId)
-        //{            
-        //  CommentRepository.Insert(new Comment()
-        //{
-        //  Text = comment.Text,
-        //MovieId = movieId
-        //});
-        //CommentRepository.Save();
-
-        // return comment.Text;
-        //}
-
-
-
 
 
         public List<SearchDetailFilterDto> Search(SearchMovieInputDto inputDto) {
@@ -127,25 +113,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             return result;
         }
 
-        //public List<SearchDetailFilterDto> Search(SearchMovieInputDto input)
-        //{
-        //    var ResultSearch = ActorMovieRepository.GetQuery().Include(x => x.Actor).Include(x => x.Movie).
-        //               Include(x => x.Movie.ProductYear).Include(x => x.Movie.ImdbRate).
-        //               Include(x => x.Movie.GenreMovies).ThenInclude(x => x.Genre).
-        //               Where(x => input.Actor.Contains(x.Actor.ActorName)
-        //                 || input.Genre.Contains(x.Movie.GenreMovies.Select(c => c.Genre.GenreName).FirstOrDefault())
-        //                 || x.Movie.RateByUser.ToString() == input.RateByUser).
-        //                 Select (x => new SearchDetailFilterDto()
-        //                 {
-        //                     Title = x.Movie.Title,
-        //                     Actors = x.Movie.ActorMovies.Select(c => c.Actor.ActorName).ToList(),
-        //                     ProductYear = x.Movie.ProductYear,
-        //                     RateByUser = x.Movie.RateByUser,
-        //                     Genres = x.Movie.GenreMovies.Select(z => z.Genre.GenreName).ToList()
-
-        //                 }).ToList();
-        //    return ResultSearch;
-        //}
+        
         public async Task<List<MovieOutputDto>> GetHighRate()
         {
             var highRateMovies = movieRepository.GetQuery().Where(x => x.RateByUser >= 4)

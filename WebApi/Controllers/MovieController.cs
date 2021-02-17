@@ -9,7 +9,7 @@ using App.Core.ApplicationService.ApplicationSerrvices.Movies;
 using App.Core.ApplicationService.ApplicationSerrvices.UsersLogin;
 using App.Core.ApplicationService.Dtos.CommentDtos;
 using App.Core.ApplicationService.Dtos.CountryBasedDtos;
-//using App.Core.ApplicationService.Dtos.LoginDto;
+
 using App.Core.ApplicationService.Dtos.MovieDtos;
 using App.Core.Entities.Model;
 using AutoMapper;
@@ -36,7 +36,7 @@ namespace WebApi.Controllers
             moviesService = _movieService;
             countryMovieService = _countryMovieService;
             mapper = _mapper;
-            // commentService = _commentService;
+            
         }
 
         [HttpPost]
@@ -65,11 +65,7 @@ namespace WebApi.Controllers
             return moviesService.Get(id);
         }
 
-        //[HttpPost("Comments")]
-        //public string CommentByUser([FromBody] CommentsInputDto comment, int Id, [FromHeader] string token)
-        //{
-        //    return moviesService.CreatComment(comment, Id);
-        //}
+        
 
         [HttpPost("Compare")]
         public async Task<List<MovieCompareOutputDto>> Compare([FromBody] MovieCompareInputDto inputDto)
