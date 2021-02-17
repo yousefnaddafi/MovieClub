@@ -106,5 +106,10 @@ namespace WebApi.Controllers
         {
             return moviesService.GetHighRate();
         }
+        [HttpGet("MostVisited")]
+        public List<Movie> MostVisit()
+        {
+            return moviesService.MostVisited();
+        }
     }
 }

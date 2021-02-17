@@ -205,6 +205,11 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             temp.Add(secondMovie);
             return temp;
         }
+        public  List<Movie> MostVisited()
+        {
+           var Most =movieRepository.GetQuery().OrderByDescending(x => x.VisitCount).Take(5).ToList();
+            return Most;
+        }
     }
 }
 

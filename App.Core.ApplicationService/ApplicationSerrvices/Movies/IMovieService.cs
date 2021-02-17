@@ -28,5 +28,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         Task<List<MovieCompareOutputDto>> Compare(MovieCompareInputDto inputDto);
         List<SearchDetailFilterDto> Search(SearchMovieInputDto inputDto);
         Task<List<MovieOutputDto>> GetHighRate();
+
+        List<Movie> MostVisited();
     }
 }
