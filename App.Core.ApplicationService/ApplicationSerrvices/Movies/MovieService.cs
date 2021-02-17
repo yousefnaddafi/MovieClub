@@ -62,9 +62,11 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             return id;
         }
 
-        public Task<Movie> Get(int id)
+        public async Task<Movie> Get(int id)
         {
-            return movieRepository.Get(id);
+            movieRepository.GetQuery().FirstOrDefault(x => x.Id == id).VisitCount += 1;
+            await movieRepository.Save();
+            return await movieRepository.Get(id);
         }
 
         public async Task<List<Movie>> GetAll()
