@@ -1,4 +1,4 @@
-﻿using App.Core.ApplicationService.ApplicationSerrvices.Movies;
+using App.Core.ApplicationService.ApplicationSerrvices.Movies;
 using App.Core.ApplicationService.Dtos.MovieDtos;
 using App.Core.ApplicationService.Dtos.ProductDtos;
 using App.Core.ApplicationService.IRepositories;
@@ -11,8 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using App.Core.Entities.Exceptions;
-using App.Core.ApplicationService.Dtos.CommentDtos;
-using App.Core.ApplicationService.Dtos.LoginDto;
+using App.Core.ApplicationService.Dtos.RateByUserDtos;
+//using App.Core.ApplicationService.Dtos.CommentDtos;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 {
@@ -87,7 +87,6 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             return  movieRepository.GetQuery().ToList();
         }
 
-
         public List<SearchDetailFilterDto> Search(SearchMovieInputDto inputDto) {
             List<SearchDetailFilterDto> result = new List<SearchDetailFilterDto>();
 
@@ -131,7 +130,27 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             return result;
         }
 
-        
+        //public List<SearchDetailFilterDto> Search(SearchMovieInputDto input)
+        //{
+        //    var ResultSearch = ActorMovieRepository.GetQuery().Include(x => x.Actor).Include(x => x.Movie).
+        //               Include(x => x.Movie.ProductYear).Include(x => x.Movie.ImdbRate).
+        //               Include(x => x.Movie.GenreMovies).ThenInclude(x => x.Genre).
+        //               Where(x => input.Actor.Contains(x.Actor.ActorName)
+        //                 || input.Genre.Contains(x.Movie.GenreMovies.Select(c => c.Genre.GenreName).FirstOrDefault())
+        //                 || x.Movie.RateByUser.ToString() == input.RateByUser).
+        //                 Select(x => new SearchDetailFilterDto()
+        //                 {
+        //                     Title = x.Movie.Title,
+        //                     Actors = x.Movie.ActorMovies.Select(c => c.Actor.ActorName).ToList(),
+        //                     ProductYear = x.Movie.ProductYear,
+        //                     RateByUser = x.Movie.RateByUser,
+        //                     Genres = x.Movie.GenreMovies.Select(z => z.Genre.GenreName).ToList()
+
+        //                 }).ToList();
+        //    return ResultSearch;
+        //}
+
+
         public async Task<List<MovieOutputDto>> GetHighRate()
         {
             var highRateMovies = movieRepository.GetQuery().Where(x => x.RateByUser >= 4)
@@ -196,10 +215,25 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             temp.Add(secondMovie);
             return temp;
         }
-        public  List<Movie> MostVisited()
+        public List<Movie> MostVisited()
         {
-           var Most =movieRepository.GetQuery().OrderByDescending(x => x.VisitCount).Take(5).ToList();
+            var Most = movieRepository.GetQuery().OrderByDescending(x => x.VisitCount).Take(5).ToList();
             return Most;
+        }
+
+        public void RateByUser(RateByUserInputDto inputDto) {
+            int tempLastRateCounter = movieRepository.GetQuery().Where(x => x.Id == inputDto.MovieId).Select(y => y.RateCounter).FirstOrDefault();
+            double tempLastRateByUser = movieRepository.GetQuery().Where(x => x.Id == inputDto.MovieId).Select(y => y.RateByUser).FirstOrDefault();
+            int tempNewRateCounter = tempLastRateCounter + 1;
+            double tempNewRateByUser = ((tempLastRateCounter * tempLastRateByUser) + inputDto.RateByUser) / tempNewRateCounter;
+
+            Movie tempMovie = movieRepository.GetQuery().Where(x => x.Id == inputDto.MovieId).FirstOrDefault();
+            tempMovie.RateByUser = tempNewRateByUser;
+            tempMovie.RateCounter = tempNewRateCounter;
+
+            movieRepository.Update(tempMovie);
+            movieRepository.Save();
+            
         }
     }
 }

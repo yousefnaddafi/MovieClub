@@ -25,5 +25,7 @@
     <Folder Include="Dtos\CountryMovieDtos\" />
     <Folder Include="Dtos\GenreMovieDtos\" />
     <Folder Include="Dtos\UserLoginDtos\" />
+    <Folder Include="ApplicationSerrvices\Commentts\" />
+    <Folder Include="Dtos\RateByUserDtos\" />
   </ItemGroup>
 </Project>
