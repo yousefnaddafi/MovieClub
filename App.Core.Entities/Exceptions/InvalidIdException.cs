@@ -4,7 +4,7 @@ using System.Text;
 
 namespace App.Core.Entities.Exceptions
 {
-    public class InvalidIdException : Exception
+    public class InvalidIdException : ApplicationException
     {
         public InvalidIdException(string msg) : base(msg)
         {

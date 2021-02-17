@@ -35,6 +35,11 @@ namespace WebApi.Middlewares
                         // custom application error
                         response.StatusCode = (int)HttpStatusCode.NotAcceptable;
                         break;
+                    case InvalidIdException e:
+                        // not found error
+                        response.StatusCode = (int)HttpStatusCode.NotAcceptable;
+                        break;
+
                     case KeyNotFoundException e:
                         // not found error
                         response.StatusCode = (int)HttpStatusCode.NotFound;
