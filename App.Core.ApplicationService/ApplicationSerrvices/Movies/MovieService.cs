@@ -91,6 +91,16 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         public List<SearchDetailFilterDto> Search(SearchMovieInputDto inputDto) {
             List<SearchDetailFilterDto> result = new List<SearchDetailFilterDto>();
 
+            if (actorMovieRepository.GetQuery().Include(x => x.Actor).Include(y => y.Movie).Select
+                    (z => z.Actor.ActorName != inputDto.Actor).FirstOrDefault() || 
+                genreMovieRepository.GetQuery().Include(x => x.Genre).Include(y => y.Movie).Select
+                    (z => z.Genre.GenreName != inputDto.Genre).FirstOrDefault() ||
+                movieRepository.GetQuery().Select(x => x.RateByUser != inputDto.RateByUser).FirstOrDefault() ||   
+                movieRepository.GetQuery().Include(x => x.Director).Select
+                    (y => y.Director.DirectorName == inputDto.Director).FirstOrDefault())
+            {
+                throw new InvalidValuesException("Wrong Value");
+            }
             var tempSearchedByRateByUser = movieRepository.GetQuery().Where(x => x.RateByUser == inputDto.RateByUser).ToList();
             foreach (var item in tempSearchedByRateByUser) {
                 var mappedTemp = mapper.Map<SearchDetailFilterDto>(item);
