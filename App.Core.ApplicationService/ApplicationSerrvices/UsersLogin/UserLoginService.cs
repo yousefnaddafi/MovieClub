@@ -2,6 +2,7 @@
 using App.Core.ApplicationService.Dtos.UserDto;
 using App.Core.ApplicationService.Dtos.UserLoginDtos;
 using App.Core.ApplicationService.IRepositories;
+using App.Core.Entities.Exceptions;
 using App.Core.Entities.Model;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -43,12 +44,20 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.UsersLogin
         }
         public int Delete(int id)
         {
+            if (userLoginRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            {
+                throw new InvalidIdException("Wrong Id");
+            }
             userLoginRepository.Delete(id);
             return id;
         }
 
         public async Task<UserLogin> Get(int id)
         {
+            if (userLoginRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            {
+                throw new InvalidIdException("Wrong Id");
+            }
             return await userLoginRepository.Get(id);
         }
         public async Task<List<UserLogin>> GetAll()

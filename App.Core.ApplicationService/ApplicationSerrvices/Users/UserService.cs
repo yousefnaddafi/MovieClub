@@ -1,6 +1,7 @@
 ﻿using App.Core.ApplicationService.Dtos.FavoriteDtos;
 using App.Core.ApplicationService.Dtos.UserDto;
 using App.Core.ApplicationService.IRepositories;
+using App.Core.Entities.Exceptions;
 using App.Core.Entities.Model;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -57,12 +58,20 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 
         public int Delete(int id)
         {
+            if (userRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            {
+                throw new InvalidIdException("Wrong Id");
+            }
             userRepository.Delete(id);
             return id;
         }
 
         public Task<User> Get(int id)
         {
+            if (userRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            {
+                throw new InvalidIdException("Wrong Id");
+            }
             return userRepository.Get(id);
         }
 

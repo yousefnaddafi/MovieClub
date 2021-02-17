@@ -58,6 +58,10 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 
         public int Delete(int id)
         {
+            if (movieRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            {
+                throw new InvalidIdException("Wrong Id");
+            }
             movieRepository.Delete(id);
             return id;
         }

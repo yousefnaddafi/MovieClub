@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using App.Core.ApplicationService.Dtos.DirectorDtos;
+using App.Core.Entities.Exceptions;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
 {
@@ -44,12 +45,20 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
 
         public int Delete(int id)
         {
+            if (directorRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            {
+                throw new InvalidIdException("Wrong Id");
+            }
             directorRepository.Delete(id);
             return id;
         }
 
         public Task<Director> Get(int id)
         {
+            if (directorRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            {
+                throw new InvalidIdException("Wrong Id");
+            }
             return directorRepository.Get(id);
         }
 

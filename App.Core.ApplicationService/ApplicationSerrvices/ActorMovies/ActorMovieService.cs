@@ -1,5 +1,6 @@
 ﻿using App.Core.ApplicationService.Dtos.ActorMovieDtos;
 using App.Core.ApplicationService.IRepositories;
+using App.Core.Entities.Exceptions;
 using App.Core.Entities.Model;
 using AutoMapper;
 using System;
@@ -35,12 +36,20 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.ActorMovies
         }
         public int Delete(int id)
         {
+            if (ActorMovieRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            {
+                throw new InvalidIdException("Wrong Id");
+            }
             ActorMovieRepository.Delete(id);
             return id;
         }
 
         public async Task<ActorMovie> Get(int id)
         {
+            if (ActorMovieRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            {
+                throw new InvalidIdException("Wrong Id");
+            }
             return await ActorMovieRepository.Get(id);
         }
 
