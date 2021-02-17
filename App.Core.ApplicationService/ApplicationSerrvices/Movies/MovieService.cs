@@ -91,10 +91,10 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             List<SearchDetailFilterDto> result = new List<SearchDetailFilterDto>();
 
             if (actorMovieRepository.GetQuery().Include(x => x.Actor).Include(y => y.Movie).Select
-                    (z => z.Actor.ActorName != inputDto.Actor).FirstOrDefault() && 
+                    (z => z.Actor.ActorName != inputDto.Actor).FirstOrDefault() | 
                 genreMovieRepository.GetQuery().Include(x => x.Genre).Include(y => y.Movie).Select
-                    (z => z.Genre.GenreName != inputDto.Genre).FirstOrDefault() &&
-                movieRepository.GetQuery().Select(x => x.RateByUser != inputDto.RateByUser).FirstOrDefault() &&   
+                    (z => z.Genre.GenreName != inputDto.Genre).FirstOrDefault() |
+                movieRepository.GetQuery().Select(x => x.RateByUser != inputDto.RateByUser).FirstOrDefault() |  
                 movieRepository.GetQuery().Include(x => x.Director).Select
                     (y => y.Director.DirectorName != inputDto.Director).FirstOrDefault())
             {
