@@ -97,7 +97,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.UsersLogin
 
         public bool CheckToken(CheckLoginInputDto inputDto)
         {
-            var checkUsername = userRepository.GetQuery().Where(x => x.Email == inputDto.Username);
+            var checkUsername = userRepository.GetQuery().Where(x => x.Email == inputDto.Username).Select(y=> y.Email).ToString();
             if (checkUsername == null) {
                 return false;
             }
