@@ -58,8 +58,6 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Commentts
         }
 
 
-        // new comment
-        public string testtttt { get; set; }
-        public int tsett22221e3121 { get; set; }
+        
     }
 }
