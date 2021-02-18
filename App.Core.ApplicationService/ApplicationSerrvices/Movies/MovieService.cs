@@ -100,31 +100,35 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             {
 
                 var tempSearchedByRateByUser = movieRepository.GetQuery().Where(x => x.RateByUser == inputDto.RateByUser).ToList();
-                foreach (var item in tempSearchedByRateByUser) {
+                foreach (var item in tempSearchedByRateByUser)
+                {
                     var mappedTemp = mapper.Map<SearchDetailFilterDto>(item);
                     result.Add(mappedTemp);
                 }
 
                 var tempSearchedByGenre = genreMovieRepository.GetQuery().Include(x => x.Genre).Include(y => y.Movie)
                         .Where(z => z.Genre.GenreName == inputDto.Genre).ToList();
-                foreach (var item in tempSearchedByGenre) {
+                foreach (var item in tempSearchedByGenre)
+                {
                     var mappedTemp = mapper.Map<SearchDetailFilterDto>(item);
                     result.Add(mappedTemp);
                 }
 
                 var tempSearchedByActor = actorMovieRepository.GetQuery().Include(x => x.Actor).Include(y => y.Movie)
                         .Where(z => z.Actor.ActorName == inputDto.Actor).ToList();
-                foreach (var item in tempSearchedByActor) {
+                foreach (var item in tempSearchedByActor)
+                {
                     var mappedTemp = mapper.Map<SearchDetailFilterDto>(item);
                     result.Add(mappedTemp);
                 }
 
                 return result;
-           else
-                {
-                    throw new InvalidValuesException("Wrong Value");
-                }
             }
+            else
+            {
+                throw new InvalidValuesException("Wrong Value");
+            }
+            
         }
 
         
