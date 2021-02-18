@@ -111,6 +111,7 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.Actors, o => o.MapFrom(z => z.Actor.ActorName))
                 ;
 
+
             CreateMap<UserLoginInputDto, UserLogin>()
                 .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
                 .ForMember(x => x.Token, o => o.MapFrom(z => z.Token))
