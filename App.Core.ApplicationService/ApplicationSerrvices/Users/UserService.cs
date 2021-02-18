@@ -35,7 +35,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 
                 userRepository.Insert(RegisterUser);
                 await userRepository.Save();
-              //  return RegisterUser.Id;
+              
             }
             catch (Exception ex)
             {

@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using App.Core.Entities.Exceptions;
 using App.Core.ApplicationService.Dtos.RateByUserDtos;
-//using App.Core.ApplicationService.Dtos.CommentDtos;
+
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 {
@@ -21,7 +21,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         private readonly IMovieRepository<Movie> movieRepository;
         private readonly IMovieRepository<ActorMovie> actorMovieRepository;
       
-        private readonly IMovieRepository<UserLogin> userRepository;
+        private readonly IMovieRepository<UserLogin> userLoginRepository;
+        private readonly IMovieRepository<User> userRepository;
         private readonly IMapper mapper;
         private readonly IMovieRepository<GenreMovie> genreMovieRepository;
 
@@ -35,7 +36,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             this.actorMovieRepository = _actorMovieRepository;
             this.movieRepository = _movieRepository;
            
-            this.userRepository = _userRepository;
+            this.userLoginRepository = _userRepository;
             this.mapper = _mapper;
             genreMovieRepository = _genreMovieRepository;
         }
@@ -217,6 +218,18 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             movieRepository.Update(tempMovie);
             movieRepository.Save();
             
+        }
+        public List<Movie> GetFavorites(int id)
+        {
+            var Fav = userRepository.GetQuery().FirstOrDefault(z => z.Id == id).Favorites;
+            var FavMovies = new List<Movie>();
+            foreach (var item in Fav)
+            {
+                var FavMovie = genreMovieRepository.GetQuery().Include(z => z.Genre)
+                    .Include(x => x.Movie).FirstOrDefault(z => z.Genre.GenreName == item.GenreTitle).Movie;
+                FavMovies.Add(FavMovie);
+            }
+            return FavMovies;
         }
     }
 }
