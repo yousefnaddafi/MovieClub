@@ -1,9 +1,11 @@
 ﻿using App.Core.ApplicationService.Dtos.GenreDto;
 using App.Core.ApplicationService.IRepositories;
+using App.Core.Entities.Exceptions;
 using App.Core.Entities.Model;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,11 +36,19 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
         }
         public int Delete(int id)
         {
+            if (genreRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            {
+                throw new InvalidIdException("Wrong Id");
+            }
             genreRepository.Delete(id);
             return id;
         }
         public Task<Genre> Get(int id)
         {
+            if (genreRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            {
+                throw new InvalidIdException("Wrong Id");
+            }
             return genreRepository.Get(id);
         }
         public Task<List<Genre>> GetAll()

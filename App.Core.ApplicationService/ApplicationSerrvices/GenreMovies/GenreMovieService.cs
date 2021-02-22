@@ -1,5 +1,6 @@
 ﻿using App.Core.ApplicationService.Dtos.GenreMovieDtos;
 using App.Core.ApplicationService.IRepositories;
+using App.Core.Entities.Exceptions;
 using App.Core.Entities.Model;
 using AutoMapper;
 using System;
@@ -38,12 +39,20 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.GenreMovies
 
         public int Delete(int id)
         {
+            if (genreMovieRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            {
+                throw new InvalidIdException("Wrong Id");
+            }
             genreMovieRepository.Delete(id);
             return id;
         }
 
         public Task<GenreMovie> Get(int id)
         {
+            if (genreMovieRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            {
+                throw new InvalidIdException("Wrong Id");
+            }
             return genreMovieRepository.Get(id);
         }
 

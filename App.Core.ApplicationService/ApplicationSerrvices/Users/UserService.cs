@@ -1,9 +1,13 @@
-﻿using App.Core.ApplicationService.Dtos.UserDto;
+﻿using App.Core.ApplicationService.Dtos.FavoriteDtos;
+using App.Core.ApplicationService.Dtos.UserDto;
 using App.Core.ApplicationService.IRepositories;
+using App.Core.Entities.Exceptions;
 using App.Core.Entities.Model;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,10 +17,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
     {
         private readonly IMapper mapper;
         private readonly IMovieRepository<User> userRepository;
-        
+        private readonly IMovieRepository<Favorite> FavoriteRepository;
 
-        public UserService(IMovieRepository<User> _repository,IMapper mapper)
+
+        public UserService(IMovieRepository<User> _repository,IMovieRepository<Favorite> FavRepository ,IMapper mapper)
         {
+            FavoriteRepository = FavRepository;
             userRepository = _repository;
             this.mapper = mapper;
         }
@@ -29,7 +35,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 
                 userRepository.Insert(RegisterUser);
                 await userRepository.Save();
-              //  return RegisterUser.Id;
+              
             }
             catch (Exception ex)
             {
@@ -52,12 +58,20 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 
         public int Delete(int id)
         {
+            if (userRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            {
+                throw new InvalidIdException("Wrong Id");
+            }
             userRepository.Delete(id);
             return id;
         }
 
         public Task<User> Get(int id)
         {
+            if (userRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            {
+                throw new InvalidIdException("Wrong Id");
+            }
             return userRepository.Get(id);
         }
 
@@ -73,6 +87,18 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
             await userRepository.Save();
         }
 
+        public async Task AddFavorites(FavoriteInputDto inputDto)
+        {
+            foreach(var item in inputDto.Favorites)
+            {
+                var Fav = new Favorite();
+                Fav.GenreTitle = item;
+                Fav.UserId= inputDto.UserId;
+                FavoriteRepository.Insert(Fav);
+                await FavoriteRepository.Save();
+            }
+            
+        }
     }
 }
 

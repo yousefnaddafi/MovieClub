@@ -1,4 +1,4 @@
-﻿using App.Core.ApplicationService.Dtos.LoginDto;
+﻿using App.Core.ApplicationService.Dtos.CommentDtos;
 using App.Core.ApplicationService.Dtos.UserDto;
 using App.Core.ApplicationService.Dtos.UserLoginDtos;
 using App.Core.Entities.Model;
@@ -17,6 +17,6 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.UsersLogin
         Task<UserLogin> Get(int id);
         Task<List<UserLogin>> GetAll();
         Task<UserLoginOutputDto> Login(UserInputDto inputDto);
-        bool CheckToken(UserLoginInputDto inputDto);
+        bool CheckToken(CheckLoginInputDto inputDto);
     }
 }

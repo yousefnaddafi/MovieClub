@@ -1,4 +1,5 @@
-﻿using App.Core.ApplicationService.Dtos.UserDto;
+﻿using App.Core.ApplicationService.Dtos.FavoriteDtos;
+using App.Core.ApplicationService.Dtos.UserDto;
 using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
@@ -15,5 +16,6 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
         Task<User> Get(int id);
         Task<List<User>> GetAll();
         Task Insert(UserInputDto inputDto);
+        Task AddFavorites(FavoriteInputDto inputDto);
     }
 }

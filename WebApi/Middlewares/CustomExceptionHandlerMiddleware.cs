@@ -31,10 +31,15 @@ namespace WebApi.Middlewares
 
                 switch (error)
                 {
-                    case InvalidTitleNameException e:
+                    case InvalidValuesException e:
                         // custom application error
                         response.StatusCode = (int)HttpStatusCode.NotAcceptable;
                         break;
+                    case InvalidIdException e:
+                        // not found error
+                        response.StatusCode = (int)HttpStatusCode.NotAcceptable;
+                        break;
+
                     case KeyNotFoundException e:
                         // not found error
                         response.StatusCode = (int)HttpStatusCode.NotFound;

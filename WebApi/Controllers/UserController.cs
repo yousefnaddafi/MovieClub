@@ -1,6 +1,6 @@
 ﻿using App.Core.ApplicationService.ApplicationSerrvices.Users;
 using App.Core.ApplicationService.ApplicationSerrvices.UsersLogin;
-//using App.Core.ApplicationService.Dtos.LoginDto;
+using App.Core.ApplicationService.Dtos.FavoriteDtos;
 using App.Core.ApplicationService.Dtos.UserDto;
 using App.Core.ApplicationService.Dtos.UserLoginDtos;
 using App.Core.Entities.Model;
@@ -20,6 +20,7 @@ namespace WebApi.Controllers
     {
         private readonly IUserService userService;
         private readonly IUserLoginService userLoginService;
+        
         private readonly IMapper mapper;
 
         public UserController(IUserService _userService, IUserLoginService _userLoginService, IMapper mapper)
@@ -58,6 +59,11 @@ namespace WebApi.Controllers
         public async Task<UserLoginOutputDto> LoginUser(UserInputDto inputDto)
         {
             return await userLoginService.Login(inputDto);
+        }
+        [HttpPost("Favorite")]
+        public async Task AddFavorite(FavoriteInputDto inputDto)
+        {
+              await userService.AddFavorites(inputDto);
         }
 
     }

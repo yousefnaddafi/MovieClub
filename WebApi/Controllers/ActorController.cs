@@ -24,7 +24,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task Create(ActorInputDto inputDto)
+        public async Task  Create(ActorInputDto inputDto)
         {
            await actorService.Create(inputDto);
         }

@@ -1,7 +1,6 @@
-﻿using App.Core.ApplicationService.Dtos.CommentDtos;
-using App.Core.ApplicationService.Dtos.LoginDto;
-using App.Core.ApplicationService.Dtos.MovieDtos;
+﻿using App.Core.ApplicationService.Dtos.MovieDtos;
 using App.Core.ApplicationService.Dtos.ProductDtos;
+using App.Core.ApplicationService.Dtos.RateByUserDtos;
 using App.Core.Entities.Model;
 using System;
 using System.Collections.Generic;
@@ -23,10 +22,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 
         Task<List<MovieRelatedDto>> GetPopular();
         Task<List<MovieRelatedDto>> GetNewComing();
-
+        void RateByUser(RateByUserInputDto inputDto);
 
         Task<List<MovieCompareOutputDto>> Compare(MovieCompareInputDto inputDto);
         List<SearchDetailFilterDto> Search(SearchMovieInputDto inputDto);
         Task<List<MovieOutputDto>> GetHighRate();
+
+        List<Movie> MostVisited();
     }
 }

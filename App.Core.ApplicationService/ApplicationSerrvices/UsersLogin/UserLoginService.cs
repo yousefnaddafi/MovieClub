@@ -1,7 +1,8 @@
-﻿using App.Core.ApplicationService.Dtos.LoginDto;
+﻿using App.Core.ApplicationService.Dtos.CommentDtos;
 using App.Core.ApplicationService.Dtos.UserDto;
 using App.Core.ApplicationService.Dtos.UserLoginDtos;
 using App.Core.ApplicationService.IRepositories;
+using App.Core.Entities.Exceptions;
 using App.Core.Entities.Model;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.UsersLogin
         private readonly IMovieRepository<UserLogin> userLoginRepository;
         private readonly IMovieRepository<User> userRepository;
         private readonly IMapper mapper;
+        private readonly IMovieRepository<Comment> commentRepository;
 
         public UserLoginService(IMovieRepository<UserLogin> _userLoginRepository,
             IMovieRepository<User> _userRepository, IMapper _mapper )
@@ -43,12 +45,20 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.UsersLogin
         }
         public int Delete(int id)
         {
+            if (userLoginRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            {
+                throw new InvalidIdException("Wrong Id");
+            }
             userLoginRepository.Delete(id);
             return id;
         }
 
         public async Task<UserLogin> Get(int id)
         {
+            if (userLoginRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            {
+                throw new InvalidIdException("Wrong Id");
+            }
             return await userLoginRepository.Get(id);
         }
         public async Task<List<UserLogin>> GetAll()
@@ -57,6 +67,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.UsersLogin
         }
         public async Task<UserLoginOutputDto> Login(UserInputDto inputDto)
         {
+            if(userRepository.GetQuery().Select(x => x.Email != inputDto.Email).FirstOrDefault())
+            {
+                throw new InvalidValuesException("Wrong Email");
+            }
+
+
             var getUser =  userRepository.GetQuery().
                 Where(x => x.Email == inputDto.Email && x.Password == inputDto.Password).FirstOrDefault();
 
@@ -79,19 +95,28 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.UsersLogin
             return mappedUserLoginOutput;           
         }
 
-
-        public  bool CheckToken(UserLoginInputDto inputDto)
+        public bool CheckToken(CheckLoginInputDto inputDto)
         {
-            var Exp =userLoginRepository.GetQuery().FirstOrDefault(x => x.Token == inputDto.Token).ExpireMembershipDate;
-            
-            if (Exp > DateTime.UtcNow)
-            {
+            var checkUsername = userRepository.GetQuery().Where(x => x.Email == inputDto.Username).Select(y=> y.Email).ToString();
+            if (checkUsername == null) {
+                return false;
+            }
+
+            var checktoken = userRepository.GetQuery().Where(x => x.Email == inputDto.Username).Select(x => x.UserLogin.Token).ToString();
+            if (checktoken == null) {
+                return false;
+            }
+
+            DateTime checkExpiredDate = userRepository.GetQuery().Where(x => x.Email == inputDto.Username).Select(x => x.UserLogin.ExpireMembershipDate).FirstOrDefault();
+            if (checkExpiredDate < DateTime.UtcNow) {
                 return true;
             }
-            else
-                return false;            
+            else {
+                return false;
+            }
         }
-    }
 
+        
+    }
 }
 
