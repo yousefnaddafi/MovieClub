@@ -5,6 +5,44 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <hr>
+    <h3 class="text-center bg-light">آخرین فیلم های سایت</h3>
+    @for (int i = 0; i <= Model.movieList.Count; i++)
+    {
+
+        <hr>
+        <div class="card w-100 border-0 text-right bg-light">
+            <img class="card-img-top" src="Image/Movie/Horizontal/wonder woman.jpg" style="border-radius: 1rem;" alt="Card image cap">
+            <div class="card-body mt-3">
+                <a href="#" class="card-link">
+                    <h5 class="card-title float-left d-inline"> Title </h5>
+                </a>
+                <a href="#" class="btn btn-warning">ImdbRate:</a>
+                <p class="card-text text-left"> RateByUser:</p>
+                <p class="card-text text-left"> Genre: </p>
+                <p class="card-text text-left"> ProductorYear: </p>
+                <p class="card-text text-left"> Director:</p>
+                <p class="card-text text-left"> Actor: </p>
+                <p class="card-text text-left">
+                    Summery:
+                </p>
+                <a href="#" class="btn btn-primary">ادامه مطلب</a>
+                <a href="#" class="card-link"><i class="far fa-bell"></i></a>
+                <a href="#" class="card-link"><i class="far fa-comment-alt"></i></a>
+                <a href="#" class="card-link"><i class="far fa-heart"></i></a>
+                <a href="#" class="card-link"><i class="far fa-bookmark"></i></a>
+
+            </div>
+        </div>
+    }
+
+    }
+    
+
+
+
+
+    <h1 class="display-4"></h1>
+
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core"></a>.</p>
 </div>

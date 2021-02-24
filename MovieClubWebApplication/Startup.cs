@@ -1,3 +1,4 @@
+using App.Core.ApplicationService.Mapping;
 using App.Infrastucture.EF.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +12,7 @@ using MovieClubWebApplication.Middlewares;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace MovieClubWebApplication
@@ -31,6 +33,7 @@ namespace MovieClubWebApplication
             { o.UseSqlServer(Configuration.GetConnectionString("MovieDbConections")); });
             services.AddDependency();
             services.AddRazorPages();
+            services.AddAutoMapper(Assembly.GetAssembly(typeof(MappingConfiguration)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

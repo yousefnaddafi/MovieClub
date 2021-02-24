@@ -30,7 +30,7 @@ namespace App.Infrastucture.EF.Repositories
 
         public async Task<List<T>> GetAll()
         {
-            return await this.dbContext.Set<T>().ToListAsync();
+            return await  this.dbContext.Set<T>().ToListAsync();
         }
 
         public void Insert(T item)
