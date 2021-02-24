@@ -78,9 +78,19 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             return await movieRepository.Get(id);
         }
 
-        public async Task<List<Movie>> GetAll()
+        public async Task<List<MovieOutputDto>> GetAll()
         {
-            return await movieRepository.GetAll();
+
+          var  Moviesss = await movieRepository.GetAll();
+            List<MovieOutputDto> result = new List<MovieOutputDto>();
+
+            foreach (var item in Moviesss)
+            {
+                var mappedHighRateMovies = mapper.Map<MovieOutputDto>(item);
+                result.Add(mappedHighRateMovies);
+            }
+
+            return result;
         }
 
         public List<Movie> GetQuery()

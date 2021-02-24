@@ -29,13 +29,26 @@ namespace MovieClubWebApplication.Pages
         }
         [BindProperty]
          
-        public List<Movie> movieList { get; set; }
-      
-
-        public async Task OnGet()
+        public List<MovieOutputDto> movieList { get; set; }
+        [BindProperty]
+       public List<SearchDetailFilterDto> searchDetailFilters { get; set; }
+        [BindProperty]
+        public List<GenreInputDtos> genreInputDtos { get; set; }
+        [BindProperty]
+        public List<MovieRelatedDto> movieOutput { get; set; }
+        public List<MovieOutputDto> movieOutputs { get; set; }
+        [BindProperty]
+        public List<Movie> movies { get; set; }
+        public List<MovieOutputDto> movieHigh { get; set; }
+        public async Task OnGet(SearchMovieInputDto input)
         {
             movieList = await _movieService.GetAll();
-          
+            searchDetailFilters = _movieService.Search(input);
+            movieOutput =await _movieService.GetNewComing();
+            movieOutputs = await _movieService.GetHighRate();
+            movies = _movieService.MostVisited();
+            movieHigh = await _movieService.GetHighRate();
+
         }
    
 
