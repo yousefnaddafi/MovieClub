@@ -15,6 +15,7 @@ namespace App.Core.ApplicationService.Dtos.MovieDtos
         public string Summery { get; set; }
         public string ImdbRate { get; set; }
         public float Rate { get; set; }
+        public string Image { get; set; }
         public List<Comment> Comments { get; set; }
         public List<Country> Countries { get; set; }
     }

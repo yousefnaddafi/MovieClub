@@ -8,5 +8,6 @@ namespace App.Core.ApplicationService.Dtos.MovieDtos
         public string Summary { get; set; }
         public string ImdbRate { get; set; }
         public int DirectorId { get; set; }
+        public string Image { get; set; }
     }
 }
