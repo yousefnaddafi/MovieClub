@@ -69,6 +69,11 @@ namespace WebApi.Controllers
         {
             return moviesService.Get(id);
         }
+        [HttpGet("GetAll")]
+        public async Task<List<MovieOutputDto>> GetAll()
+        {
+            return await moviesService.GetAll();
+        }
 
         [HttpPost("Comments")]
         public int CommentByUser([FromHeader] CheckLoginInputDto _checkLoginInputDto, [FromBody] CommentsInputDto _commentInputDto) {

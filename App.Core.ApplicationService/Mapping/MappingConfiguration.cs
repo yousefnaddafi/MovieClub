@@ -83,8 +83,11 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.VisitCount, o => o.MapFrom(z => z.VisitCount))
                 .ForMember(x => x.ImdbRate, o => o.MapFrom(z => z.ImdbRate))
                 .ForMember(x => x.Summery, o => o.MapFrom(z => z.Summery))
-                .ForMember(x => x.DirectorId, o => o.MapFrom(z => z.Director))
+                
                 .ForMember(x => x.RateByUser, o => o.MapFrom(z => z.RateByUser))
+                .ForMember(x => x.Actors, o => o.MapFrom(z => z.ActorMovies.Select(y => y.Actor.ActorName)))
+                .ForMember(x=>x.DirectorName, o=>o.MapFrom(z=>z.Director.DirectorName))
+                .ForMember(x => x.Genre, o => o.MapFrom(z => z.GenreMovies.Select(y => y.Genre.GenreName)))
                 ;
             CreateMap<Movie, SearchDetailFilterDto>()
                 .ForMember(x => x.Title, o => o.MapFrom(z => z.Title))
