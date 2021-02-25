@@ -78,14 +78,24 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             return await movieRepository.Get(id);
         }
 
-        public async Task<List<Movie>> GetAll()
+        public async Task<List<MovieOutputDto>> GetAll()
         {
-            return await movieRepository.GetAll();
+
+          var  Moviesss = await movieRepository.GetAll();
+            List<MovieOutputDto> result = new List<MovieOutputDto>();
+
+            foreach (var item in Moviesss)
+            {
+                var mappedHighRateMovies = mapper.Map<MovieOutputDto>(item);
+                result.Add(mappedHighRateMovies);
+            }
+
+            return result;
         }
 
         public List<Movie> GetQuery()
         {
-            return  movieRepository.GetQuery().ToList();
+            return movieRepository.GetQuery().ToList();
         }
 
         public List<SearchDetailFilterDto> Search(SearchMovieInputDto inputDto) {
@@ -138,11 +148,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         public async Task<List<MovieOutputDto>> GetHighRate()
         {
             var highRateMovies = movieRepository.GetQuery().Where(x => x.RateByUser >= 4)
-                    .OrderByDescending(y=> y.RateByUser).Take(3);
+                    .OrderByDescending(y => y.RateByUser).Take(3);
 
             List<MovieOutputDto> result = new List<MovieOutputDto>();
 
-            foreach (var item in highRateMovies) {
+            foreach (var item in highRateMovies)
+            {
                 var mappedHighRateMovies = mapper.Map<MovieOutputDto>(item);
                 result.Add(mappedHighRateMovies);
             }
@@ -152,7 +163,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 
         public async Task<List<MovieRelatedDto>> GetPopular()
         {
-            var MostPopular = movieRepository.GetQuery().OrderByDescending(z=> z.RateByUser).Take(5);
+            var MostPopular = movieRepository.GetQuery().OrderByDescending(z => z.RateByUser).Take(5);
             var Popular = new List<MovieRelatedDto>();
 
             foreach (var item in MostPopular)
@@ -161,7 +172,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
                 Popular.Add(MappedMovie);
             }
 
-            
+            //await movieRepository.Save();
 
             return Popular;
         }
@@ -176,7 +187,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
                 var MappedMovie = mapper.Map<MovieRelatedDto>(item);
                 Recently.Add(MappedMovie);
             }
-            
+            //await movieRepository.Save();
 
             return Recently;
         }

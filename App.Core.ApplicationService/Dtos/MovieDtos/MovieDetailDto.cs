@@ -13,6 +13,7 @@ namespace App.Core.ApplicationService.Dtos.MovieDtos
         public string Director { get; set; }
         public string ProductorYear { get; set; }
         public string Summery { get; set; }
+        public string Actor { get; set; }
         public string ImdbRate { get; set; }
         public float Rate { get; set; } 
     }
