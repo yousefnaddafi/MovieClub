@@ -231,7 +231,15 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             }
             return FavMovies;
         }
+        public void MAchines()
+        {
+            movieRepository.GetQuery().Select(x => x.Director).GroupBy(z => z.DirectorName);
+        }
+    
     }
+
+    
+
 }
 
 
