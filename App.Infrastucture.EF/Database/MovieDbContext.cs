@@ -32,6 +32,7 @@ namespace App.Infrastucture.EF.Database
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
+            modelbuilder.Entity<GenreMovie>().HasKey(sc => new { sc.GenreId, sc.MovieId });
             modelbuilder.Entity<Actor>(x => x.ToTable("Actor"));
             modelbuilder.Entity<Comment>(x => x.ToTable("Comment"));
             modelbuilder.Entity<Country>(x => x.ToTable("Country"));

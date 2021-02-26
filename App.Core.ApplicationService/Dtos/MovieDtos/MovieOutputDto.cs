@@ -17,7 +17,7 @@ namespace App.Core.ApplicationService.Dtos.MovieDtos
         
         
         public string DirectorName { get; set; }
-        public List<string> Actors { get; set; }
-        public List<string> Genre { get; set; }
+        public string[] Actors { get; set; }
+        public string[] Genre { get; set; }
     }
 }

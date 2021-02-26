@@ -81,7 +81,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         public async Task<List<MovieOutputDto>> GetAll()
         {
 
-          var  Moviesss = await movieRepository.GetAll();
+          var  Moviesss = movieRepository.GetQuery().Include(x=>x.ActorMovies).ThenInclude(z=>z.Actor)
+                .Include(x=>x.GenreMovies).ThenInclude(z=>z.Genre).Include(o=>o.Director).ToList();
             List<MovieOutputDto> result = new List<MovieOutputDto>();
 
             foreach (var item in Moviesss)

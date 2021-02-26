@@ -237,13 +237,13 @@
                 </div>
             </div>
             <hr>
-            @for (int i = 0; i < Model.movieHigh.Count; i++)
+            @foreach (var item in Model.movieHigh)
             {
                 <div class="row mt-3 py-1">
                     <div class="col-4 text-right">
-                        <img class="d-block w-100" src="@Model.movieHigh[i].Image" alt="First slide">
-                        <p class="card-text text-right">@Model.movieHigh[i].Title </p>
-                        <p class="card-text text-right">@Model.movieHigh[i].RateByUser:رای کاربران</p>
+                        <img class="d-block w-100" src="@item.Image" alt="First slide">
+                        <p class="card-text text-right">@item.Title </p>
+                        <p class="card-text text-right">@item.RateByUser:رای کاربران</p>
                     </div>
                 </div>
             }
@@ -301,12 +301,12 @@
                 </div>
             </div>
             <hr>
-            @for (int i = 0; i < Model.movies.Count; i++)
+            @foreach (var item in Model.movies)
             {
                 <div class="row">
                     <div class="col-12">
-                        <img class="d-block w-100" src="@Model.movies[i].Image" alt="First slide">
-                        <p class="card-text text-right"> @Model.movies[i].VisitCount:تعداد بینندگان</p>
+                        <img class="d-block w-100" src="@item.Image" alt="First slide">
+                        <p class="card-text text-right"> @item.VisitCount:تعداد بینندگان</p>
                     </div>
                 </div>
 
@@ -323,12 +323,12 @@
                     </div>
                 </div>
                 <hr>
-                @for (int i = 0; i < Model.movieOutput.Count; i++)
+                @foreach (var item in Model.movieOutput)
                 {
                     <div class="row mt-3 py-1">
                         <div class="col-4 text-right">
-                            <img class="d-block w-100" src="@Model.movieOutput[i].Image" alt="First slide">
-                            <p class="card-text text-center"> @Model.movieOutput[i].Title</p>
+                            <img class="d-block w-100" src="@item.Image" alt="First slide">
+                            <p class="card-text text-center"> @item.Title</p>
                         </div>
                     </div>
                 }
@@ -492,22 +492,30 @@
                         <hr>
                         <h3 class="text-center bg-light">Movies</h3>
                         <hr>
-                        @for (int i = 0; i < 4; i++)
+                        @foreach(var item in Model.movieList)
                         {
                             <div class="card w-100 border-0 bg-light">
-                                <img class="card-img-top" src="@Model.movieList[i].Image" style="border-radius: 1rem;" alt="Card image cap">
+                                <img class="card-img-top" src="@item.Image" style="border-radius: 1rem;" alt="Card image cap">
                                 <div class="card-body mt-3">
                                     <a href="#" class="card-link">
-                                        <h5 class="card-title float-right d-inline"> @Model.movieList[i].Title  </h5>
+                                        <h5 class="card-title float-right d-inline"> @item.Title  </h5>
                                     </a>
-                                    <a href="#" class="btn btn-warning">ImdbRate: @Model.movieList[i].ImdbRate</a>
+                                    <a href="#" class="btn btn-warning">ImdbRate: @item.ImdbRate</a>
                                     <a href="#" class="btn btn-danger">دوبله فارسی</a>
-                                    <p class="card-text text-right">@Model.movieList[i].RateByUser:رای کاربران</p>
-                                    <p class="card-text text-right"> : @Model.movieList[i].Genre :ژانر   </p>
-                                    <p class="card-text text-right"> @Model.movieList[i].ProductYear :محصول سال</p>
-                                    <p class="card-text text-right"> Alex Ranarivelo : کارگردان</p>
-                                    <p class="card-text text-right">Dennis Quaid, Katrina Bowden, Sean Patrick Flanery : بازیگران</p>
-                                    <p class="card-text text-right">  @Model.movieList[i].Summery:خلاصه داستان</p>
+                                    <p class="card-text text-right">@item.RateByUser:رای کاربران</p>
+                                    @foreach (var genre in item.Genre)
+                                    {
+                                        <p class="card-text text-right"> @genre :ژانر   </p>
+                                    }
+
+
+                                    <p class="card-text text-right"> @item.ProductYear :محصول سال</p>
+                                    <p class="card-text text-right"> @item.DirectorName : کارگردان</p>
+                                    @foreach (var actor in item.Actors)
+                                    {
+                                        <p class="card-text text-right"> @actor :بازیگران    </p>
+                                    }
+                                    <p class="card-text text-right">  @item.Summery:خلاصه داستان</p>
 
                                     <a href="#" class="btn btn-primary">ادامه مطلب</a>
                                     <a href="#" class="card-link"><i class="far fa-bell"></i></a>
