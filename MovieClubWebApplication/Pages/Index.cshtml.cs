@@ -16,8 +16,7 @@ namespace MovieClubWebApplication.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        private readonly IMovieService _movieService;
-        private readonly IGenreService _genreService;
+        private readonly IMovieService _movieService;       
 
 
         public IndexModel(ILogger<IndexModel> logger, IMovieService movieService, IGenreService genreService)
