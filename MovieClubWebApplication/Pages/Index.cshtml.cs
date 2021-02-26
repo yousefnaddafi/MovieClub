@@ -40,9 +40,10 @@ namespace MovieClubWebApplication.Pages
         [BindProperty]
         public List<Movie> movies { get; set; }
         public List<MovieOutputDto> movieHigh { get; set; }
-        public async Task OnGet(SearchMovieInputDto input)
+        public async Task OnGet()
         {
             movieList = await _movieService.GetAll();
+            //searchDetailFilters = _movieService.Search(input);
             movieOutput =await _movieService.GetNewComing();
             movieOutputs = await _movieService.GetHighRate();
             movies = _movieService.MostVisited();

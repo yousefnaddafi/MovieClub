@@ -14,7 +14,7 @@ namespace App.Core.ApplicationService.Dtos.MovieDtos
         public int VisitCount { get; set; }
         public double RateByUser { get; set; }
         public string DirectorName { get; set; }
-        public List<string> Actors { get; set; }
-        public List<string> Genre { get; set; }
+        public string[] Actors { get; set; }
+        public string[] Genre { get; set; }
     }
 }

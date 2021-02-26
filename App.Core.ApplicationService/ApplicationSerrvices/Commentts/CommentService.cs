@@ -37,8 +37,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Commentts
             return id;
         }
 
-        public Task<Comment> Get(int id) {
-            return commentRepository.Get(id);
+        public async Task<Comment> Get(int id) {
+            return await commentRepository.Get(id);
         }
 
         public Task<List<Comment>> GetAll() {
