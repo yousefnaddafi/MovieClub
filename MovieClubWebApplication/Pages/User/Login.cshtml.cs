@@ -19,16 +19,27 @@ namespace MovieClubWebApplication.Pages
         }
         [BindProperty]
         public UserInputDto userInput { get; set; }
+        [BindProperty]
+        public int LoginState { get; set; } = 0;
         public async  Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid)
             {
                return Page() ;
             }
-            
-            await _loginService.Login(userInput);
-           
-            return RedirectToPage("../Index");
+            try
+            {
+                await _loginService.Login(userInput);
+                LoginState = 1;
+
+                return RedirectToPage("../Index");
+            }
+            catch
+            {
+                LoginState = -1;
+                ViewData["Error"] = "login failed!";
+                return Page();
+            }
         }
     }
 }
