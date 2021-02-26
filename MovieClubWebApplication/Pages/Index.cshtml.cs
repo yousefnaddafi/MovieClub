@@ -43,7 +43,6 @@ namespace MovieClubWebApplication.Pages
         public async Task OnGet(SearchMovieInputDto input)
         {
             movieList = await _movieService.GetAll();
-            searchDetailFilters = _movieService.Search(input);
             movieOutput =await _movieService.GetNewComing();
             movieOutputs = await _movieService.GetHighRate();
             movies = _movieService.MostVisited();
