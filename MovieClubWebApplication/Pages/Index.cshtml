@@ -259,7 +259,7 @@
                 </div>
             </div>
             <hr>
-            @for (int i = 0; i <= Model.movieOutputs.Count; i++)
+            @for (int i = 0; i < Model.movieOutputs.Count; i++)
             {
                 <div class="row mt-12 py-1">
                     <div class="col-12">
@@ -269,7 +269,7 @@
                             </ol>
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img class="d-block w-100" src="Image/Movie/Horizontal/other_10.png" alt="First slide">
+                                    <img class="d-block w-100" src="@Model.movieOutputs[i].Image" alt="First slide">
                                     
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Lorem ipsum</h5>
