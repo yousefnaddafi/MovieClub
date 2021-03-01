@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using App.Core.ApplicationService.Dtos.DirectorDtos;
 using App.Core.Entities.Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
 {
@@ -15,7 +16,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
     {
         private readonly IMovieRepository<Entities.Model.Directors> directorRepository;
         private readonly IMapper mapper;
-        public DirectorService(IMovieRepository<Entities.Model.Directors> _directorRepository,IMapper mapper)
+        public DirectorService(IMovieRepository<Entities.Model.Directors> _directorRepository, IMapper mapper)
         {
             this.directorRepository = _directorRepository;
             this.mapper = mapper;
@@ -30,7 +31,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
                 await directorRepository.Save();
                 return inputDto.FullName;
             }
-         catch(Exception ex)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -53,27 +54,43 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
             return id;
         }
 
-        public Task<Entities.Model.Directors> Get(int id)
+        public async Task<DirectorInputDto> Get(int id)
         {
             if (directorRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
             {
                 throw new InvalidIdException("Wrong Id");
             }
-            return directorRepository.Get(id);
+            var directorss = directorRepository.GetQuery().FirstOrDefault(x => x.Id == id);
+
+            List<DirectorInputDto> result = new List<DirectorInputDto>();
+
+            var mappedDirectorss = mapper.Map<DirectorInputDto>(directorss);
+            result.Add(mappedDirectorss);
+            return mappedDirectorss;
         }
 
-        public Task<List<Entities.Model.Directors>> GetAll()
+
+        public async Task<List<DirectorInputDto>> GetAll()
         {
-            return directorRepository.GetAll();
-        }
+            var directorrr = directorRepository.GetQuery().Select(x => x.DirectorName).ToList();
+            List<DirectorInputDto> result = new List<DirectorInputDto>();
 
+            foreach (var item in directorrr)
+            {
+                var mappedDirectors = mapper.Map<DirectorInputDto>(item);
+                result.Add(mappedDirectors);
+            }
+
+            return result;
+        }
         public List<Entities.Model.Directors> GetQuery()
         {
             return directorRepository.GetQuery().ToList();
-        }
-       public Task SaveChangesAsync()
+        }        
+        public async Task SaveChangesAsync()
         {
-            return  directorRepository.Save();
+            await directorRepository.Save();
         }
+
     }
 }

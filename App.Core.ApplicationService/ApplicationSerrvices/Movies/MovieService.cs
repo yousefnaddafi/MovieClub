@@ -79,17 +79,17 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         public async Task<List<MovieOutputDto>> GetAll()
         {
 
-          var  Moviesss = movieRepository.GetQuery().Include(x=>x.ActorMovies).ThenInclude(z=>z.Actor)
+          var Moviesss = movieRepository.GetQuery().Include(x=>x.ActorMovies).ThenInclude(z=>z.Actor)
                 .Include(x=>x.GenreMovies).ThenInclude(z=>z.Genre).Include(o=>o.Director).ToList();
-            List<MovieOutputDto> result = new List<MovieOutputDto>();
+             List <MovieOutputDto> result =  new List<MovieOutputDto>();
 
             foreach (var item in Moviesss)
             {
                 var mappedHighRateMovies = mapper.Map<MovieOutputDto>(item);
                 result.Add(mappedHighRateMovies);
             }
-
-            return result;
+            
+            return  result;
         }
 
         public List<Movie> GetQuery()

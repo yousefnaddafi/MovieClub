@@ -6,6 +6,7 @@ namespace App.Core.ApplicationService.Dtos.MovieDtos
 {
     public class MovieOutputDto
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public string ProductYear { get; set; }
         public string Summery { get; set; }

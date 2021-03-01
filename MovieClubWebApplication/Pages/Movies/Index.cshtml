@@ -4,7 +4,7 @@
     ViewData["Title"] = "MovieIndex";
 }
 <h3 class="text-center bg-light">Movies</h3>
-<hr>
+    <hr>
     <div class="card w-100 border-0 bg-light">
         <img class="card-img-top" src="@Model.movieInput.Image" style="border-radius: 1rem;" alt="Card image cap">
         <div class="card-body mt-3">
@@ -16,18 +16,16 @@
             <p class="card-text text-right">@Model.movieInput.RateByUser:رای کاربران</p>
             @foreach (var genre in Model.movieInput.Genre)
             {
-                <p class="card-text text-right"> @genre :ژانر   </p>
+                <p class="card-text text-right"> @genre :ژانر </p>
             }
 
             <p class="card-text text-right"> @Model.movieInput.ProductYear :محصول سال</p>
             <p class="card-text text-right"> @Model.movieInput.DirectorName : کارگردان</p>
             @foreach (var actor in Model.movieInput.Actors)
             {
-                <p class="card-text text-right"> @actor :بازیگران    </p>
+                <p class="card-text text-right"> @actor :بازیگران </p>
             }
             <p class="card-text text-right">  @Model.movieInput.Summery:خلاصه داستان</p>
         </div>
     </div>
-
-
 }

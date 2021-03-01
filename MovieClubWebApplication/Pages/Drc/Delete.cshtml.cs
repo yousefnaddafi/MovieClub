@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using App.Core.ApplicationService.ApplicationSerrvices.Directors;
+using App.Core.ApplicationService.Dtos.DirectorDtos;
+using App.Core.ApplicationService.Dtos.MovieDtos;
 using App.Core.Entities.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -18,7 +20,43 @@ namespace MovieClubWebApplication.Pages.Drc
             _directorService = directService;
         }
         [BindProperty]
-        public int MyProperty { get; set; }
+        public Directors directorDLT { get; set; }
+        public string ErrorMessage { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(int ? id, bool? saveChangesError = false)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            directorDLT=  _directorService.
+
+
+
+                GetQuery().FirstOrDefault(x => x.Id == id);
+
+            if ( directorDLT== null)
+            {
+                return NotFound();
+            }
+
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ErrorMessage = "Delete failed. Try again";
+            }
+
+            return  Page();
+        }
+
+        //public async Task<IActionResult> OnPostAsync(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //}      
 
 
 

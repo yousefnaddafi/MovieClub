@@ -29,7 +29,8 @@ namespace MovieClubWebApplication.Pages.Movies
                 return Page();
             }
 
-             var entry = _movieService.Create(new MovieInputDto());
+             await _movieService.Create(new MovieInputDto());
+            
             return  RedirectToPage("./Index");
         }
 

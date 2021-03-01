@@ -13,10 +13,10 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
         Task<string> Create(DirectorInputDto inputDto);
         Entities.Model.Directors Update(Entities.Model.Directors item);
         int Delete(int id);
-        Task<Entities.Model.Directors> Get(int id);
-        Task<List<Entities.Model.Directors>> GetAll();
+        Task<DirectorInputDto> Get(int id);
+        Task<List<DirectorInputDto>> GetAll();
         List<Entities.Model.Directors> GetQuery();
-        Task<Entities.Model.Directors> SaveChangesAsync();
+        Task SaveChangesAsync();
 
     }
 }
