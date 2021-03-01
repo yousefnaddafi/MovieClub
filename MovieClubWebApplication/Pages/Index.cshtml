@@ -1,8 +1,9 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page"; }
-}
+    ViewData["Title"] = "Home page";
+    }
+
 
 <!--search bar-->
 <section class="search-bar">
@@ -500,32 +501,7 @@
                                     <a href="#" class="card-link">
                                         <h5 class="card-title float-right d-inline"> @item.Title  </h5>
                                     </a>
-                                    <a href="#" class="btn btn-warning">ImdbRate: @item.ImdbRate</a>
-                                    <a href="#" class="btn btn-danger">دوبله فارسی</a>
-                                    <p class="card-text text-right">@item.RateByUser:رای کاربران</p>
-                                    <p class="card-text text-right">
-                                        @foreach (var genre in item.Genre)
-                                        {
 
-                                            @genre
-
-                                        }: ژانر
-                                        </p>
-
-
-                                        <p class="card-text text-right"> @item.ProductYear :محصول سال</p>
-                                        <p class="card-text text-right"> @item.DirectorName : کارگردان</p>
-                                        <p class="card-text text-right">
-
-                                            @foreach (var actor in item.Actors)
-                                            {
-
-                                                @actor 
-                                                
-
-                                            }: بازیگران
-                                        </p>
-                                            <p class="card-text text-right">  @item.Summery:خلاصه داستان</p>
 
                                             <a asp-page="/Index" asp-route-id="@item.Title" class="btn btn-primary">ادامه مطلب</a>
                                             <a href="#" class="card-link"><i class="far fa-bell"></i></a>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace App.Core.Entities.Model
 {
-    public class Director:IHasIdentity
+    public class Directors:IHasIdentity
     {
         public int Id { get; set; }
         public string DirectorName { get; set; }

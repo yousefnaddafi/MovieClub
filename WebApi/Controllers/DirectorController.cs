@@ -28,7 +28,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        public Director Update(Director item)
+        public Directors Update(Directors item)
         {
             this.DirectorService.Update(item);
             return item;
@@ -42,7 +42,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public Task<Director> Get(int id)
+        public Task<Directors> Get(int id)
         {
             return DirectorService.Get(id);
         }

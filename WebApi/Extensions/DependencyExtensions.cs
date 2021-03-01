@@ -35,7 +35,7 @@ namespace WebApi.Extensions
             services.AddScoped<IMovieRepository<Movie>, MovieEfRepository<Movie>>();
             services.AddScoped<IMovieRepository<Actor>, MovieEfRepository<Actor>>();
             services.AddScoped<IMovieRepository<Genre>, MovieEfRepository<Genre>>();
-            services.AddScoped<IMovieRepository<Director>, MovieEfRepository<Director>>();
+            services.AddScoped<IMovieRepository<Directors>, MovieEfRepository<Directors>>();
             services.AddScoped<IMovieRepository<Country>, MovieEfRepository<Country>>();
             services.AddScoped<IMovieRepository<GenreMovie>, MovieEfRepository<GenreMovie>>();
             services.AddScoped<IMovieRepository<ActorMovie>, MovieEfRepository<ActorMovie>>();

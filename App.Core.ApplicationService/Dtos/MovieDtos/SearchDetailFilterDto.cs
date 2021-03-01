@@ -10,7 +10,7 @@ namespace App.Core.ApplicationService.Dtos.MovieDtos
         public string Title { get; set; }
         public string ProductYear { get; set; }
         public double RateByUser { get; set; }
-        public Director Director { get; set; }
+        public Directors Director { get; set; }
         public string Image { get; set; }
         public string[] Actors { get; set; }
         public string[] Genres { get; set; }

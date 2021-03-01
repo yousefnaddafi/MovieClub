@@ -16,7 +16,7 @@ namespace App.Infrastucture.EF.Database
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<GenreMovie> GenreMovies { get; set; }
-        public DbSet<Director> Directors { get; set; }
+        public DbSet<Directors> Directors { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserLogin> UserLogins { get; set; }
@@ -37,7 +37,7 @@ namespace App.Infrastucture.EF.Database
             modelbuilder.Entity<Comment>(x => x.ToTable("Comment"));
             modelbuilder.Entity<Country>(x => x.ToTable("Country"));
             modelbuilder.Entity<CountryMovie>(x => x.ToTable("CountryMovie"));
-            modelbuilder.Entity<Director>(x => x.ToTable("Director"));
+            modelbuilder.Entity<Directors>(x => x.ToTable("Directors"));
             modelbuilder.Entity<Genre>(x => x.ToTable("Genre"));
             modelbuilder.Entity<GenreMovie>(x => x.ToTable("GenreMovie"));
             modelbuilder.Entity<Movie>(x => x.ToTable("Movie"));

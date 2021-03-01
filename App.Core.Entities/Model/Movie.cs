@@ -15,7 +15,7 @@ namespace App.Core.Entities.Model
         public double RateByUser { get; set; }
         public int RateCounter { get; set; }
         public int DirectorId { get; set; }
-        public Director Director { get; set; }
+        public Directors Director { get; set; }
         
         public List<Comment> Comments { get; set; }
         public List<GenreMovie> GenreMovies { get; set; }

@@ -1,4 +1,47 @@
 ﻿@page
 @model MovieClubWebApplication.Pages.Movies.CreatModel
-@{
+@{ViewData["Title"] = "Creat MoviePage";
 }
+<h1>Create</h1>
+
+<h4>Student</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MovieCreation.Title" class="control-label"></label>
+                <input asp-for="MovieCreation.Title" class="form-control" />
+                <span asp-validation-for="MovieCreation.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MovieCreation.Summary" class="control-label"></label>
+                <input asp-for="MovieCreation.Summary" class="form-control" />
+                <span asp-validation-for="MovieCreation.Summary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MovieCreation.ImdbRate" class="control-label"></label>
+                <input asp-for="MovieCreation.ImdbRate" class="form-control" />
+                <span asp-validation-for="MovieCreation.ImdbRate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MovieCreation.ProductYear" class="control-label"></label>
+                <input asp-for="MovieCreation.ProductYear" class="form-control" />
+                <span asp-validation-for="MovieCreation.ProductYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

@@ -13,9 +13,9 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
 {
     public class DirectorService : IDirectorService
     {
-        private readonly IMovieRepository<Director> directorRepository;
+        private readonly IMovieRepository<Entities.Model.Directors> directorRepository;
         private readonly IMapper mapper;
-        public DirectorService(IMovieRepository<Director> _directorRepository,IMapper mapper)
+        public DirectorService(IMovieRepository<Entities.Model.Directors> _directorRepository,IMapper mapper)
         {
             this.directorRepository = _directorRepository;
             this.mapper = mapper;
@@ -25,7 +25,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
         {
             try
             {
-                var director = mapper.Map<Director>(inputDto);
+                var director = mapper.Map<Entities.Model.Directors>(inputDto);
                 directorRepository.Insert(director);
                 await directorRepository.Save();
                 return inputDto.FullName;
@@ -36,7 +36,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
             }
         }
 
-        public Director Update(Director item)
+        public Entities.Model.Directors Update(Entities.Model.Directors item)
         {
             this.directorRepository.Update(item);
             directorRepository.Save();
@@ -53,7 +53,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
             return id;
         }
 
-        public Task<Director> Get(int id)
+        public Task<Entities.Model.Directors> Get(int id)
         {
             if (directorRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
             {
@@ -62,14 +62,18 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
             return directorRepository.Get(id);
         }
 
-        public Task<List<Director>> GetAll()
+        public Task<List<Entities.Model.Directors>> GetAll()
         {
             return directorRepository.GetAll();
         }
 
-        public List<Director> GetQuery()
+        public List<Entities.Model.Directors> GetQuery()
         {
             return directorRepository.GetQuery().ToList();
+        }
+       public Task SaveChangesAsync()
+        {
+            return  directorRepository.Save();
         }
     }
 }

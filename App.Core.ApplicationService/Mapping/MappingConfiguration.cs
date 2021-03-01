@@ -50,7 +50,7 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.ImdbRate, o => o.MapFrom(z => z.ImdbRate))
                 .ForMember(x => x.DirectorId, o => o.MapFrom(z => z.DirectorId));              
             
-            CreateMap<DirectorInputDto,Director>()
+            CreateMap<DirectorInputDto,Directors>()
                 .ForMember(x=>x.DirectorName,o=>o.MapFrom(z=>z.FullName));
 
 
