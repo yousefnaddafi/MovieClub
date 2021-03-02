@@ -11,12 +11,12 @@ namespace MovieClubWebApplication.Pages.Movies
 {
     public class CreateModel : PageModel
     {
-        private  IMovieService _movieService;
+        private readonly IMovieService _movieService;
 
 
      public CreateModel(IMovieService movieService)
         {
-            this._movieService  =   movieService;
+            _movieService  =   movieService;
         }
 
         [BindProperty]

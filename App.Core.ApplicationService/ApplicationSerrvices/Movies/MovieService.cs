@@ -64,6 +64,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
                 throw new InvalidIdException("Wrong Id");
             }
             movieRepository.Delete(id);
+            movieRepository.Save();
             return id;
         }
 

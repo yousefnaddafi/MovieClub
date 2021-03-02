@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using App.Core.ApplicationService.ApplicationSerrvices.Movies;
 using App.Core.ApplicationService.Dtos.MovieDtos;
-using App.Core.Entities.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -23,7 +22,7 @@ namespace MovieClubWebApplication.Pages.Movies
         {
             if (id == null)
             {
-                return  (IActionResult)NotFound();
+                return NotFound();
             }
             movieDelete = await _movieService.Get(id.Value);
             if (movieDelete == null)
@@ -36,13 +35,12 @@ namespace MovieClubWebApplication.Pages.Movies
         {
             if (id == null)
             {
-                return (IActionResult)NotFound();
+                return NotFound();
             }
                       
             if(movieDelete != null)
             {
-                _movieService.Delete(id.Value);
-                 await _movieService.SaveChangesAsync();                
+                _movieService.Delete(id.Value);                              
             }
             return RedirectToPage("/Index");
         }
