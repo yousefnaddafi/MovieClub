@@ -140,10 +140,6 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             }
             
         }
-
-        
-
-
         public async Task<List<MovieOutputDto>> GetHighRate()
         {
             var highRateMovies = movieRepository.GetQuery().Where(x => x.RateByUser >= 4)
@@ -245,7 +241,11 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         {
             movieRepository.GetQuery().Select(x => x.Director).GroupBy(z => z.DirectorName);
         }
-    
+
+        public async Task SaveChangesAsync()
+        {
+            await movieRepository.Save();
+        }
     }
 
     
