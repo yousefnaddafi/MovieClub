@@ -1,0 +1,28 @@
+﻿@page
+@model MovieClubWebApplication.Pages.ActorRazor.DeleteModel
+@{
+    ViewData["Title"] = "Delete Actor";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure ?</h3>
+<p>NOTE: you cant access tio this after deleting.</p>
+<div>
+    <h4>Existing List</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.actorDLT.ActorName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.actorDLT.ActorName)
+        </dd>
+    </dl>
+
+    <form method="post">
+        <input type="hidden" asp-for="actorDLT.Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">All Lists</a>
+    </form>
+</div>

@@ -9,12 +9,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MovieClubWebApplication.Pages.Movies
 {
-    public class CreatModel : PageModel
+    public class CreateModel : PageModel
     {
         private readonly IMovieService _movieService;
 
 
-     public CreatModel(IMovieService movieService)
+     public CreateModel(IMovieService movieService)
         {
             _movieService  =   movieService;
         }

@@ -13,6 +13,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
         Genre Update(Genre item);
         int Delete(int id);
         Task<Genre> Get(int id);
-        Task<List<Genre>> GetAll();
+        Task<List<GenreInputDtos>> GetAll();
+        Task SaveChangesAsync();
+        List<Genre> GetQuery();
     }
 }

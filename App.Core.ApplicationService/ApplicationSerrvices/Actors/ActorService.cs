@@ -58,13 +58,27 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
             return await actorRepository.Get(id);
         }
 
-        public async Task<List<Actor>> GetAll()
+        public async Task<List<ActorInputDto>> GetAll()
         {
-            return await actorRepository.GetAll();
+            var actor = actorRepository.GetQuery().Select(x => x.ActorName).ToList();
+            List<ActorInputDto> result = new List<ActorInputDto>();
+
+            foreach (var item in actor)
+            {
+                var mappedDirectors = mapper.Map<ActorInputDto>(item);
+                result.Add(mappedDirectors);
+            }
+
+            return  result;
         }
 
         public List<Actor> GetQuery() {
             return actorRepository.GetQuery().ToList();
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await actorRepository.Save();
         }
     }
 }

@@ -51,9 +51,26 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
             }
             return genreRepository.Get(id);
         }
-        public Task<List<Genre>> GetAll()
+        public async Task<List<GenreInputDtos>> GetAll()
         {
-            return genreRepository.GetAll();
+            var genre = genreRepository.GetQuery().Select(x => x.GenreName).ToList();
+            List<GenreInputDtos> result = new List<GenreInputDtos>();
+
+            foreach (var item in genre)
+            {
+                var mappedDirectors = mapper.Map<GenreInputDtos>(item);
+                result.Add(mappedDirectors);
+            }
+
+            return result;
+        }
+        public async Task SaveChangesAsync()
+        {
+            await genreRepository.Save();
+        }
+        public List<Genre> GetQuery()
+        {
+            return genreRepository.GetQuery().ToList();
         }
     }
 }
