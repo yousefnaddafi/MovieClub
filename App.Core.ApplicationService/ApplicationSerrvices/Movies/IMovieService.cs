@@ -18,16 +18,13 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         Task<MovieOutputDto> Get(int id);
         Task<List<MovieOutputDto>> GetAll();
         List<Movie> GetQuery();
-
-
         Task<List<MovieRelatedDto>> GetPopular();
         Task<List<MovieRelatedDto>> GetNewComing();
         void RateByUser(RateByUserInputDto inputDto);
-
         Task<List<MovieCompareOutputDto>> Compare(MovieCompareInputDto inputDto);
         List<SearchDetailFilterDto> Search(SearchMovieInputDto inputDto);
         Task<List<MovieOutputDto>> GetHighRate();
-
+        Task SaveChangesAsync();
         List<Movie> MostVisited();
     }
 }

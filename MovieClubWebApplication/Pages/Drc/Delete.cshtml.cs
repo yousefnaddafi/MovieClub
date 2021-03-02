@@ -20,9 +20,8 @@ namespace MovieClubWebApplication.Pages.Drc
             _directorService = directService;
         }
         [BindProperty]
-        public Directors directorDLT { get; set; }
+        public List<DirectorInputDto> directorDLT { get; set; }
         public string ErrorMessage { get; set; }
-
         public async Task<IActionResult> OnGetAsync(int ? id, bool? saveChangesError = false)
         {
             if (id == null)
@@ -30,11 +29,7 @@ namespace MovieClubWebApplication.Pages.Drc
                 return NotFound();
             }
 
-            directorDLT=  _directorService.
-
-
-
-                GetQuery().FirstOrDefault(x => x.Id == id);
+            directorDLT = await _directorService.GetAll();
 
             if ( directorDLT== null)
             {
@@ -45,21 +40,23 @@ namespace MovieClubWebApplication.Pages.Drc
             {
                 ErrorMessage = "Delete failed. Try again";
             }
-
             return  Page();
         }
 
-        //public async Task<IActionResult> OnPostAsync(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        public async Task<IActionResult> OnPostAsync(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var m = _directorService.GetQuery().Find(x => x.Id == id);
 
-        //}      
-
-
-
-
+            if (m != null)
+            {
+                _directorService.GetQuery().Remove(m);
+                await _directorService.SaveChangesAsync();
+            }
+            return RedirectToPage("./Index");
+        }      
     }
 }
