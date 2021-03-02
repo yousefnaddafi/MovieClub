@@ -62,18 +62,21 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <form>
+                        <form method="post">
                             <div class="form-group">
-                                <input type="email" class="form-control text-center" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ایمیل خود را وارد کنید">
+                                <input asp-for="userInput.Email" type="email" class="form-control text-center" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ایمیل خود را وارد کنید">
+                                <span asp-validation-for="userInput.Email" class="text-danger"></span>
                             </div>
                             <div class="form-group mt-4">
-                                <input type="password" class="form-control text-center" id="exampleInputPassword1" placeholder="رمز خود را وارد کنید">
+                                <input asp-for="userInput.Password" type="password" class="form-control text-center" id="exampleInputPassword1" placeholder="رمز خود را وارد کنید">
+                                <span asp-validation-for="userInput.Password" class="text-danger"></span>
                             </div>
                             <div class="form-group mt-4">
                                 <input type="password" class="form-control text-center" id="exampleInputPassword1" placeholder="دوباره رمز را وارد کنید">
                             </div>
                             <div class="form-group mt-5">
                                 <button type="submit" class="btn btn-primary form-control d-block mx-auto">ثبت نام</button>
+                                <!--if-->
                             </div>
                         </form>
                     </div>
