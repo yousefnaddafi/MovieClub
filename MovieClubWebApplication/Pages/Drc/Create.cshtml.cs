@@ -29,11 +29,8 @@ namespace MovieClubWebApplication.Pages.Director
                 return Page();
             }
 
-            await _directorService.Create(new DirectorInputDto());
-            
-            await _directorService.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+            await _directorService.Create(DirectorCreation);
+            return RedirectToPage("/Index");
         }
     }
 }

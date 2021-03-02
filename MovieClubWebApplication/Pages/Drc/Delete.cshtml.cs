@@ -20,16 +20,16 @@ namespace MovieClubWebApplication.Pages.Drc
             _directorService = directService;
         }
         [BindProperty]
-        public Directors directorDLT { get; set; }
+        public DirectorInputDto directorDLT { get; set; }
         public string ErrorMessage { get; set; }
-        public async Task<IActionResult> OnGetAsync(int ? id,int Id, bool? saveChangesError = false)
+        public async Task<IActionResult> OnGetAsync(int ? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            directorDLT = _directorService.GetQuery().FirstOrDefault(x => x.Id == id);
+            await _directorService.Get(id.Value);
 
             if ( directorDLT== null)
             {
@@ -49,14 +49,12 @@ namespace MovieClubWebApplication.Pages.Drc
             {
                 return NotFound();
             }
-             directorDLT = _directorService.GetQuery().Find(x => x.Id == id);
-
+          
             if (directorDLT != null)
             {
-                _directorService.GetQuery().Remove(directorDLT);
-                await _directorService.SaveChangesAsync();
+                _directorService.Delete(id.Value);
             }
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Index");
         }      
     }
 }

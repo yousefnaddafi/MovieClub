@@ -18,7 +18,7 @@ namespace MovieClubWebApplication.Pages.Movies
             _movieService= movieService;
         }
         [BindProperty]
-        public List<MovieOutputDto> moviesEdit { get; set; }
+        public MovieOutputDto moviesEdit { get; set; }
         public async Task<IAsyncResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -26,7 +26,7 @@ namespace MovieClubWebApplication.Pages.Movies
                 return (IAsyncResult)NotFound();
             }
 
-            moviesEdit =await _movieService.GetAll();
+            moviesEdit =await _movieService.Get(id.Value);
 
             if (moviesEdit == null)
             {
@@ -34,7 +34,6 @@ namespace MovieClubWebApplication.Pages.Movies
             }
             return (IAsyncResult)Page();
         }
-
         public async Task<IActionResult> OnPostAsync(MovieInputDto moviess)
         {
             var movieToEdit = _movieService.Update(moviess);
@@ -43,14 +42,9 @@ namespace MovieClubWebApplication.Pages.Movies
             {
                 return NotFound();
             }
-
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Index");
             }
-
-        private bool MovieListExists(int id)
-        {
-            return _movieService.GetQuery().Any(e => e.Id == id);
-        }
+       
     }
     
 }

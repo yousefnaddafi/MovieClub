@@ -18,14 +18,14 @@ namespace MovieClubWebApplication.Pages.Movies
             _movieService = movieService;
         }
         [BindProperty]
-        public List<MovieOutputDto> movieDelete { get; set; }
+        public MovieOutputDto movieDelete { get; set; }
         public async Task<IActionResult> OnGetAsync(int ? id)
         {
             if (id == null)
             {
                 return  (IActionResult)NotFound();
             }
-            movieDelete = await _movieService.GetAll();
+            movieDelete = await _movieService.Get(id.Value);
             if (movieDelete == null)
             {
                 return NotFound();
@@ -38,14 +38,13 @@ namespace MovieClubWebApplication.Pages.Movies
             {
                 return (IActionResult)NotFound();
             }
-           var m=_movieService.GetQuery().Find(x => x.Id == id);
-            
-            if(m != null)
+                      
+            if(movieDelete != null)
             {
-                _movieService.GetQuery().Remove(m);
+                _movieService.Delete(id.Value);
                  await _movieService.SaveChangesAsync();                
             }
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Index");
         }
     }
    

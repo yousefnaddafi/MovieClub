@@ -71,7 +71,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         {
             var Mov = movieRepository.GetQuery().Include(x => x.ActorMovies).ThenInclude(z => z.Actor)
                 .Include(x => x.GenreMovies).ThenInclude(z => z.Genre).Include(o => o.Director).FirstOrDefault(x=>x.Id == id);
-            movieRepository.GetQuery().FirstOrDefault(x => x.Id == id).VisitCount += 1;
+            movieRepository.GetQuery().FirstOrDefault(x => x.Id==id).VisitCount += 1;
             await movieRepository.Save();
             return  mapper.Map<MovieOutputDto>(Mov);
         }

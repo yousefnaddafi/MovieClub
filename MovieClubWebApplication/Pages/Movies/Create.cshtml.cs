@@ -11,12 +11,12 @@ namespace MovieClubWebApplication.Pages.Movies
 {
     public class CreateModel : PageModel
     {
-        private readonly IMovieService _movieService;
+        private  IMovieService _movieService;
 
 
      public CreateModel(IMovieService movieService)
         {
-            _movieService  =   movieService;
+            this._movieService  =   movieService;
         }
 
         [BindProperty]
@@ -29,9 +29,9 @@ namespace MovieClubWebApplication.Pages.Movies
                 return Page();
             }
 
-             await _movieService.Create(new MovieInputDto());
+             await _movieService.Create(MovieCreation);
             
-            return  RedirectToPage("./Index");
+            return  RedirectToPage("/Index");
         }
 
     }

@@ -50,7 +50,7 @@ namespace MovieClubWebApplication.Pages.Drc
                 s => s.DirectorName))
             {
                 
-                return RedirectToPage("./Index");
+                return RedirectToPage("/Index");
             }
 
             return Page();

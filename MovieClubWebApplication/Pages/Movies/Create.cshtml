@@ -4,7 +4,7 @@
 }
 <h1>Create</h1>
 
-<h4>Student</h4>
+<h4>New Movie</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -30,6 +30,27 @@
                 <input asp-for="MovieCreation.ProductYear" class="form-control" />
                 <span asp-validation-for="MovieCreation.ProductYear" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="MovieCreation.DirectorId" class="control-label"></label>
+                <input asp-for="MovieCreation.DirectorId" class="form-control" />
+                <span asp-validation-for="MovieCreation.DirectorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MovieCreation.RateCounter" class="control-label"></label>
+                <input asp-for="MovieCreation.RateCounter" class="form-control" />
+                <span asp-validation-for="MovieCreation.RateCounter" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MovieCreation.RateByUser" class="control-label"></label>
+                <input asp-for="MovieCreation.RateByUser" class="form-control" />
+                <span asp-validation-for="MovieCreation.RateByUser" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MovieCreation.VisitCount" class="control-label"></label>
+                <input asp-for="MovieCreation.VisitCount" class="form-control" />
+                <span asp-validation-for="MovieCreation.VisitCount" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
