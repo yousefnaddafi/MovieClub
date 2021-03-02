@@ -17,10 +17,13 @@ namespace MovieClubWebApplication.Pages
         {
             _loginService = userLoginService;
         }
+
         [BindProperty]
         public UserInputDto userInput { get; set; }
+
         [BindProperty]
         public int LoginState { get; set; } = 0;
+
         public async  Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid)
