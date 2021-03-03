@@ -11,7 +11,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
     public interface IUserService
     {
         Task Create(UserInputDto inputDto);
-        User Update(UserInputDto item);
+        User Update(UserUpdateDto item);
         int Delete(int id);
         Task<User> Get(int id);
         Task<List<User>> GetAll();

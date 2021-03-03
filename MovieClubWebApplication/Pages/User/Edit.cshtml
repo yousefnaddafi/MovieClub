@@ -21,16 +21,21 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="userInputDto.Email" class="control-label"></label>
-                <input asp-for="userInputDto.Email" class="form-control" />
-                <span asp-validation-for="userInputDto.Email" class="text-danger"></span>
+                <label asp-for="inputDto.Id" class="control-label"></label>
+                <input asp-for="inputDto.Id" class="form-control" />
+                <span asp-validation-for="inputDto.Id" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="userInputDto.Password" class="control-label"></label>
-                <input asp-for="userInputDto.Password" class="form-control" />
-                <span asp-validation-for="userInputDto.Password" class="text-danger"></span>
+                <label asp-for="inputDto.Email" class="control-label"></label>
+                <input asp-for="inputDto.Email" class="form-control" />
+                <span asp-validation-for="inputDto.Email" class="text-danger"></span>
             </div>
-            
+            <div class="form-group">
+                <label asp-for="inputDto.Password" class="control-label"></label>
+                <input asp-for="inputDto.Password" class="form-control" />
+                <span asp-validation-for="inputDto.Password" class="text-danger"></span>
+            </div>
+
 
 
             <div class="form-group">

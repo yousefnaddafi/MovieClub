@@ -45,13 +45,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 
         }
 
-        public User Update(UserInputDto inputDto)
+        public User Update(UserUpdateDto inputDto)
         {
 
             var RegisterUser = mapper.Map<User>(inputDto);
 
-
-            this.userRepository.Update(RegisterUser);
+            userRepository.Update(RegisterUser);
             userRepository.Save();
             return RegisterUser;
         }

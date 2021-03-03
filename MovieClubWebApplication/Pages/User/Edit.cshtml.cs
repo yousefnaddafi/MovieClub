@@ -19,7 +19,7 @@ namespace MovieClubWebApplication.Pages.User
         }
 
         [BindProperty]
-        public UserInputDto userInputDto { get; set; }
+        public UserUpdateDto inputDto { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -29,7 +29,7 @@ namespace MovieClubWebApplication.Pages.User
                 return Page();
             }
 
-            userService.Update(userInputDto);
+            userService.Update(inputDto);
 
             return RedirectToPage("../User/Index");
         }
