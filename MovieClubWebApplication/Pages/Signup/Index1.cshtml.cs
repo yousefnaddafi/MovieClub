@@ -30,10 +30,5 @@ namespace MovieClubWebApplication.Pages.Signup
 
             return RedirectToPage("../User/Index");
         }
-
-
-        //public void OnGet()
-        //{
-        //}
     }
 }
