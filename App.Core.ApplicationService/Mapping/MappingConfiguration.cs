@@ -8,6 +8,7 @@ using App.Core.ApplicationService.Dtos.GenreDto;
 using App.Core.ApplicationService.Dtos.MovieDtos;
 using App.Core.ApplicationService.Dtos.UserDto;
 using App.Core.ApplicationService.Dtos.UserLoginDtos;
+using App.Core.ApplicationService.Dtos.UserDto;
 using App.Core.Entities.Model;
 using AutoMapper;
 using System;
@@ -30,7 +31,19 @@ namespace App.Core.ApplicationService.Mapping
             CreateMap<UserInputDto, User>()
                 .ForMember(x => x.Email, o => o.MapFrom(z => z.Email))
                 .ForMember(x => x.Password, o => o.MapFrom(z => z.Password))
-                ;           
+                ;
+
+            CreateMap<User, UserOutputDto>()
+                .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
+                .ForMember(x => x.Email, o => o.MapFrom(z => z.Email))
+                ;
+
+
+            CreateMap<UserUpdateDto, User>()
+                .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
+                .ForMember(x => x.Email, o => o.MapFrom(z => z.Email))
+                .ForMember(x => x.Password, o => o.MapFrom(z => z.Password))
+                ;
                       
             CreateMap<Movie, MovieRelatedDto>()
                 .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))

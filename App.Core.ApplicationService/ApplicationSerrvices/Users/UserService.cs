@@ -45,20 +45,20 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 
         }
 
-        public User Update(UserInputDto inputDto)
+        public User Update(UserUpdateDto inputDto)
         {
 
             var RegisterUser = mapper.Map<User>(inputDto);
 
-
-            this.userRepository.Update(RegisterUser);
+            userRepository.Update(RegisterUser);
             userRepository.Save();
             return RegisterUser;
         }
 
         public int Delete(int id)
         {
-            if (userRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            var item = userRepository.GetQuery().Where(x => x.Id == id).FirstOrDefault();
+            if (item == null)
             {
                 throw new InvalidIdException("Wrong Id");
             }
