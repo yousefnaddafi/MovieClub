@@ -1,0 +1,25 @@
+﻿@page
+@model MovieClubWebApplication.Pages.ActorRazor.DetailModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Existing List</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.actorDetail.ActorName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.actorDetail.ActorName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.actorDetail.Id">Edit this List</a>
+    <a asp-page="./Index">All Lists</a>|
+    <a href="/LearningResources/@Model.actorDetail.Id">Resources in this List</a>
+</div>

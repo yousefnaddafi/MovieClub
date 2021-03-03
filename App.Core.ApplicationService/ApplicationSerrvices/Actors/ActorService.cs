@@ -49,13 +49,19 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
             return id;
         }
 
-        public async Task<Actor> Get(int id)
+        public async Task<ActorInputDto> Get(int id)
         {
             if (actorRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
             {
                 throw new InvalidIdException("Wrong Id");
             }
-            return await actorRepository.Get(id);
+            var actors = actorRepository.GetQuery().FirstOrDefault(x => x.Id == id);
+
+            List<ActorInputDto> result = new List<ActorInputDto>();
+
+            var mappedActors = mapper.Map<ActorInputDto>(actors);
+            result.Add(mappedActors);
+            return mappedActors;
         }
 
         public async Task<List<ActorInputDto>> GetAll()
