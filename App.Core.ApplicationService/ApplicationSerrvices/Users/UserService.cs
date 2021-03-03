@@ -58,7 +58,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 
         public int Delete(int id)
         {
-            if (userRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            var item = userRepository.GetQuery().Where(x => x.Id == id).FirstOrDefault();
+            if (item == null)
             {
                 throw new InvalidIdException("Wrong Id");
             }

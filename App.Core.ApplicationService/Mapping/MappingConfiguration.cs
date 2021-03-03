@@ -30,7 +30,12 @@ namespace App.Core.ApplicationService.Mapping
             CreateMap<UserInputDto, User>()
                 .ForMember(x => x.Email, o => o.MapFrom(z => z.Email))
                 .ForMember(x => x.Password, o => o.MapFrom(z => z.Password))
-                ;           
+                ;
+
+            CreateMap<User, UserOutputDto>()
+                .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
+                .ForMember(x => x.Email, o => o.MapFrom(z => z.Email))
+                ;
                       
             CreateMap<Movie, MovieRelatedDto>()
                 .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))

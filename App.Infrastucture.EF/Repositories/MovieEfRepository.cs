@@ -17,7 +17,7 @@ namespace App.Infrastucture.EF.Repositories
             this.dbContext = dbContext;
         }
 
-        public  async Task Delete(int id)
+        public async Task Delete(int id)
         {
             var item =await this.dbContext.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
              this.dbContext.Remove(item);
@@ -36,7 +36,6 @@ namespace App.Infrastucture.EF.Repositories
         public void Insert(T item)
         {
             this.dbContext.Add<T>(item);
-
         }
 
         public async Task Save()
