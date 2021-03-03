@@ -1,33 +1,63 @@
 ﻿@page
 @model MovieClubWebApplication.Pages.Movies.EditModel
 @{
-    ViewData["Title"] = "Edit"; 
-  }
-
+    ViewData["Title"] = "Edit";
+}
 <h1>Edit</h1>
 
 <h4>Existing List</h4>
 <hr />
+<dl class="row">
+    <dt class="col-sm-2">
+
+    </dt>
+    <dd class="col-sm-10">
+
+    </dd>
+</dl>
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="moviesEdit.Id" />
+            
             <div class="form-group">
-                <label asp-for="moviesEdit.Title" class="control-label"></label>
-                <input asp-for="moviesEdit.Title" class="form-control" />
-                <span asp-validation-for="moviesEdit.Title" class="text-danger"></span>
+                <label asp-for="movies.Title" class="control-label"></label>
+                <input asp-for="movies.Title" class="form-control" />
+                <span asp-validation-for="movies.Title" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="movies.Summary" class="control-label"></label>
+                <input asp-for="movies.Summary" class="form-control" />
+                <span asp-validation-for="movies.Summary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="movies.ImdbRate" class="control-label"></label>
+                <input asp-for="movies.ImdbRate" class="form-control" />
+                <span asp-validation-for="movies.ImdbRate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="movies.ProductYear" class="control-label"></label>
+                <input asp-for="movies.ProductYear" class="form-control" />
+                <span asp-validation-for="movies.ProductYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="movies.DirectorId" class="control-label"></label>
+                <input asp-for="movies.DirectorId" class="form-control" />
+                <span asp-validation-for="movies.DirectorId" class="text-danger"></span>
+            </div>
+
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
+          <div class="form-group mt-5">
+                    <button type="submit">Edit</button>
+           </div>
 </div>
 
-    <div class="form-group mt-5">
-        <button type="submit">Edit</button>
-    </div>
+  
 
 
 

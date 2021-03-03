@@ -49,12 +49,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             return tempMovie.Id;
         }
 
-        public Movie Update(MovieInputDto inputDto)
+        public async Task<string> Update(MovieInputDto inputDto)
         {
             var tempMovie = mapper.Map<Movie>(inputDto);
             movieRepository.Update(tempMovie);
-            movieRepository.Save();
-            return tempMovie;
+           await movieRepository.Save();
+            return $"{inputDto.Title} was Upadated";
         }
 
         public int Delete(int id)

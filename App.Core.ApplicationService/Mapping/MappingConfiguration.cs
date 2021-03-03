@@ -47,7 +47,12 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.ProductYear, o => o.MapFrom(z => z.ProductYear))
                 .ForMember(x => x.Summery, o => o.MapFrom(z => z.Summary))
                 .ForMember(x => x.ImdbRate, o => o.MapFrom(z => z.ImdbRate))
-                .ForMember(x => x.DirectorId, o => o.MapFrom(z => z.Director));              
+                .ForMember(x => x.DirectorId, o => o.MapFrom(z => z.DirectorId))
+                .ForMember(x => x.Image, o => o.MapFrom(z => z.Image))
+                .ForMember(x => x.VisitCount, o => o.MapFrom(z => z.VisitCount))
+                .ForMember(x => x.RateByUser, o => o.MapFrom(z => z.RateByUser))
+
+                ;              
             
             CreateMap<DirectorInputDto,Directors>()
                 .ForMember(x=>x.DirectorName,o=>o.MapFrom(z=>z.FullName));
@@ -83,8 +88,7 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.ProductYear, o => o.MapFrom(z => z.ProductYear))
                 .ForMember(x => x.VisitCount, o => o.MapFrom(z => z.VisitCount))
                 .ForMember(x => x.ImdbRate, o => o.MapFrom(z => z.ImdbRate))
-                .ForMember(x => x.Summery, o => o.MapFrom(z => z.Summery))
-                
+                .ForMember(x => x.Summery, o => o.MapFrom(z => z.Summery))                
                 .ForMember(x => x.RateByUser, o => o.MapFrom(z => z.RateByUser))
                 .ForMember(x => x.Actors, o => o.MapFrom(z => z.ActorMovies.Select(y => y.Actor.ActorName)))
                 .ForMember(x=>x.DirectorName, o=>o.MapFrom(z=>z.Director.DirectorName))

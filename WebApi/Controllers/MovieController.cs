@@ -51,10 +51,10 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        public Movie Update(MovieInputDto inputDto)
+        public async Task<Movie> Update(MovieInputDto inputDto)
         {
-            moviesService.Update(inputDto);
-            return mapper.Map<Movie>(inputDto); ;
+          await  moviesService.Update(inputDto);
+            return  mapper.Map<Movie>(inputDto); ;
         }
 
         [HttpDelete]
