@@ -1,0 +1,36 @@
+﻿@page
+@model MovieClubWebApplication.Pages.CommentRazor.DetailModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>User Detail</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.commentOutputDto.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.commentOutputDto.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.commentOutputDto.MovieId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.commentOutputDto.MovieId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.commentOutputDto.Text)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.commentOutputDto.Text)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.commentOutputDto.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

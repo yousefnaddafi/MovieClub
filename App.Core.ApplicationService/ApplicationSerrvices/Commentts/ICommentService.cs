@@ -9,7 +9,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Commentts
     public interface ICommentService
     {
         Task<string> Create(CommentsInputDto inputDto);
-        Comment Update(Comment item);
+        Comment Update(CommentsUpdateDto item);
         int Delete(int id);
         Task<Comment> Get(int id);
         Task<List<Comment>> GetAll();

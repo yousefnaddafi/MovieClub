@@ -26,10 +26,11 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Commentts
             return temp.Text;
         }
 
-        public Comment Update(Comment item) {
-            commentRepository.Update(item);
+        public Comment Update(CommentsUpdateDto commentsUpdateDto) {
+            var tempComment = mapper.Map<Comment>(commentsUpdateDto);
+            commentRepository.Update(tempComment);
             commentRepository.Save();
-            return item;
+            return tempComment;
         }
 
         public int Delete(int id) {

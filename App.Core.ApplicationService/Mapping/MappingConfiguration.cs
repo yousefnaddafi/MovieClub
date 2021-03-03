@@ -177,6 +177,12 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.MovieId, o => o.MapFrom(z => z.MovieId))
                 .ForMember(x => x.Text, o => o.MapFrom(z => z.Text))
                 ;
+
+            CreateMap<CommentsUpdateDto, Comment>()
+                .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
+                .ForMember(x => x.MovieId, o => o.MapFrom(z => z.MovieId))
+                .ForMember(x => x.Text, o => o.MapFrom(z => z.MovieId))
+                ;
         }
     }
 }
