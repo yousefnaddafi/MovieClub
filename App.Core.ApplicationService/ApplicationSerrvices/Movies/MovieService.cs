@@ -49,7 +49,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             return tempMovie.Id;
         }
 
-        public async Task<string> Update(MovieInputDto inputDto)
+        public async Task<string> Update(MovieInputUpdateDto inputDto)
         {
             var tempMovie = mapper.Map<Movie>(inputDto);
             movieRepository.Update(tempMovie);

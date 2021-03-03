@@ -28,9 +28,9 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        public Genre Update(Genre item)
+        public async Task<GenreInputDtos> Update(GenreInputDtos item)
         {
-            this.GenreService.Update(item);
+            await GenreService.Update(item);
             return item;
         }
 

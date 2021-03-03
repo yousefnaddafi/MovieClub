@@ -16,43 +16,22 @@ namespace MovieClubWebApplication.Pages.GenreRazor
         {
             _genreService = genreService;
         }
+        
         [BindProperty]
-        public Genre genreDLT { get; set; }
-        public string ErrorMessage { get; set; }
+        public int ganreId { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id, bool? saveChangesError = false)
+        public async Task<IActionResult> OnPost(int id)
         {
-            if (id == null)
+
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                return Page();
             }
 
-            await _genreService.Get(id.Value);
+            _genreService.Delete(id);
 
-            if (genreDLT == null)
-            {
-                return NotFound();
-            }
-
-            if (saveChangesError.GetValueOrDefault())
-            {
-                ErrorMessage = "Delete failed. Try again";
-            }
-            return Page();
+            return RedirectToPage("../User/Index");
         }
-
-        public async Task<IActionResult> OnPostAsync(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            if (genreDLT != null)
-            {
-                _genreService.Delete(id.Value);
-            }
-            return RedirectToPage("/Index");
-        }
+       
     }
 }

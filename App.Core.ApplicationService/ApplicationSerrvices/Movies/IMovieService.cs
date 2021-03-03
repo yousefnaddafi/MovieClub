@@ -13,7 +13,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
     public interface IMovieService
     {
         Task<int> Create(MovieInputDto inputDto);
-        Task<string> Update(MovieInputDto item);
+        Task<string> Update(MovieInputUpdateDto item);
         int Delete(int id);
         Task<MovieOutputDto> Get(int id);
         Task<List<MovieOutputDto>> GetAll();

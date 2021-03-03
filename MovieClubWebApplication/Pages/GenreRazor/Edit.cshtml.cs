@@ -18,42 +18,18 @@ namespace MovieClubWebApplication.Pages.GenreRazor
             _genreService = genreService;
         }
         [BindProperty]
-        public List<GenreInputDtos> genreEdit { get; set; }
-        public async Task<IAsyncResult> OnGetAsync(int? id)
+        public GenreInputDtos genres { get; set; }
+        public async Task<IActionResult> OnPostAsync()
         {
-            if (id == null)
+
+            if (!ModelState.IsValid)
             {
-                return (IAsyncResult)NotFound();
+                return Page();
             }
 
-            genreEdit = await _genreService.GetAll();
-
-            if (genreEdit == null)
-            {
-                return (IAsyncResult)NotFound();
-            }
-            return (IAsyncResult)Page();
+            await _genreService.Update(genres);
+            return RedirectToPage("../User/Index");
         }
 
-        public async Task<IActionResult> OnPostAsync(Genre genre)
-        {
-            var actorToEdit = _genreService.Update(genre);
-
-            if (actorToEdit == null)
-            {
-                return NotFound();
-            }
-
-            if (await TryUpdateModelAsync<Genre>(
-                actorToEdit,
-                "actor",
-                s => s.GenreName))
-            {
-
-                return RedirectToPage("./Index");
-            }
-
-            return Page();
-        }
     }
 }

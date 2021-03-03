@@ -18,7 +18,7 @@ namespace MovieClubWebApplication.Pages.Movies
             _movieService= movieService;
         }
         [BindProperty]
-        public MovieInputDto movies { get; set; }
+        public MovieInputUpdateDto movies { get; set; }
        
         public async Task<IActionResult> OnPostAsync()
         {
@@ -29,7 +29,7 @@ namespace MovieClubWebApplication.Pages.Movies
             }
 
            await _movieService.Update(movies);
-            return RedirectToPage("./User/Index");
+            return RedirectToPage("../Index");
         }       
     }
     

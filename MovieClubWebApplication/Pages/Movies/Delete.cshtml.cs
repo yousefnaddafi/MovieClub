@@ -18,39 +18,6 @@ namespace MovieClubWebApplication.Pages.Movies
             this.movieService = _movieService;
         }
 
-        //[BindProperty]
-        //public MovieOutputDto movieDelete { get; set; }
-
-        //public async Task<IActionResult> OnGetAsync(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    movieDelete = await _movieService.Get(id.Value);
-        //    if (movieDelete == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Page();
-        //}
-
-
-
-        //public async Task<IActionResult> OnPostAsync(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (movieDelete != null)
-        //    {
-        //        _movieService.Delete(movieDelete.Id);
-        //    }
-        //    return RedirectToPage("../Index");
-        //}
-
         [BindProperty]
         public int movieId { get; set; }
 

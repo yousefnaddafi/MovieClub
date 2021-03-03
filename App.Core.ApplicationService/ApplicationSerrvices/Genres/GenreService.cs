@@ -12,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
 {
-    public class GenreService :IGenreService
+    public class GenreService : IGenreService
     {
         private readonly IMovieRepository<Genre> genreRepository;
         private readonly IMapper mapper;
 
-        public GenreService(IMovieRepository<Genre> genreRepository,IMapper mapper)
+        public GenreService(IMovieRepository<Genre> genreRepository, IMapper mapper)
         {
             this.genreRepository = genreRepository;
             this.mapper = mapper;
@@ -29,11 +29,15 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
             await genreRepository.Save();
             return temp.Id;
         }
-        public Genre Update(Genre item)
+        public async Task<string> Update(GenreInputDtos item)
         {
-            this.genreRepository.Update(item);
-            genreRepository.Save();
-            return item;
+          var eddition =  mapper.Map<Genre>(item);
+            genreRepository.Update(eddition);
+            
+            await genreRepository.Save();
+
+                return $"{item.Id}is update";
+
         }
         public int Delete(int id)
         {
