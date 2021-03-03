@@ -28,7 +28,7 @@ namespace MovieClubWebApplication.Pages.Signup
 
             await userService.Create(userInput);
 
-            return RedirectToPage("../Index");
+            return RedirectToPage("../User/Index");
         }
 
 

@@ -11,38 +11,60 @@ namespace MovieClubWebApplication.Pages.Movies
 {
     public class DeleteModel : PageModel
     {
-        private readonly IMovieService _movieService;
-        public DeleteModel(IMovieService movieService)
+        private readonly IMovieService movieService;
+
+        public DeleteModel(IMovieService _movieService)
         {
-            _movieService = movieService;
+            this.movieService = _movieService;
         }
+
+        //[BindProperty]
+        //public MovieOutputDto movieDelete { get; set; }
+
+        //public async Task<IActionResult> OnGetAsync(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    movieDelete = await _movieService.Get(id.Value);
+        //    if (movieDelete == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Page();
+        //}
+
+
+
+        //public async Task<IActionResult> OnPostAsync(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    if (movieDelete != null)
+        //    {
+        //        _movieService.Delete(movieDelete.Id);
+        //    }
+        //    return RedirectToPage("../Index");
+        //}
+
         [BindProperty]
-        public MovieOutputDto movieDelete { get; set; }
-        public async Task<IActionResult> OnGetAsync(int ? id)
+        public int movieId { get; set; }
+
+        public async Task<IActionResult> OnPost()
         {
-            if (id == null)
+
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                return Page();
             }
-            movieDelete = await _movieService.Get(id.Value);
-            if (movieDelete == null)
-            {
-                return NotFound();
-            }
-            return Page();
-        }
-        public async Task<IActionResult> OnPostAsync(int ? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-                      
-            if(movieDelete != null)
-            {
-                _movieService.Delete(id.Value);                              
-            }
-            return RedirectToPage("/Index");
+
+            movieService.Delete(movieId);
+
+            return RedirectToPage("../User/Index");
         }
     }
    
