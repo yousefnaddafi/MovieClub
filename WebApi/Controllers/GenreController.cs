@@ -42,7 +42,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public Task<Genre> Get(int id)
+        public Task<GenreInputDtos> Get(int id)
         {
             return GenreService.Get(id);
         }

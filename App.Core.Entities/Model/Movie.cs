@@ -16,7 +16,6 @@ namespace App.Core.Entities.Model
         public int RateCounter { get; set; }
         public int DirectorId { get; set; }
         public Directors Director { get; set; }
-        
         public List<Comment> Comments { get; set; }
         public List<GenreMovie> GenreMovies { get; set; }
         public List<CountryMovie> CountryMovies { get; set; }

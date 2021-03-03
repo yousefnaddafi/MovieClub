@@ -40,11 +40,10 @@ namespace MovieClubWebApplication.Pages.Movies
 
             if (movieToEdit == null)
             {
-                return NotFound();
+                return  NotFound();
             }
             return RedirectToPage("/Index");
-            }
-       
+        }       
     }
     
 }
