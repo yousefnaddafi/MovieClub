@@ -27,7 +27,7 @@ namespace MovieClubWebApplication.Pages.ActorRazor
                 return NotFound();
             }
 
-            actorDLT = _actorService.GetQuery().FirstOrDefault(x => x.Id == id);
+            await _actorService.Get(id.Value);
 
             if (actorDLT == null)
             {
@@ -38,8 +38,20 @@ namespace MovieClubWebApplication.Pages.ActorRazor
             {
                 ErrorMessage = "Delete failed. Try again";
             }
-
             return Page();
+        }
+        public async Task<IActionResult> OnPostAsync(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            if (actorDLT != null)
+            {
+                _actorService.Delete(id.Value);
+            }
+            return RedirectToPage("/Index");
         }
     }
 }
