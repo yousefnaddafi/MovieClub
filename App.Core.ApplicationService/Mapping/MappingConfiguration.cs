@@ -58,6 +58,7 @@ namespace App.Core.ApplicationService.Mapping
 
             CreateMap<ActorInputDto, Actor>()
                 .ForMember(x => x.ActorName, o => o.MapFrom(z => z.ActorName))
+                .ForMember(x=>x.Id,o=>o.MapFrom(z=>z.Id))
                 ;
 
             CreateMap<CountryInputDTO, Country>()
@@ -66,6 +67,7 @@ namespace App.Core.ApplicationService.Mapping
 
             CreateMap<GenreInputDtos, Genre>()
                 .ForMember(x => x.GenreName, o => o.MapFrom(z => z.GenreName))
+                .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
                 ;
 
             CreateMap<ActorMovieInputDto, ActorMovie>()

@@ -27,7 +27,7 @@ namespace MovieClubWebApplication.Pages.GenreRazor
                 return NotFound();
             }
 
-            genreDLT = _genreService.GetQuery().FirstOrDefault(x => x.Id == id);
+            await _genreService.Get(id.Value);
 
             if (genreDLT == null)
             {
@@ -38,8 +38,21 @@ namespace MovieClubWebApplication.Pages.GenreRazor
             {
                 ErrorMessage = "Delete failed. Try again";
             }
-
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            if (genreDLT != null)
+            {
+                _genreService.Delete(id.Value);
+            }
+            return RedirectToPage("/Index");
         }
     }
 }

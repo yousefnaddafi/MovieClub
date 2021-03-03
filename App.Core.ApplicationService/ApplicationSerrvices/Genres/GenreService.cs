@@ -1,4 +1,5 @@
-﻿using App.Core.ApplicationService.Dtos.GenreDto;
+﻿using App.Core.ApplicationService.Dtos.ActorDtos;
+using App.Core.ApplicationService.Dtos.GenreDto;
 using App.Core.ApplicationService.IRepositories;
 using App.Core.Entities.Exceptions;
 using App.Core.Entities.Model;
@@ -43,13 +44,19 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
             genreRepository.Delete(id);
             return id;
         }
-        public Task<Genre> Get(int id)
+        public async Task<GenreInputDtos> Get(int id)
         {
             if (genreRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
             {
                 throw new InvalidIdException("Wrong Id");
             }
-            return genreRepository.Get(id);
+            var genres = genreRepository.GetQuery().FirstOrDefault(x => x.Id == id);
+
+            List<GenreInputDtos> result = new List<GenreInputDtos>();
+
+            var mappedGenres = mapper.Map<GenreInputDtos>(genres);
+            result.Add(mappedGenres);
+            return mappedGenres;
         }
         public async Task<List<GenreInputDtos>> GetAll()
         {

@@ -65,9 +65,9 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public Task<Movie> Get(int id)
+        public async Task<MovieOutputDto> Get(int id)
         {
-            return moviesService.Get(id);
+           return  await moviesService.Get(id);
         }
         [HttpGet("GetAll")]
         public async Task<List<MovieOutputDto>> GetAll()

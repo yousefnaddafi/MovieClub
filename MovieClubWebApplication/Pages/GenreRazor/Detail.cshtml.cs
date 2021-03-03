@@ -9,29 +9,29 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MovieClubWebApplication.Pages.GenreRazor
 {
-    public class CreateModel : PageModel
+    public class DetailModel : PageModel
     {
         private readonly IGenreService _genreService;
-
-
-        public CreateModel(IGenreService genreService)
+        public DetailModel(IGenreService genreService)
         {
             _genreService = genreService;
         }
+        public GenreInputDtos genreDetail { get; set; }
 
-        [BindProperty]
-        public GenreInputDtos GenreCreation { get; set; }
-
-        
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return Page();
+                return NotFound();
             }
 
-            await _genreService.Create(GenreCreation);
-            return RedirectToPage("/Index");
+            genreDetail = await _genreService.Get(id.Value);
+
+            if (genreDetail == null)
+            {
+                return NotFound();
+            }
+            return Page();
         }
     }
 }

@@ -9,29 +9,29 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MovieClubWebApplication.Pages.ActorRazor
 {
-    public class CreateModel : PageModel
+    public class DetailModel : PageModel
     {
         private readonly IActorService _actorService;
-
-
-        public CreateModel(IActorService actorService)
+        public DetailModel(IActorService actorService)
         {
             _actorService = actorService;
         }
+        public ActorInputDto actorDetail { get; set; }
 
-        [BindProperty]
-        public ActorInputDto ActorCreation { get; set; }
-
-        
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return Page();
+                return NotFound();
             }
 
-            await _actorService.Create(ActorCreation);
-            return RedirectToPage("/Index");
+            actorDetail = await _actorService.Get(id.Value);
+
+            if (actorDetail == null)
+            {
+                return NotFound();
+            }
+            return Page();
         }
     }
 }

@@ -63,6 +63,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
                 throw new InvalidIdException("Wrong Id");
             }
             userRepository.Delete(id);
+            userRepository.Save();
             return id;
         }
 

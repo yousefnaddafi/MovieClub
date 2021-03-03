@@ -42,7 +42,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public Task<Directors> Get(int id)
+        public Task<DirectorInputDto> Get(int id)
         {
             return DirectorService.Get(id);
         }

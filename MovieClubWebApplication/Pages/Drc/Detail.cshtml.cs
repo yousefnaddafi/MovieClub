@@ -12,7 +12,7 @@ namespace MovieClubWebApplication.Pages.Drc
 {
     public class DetailModel : PageModel
     {
-        private readonly IDirectorService _directorService;
+       private readonly IDirectorService _directorService;
        public DetailModel(IDirectorService directorService)
         {
             _directorService = directorService;
