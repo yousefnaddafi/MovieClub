@@ -22,6 +22,7 @@ namespace MovieClubWebApplication.Pages.ActorRazor
         [BindProperty]
         public ActorInputDto ActorCreation { get; set; }
 
+        
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -29,11 +30,8 @@ namespace MovieClubWebApplication.Pages.ActorRazor
                 return Page();
             }
 
-            await _actorService.Create(new ActorInputDto());
-
-            await _actorService.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+            await _actorService.Create(ActorCreation);
+            return RedirectToPage("/Index");
         }
     }
 }

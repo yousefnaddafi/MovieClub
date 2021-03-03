@@ -22,6 +22,7 @@ namespace MovieClubWebApplication.Pages.GenreRazor
         [BindProperty]
         public GenreInputDtos GenreCreation { get; set; }
 
+        
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -29,11 +30,8 @@ namespace MovieClubWebApplication.Pages.GenreRazor
                 return Page();
             }
 
-            await _genreService.Create(new GenreInputDtos());
-
-            await _genreService.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+            await _genreService.Create(GenreCreation);
+            return RedirectToPage("/Index");
         }
     }
 }

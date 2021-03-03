@@ -34,5 +34,6 @@ namespace MovieClubWebApplication.Pages.Movies
             return  RedirectToPage("/Index");
         }
 
+
     }
 }
