@@ -87,7 +87,7 @@ namespace App.Core.ApplicationService.Mapping
 
             CreateMap<ActorInputDto, Actor>()
                 .ForMember(x => x.ActorName, o => o.MapFrom(z => z.ActorName))
-                .ForMember(x=>x.Id,o=>o.MapFrom(z=>z.Id))
+                //.ForMember(x=>x.Id,o=>o.MapFrom(z=>z.Id))
                 ;
 
             CreateMap<CountryInputDTO, Country>()
