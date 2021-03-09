@@ -44,18 +44,33 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.ActorMovies
             return id;
         }
 
-        public async Task<ActorMovie> Get(int id)
+        public async Task<ActorMovieInputDto> Get(int id)
         {
             if (ActorMovieRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
             {
                 throw new InvalidIdException("Wrong Id");
             }
-            return await ActorMovieRepository.Get(id);
+            var actorMovies = ActorMovieRepository.GetQuery().FirstOrDefault(x => x.Id == id);
+
+            List<ActorMovieInputDto> result = new List<ActorMovieInputDto>();
+
+            var mappedActorMovies = mapper.Map<ActorMovieInputDto>(actorMovies);
+            result.Add(mappedActorMovies);
+            return mappedActorMovies;
         }
 
-        public async Task<List<ActorMovie>> GetAll()
+        public async Task<List<ActorMovieInputDto>> GetAll()
         {
-            return await ActorMovieRepository.GetAll();
+            var actorMovies = ActorMovieRepository.GetQuery().Select(x => x.Id).ToList();
+            List<ActorMovieInputDto> result = new List<ActorMovieInputDto>();
+
+            foreach (var item in actorMovies)
+            {
+                var mappedActorMovies = mapper.Map<ActorMovieInputDto>(item);
+                result.Add(mappedActorMovies);
+            }
+
+            return result;
         }
         public List<ActorMovie> GetQuery()
         {
