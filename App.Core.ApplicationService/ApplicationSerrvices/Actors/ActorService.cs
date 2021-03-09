@@ -41,10 +41,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
 
         public int Delete(int id)
         {
-            if (actorRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
-            {
-                throw new InvalidIdException("Wrong Id");
-            }
+           
             actorRepository.Delete(id);
             return id;
         }

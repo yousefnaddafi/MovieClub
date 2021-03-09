@@ -40,10 +40,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Countries
 
         public int Delete(int id)
         {
-            if (countryRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
-            {
-                throw new InvalidIdException("Wrong Id");
-            }
+            
             countryRepository.Delete(id);
             return id;
         }

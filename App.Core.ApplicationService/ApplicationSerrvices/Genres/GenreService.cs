@@ -41,10 +41,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
         }
         public int Delete(int id)
         {
-            if (genreRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
-            {
-                throw new InvalidIdException("Wrong Id");
-            }
+            
             genreRepository.Delete(id);
             return id;
         }

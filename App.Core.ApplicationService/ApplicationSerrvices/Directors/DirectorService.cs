@@ -46,10 +46,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
 
         public int Delete(int id)
         {
-            if (directorRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
-            {
-                throw new InvalidIdException("Wrong Id");
-            }
+            
             directorRepository.Delete(id);
             return id;
         }

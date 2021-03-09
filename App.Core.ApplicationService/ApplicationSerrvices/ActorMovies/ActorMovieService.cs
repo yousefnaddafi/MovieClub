@@ -36,10 +36,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.ActorMovies
         }
         public int Delete(int id)
         {
-            if (ActorMovieRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
-            {
-                throw new InvalidIdException("Wrong Id");
-            }
+            
             ActorMovieRepository.Delete(id);
             return id;
         }

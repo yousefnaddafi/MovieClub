@@ -42,7 +42,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public Task<Country> Get(int id)
+        public Task<CountryInputDTO> Get(int id)
         {
             return countryService.Get(id);
         }

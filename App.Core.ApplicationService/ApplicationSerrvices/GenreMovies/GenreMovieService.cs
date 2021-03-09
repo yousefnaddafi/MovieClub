@@ -39,10 +39,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.GenreMovies
 
         public int Delete(int id)
         {
-            if (genreMovieRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
-            {
-                throw new InvalidIdException("Wrong Id");
-            }
+            
             genreMovieRepository.Delete(id);
             return id;
         }

@@ -7,9 +7,53 @@
 <hr>
 <div class="card w-100 border-0 bg-light">
 
-    <div class="card-body mt-3">
+    @*<div class="card-body mt-3">
         <a href="#" class="card-link">
-            <h5 class="card-title float-right d-inline"> @Model.actorInput.Select(x => x.ActorName) </h5>
+            <h5 class="card-title float-right d-inline">
+                @Model.actorInput.Select(x => x.ActorName)
+            </h5>
         </a>
     </div>
-</div>
+    <div>
+        <img class="card-img-top imageThumbnail" src="#"
+             asp-append-version="true" />
+        <div class="card-footer text-center">
+            <a asp-page="/ActorRazor/Detail" asp-route-Id="@Model.actorInput"
+               class="btn btn-primary m-1">View</a>
+            <a asp-page="/ActorRazor/Edit" asp-route-Id="@Model.actorInput"
+               class="btn btn-primary m-1">Edit</a>
+            <a asp-page="/ActorRazor/Delete" asp-route-Id="@Model.actorInput"
+               class="btn btn-primary m-1">Delete</a>
+        </div>
+    </div>
+</div>*@
+
+<hr>
+<h3 class="text-center bg-light">Movies</h3>
+<hr>
+@foreach (var item in Model.Actors)
+{
+    <div class="card w-100 border-0 bg-light">
+        <img class="card-img-top" src="@item.ActorName" style="border-radius: 1rem;" alt="Card image cap">
+        <div class="card-body mt-3">
+            <a href="#" class="card-link">
+                <h5 class="card-title float-right d-inline"> @item.ActorName </h5>
+            </a>
+
+
+            <a asp-page="/ActorRazor/Index" asp-route-id="@item.Id" class="btn btn-primary">ادامه مطلب</a>
+            <a asp-page="/ActorRazor/Edit" asp-route-Id="@item.Id"
+               class="btn btn-primary m-1">Edit</a>
+            <a asp-page="/ActorRazor/Delete" asp-route-Id="@item.Id"
+               class="btn btn-primary m-1">Delete</a>
+            <a href="#" class="card-link"><i class="far fa-bell"></i></a>
+            <a href="#" class="card-link"><i class="far fa-comment-alt"></i></a>
+            <a href="#" class="card-link"><i class="far fa-heart"></i></a>
+            <a href="#" class="card-link"><i class="far fa-bookmark"></i></a>
+
+        </div>
+    </div>
+
+
+}
+                        ;
