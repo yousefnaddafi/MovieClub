@@ -63,15 +63,15 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
             return mappedActors;
         }
 
-        public async Task<List<ActorInputDto>> GetAll()
+        public async Task<List<Actor>> GetAll()
         {
-            var actor = actorRepository.GetQuery().Select(x => x.ActorName).ToList();
-            List<ActorInputDto> result = new List<ActorInputDto>();
+            var actor = actorRepository.GetQuery().ToList();
+            List<Actor> result = new List<Actor>();
 
             foreach (var item in actor)
             {
-                var mappedActors = mapper.Map<ActorInputDto>(item);
-                result.Add(mappedActors);
+                
+                result.Add(item);
             }
 
             return  result;

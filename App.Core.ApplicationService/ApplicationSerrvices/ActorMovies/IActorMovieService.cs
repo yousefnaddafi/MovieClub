@@ -14,7 +14,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.ActorMovies
         ActorMovie Update(ActorMovie item);
         int Delete(int id);
         Task<ActorMovieInputDto> Get(int id);
-        Task<List<ActorMovieInputDto>> GetAll();
+        Task<List<ActorMovie>> GetAll();
         List<ActorMovie> GetQuery();
     }
 }

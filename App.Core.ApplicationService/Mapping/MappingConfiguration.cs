@@ -81,7 +81,10 @@ namespace App.Core.ApplicationService.Mapping
             CreateMap<DirectorInputDto,Directors>()
                 .ForMember(x=>x.DirectorName,o=>o.MapFrom(z=>z.FullName));
 
-
+            CreateMap<Actor, ActorRazorDto>()
+                .ForMember(x => x.ActorName, o => o.MapFrom(z => z.ActorName))
+                .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
+                ;
 
 
             CreateMap<ActorRazorDto, Actor>()

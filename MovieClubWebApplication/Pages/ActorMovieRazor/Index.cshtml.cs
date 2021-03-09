@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using App.Core.ApplicationService.ApplicationSerrvices.ActorMovies;
 using App.Core.ApplicationService.Dtos.ActorMovieDtos;
+using App.Core.Entities.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -17,11 +18,11 @@ namespace MovieClubWebApplication.Pages.ActorMovieRazor
             _actorMovieService = actorMovieService;
         }
         [BindProperty]
-        public List<ActorMovieInputDto> actorMovieInput { get; set; }
+        public List<ActorMovie> actorMovies { get; set; }
 
         public async Task OnGetAsync()
         {
-            actorMovieInput = await _actorMovieService.GetAll();
+            actorMovies = await _actorMovieService.GetAll();
         }
     }
 }

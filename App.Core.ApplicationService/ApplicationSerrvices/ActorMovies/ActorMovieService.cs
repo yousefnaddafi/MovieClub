@@ -56,15 +56,15 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.ActorMovies
             return mappedActorMovies;
         }
 
-        public async Task<List<ActorMovieInputDto>> GetAll()
+        public async Task<List<ActorMovie>> GetAll()
         {
-            var actorMovies = ActorMovieRepository.GetQuery().Select(x => x.Id).ToList();
-            List<ActorMovieInputDto> result = new List<ActorMovieInputDto>();
+            var actorMovies = ActorMovieRepository.GetQuery().ToList();
+            List<ActorMovie> result = new List<ActorMovie>();
 
             foreach (var item in actorMovies)
             {
-                var mappedActorMovies = mapper.Map<ActorMovieInputDto>(item);
-                result.Add(mappedActorMovies);
+                
+                result.Add(item);
             }
 
             return result;

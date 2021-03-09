@@ -12,19 +12,17 @@ namespace MovieClubWebApplication.Pages.ActorRazor
 {
     public class IndexModel : PageModel
     {
-        private readonly IActorService _actorService;
-        public IndexModel(IActorService actorService)
+        private readonly IActorService actorService;
+        public IndexModel(IActorService _actorService)
         {
-            _actorService = actorService;
+            actorService = _actorService;
         }
         [BindProperty]
-        public List<ActorInputDto> actorInput { get; set; }
-        [BindProperty]
-        public List<Actor> Actors { get; set; }
+        public List<Actor> actors { get; set; }
+        public async Task OnGetAsync(int id)
+        {
+            actors = await actorService.GetAll();
+        }
 
-        public async Task OnGetAsync()
-        {
-            actorInput = await _actorService.GetAll();
-        }
     }
 }

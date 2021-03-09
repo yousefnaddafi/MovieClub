@@ -14,7 +14,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Countries
         Country Update(CountryRazorDto item);
         int Delete(int id);
         Task<CountryInputDTO> Get(int id);
-        Task<List<CountryInputDTO>> GetAll();
+        Task<List<Country>> GetAll();
         List<Country> GetQuery();
     }
 }

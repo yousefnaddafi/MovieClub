@@ -61,15 +61,15 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Countries
             return mappedCountries;
         }
 
-        public async Task<List<CountryInputDTO>> GetAll()
+        public async Task<List<Country>> GetAll()
         {
-            var country = countryRepository.GetQuery().Select(x => x.CountryName).ToList();
-            List<CountryInputDTO> result = new List<CountryInputDTO>();
+            var country = countryRepository.GetQuery().ToList();
+            List<Country> result = new List<Country>();
 
             foreach (var item in country)
             {
-                var mappedCountries = mapper.Map<CountryInputDTO>(item);
-                result.Add(mappedCountries);
+                
+                result.Add(item);
             }
 
             return result;

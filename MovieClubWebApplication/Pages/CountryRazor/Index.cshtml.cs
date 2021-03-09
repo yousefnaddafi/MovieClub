@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using App.Core.ApplicationService.ApplicationSerrvices.Countries;
 using App.Core.ApplicationService.Dtos.CountryDtos;
+using App.Core.Entities.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -17,11 +18,11 @@ namespace MovieClubWebApplication.Pages.CountryRazor
             _countryService = countryService;
         }
         [BindProperty]
-        public List<CountryInputDTO> countryInput { get; set; }
+        public List<Country> countries { get; set; }
 
         public async Task OnGetAsync()
         {
-            countryInput = await _countryService.GetAll();
+            countries = await _countryService.GetAll();
         }
     }
 }
