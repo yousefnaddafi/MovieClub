@@ -71,8 +71,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
 
             foreach (var item in actor)
             {
-                var mappedDirectors = mapper.Map<ActorInputDto>(item);
-                result.Add(mappedDirectors);
+                var mappedActors = mapper.Map<ActorInputDto>(item);
+                result.Add(mappedActors);
             }
 
             return  result;

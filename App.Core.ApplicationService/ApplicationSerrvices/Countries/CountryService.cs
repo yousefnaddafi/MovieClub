@@ -48,19 +48,33 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Countries
             return id;
         }
 
-        public async Task<Country> Get(int id)
+        public async Task<CountryInputDTO> Get(int id)
         {
             if (countryRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
             {
                 throw new InvalidIdException("Wrong Id");
             }
+            var countries = countryRepository.GetQuery().FirstOrDefault(x => x.Id == id);
 
-            return await countryRepository.Get(id);
+            List<CountryInputDTO> result = new List<CountryInputDTO>();
+
+            var mappedCountries = mapper.Map<CountryInputDTO>(countries);
+            result.Add(mappedCountries);
+            return mappedCountries;
         }
 
-        public async Task<List<Country>> GetAll()
+        public async Task<List<CountryInputDTO>> GetAll()
         {
-            return await countryRepository.GetAll();
+            var country = countryRepository.GetQuery().Select(x => x.CountryName).ToList();
+            List<CountryInputDTO> result = new List<CountryInputDTO>();
+
+            foreach (var item in country)
+            {
+                var mappedCountries = mapper.Map<CountryInputDTO>(item);
+                result.Add(mappedCountries);
+            }
+
+            return result;
         }
         public List<Country> GetQuery()
         {

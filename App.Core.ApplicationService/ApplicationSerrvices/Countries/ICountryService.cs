@@ -13,8 +13,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Countries
         Task<string> Create(CountryInputDTO inputDto);
         Country Update(Country item);
         int Delete(int id);
-        Task<Country> Get(int id);
-        Task<List<Country>> GetAll();
+        Task<CountryInputDTO> Get(int id);
+        Task<List<CountryInputDTO>> GetAll();
         List<Country> GetQuery();
     }
 }
