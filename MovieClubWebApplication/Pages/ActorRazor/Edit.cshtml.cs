@@ -12,48 +12,27 @@ namespace MovieClubWebApplication.Pages.ActorRazor
 {
     public class EditModel : PageModel
     {
-        private readonly IActorService _actorService;
-        public EditModel(IActorService actorService)
+        private readonly IActorService actorService;
+
+        public EditModel(IActorService _actorService)
         {
-            _actorService = actorService;
+            actorService = _actorService;
         }
+
         [BindProperty]
-        public List<ActorInputDto> actorsEdit { get; set; }
-        public async Task<IAsyncResult> OnGetAsync(int? id)
+        public ActorRazorDto inputDto { get; set; }
+
+        public async Task<IActionResult> OnPostAsync()
         {
-            if (id == null)
+
+            if (!ModelState.IsValid)
             {
-                return (IAsyncResult)NotFound();
+                return Page();
             }
 
-            actorsEdit = await _actorService.GetAll();
+            actorService.Update(inputDto);
 
-            if (actorsEdit == null)
-            {
-                return (IAsyncResult)NotFound();
-            }
-            return (IAsyncResult)Page();
-        }
-
-        public async Task<IActionResult> OnPostAsync(Actor actor)
-        {
-            var actorToEdit = _actorService.Update(actor);
-
-            if (actorToEdit == null)
-            {
-                return NotFound();
-            }
-
-            if (await TryUpdateModelAsync<Actor>(
-                actorToEdit,
-                "actor",
-                s => s.ActorName))
-            {
-
-                return RedirectToPage("./Index");
-            }
-
-            return Page();
+            return RedirectToPage("../ActorRazor/Index");
         }
     }
 }

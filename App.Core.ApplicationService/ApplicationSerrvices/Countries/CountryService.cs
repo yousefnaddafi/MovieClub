@@ -30,12 +30,13 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Countries
             return inputDto.CountryName;
         }
 
-        public Country Update(Country inputDto)
+        public Country Update(CountryRazorDto inputDto)
         {
-            //var temp = mapper.Map<Country>(inputDto);
-            countryRepository.Update(inputDto);
+            var country = mapper.Map<Country>(inputDto);
+
+            countryRepository.Update(country);
             countryRepository.Save();
-            return inputDto;
+            return country;
         }
 
         public int Delete(int id)

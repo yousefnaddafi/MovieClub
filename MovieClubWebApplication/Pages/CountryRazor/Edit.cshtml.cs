@@ -10,50 +10,31 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MovieClubWebApplication.Pages.CountryRazor
 {
-    public class EditModel : PageModel
-    {
-        private readonly ICountryService _countryService;
-        public EditModel(ICountryService countryService)
+    
+        public class EditModel : PageModel
         {
-            _countryService = countryService;
+            private readonly ICountryService countryService;
+
+            public EditModel(ICountryService _countryService)
+            {
+                countryService = _countryService;
+            }
+
+            [BindProperty]
+            public CountryRazorDto inputDto { get; set; }
+
+            public async Task<IActionResult> OnPostAsync()
+            {
+
+                if (!ModelState.IsValid)
+                {
+                    return Page();
+                }
+
+                countryService.Update(inputDto);
+
+                return RedirectToPage("../Country/Index");
+            }
+        
         }
-        [BindProperty]
-        public List<CountryInputDTO> countriesEdit { get; set; }
-        public async Task<IAsyncResult> OnGetAsync(int? id)
-        {
-            if (id == null)
-            {
-                return (IAsyncResult)NotFound();
-            }
-
-            countriesEdit = await _countryService.GetAll();
-
-            if (countriesEdit == null)
-            {
-                return (IAsyncResult)NotFound();
-            }
-            return (IAsyncResult)Page();
-        }
-
-        public async Task<IActionResult> OnPostAsync(Country country)
-        {
-            var countryToEdit = _countryService.Update(country);
-
-            if (countryToEdit == null)
-            {
-                return NotFound();
-            }
-
-            if (await TryUpdateModelAsync<Country>(
-                countryToEdit,
-                "country",
-                s => s.CountryName))
-            {
-
-                return RedirectToPage("./Index");
-            }
-
-            return Page();
-        }
-    }
 }

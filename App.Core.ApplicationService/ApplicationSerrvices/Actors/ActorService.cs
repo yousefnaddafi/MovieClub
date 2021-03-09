@@ -32,11 +32,13 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
             return temp.Id;
         }
 
-        public Actor Update(Actor inputDto)
+        public Actor Update(ActorRazorDto inputDto)
         {
-            actorRepository.Update(inputDto);
+            var actor = mapper.Map<Actor>(inputDto);
+
+            actorRepository.Update(actor);
             actorRepository.Save();
-            return inputDto;
+            return actor;
         }
 
         public int Delete(int id)

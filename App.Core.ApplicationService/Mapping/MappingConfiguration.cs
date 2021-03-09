@@ -84,12 +84,20 @@ namespace App.Core.ApplicationService.Mapping
 
 
 
+            CreateMap<ActorRazorDto, Actor>()
+                .ForMember(x => x.ActorName, o => o.MapFrom(z => z.ActorName))
+                .ForMember(x=>x.Id,o=>o.MapFrom(z=>z.Id))
+                ;
 
             CreateMap<ActorInputDto, Actor>()
                 .ForMember(x => x.ActorName, o => o.MapFrom(z => z.ActorName))
                 //.ForMember(x=>x.Id,o=>o.MapFrom(z=>z.Id))
                 ;
 
+            CreateMap<CountryRazorDto, Country>()
+                .ForMember(x => x.CountryName, o => o.MapFrom(z => z.CountryName))
+                .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
+                ;
             CreateMap<CountryInputDTO, Country>()
                 .ForMember(x => x.CountryName, o => o.MapFrom(z => z.CountryName))
                 ;

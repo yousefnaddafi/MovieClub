@@ -17,10 +17,10 @@ namespace MovieClubWebApplication.Pages.Movies
             movieService = _movieService;
         }   
         [BindProperty]
-        public MovieOutputDto movieInput { get; set; }
+        public List<MovieOutputDto> movies { get; set; }
         public async Task OnGetAsync(int id)
         {
-            movieInput = await movieService.Get(id);
+            movies = await movieService.GetAll();
         }
 
     }

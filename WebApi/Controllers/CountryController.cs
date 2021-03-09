@@ -28,7 +28,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        public Country Update(Country inputDto)
+        public CountryRazorDto Update(CountryRazorDto inputDto)
         {
             countryService.Update(inputDto);
             return inputDto;

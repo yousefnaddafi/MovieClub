@@ -1,4 +1,50 @@
 ﻿@page
 @model MovieClubWebApplication.Pages.ActorMovieRazor.EditModel
 @{
+    ViewData["Title"] = "Edit";
 }
+<h1>Edit</h1>
+
+<h4>Existing List</h4>
+<hr />
+<dl class="row">
+    <dt class="col-sm-2">
+
+    </dt>
+    <dd class="col-sm-10">
+
+    </dd>
+</dl>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="inputDto.Id" class="control-label"></label>
+                <input asp-for="inputDto.Id" class="form-control" />
+                <span asp-validation-for="inputDto.Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="inputDto.MovieId" class="control-label"></label>
+                <input asp-for="inputDto.MovieId" class="form-control" />
+                <span asp-validation-for="inputDto.MovieId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="inputDto.ActorId" class="control-label"></label>
+                <input asp-for="inputDto.ActorId" class="form-control" />
+                <span asp-validation-for="inputDto.ActorId" class="text-danger"></span>
+            </div>
+
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div class="form-group mt-5">
+        <button type="submit">Edit</button>
+    </div>
+</div>
