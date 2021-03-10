@@ -28,7 +28,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        public Directors Update(Directors item)
+        public DirectorUpdateDto Update(DirectorUpdateDto item)
         {
             this.DirectorService.Update(item);
             return item;

@@ -18,7 +18,7 @@ namespace MovieClubWebApplication.Pages.Movies
         }   
         [BindProperty]
         public List<MovieOutputDto> movies { get; set; }
-        public async Task OnGetAsync(int id)
+        public async Task OnGetAsync()
         {
             movies = await movieService.GetAll();
         }

@@ -21,7 +21,7 @@ namespace MovieClubWebApplication.Pages.Movies
         [BindProperty]
         public int movieId { get; set; }
 
-        public async Task<IActionResult> OnPost(int id)
+        public async Task<IActionResult> OnPost()
         {
 
             if (!ModelState.IsValid)
@@ -29,7 +29,7 @@ namespace MovieClubWebApplication.Pages.Movies
                 return Page();
             }
 
-            movieService.Delete(id);
+          await  movieService.Delete(movieId);
 
             return RedirectToPage("../User/Index");
         }

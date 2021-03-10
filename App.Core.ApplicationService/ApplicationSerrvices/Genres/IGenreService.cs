@@ -10,8 +10,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
     public interface IGenreService
     {
         Task<int> Create(GenreInputDtos inputDto);
-        Task<string> Update(GenreInputDtos item);
-        int Delete(int id);
+        Task<string> Update(GenreUpdateDto item);
+        Task<int> Delete(int id);
         Task<GenreInputDtos> Get(int id);
         Task<List<GenreInputDtos>> GetAll();
         Task SaveChangesAsync();

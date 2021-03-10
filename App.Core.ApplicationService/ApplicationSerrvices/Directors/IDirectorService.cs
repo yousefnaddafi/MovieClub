@@ -11,8 +11,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
     public interface IDirectorService
     {
         Task<string> Create(DirectorInputDto inputDto);
-        Entities.Model.Directors Update(Entities.Model.Directors item);
-        int Delete(int id);
+       Task<string> Update(DirectorUpdateDto item);
+        Task<int> Delete(int id);
         Task<DirectorInputDto> Get(int id);
         Task<List<DirectorInputDto>> GetAll();
         List<Entities.Model.Directors> GetQuery();

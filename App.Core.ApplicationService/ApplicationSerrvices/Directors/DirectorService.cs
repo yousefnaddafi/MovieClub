@@ -37,18 +37,24 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
             }
         }
 
-        public Entities.Model.Directors Update(Entities.Model.Directors item)
+        public async Task<string> Update(DirectorUpdateDto item)
         {
-            this.directorRepository.Update(item);
-            directorRepository.Save();
-            return item;
+            var drc = mapper.Map<Entities.Model.Directors>(item);
+            this.directorRepository.Update(drc);
+            await directorRepository.Save();
+            return $"{item.Id}is update";
         }
 
-        public int Delete(int id)
+        public async Task<int> Delete(int id)
         {
-            
-            directorRepository.Delete(id);
-            return id;
+            var dltDirector = directorRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault();
+           if(dltDirector.ToString()==null)
+            {
+                return 0;
+            }
+          await directorRepository.Delete(id);
+          await directorRepository.Save();
+          return id;
         }
 
         public async Task<DirectorInputDto> Get(int id)

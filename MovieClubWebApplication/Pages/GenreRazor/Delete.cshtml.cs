@@ -22,14 +22,11 @@ namespace MovieClubWebApplication.Pages.GenreRazor
 
         public async Task<IActionResult> OnPost(int id)
         {
-
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-
-            _genreService.Delete(id);
-
+           await _genreService.Delete(id);
             return RedirectToPage("../User/Index");
         }
        
