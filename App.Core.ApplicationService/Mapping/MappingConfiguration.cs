@@ -101,6 +101,11 @@ namespace App.Core.ApplicationService.Mapping
                 //.ForMember(x=>x.Id,o=>o.MapFrom(z=>z.Id))
                 ;
 
+            CreateMap<Country, CountryOutputDto>()
+                .ForMember(x => x.CountryName, o => o.MapFrom(z => z.CountryName))
+                .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
+                ;
+
             CreateMap<CountryRazorDto, Country>()
                 .ForMember(x => x.CountryName, o => o.MapFrom(z => z.CountryName))
                 .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))

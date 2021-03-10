@@ -18,7 +18,7 @@ namespace MovieClubWebApplication.Pages.CountryRazor
             _countryService = countryService;
         }
         [BindProperty]
-        public List<Country> countries { get; set; }
+        public List<CountryOutputDto> countries { get; set; }
 
         public async Task OnGetAsync()
         {
