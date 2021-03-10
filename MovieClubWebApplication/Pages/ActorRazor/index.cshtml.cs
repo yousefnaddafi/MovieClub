@@ -18,7 +18,7 @@ namespace MovieClubWebApplication.Pages.ActorRazor
             actorService = _actorService;
         }
         [BindProperty]
-        public List<Actor> actors { get; set; }
+        public List<ActorOutputDto> actors { get; set; }
         public async Task OnGetAsync(int id)
         {
             actors = await actorService.GetAll();

@@ -14,8 +14,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
         Task<int> Create(ActorInputDto inputDto);
         Actor Update(ActorRazorDto item);
         int Delete(int id);
-        Task<ActorInputDto> Get(int id);
-        Task<List<Actor>> GetAll();
+        Task<ActorOutputDto> Get(int id);
+        Task<List<ActorOutputDto>> GetAll();
         List<Actor> GetQuery();
         Task SaveChangesAsync();
     }

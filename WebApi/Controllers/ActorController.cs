@@ -43,7 +43,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public Task<ActorInputDto> Get(int id)
+        public Task<ActorOutputDto> Get(int id)
         {
             return actorService.Get(id);
         }
