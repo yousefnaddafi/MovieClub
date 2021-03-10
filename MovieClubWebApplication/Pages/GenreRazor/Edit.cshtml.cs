@@ -18,18 +18,15 @@ namespace MovieClubWebApplication.Pages.GenreRazor
             _genreService = genreService;
         }
         [BindProperty]
-        public GenreInputDtos genres { get; set; }
+        public GenreUpdateDto genres { get; set; }
         public async Task<IActionResult> OnPostAsync()
         {
-
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-
             await _genreService.Update(genres);
             return RedirectToPage("../User/Index");
         }
-
     }
 }

@@ -22,39 +22,15 @@ namespace MovieClubWebApplication.Pages.Drc
         [BindProperty]
         public DirectorInputDto directorDLT { get; set; }
         public string ErrorMessage { get; set; }
-        public async Task<IActionResult> OnGetAsync(int ? id, bool? saveChangesError = false)
+        public async Task<IActionResult> OnPostAsync(int id)
         {
-            if (id == null)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                return Page();
             }
-
-            await _directorService.Get(id.Value);
-
-            if ( directorDLT== null)
-            {
-                return NotFound();
-            }
-
-            if (saveChangesError.GetValueOrDefault())
-            {
-                ErrorMessage = "Delete failed. Try again";
-            }
-            return  Page();
-        }
-
-        public async Task<IActionResult> OnPostAsync(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-          
-            if (directorDLT != null)
-            {
-                _directorService.Delete(id.Value);
-            }
-            return RedirectToPage("/Index");
+               await _directorService.Delete(id);
+            
+            return RedirectToPage("../Index");
         }      
     }
 }

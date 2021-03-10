@@ -12,23 +12,18 @@ namespace MovieClubWebApplication.Pages.Director
     public class Index1Model : PageModel
     {
         private readonly IDirectorService _directorService;
-
-
         public Index1Model(IDirectorService directService)
         {
              _directorService = directService;
         }
-
         [BindProperty]
         public DirectorInputDto DirectorCreation { get; set; }
-
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-
             await _directorService.Create(DirectorCreation);
             return RedirectToPage("/Index");
         }

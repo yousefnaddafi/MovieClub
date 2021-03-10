@@ -12,8 +12,6 @@ namespace MovieClubWebApplication.Pages.GenreRazor
     public class CreateModel : PageModel
     {
         private readonly IGenreService _genreService;
-
-
         public CreateModel(IGenreService genreService)
         {
             _genreService = genreService;
@@ -21,15 +19,12 @@ namespace MovieClubWebApplication.Pages.GenreRazor
 
         [BindProperty]
         public GenreInputDtos GenreCreation { get; set; }
-
-        
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-
             await _genreService.Create(GenreCreation);
             return RedirectToPage("/Index");
         }

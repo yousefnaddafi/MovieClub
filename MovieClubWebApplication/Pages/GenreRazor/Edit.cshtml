@@ -4,14 +4,14 @@
     ViewData["Title"] = "Edit Genre";
 }
 
-<h1>Edit</h1>
-<h4>Genre List</h4>
+<h1>ویرایش</h1>
+<h4>لیست همه ی ژانرها</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+            <input type="hidden" asp-for="genres.Id" />
             <div class="form-group">
                 <label asp-for="genres.GenreName" class="control-label"></label>
                 <input asp-for="genres.GenreName" class="form-control" />
@@ -25,7 +25,7 @@
 </div>
 
 <div>
-    <a asp-page="./Index">All Lists</a>
+    <a asp-page="./Index">صفحه ی اصلی</a>
 </div>
 
 @section Scripts

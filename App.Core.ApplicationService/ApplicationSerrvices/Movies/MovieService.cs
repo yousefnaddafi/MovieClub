@@ -57,15 +57,15 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             return $"{inputDto.Title} was Upadated";
         }
 
-        public int Delete(int id)
+        public async Task<int> Delete(int id)
         {
             var item = movieRepository.GetQuery().Where(x => x.Id == id).FirstOrDefault();
             if (item==null)
             {
                 return 0;
             }
-            movieRepository.Delete(id);
-            movieRepository.Save();
+          await  movieRepository.Delete(id);
+          await movieRepository.Save();
             return id;
         }
 

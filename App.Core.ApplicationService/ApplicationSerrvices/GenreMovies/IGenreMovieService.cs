@@ -11,9 +11,9 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.GenreMovies
     public interface IGenreMovieService
     {
         Task<int> Create(GenreMovieInputDto inputDto);
-        GenreMovie Update(GenreMovie item);
-        int Delete(int id);
-        Task<GenreMovie> Get(int id);
+        Task<string> Update(GenreMovieUpdateDto item);
+        Task<int> Delete(int id);
+        Task<GenreMovieInputDto> Get(int id);
         Task<List<GenreMovie>> GetAll();
         List<GenreMovie> GetQuery();
     }

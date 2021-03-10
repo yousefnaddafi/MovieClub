@@ -29,23 +29,21 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
             await genreRepository.Save();
             return temp.Id;
         }
-        public async Task<string> Update(GenreInputDtos item)
+        public async Task<string> Update(GenreUpdateDto item)
         {
-          var eddition =  mapper.Map<Genre>(item);
+            var eddition = mapper.Map<Genre>(item);
             genreRepository.Update(eddition);
-            
             await genreRepository.Save();
-
-                return $"{item.Id}is update";
+            return $"{item.Id}is update";
 
         }
-        public int Delete(int id)
+        public async Task<int> Delete(int id)
         {
             if (genreRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
             {
                 throw new InvalidIdException("Wrong Id");
             }
-            genreRepository.Delete(id);
+            await genreRepository.Delete(id);
             return id;
         }
         public async Task<GenreInputDtos> Get(int id)
@@ -55,9 +53,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
                 throw new InvalidIdException("Wrong Id");
             }
             var genres = genreRepository.GetQuery().FirstOrDefault(x => x.Id == id);
-
             List<GenreInputDtos> result = new List<GenreInputDtos>();
-
             var mappedGenres = mapper.Map<GenreInputDtos>(genres);
             result.Add(mappedGenres);
             return mappedGenres;
@@ -66,13 +62,11 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
         {
             var genre = genreRepository.GetQuery().Select(x => x.GenreName).ToList();
             List<GenreInputDtos> result = new List<GenreInputDtos>();
-
             foreach (var item in genre)
             {
                 var mappedDirectors = mapper.Map<GenreInputDtos>(item);
                 result.Add(mappedDirectors);
             }
-
             return result;
         }
         public async Task SaveChangesAsync()

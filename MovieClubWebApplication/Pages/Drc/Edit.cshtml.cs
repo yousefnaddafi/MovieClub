@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using App.Core.ApplicationService.ApplicationSerrvices.Directors;
 using App.Core.ApplicationService.Dtos.DirectorDtos;
-using App.Core.Entities.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -18,43 +17,15 @@ namespace MovieClubWebApplication.Pages.Drc
             _directorService = directorService;
         }
         [BindProperty]
-        public List<DirectorInputDto> directorsEdit { get; set; }
-        public async Task<IAsyncResult> OnGetAsync(int ? id)
-                {
-            if (id == null)
-            {
-                return (IAsyncResult)NotFound();
-            }
-
-            directorsEdit = await _directorService.GetAll();
-
-            if (directorsEdit == null)
-            {
-                return (IAsyncResult)NotFound();
-            }
-            return (IAsyncResult)Page();
-        }
-
-        public async Task<IActionResult> OnPostAsync(Directors directors)
+        public DirectorUpdateDto directorsEdit { get; set; }     
+        public async Task<IActionResult> OnPostAsync()
         {
-            var directortToEdit =  _directorService.Update(directors);
-
-            if (directortToEdit == null)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                return Page();
             }
-
-            if (await TryUpdateModelAsync<Directors>(
-                directortToEdit,
-                "director",
-                s => s.DirectorName))
-            {
-                
-                return RedirectToPage("/Index");
-            }
-
-            return Page();
+            await _directorService.Update(directorsEdit);
+            return RedirectToPage("../Index");
         }
-
     }
 }

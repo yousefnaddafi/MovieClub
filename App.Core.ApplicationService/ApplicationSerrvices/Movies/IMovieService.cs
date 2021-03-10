@@ -14,7 +14,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
     {
         Task<int> Create(MovieInputDto inputDto);
         Task<string> Update(MovieInputUpdateDto item);
-        int Delete(int id);
+        Task<int> Delete(int id);
         Task<MovieOutputDto> Get(int id);
         Task<List<MovieOutputDto>> GetAll();
         List<Movie> GetQuery();

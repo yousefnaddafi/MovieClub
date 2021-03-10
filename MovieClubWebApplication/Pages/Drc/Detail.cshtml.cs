@@ -32,7 +32,7 @@ namespace MovieClubWebApplication.Pages.Drc
             {
                 return NotFound();
             }
-            return Page();
+            return RedirectToPage("../Index");
         }
     }
 }
