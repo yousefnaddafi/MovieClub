@@ -5,7 +5,7 @@
 <h1>جزئیات</h1>
 
 <div>
-    <h4>لیستی از ژانر فیلم های موجود</h4>
+    <h4> ژانر فیلم </h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -14,9 +14,16 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.gmDetail.MovieId)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.gmDetail.GenreId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.gmDetail.GenreId)
+        </dd>
     </dl>   
 </div>
 <div>
-    <a asp-page="./Index" asp-route-id="@Model.gmDetail.MovieId.">Edit this List</a>
+    <a asp-page="./Index" asp-route-id="@Model.gmDetail.MovieId.">Edit this List</a>|
     <a asp-page="./Index">All Lists</a>|
+    <a asp-page="./Delete" asp-route-id="@Model.gmDetail.MovieId.">Delete this List</a>
 </div>
