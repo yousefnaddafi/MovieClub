@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using App.Core.ApplicationService.Dtos.GenreMovieDtos;
 
 namespace App.Core.ApplicationService.Mapping
 {
@@ -74,9 +75,12 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.ImdbRate, o => o.MapFrom(z => z.ImdbRate))
                 .ForMember(x => x.DirectorId, o => o.MapFrom(z => z.DirectorId))
                 .ForMember(x => x.Image, o => o.MapFrom(z => z.Image))
-
-
                 ;
+            CreateMap<GenreMovieUpdateDto, GenreMovie>()
+               .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
+               .ForMember(x=> x.GenreId, o=>o.MapFrom(z=>z.GenreId))
+               ;
+
 
             CreateMap<DirectorInputDto,Directors>()
                 .ForMember(x=>x.DirectorName,o=>o.MapFrom(z=>z.FullName));
