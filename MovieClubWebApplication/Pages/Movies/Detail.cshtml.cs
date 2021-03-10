@@ -17,7 +17,9 @@ namespace MovieClubWebApplication.Pages.Movies
         {
             _movieService = movieService;
         }
-        public MovieOutputDto movieDetail { get; set; }
+        [BindProperty]
+        // public int movieDetail { get; set; }
+        public MovieOutputDto movieDetails { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -25,9 +27,9 @@ namespace MovieClubWebApplication.Pages.Movies
                 return NotFound();
             }
 
-            movieDetail =await _movieService.Get(id.Value);
+            movieDetails = await _movieService.Get(id.Value);
 
-            if (movieDetail == null)
+            if (movieDetails == null)
             {
                 return NotFound();
             }
