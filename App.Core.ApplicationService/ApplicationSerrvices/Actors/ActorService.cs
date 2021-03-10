@@ -32,19 +32,18 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
             return temp.Id;
         }
 
-        public Actor Update(Actor inputDto)
+        public Actor Update(ActorRazorDto inputDto)
         {
-            actorRepository.Update(inputDto);
+            var actor = mapper.Map<Actor>(inputDto);
+
+            actorRepository.Update(actor);
             actorRepository.Save();
-            return inputDto;
+            return actor;
         }
 
         public int Delete(int id)
         {
-            if (actorRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
-            {
-                throw new InvalidIdException("Wrong Id");
-            }
+           
             actorRepository.Delete(id);
             return id;
         }
@@ -64,15 +63,15 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
             return mappedActors;
         }
 
-        public async Task<List<ActorInputDto>> GetAll()
+        public async Task<List<Actor>> GetAll()
         {
-            var actor = actorRepository.GetQuery().Select(x => x.ActorName).ToList();
-            List<ActorInputDto> result = new List<ActorInputDto>();
+            var actor = actorRepository.GetQuery().ToList();
+            List<Actor> result = new List<Actor>();
 
             foreach (var item in actor)
             {
-                var mappedDirectors = mapper.Map<ActorInputDto>(item);
-                result.Add(mappedDirectors);
+                
+                result.Add(item);
             }
 
             return  result;

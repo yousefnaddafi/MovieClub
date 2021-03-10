@@ -12,10 +12,10 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
     public interface IActorService
     {
         Task<int> Create(ActorInputDto inputDto);
-        Actor Update(Actor item);
+        Actor Update(ActorRazorDto item);
         int Delete(int id);
         Task<ActorInputDto> Get(int id);
-        Task<List<ActorInputDto>> GetAll();
+        Task<List<Actor>> GetAll();
         List<Actor> GetQuery();
         Task SaveChangesAsync();
     }

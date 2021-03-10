@@ -13,7 +13,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.ActorMovies
         Task<int> Create(ActorMovieInputDto inputDto);
         ActorMovie Update(ActorMovie item);
         int Delete(int id);
-        Task<ActorMovie> Get(int id);
+        Task<ActorMovieInputDto> Get(int id);
         Task<List<ActorMovie>> GetAll();
         List<ActorMovie> GetQuery();
     }

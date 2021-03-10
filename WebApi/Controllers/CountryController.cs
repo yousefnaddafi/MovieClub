@@ -28,7 +28,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        public Country Update(Country inputDto)
+        public CountryRazorDto Update(CountryRazorDto inputDto)
         {
             countryService.Update(inputDto);
             return inputDto;
@@ -42,7 +42,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public Task<Country> Get(int id)
+        public Task<CountryInputDTO> Get(int id)
         {
             return countryService.Get(id);
         }

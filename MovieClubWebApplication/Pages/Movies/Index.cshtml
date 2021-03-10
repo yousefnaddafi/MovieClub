@@ -3,29 +3,33 @@
 @{
     ViewData["Title"] = "MovieIndex";
 }
+<hr>
 <h3 class="text-center bg-light">Movies</h3>
-    <hr>
+<hr>
+@foreach (var item in Model.movies)
+{
     <div class="card w-100 border-0 bg-light">
-        <img class="card-img-top" src="@Model.movieInput.Image" style="border-radius: 1rem;" alt="Card image cap">
+        <img class="card-img-top" src="@item.Image" style="border-radius: 1rem;" alt="Card image cap">
         <div class="card-body mt-3">
-            <a href="/Detail" class="card-link">
-                <h5 class="card-title float-right d-inline"> @Model.movieInput.Title  </h5>
+            <a href="#" class="card-link">
+                <h5 class="card-title float-right d-inline"> @item.Title </h5>
             </a>
-            <a href="#" class="btn btn-warning">ImdbRate: @Model.movieInput.ImdbRate</a>
-            <a href="#" class="btn btn-danger">...</a>
-            <p class="card-text text-right">@Model.movieInput.RateByUser:رای کاربران</p>
-            @foreach (var genre in Model.movieInput.Genre)
-            {
-                <p class="card-text text-right"> @genre :ژانر </p>
-            }
 
-            <p class="card-text text-right"> @Model.movieInput.ProductYear :محصول سال</p>
-            <p class="card-text text-right"> @Model.movieInput.DirectorName : کارگردان</p>
-            @foreach (var actor in Model.movieInput.Actors)
-            {
-                <p class="card-text text-right"> @actor :بازیگران </p>
-            }
-            <p class="card-text text-right">  @Model.movieInput.Summery:خلاصه داستان</p>
+
+            <a asp-page="/Movies/Detail" asp-route-id="@item.Id" class="btn btn-primary">جزییات</a>
+            <a href="#" class="card-link"><i class="far fa-bell"></i></a>
+            <a asp-page="/Movies/Delete" asp-route-id="@item.Id" class="btn btn-primary">حذف</a>
+            <a href="#" class="card-link"><i class="far fa-bell"></i></a>
+            <a asp-page="/Movies/Edit" asp-route-id="@item.Id" class="btn btn-primary">تغییر</a>
+            <a href="#" class="card-link"><i class="far fa-bell"></i></a>
+            <a href="#" class="card-link"><i class="far fa-comment-alt"></i></a>
+            <a href="#" class="card-link"><i class="far fa-heart"></i></a>
+            <a href="#" class="card-link"><i class="far fa-bookmark"></i></a>
+
         </div>
     </div>
-}
+
+};
+
+
+

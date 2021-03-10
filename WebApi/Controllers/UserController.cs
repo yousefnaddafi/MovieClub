@@ -37,7 +37,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        public User Update(UserInputDto inputDto)
+        public User Update(UserUpdateDto inputDto)
         {
             this.userService.Update(inputDto);
             return mapper.Map<User>(inputDto);

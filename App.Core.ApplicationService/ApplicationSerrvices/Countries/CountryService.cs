@@ -30,37 +30,49 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Countries
             return inputDto.CountryName;
         }
 
-        public Country Update(Country inputDto)
+        public Country Update(CountryRazorDto inputDto)
         {
-            //var temp = mapper.Map<Country>(inputDto);
-            countryRepository.Update(inputDto);
+            var country = mapper.Map<Country>(inputDto);
+
+            countryRepository.Update(country);
             countryRepository.Save();
-            return inputDto;
+            return country;
         }
 
         public int Delete(int id)
         {
-            if (countryRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
-            {
-                throw new InvalidIdException("Wrong Id");
-            }
+            
             countryRepository.Delete(id);
             return id;
         }
 
-        public async Task<Country> Get(int id)
+        public async Task<CountryInputDTO> Get(int id)
         {
             if (countryRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
             {
                 throw new InvalidIdException("Wrong Id");
             }
+            var countries = countryRepository.GetQuery().FirstOrDefault(x => x.Id == id);
 
-            return await countryRepository.Get(id);
+            List<CountryInputDTO> result = new List<CountryInputDTO>();
+
+            var mappedCountries = mapper.Map<CountryInputDTO>(countries);
+            result.Add(mappedCountries);
+            return mappedCountries;
         }
 
         public async Task<List<Country>> GetAll()
         {
-            return await countryRepository.GetAll();
+            var country = countryRepository.GetQuery().ToList();
+            List<Country> result = new List<Country>();
+
+            foreach (var item in country)
+            {
+                
+                result.Add(item);
+            }
+
+            return result;
         }
         public List<Country> GetQuery()
         {

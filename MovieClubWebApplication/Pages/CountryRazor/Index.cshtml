@@ -1,20 +1,22 @@
 ﻿@page
-@model MovieClubWebApplication.Pages.ActorRazor.IndexModel
+@model MovieClubWebApplication.Pages.CountryRazor.IndexModel
 @{
-    ViewData["Title"] = "Actors";
+    ViewData["Title"] = "Countries";
 }
-
+<h3 class="text-center bg-light">Countries</h3>
+<hr>
+<div class="card w-100 border-0 bg-light">
 
     <hr>
-    <h3 class="text-center bg-light">Actors</h3>
+    <h3 class="text-center bg-light">Countries</h3>
     <hr>
-    @foreach (var item in Model.actors)
+    @foreach (var item in Model.countries)
     {
         <div class="card w-100 border-0 bg-light">
-            
+
             <div class="card-body mt-3">
                 <a href="#" class="card-link">
-                    <h5 class="card-title float-right d-inline"> @item.ActorName </h5>
+                    <h5 class="card-title float-right d-inline"> @item.CountryName </h5>
                 </a>
 
 

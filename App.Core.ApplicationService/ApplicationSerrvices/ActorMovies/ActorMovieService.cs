@@ -36,26 +36,38 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.ActorMovies
         }
         public int Delete(int id)
         {
-            if (ActorMovieRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
-            {
-                throw new InvalidIdException("Wrong Id");
-            }
+            
             ActorMovieRepository.Delete(id);
             return id;
         }
 
-        public async Task<ActorMovie> Get(int id)
+        public async Task<ActorMovieInputDto> Get(int id)
         {
             if (ActorMovieRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
             {
                 throw new InvalidIdException("Wrong Id");
             }
-            return await ActorMovieRepository.Get(id);
+            var actorMovies = ActorMovieRepository.GetQuery().FirstOrDefault(x => x.Id == id);
+
+            List<ActorMovieInputDto> result = new List<ActorMovieInputDto>();
+
+            var mappedActorMovies = mapper.Map<ActorMovieInputDto>(actorMovies);
+            result.Add(mappedActorMovies);
+            return mappedActorMovies;
         }
 
         public async Task<List<ActorMovie>> GetAll()
         {
-            return await ActorMovieRepository.GetAll();
+            var actorMovies = ActorMovieRepository.GetQuery().ToList();
+            List<ActorMovie> result = new List<ActorMovie>();
+
+            foreach (var item in actorMovies)
+            {
+                
+                result.Add(item);
+            }
+
+            return result;
         }
         public List<ActorMovie> GetQuery()
         {

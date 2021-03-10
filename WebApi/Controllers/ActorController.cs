@@ -30,7 +30,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        public Actor Update(Actor inputDto)
+        public Actor Update(ActorRazorDto inputDto)
         {
             return actorService.Update(inputDto);
         }

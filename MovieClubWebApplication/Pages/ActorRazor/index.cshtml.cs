@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using App.Core.ApplicationService.ApplicationSerrvices.Actors;
 using App.Core.ApplicationService.Dtos.ActorDtos;
+using App.Core.Entities.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -11,17 +12,17 @@ namespace MovieClubWebApplication.Pages.ActorRazor
 {
     public class IndexModel : PageModel
     {
-        private readonly IActorService _actorService;
-        public IndexModel(IActorService actorService)
+        private readonly IActorService actorService;
+        public IndexModel(IActorService _actorService)
         {
-            _actorService = actorService;
+            actorService = _actorService;
         }
         [BindProperty]
-        public List<ActorInputDto> actorInput { get; set; }
-
-        public async Task OnGetAsync()
+        public List<Actor> actors { get; set; }
+        public async Task OnGetAsync(int id)
         {
-            actorInput = await _actorService.GetAll();
+            actors = await actorService.GetAll();
         }
+
     }
 }

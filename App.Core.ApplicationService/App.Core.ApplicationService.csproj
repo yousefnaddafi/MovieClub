@@ -20,8 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\ActorDtos\" />
-    <Folder Include="Dtos\ActorMovieDtos\" />
     <Folder Include="Dtos\CountryMovieDtos\" />
     <Folder Include="ApplicationSerrvices\Commentts\" />
     <Folder Include="Dtos\RateByUserDtos\" />

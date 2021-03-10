@@ -41,10 +41,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.CountryMovies
 
         public int Delete(int id)
         {
-            if (countryMovieRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
-            {
-                throw new InvalidIdException("Wrong Id");
-            }
+            
             countryMovieRepository.Delete(id);
             return id;
         }
