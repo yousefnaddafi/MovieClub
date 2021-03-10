@@ -20,24 +20,25 @@ namespace MovieClubWebApplication.Pages.ActorRazor
         public Actor actorDLT { get; set; }
         public string ErrorMessage { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id, bool? saveChangesError = false)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+           
 
-            await _actorService.Get(id.Value);
+            var Actor=await _actorService.Get(id);
+            if (Actor == null)
+            {
+                return RedirectToPage("/NotFound");
+            }
 
             if (actorDLT == null)
             {
                 return NotFound();
             }
 
-            if (saveChangesError.GetValueOrDefault())
-            {
-                ErrorMessage = "Delete failed. Try again";
-            }
+            //if (saveChangesError.GetValueOrDefault())
+            //{
+            //    ErrorMessage = "Delete failed. Try again";
+            //}
             return Page();
         }
         public async Task<IActionResult> OnPostAsync(int? id)
