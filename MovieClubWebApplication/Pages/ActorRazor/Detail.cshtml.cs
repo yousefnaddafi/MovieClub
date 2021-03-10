@@ -16,7 +16,7 @@ namespace MovieClubWebApplication.Pages.ActorRazor
         {
             _actorService = actorService;
         }
-        public ActorInputDto actorDetail { get; set; }
+        public ActorOutputDto actorDetail { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

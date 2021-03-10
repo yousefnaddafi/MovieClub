@@ -43,35 +43,31 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
 
         public int Delete(int id)
         {
-           
             actorRepository.Delete(id);
             return id;
         }
 
-        public async Task<ActorInputDto> Get(int id)
+        public async Task<ActorOutputDto> Get(int id)
         {
-            if (actorRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
-            {
-                throw new InvalidIdException("Wrong Id");
-            }
+           
             var actors = actorRepository.GetQuery().FirstOrDefault(x => x.Id == id);
 
-            List<ActorInputDto> result = new List<ActorInputDto>();
+            List<ActorOutputDto> result = new List<ActorOutputDto>();
 
-            var mappedActors = mapper.Map<ActorInputDto>(actors);
+            var mappedActors = mapper.Map<ActorOutputDto>(actors);
             result.Add(mappedActors);
             return mappedActors;
         }
 
-        public async Task<List<Actor>> GetAll()
+        public async Task<List<ActorOutputDto>> GetAll()
         {
             var actor = actorRepository.GetQuery().ToList();
-            List<Actor> result = new List<Actor>();
+            List<ActorOutputDto> result = new List<ActorOutputDto>();
 
             foreach (var item in actor)
             {
-                
-                result.Add(item);
+                var actorOpD = mapper.Map<ActorOutputDto>(item);
+                result.Add(actorOpD);
             }
 
             return  result;
