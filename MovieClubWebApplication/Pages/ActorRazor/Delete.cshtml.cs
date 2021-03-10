@@ -41,16 +41,17 @@ namespace MovieClubWebApplication.Pages.ActorRazor
             //}
             return Page();
         }
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(int id)
         {
-            if (id == null)
+            var Actor = await _actorService.Get(id);
+            if (Actor == null)
             {
                 return NotFound();
             }
 
             if (actorDLT != null)
             {
-                _actorService.Delete(id.Value);
+                _actorService.Delete(id);
             }
             return RedirectToPage("/Index");
         }

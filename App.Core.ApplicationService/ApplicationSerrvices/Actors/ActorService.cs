@@ -43,7 +43,6 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
 
         public int Delete(int id)
         {
-           
             actorRepository.Delete(id);
             return id;
         }
