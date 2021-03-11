@@ -34,7 +34,7 @@ namespace MovieClubWebApplication.Pages
         [BindProperty]
         public List<MovieOutputDto> movieOutputs { get; set; }
         [BindProperty]
-        public List<Movie> movies { get; set; }
+        public Task<List<MovieRelatedDto>> movies { get; set; }
         [BindProperty]
         public List<MovieOutputDto> movieHigh { get; set; }
 
