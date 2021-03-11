@@ -17,20 +17,24 @@
 <hr>
 @foreach (var item in Model.movieInput)
 {
-<div class="card w-100 border-0 bg-light">
-    <img class="card-img-top" src="@item.Image" style="border-radius: 1rem;" alt="Card image cap">
-    <div class="card-body mt-3">
-        <a asp-page="/Movies/Detail" asp-route-id="@item.Id" class="card-link">
-            <h5 class="card-title float-right d-inline"> @item.Title </h5>
-        </a>
-        <a class="btn btn-warning">ImdbRate: @item.ImdbRate</a>
-   
-        <p class="card-text text-right"> @item.ProductYear :محصول سال</p>
-       
-        <a href="#" class="card-link"><i class="far fa-bell"></i></a>
-        <a href="#" class="card-link"><i class="far fa-comment-alt"></i></a>
-        <a href="#" class="card-link"><i class="far fa-heart"></i></a>
-        <a href="#" class="card-link"><i class="far fa-bookmark"></i></a>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+            <div class="card bg-light">
+                <img class="card-img-top" src="@item.Image" style="border-radius: 1rem; height: 100%; width: 100%;" alt="Card image cap">
+                <div class="card-body mt-3">
+                    <a asp-page="/Movies/Detail" asp-route-id="@item.Id" class="card-link">
+                        <h5 class="card-title float-right d-inline"> @item.Title </h5>
+                    </a>
+                    <a class="btn btn-warning">ImdbRate: @item.ImdbRate</a>
+                    <p class="card-text text-right"> @item.ProductYear :محصول سال</p>
+                    <a href="#" class="card-link"><i class="far fa-bell"></i></a>
+                    <a href="#" class="card-link"><i class="far fa-comment-alt"></i></a>
+                    <a href="#" class="card-link"><i class="far fa-heart"></i></a>
+                    <a href="#" class="card-link"><i class="far fa-bookmark"></i></a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 }
