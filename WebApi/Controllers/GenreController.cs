@@ -28,7 +28,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        public async Task<GenreUpdateDto> Update(GenreUpdateDto item)
+        public async Task<Genre> Update(GenreInputDtos item)
         {
             await GenreService.Update(item);
             return item;
@@ -42,7 +42,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public Task<GenreInputDtos> Get(int id)
+        public Task<GenreOutPutDto> Get(int id)
         {
             return GenreService.Get(id);
         }

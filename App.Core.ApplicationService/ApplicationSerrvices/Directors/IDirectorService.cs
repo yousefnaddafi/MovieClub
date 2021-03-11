@@ -13,8 +13,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
         Task<string> Create(DirectorInputDto inputDto);
        Task<string> Update(DirectorUpdateDto item);
         Task<int> Delete(int id);
-        Task<DirectorInputDto> Get(int id);
-        Task<List<DirectorInputDto>> GetAll();
+        Task<DirectorOutputDto> Get(int id);
+        Task<List<DirectorOutputDto>> GetAll();
         List<Entities.Model.Directors> GetQuery();
         Task SaveChangesAsync();
 

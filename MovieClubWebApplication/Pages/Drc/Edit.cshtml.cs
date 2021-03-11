@@ -25,7 +25,7 @@ namespace MovieClubWebApplication.Pages.Drc
                 return Page();
             }
             await _directorService.Update(directorsEdit);
-            return RedirectToPage("../Index");
+            return RedirectToPage("./Index");
         }
     }
 }

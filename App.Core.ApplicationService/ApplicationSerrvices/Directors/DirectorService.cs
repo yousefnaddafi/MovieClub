@@ -47,40 +47,48 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
 
         public async Task<int> Delete(int id)
         {
-            var dltDirector = directorRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault();
-           if(dltDirector.ToString()==null)
+            // var dltDirector = directorRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault();
+            //if(dltDirector.ToString()==null)
+            //{
+            //  return 0;
+
+            //}
+            var directortoDelete = directorRepository.GetQuery().FirstOrDefault(x => x.Id == id);
+            if(directortoDelete != null)
             {
-                return 0;
+               await directorRepository.Delete(id);  
+               await directorRepository.Save();
             }
-          await directorRepository.Delete(id);
-          await directorRepository.Save();
+
           return id;
+        
+          
         }
 
-        public async Task<DirectorInputDto> Get(int id)
+        public async Task<DirectorOutputDto> Get(int id)
         {
-            if (directorRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
-            {
-                throw new InvalidIdException("Wrong Id");
-            }
+            //if (directorRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            //{
+            //    throw new InvalidIdException("Wrong Id");
+            //}
             var directorss = directorRepository.GetQuery().FirstOrDefault(x => x.Id == id);
 
-            List<DirectorInputDto> result = new List<DirectorInputDto>();
+            List<DirectorOutputDto> result = new List<DirectorOutputDto>();
 
-            var mappedDirectorss = mapper.Map<DirectorInputDto>(directorss);
+            var mappedDirectorss = mapper.Map<DirectorOutputDto>(directorss);
             result.Add(mappedDirectorss);
             return mappedDirectorss;
         }
 
 
-        public async Task<List<DirectorInputDto>> GetAll()
+        public async Task<List<DirectorOutputDto>> GetAll()
         {
-            var directorrr = directorRepository.GetQuery().Select(x => x.DirectorName).ToList();
-            List<DirectorInputDto> result = new List<DirectorInputDto>();
+            var directorrr = directorRepository.GetQuery().ToList();
+            List<DirectorOutputDto> result = new List<DirectorOutputDto>();
 
             foreach (var item in directorrr)
             {
-                var mappedDirectors = mapper.Map<DirectorInputDto>(item);
+                var mappedDirectors = mapper.Map<DirectorOutputDto>(item);
                 result.Add(mappedDirectors);
             }
 

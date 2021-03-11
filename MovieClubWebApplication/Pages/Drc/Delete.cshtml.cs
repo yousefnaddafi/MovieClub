@@ -20,17 +20,26 @@ namespace MovieClubWebApplication.Pages.Drc
             _directorService = directService;
         }
         [BindProperty]
-        public DirectorInputDto directorDLT { get; set; }
-        public string ErrorMessage { get; set; }
-        public async Task<IActionResult> OnPostAsync(int id)
+        public DirectorOutputDto directorDLT { get; set; }
+        [BindProperty]
+        public int directorId { get; set; }
+        public async Task<IActionResult> OnGet(int id)
         {
-            if (!ModelState.IsValid)
+            directorDLT = await _directorService.Get(id);
+            if (directorDLT == null)
             {
-                return Page();
+                return RedirectToPage("/NotFound");
             }
-               await _directorService.Delete(id);
-            
-            return RedirectToPage("../Index");
+            return Page();
+        }
+        public async Task<IActionResult> OnPostAsync()
+        {
+            directorId = await _directorService.Delete(directorId);
+            if (directorId == null)
+            {
+                return RedirectToPage("/NotFound");
+            }
+            return RedirectToPage("./Index");
         }      
     }
 }

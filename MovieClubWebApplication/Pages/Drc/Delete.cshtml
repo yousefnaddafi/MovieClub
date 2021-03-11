@@ -1,29 +1,40 @@
-﻿@page
+﻿@page "{id}"
 @model MovieClubWebApplication.Pages.Drc.DeleteModel
 @{
     ViewData["Title"] = "Delete";
-    }
+}
 
 <h1>حذف کارگردان</h1>
+<h1>Delete Confirmation</h1>
+<div class="alert alert-danger">
+    <h5>Are you sure you want to delete this list? - @Model.directorDLT.Id</h5>
+    <form method="post">
+        <button type="submit"  class="btn btn-danger">Yes</button>
+        <a class="btn btn-primary" asp-page="./Index">No</a>
+    </form>
+</div>
 
+
+
+<!--j
 <h3>آیا مطمئن به حذف این کارگردان هستید؟</h3>
 <p>توجه: حذف این کارگردان تمام فایل های مرتبط به آن را نیز حذف میکند</p>
 <div>
     <h4>اسم فیلم مورد نظر</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.directorDLT.FullName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.directorDLT.FullName)
-        </dd>
-    </dl>
 
-    <form method="post">
-        <input type="hidden" asp-for="directorDLT.Id" />
-        <input type="submit" value="حذف" class="btn btn-danger" /> |
-        <a asp-page="./Index">برگشت به لیست کارگردان های موجود</a>
-    </form>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.directorDLT.FullName)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.directorDLT.FullName)
+    </dd>
 </div>
 
+<form method="post">
+    <input type="hidden" asp-for="directorDLT.Id" />
+    <input type="submit" value="حذف" class="btn btn-danger" /> |
+    <a asp-page="./Index">برگشت به لیست کارگردان های موجود</a>
+</form>
+</div>
+    -->

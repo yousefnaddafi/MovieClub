@@ -18,7 +18,7 @@ namespace MovieClubWebApplication.Pages.GenreRazor
             _genreService = genreService;
         }
         [BindProperty]
-        public GenreUpdateDto genres { get; set; }
+        public GenreInputDtos genres { get; set; }
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -27,6 +27,6 @@ namespace MovieClubWebApplication.Pages.GenreRazor
             }
             await _genreService.Update(genres);
             return RedirectToPage("../User/Index");
-        }
+        }        
     }
 }

@@ -28,7 +28,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        public GenreMovie Update(GenreMovie item)
+        public GenreMovieUpdateDto Update(GenreMovieUpdateDto item)
         {
             this.GenreMovieService.Update(item);
             return item;
@@ -42,7 +42,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public Task<GenreMovie> Get(int id)
+        public Task<GenreMovieInputDto> Get(int id)
         {
             return GenreMovieService.Get(id);
         }

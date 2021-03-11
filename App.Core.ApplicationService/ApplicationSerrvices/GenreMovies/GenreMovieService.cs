@@ -30,7 +30,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.GenreMovies
             return temp.Id;
         }
 
-        public async Task<string> Update(GenreMovieInputDto item)
+        public async Task<string> Update(GenreMovieUpdateDto item)
         {
             var GMovie = mapper.Map<GenreMovie>(item);
             this.genreMovieRepository.Update(GMovie);

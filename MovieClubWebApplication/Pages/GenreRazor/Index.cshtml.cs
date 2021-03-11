@@ -17,7 +17,7 @@ namespace MovieClubWebApplication.Pages.GenreRazor
             _genreService = genreService;
         }
         [BindProperty]
-        public List<GenreInputDtos> genreInput { get; set; }
+        public List<GenreOutPutDto> genreInput { get; set; }
 
         public async Task OnGetAsync()
         {

@@ -17,7 +17,7 @@ namespace MovieClubWebApplication.Pages.Drc
             _directorService = directorService;
         }
         [BindProperty]
-        public List<DirectorInputDto> directorInput { get; set; }
+        public List<DirectorOutputDto> directorInput { get; set; }
         public async Task OnGetAsync()
         {
             directorInput = await _directorService.GetAll();

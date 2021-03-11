@@ -29,7 +29,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
             await genreRepository.Save();
             return temp.Id;
         }
-        public async Task<string> Update(GenreUpdateDto item)
+        public async Task<string> Update(GenreInputDtos item)
         {
             var eddition = mapper.Map<Genre>(item);
             genreRepository.Update(eddition);
@@ -46,25 +46,25 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
             await genreRepository.Delete(id);
             return id;
         }
-        public async Task<GenreInputDtos> Get(int id)
+        public async Task<GenreOutPutDto> Get(int id)
         {
             if (genreRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
             {
                 throw new InvalidIdException("Wrong Id");
             }
             var genres = genreRepository.GetQuery().FirstOrDefault(x => x.Id == id);
-            List<GenreInputDtos> result = new List<GenreInputDtos>();
-            var mappedGenres = mapper.Map<GenreInputDtos>(genres);
+            List<GenreOutPutDto> result = new List<GenreOutPutDto>();
+            var mappedGenres = mapper.Map<GenreOutPutDto>(genres);
             result.Add(mappedGenres);
             return mappedGenres;
         }
-        public async Task<List<GenreInputDtos>> GetAll()
+        public async Task<List<GenreOutPutDto>> GetAll()
         {
             var genre = genreRepository.GetQuery().Select(x => x.GenreName).ToList();
-            List<GenreInputDtos> result = new List<GenreInputDtos>();
+            List<GenreOutPutDto> result = new List<GenreOutPutDto>();
             foreach (var item in genre)
             {
-                var mappedDirectors = mapper.Map<GenreInputDtos>(item);
+                var mappedDirectors = mapper.Map<GenreOutPutDto>(item);
                 result.Add(mappedDirectors);
             }
             return result;

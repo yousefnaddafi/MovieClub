@@ -17,7 +17,7 @@ namespace MovieClubWebApplication.Pages.Drc
         {
             _directorService = directorService;
         }
-        public DirectorInputDto directorDetail { get; set; }
+        public DirectorOutputDto directorDetail { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,11 +28,12 @@ namespace MovieClubWebApplication.Pages.Drc
 
             directorDetail = await _directorService.Get(id.Value);
 
+
             if (directorDetail == null)
             {
                 return NotFound();
             }
-            return RedirectToPage("../Index");
-        }
+            return Page();
+        }      
     }
 }

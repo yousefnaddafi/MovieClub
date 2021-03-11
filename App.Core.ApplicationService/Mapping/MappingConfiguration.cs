@@ -76,14 +76,18 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.DirectorId, o => o.MapFrom(z => z.DirectorId))
                 .ForMember(x => x.Image, o => o.MapFrom(z => z.Image))
                 ;
-            CreateMap<GenreMovieUpdateDto, GenreMovie>()
-               .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
-               .ForMember(x=> x.GenreId, o=>o.MapFrom(z=>z.GenreId))
-               ;
-
-
+           
             CreateMap<DirectorInputDto,Directors>()
                 .ForMember(x=>x.DirectorName,o=>o.MapFrom(z=>z.FullName));
+
+            CreateMap<Directors, DirectorOutputDto>()
+                .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
+                .ForMember(x => x.FullName, o => o.MapFrom(z => z.DirectorName));
+
+            CreateMap<DirectorUpdateDto, Directors>()
+               .ForMember(x => x.DirectorName, o => o.MapFrom(z => z.DirectorName))
+               .ForMember(x=> x.Id , o=>o.MapFrom(z=>z.Id))
+               ;
 
             CreateMap<Actor, ActorOutputDto>()
                 .ForMember(x => x.ActorName, o => o.MapFrom(z => z.ActorName))
@@ -118,6 +122,10 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.GenreName, o => o.MapFrom(z => z.GenreName))
                 .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
                 ;
+            CreateMap<Genre, GenreOutPutDto>()
+               .ForMember(x => x.GenreName, o => o.MapFrom(z => z.GenreName))
+               .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
+               ;
 
             CreateMap<ActorMovieInputDto, ActorMovie>()
                 .ForMember(x => x.ActorId, o => o.MapFrom(z => z.ActorId))
@@ -154,6 +162,17 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.Director, o => o.MapFrom(z => z.Movie.Director.DirectorName))
                 .ForMember(x => x.Actors, o => o.MapFrom(z => z.Movie.ActorMovies.Select(y=> y.Actor.ActorName)))
                 ;
+            CreateMap<GenreMovieInputDto, GenreMovie>()
+                .ForMember(x => x.GenreId, o => o.MapFrom(z => z.GenreId))
+                .ForMember(x => x.MovieId, o => o.MapFrom(z => z.MovieId))
+                ;
+            CreateMap<GenreMovieUpdateDto, GenreMovie>()
+                .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
+                .ForMember(x => x.GenreId, o => o.MapFrom(z => z.GenreId))
+                .ForMember(x => x.MovieId, o => o.MapFrom(z => z.MovieId))
+                ;
+
+
             CreateMap<ActorMovie, SearchDetailFilterDto>()
                 .ForMember(x => x.Title, o => o.MapFrom(z => z.Movie.Title))
                 .ForMember(x => x.RateByUser, o => o.MapFrom(z => z.Movie.RateByUser))

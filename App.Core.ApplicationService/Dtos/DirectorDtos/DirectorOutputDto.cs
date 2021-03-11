@@ -4,10 +4,9 @@ using System.Text;
 
 namespace App.Core.ApplicationService.Dtos.DirectorDtos
 {
-   public class DirectorUpdateDto
+   public class DirectorOutputDto
     {
         public int Id { get; set; }
-        public string DirectorName { get; set; }
-
+        public string FullName { get; set; }
     }
 }

@@ -16,19 +16,22 @@ namespace MovieClubWebApplication.Pages.GenreRazor
         {
             _genreService = genreService;
         }
-        public GenreInputDtos genreDetail { get; set; }
-        public async Task<IActionResult> OnGetAsync(int? id)
-        {
-            if (id == null)
+        public GenreOutPutDto genreDetail { get; set; }
+        
+            public async Task<IActionResult> OnGetAsync(int? id)
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                genreDetail = await _genreService.Get(id.Value);
+
+                if (genreDetail == null)
+                {
+                    return NotFound();
+                }
+                return Page();
             }
-            genreDetail = await _genreService.Get(id.Value);
-            if (genreDetail == null)
-            {
-                return NotFound();
-            }
-            return RedirectToPage("../Index");
         }
-    }
 }
