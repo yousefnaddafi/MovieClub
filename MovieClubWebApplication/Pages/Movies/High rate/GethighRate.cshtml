@@ -2,48 +2,93 @@
 @model MovieClubWebApplication.Pages.Movies.GethighRateModel
 @{ ViewData["Title"] = "BestMovie";
 }
-<div class="col-lg-8 col-md-8 col-sm-12">
-    
-        <a class="carousel-control-prev" href="#carouselExampleIndicators1" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators1" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-    <hr>
-    <h3 class="text-center bg-light">Movies Get High rate</h3>
-    <hr>
+<div class="row mt-3" id="Post">
+    <!--Icon Left Post-->
     @foreach (var item in Model.movieInput)
-    {
-        <div class="card w-100 border-0 bg-light">
-            <img class="card-img-top" src="@item.Image" style="border-radius: 1rem;" alt="Card image cap" >
-            <div class="card-body mt-3">
-                <a href="/Detail" class="card-link">
-                    <h5 class="card-title float-right d-inline"> @item.Title </h5>
-                </a>                       
-            <a  class="btn btn-warning">ImdbRate: @item.ImdbRate</a>
-                        <a href="#" class="btn btn-danger">...</a>
-                        <p class="card-text text-right">@item.RateByUser:رای کاربران</p>
-                        @foreach (var genre in item.Genre)
-                        {
-                            <p class="card-text text-right"> @genre :ژانر </p>
-                        }
 
-            <p class="card-text text-right"> @item.ProductYear :محصول سال</p>
-            <p class="card-text text-right"> @item.DirectorName : کارگردان</p>
-                        @foreach (var actor in item.Actors)
-                        {
-                            <p class="card-text text-right"> @actor :بازیگران </p>
-                        }
-            <p class="card-text text-right">  @item.Summery:خلاصه داستان</p>       
-                <a href="#" class="card-link"><i class="far fa-bell"></i></a>
-                <a href="#" class="card-link"><i class="far fa-comment-alt"></i></a>
-                <a href="#" class="card-link"><i class="far fa-heart"></i></a>
-                <a href="#" class="card-link"><i class="far fa-bookmark"></i></a>
+    {
+        <div class="col-7 col-sm-7 col-md-6 col-lg-6 col-xl-6 m-auto text-right" id="Content">
+            <a href="#" class="card-link">
+                <b class="card-title" style="margin-bottom: 0;"> @item.Title </b>
+            </a>
+        </div>
+        <div class="col-2 col-sm-2 col-md-3 col-lg-3 col-xl-3 m-auto" id="Icons">
+            <div class="d-flex" style="margin-left: 5px;">
+                <div class="bars-icon">
+                    <button type="button" data-toggle="modal" data-target="#exampleModal" style="border: none; padding: 0;">
+                        <a asp-page="/Movies/Detail" asp-route-id="@item.Id" class="btn btn-dark">
+                            <i class="fas fa-bars"></i>
+                        </a>
+                    </button>
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content card">
+                                <h5 class="card-title d-inline-flex">Movie</h5>
+
+                                <div class="modal-header">
+
+                                    <img class="card-img-top" src="@item.Image" style="border-radius: 1rem;" alt="Card image cap">
+                                </div>
+                                <div class="modal-body">
+                                    <div class="d-flex justify-content-center">
+                                        <a href="./Index" class="card-link">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <input type="hidden" asp-for="@item.Id" />
+                                        </a>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="./Index" class="card-link">
+                                            <h5 class="card-title d-inline-flex">@item.Title  فیلم</h5>
+                                        </a>
+                                    </div>
+
+                                    <a href="#" class="btn btn-warning">ImdbRate: @item.ImdbRate</a>
+                                    @foreach (var genre in item.Genre)
+                                    {
+                                        <p class="card-text text-right"> @genre :ژانر </p>
+                                    }
+                                    <p class="card-text"> محصول کشور: </p>
+                                    <p class="card-text">  @item.ProductYear :محصول سال </p>
+                                    <p class="card-text text-right"> @item.DirectorName : کارگردان</p>
+                                    @foreach (var actor in item.Actors)
+                                    {
+                                        <p class="card-text text-right"> @actor :بازیگران </p>
+                                    }
+                                    <p class="card-text text-right">  @item.Summery:خلاصه داستان</p>
+
+                                </div>
+                                <div class="modal-footer ml-auto mr-auto">
+                                    <a href="./Edit" class="btn btn-primary">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-primary">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                    <a href="./Delete" class="btn btn-primary">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="trash-icon mx-1">
+                    <a href="./Delete" class="btn btn-dark">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </div>
+                <div class="edit-icon">
+                    <a href="./Edit" class="btn btn-dark">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </div>
             </div>
         </div>
     }
+
+
 </div>

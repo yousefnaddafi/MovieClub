@@ -207,10 +207,19 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             temp.Add(secondMovie);
             return temp;
         }
-        public List<Movie> MostVisited()
+        public async Task<List<MovieRelatedDto>> MostVisited()
         {
             var Most = movieRepository.GetQuery().OrderByDescending(x => x.VisitCount).Take(5).ToList();
-            return Most;
+            var MostVisit = new List<MovieRelatedDto>();
+
+            foreach (var item in Most)
+            {
+                var MappedMovie = mapper.Map<MovieRelatedDto>(item);
+                MostVisit.Add(MappedMovie);
+            }
+            //await movieRepository.Save();
+
+            return MostVisit;
         }
 
         public void RateByUser(RateByUserInputDto inputDto) {
