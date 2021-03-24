@@ -99,8 +99,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             return movieRepository.GetQuery().ToList();
         }
 
-        public List<SearchDetailFilterDto> Search(SearchMovieInputDto inputDto) {
-            List<SearchDetailFilterDto> result = new List<SearchDetailFilterDto>();
+        public List<MovieOutputDto> Search(SearchMovieInputDto inputDto) {
+            List<MovieOutputDto> result = new List<MovieOutputDto>();
 
             if (actorMovieRepository.GetQuery().Include(x => x.Actor).Include(y => y.Movie).Select
                     (z => z.Actor.ActorName == inputDto.Actor).FirstOrDefault() ||
@@ -114,7 +114,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
                 var tempSearchedByRateByUser = movieRepository.GetQuery().Where(x => x.RateByUser == inputDto.RateByUser).ToList();
                 foreach (var item in tempSearchedByRateByUser)
                 {
-                    var mappedTemp = mapper.Map<SearchDetailFilterDto>(item);
+                    var mappedTemp = mapper.Map<MovieOutputDto>(item);
                     result.Add(mappedTemp);
                 }
 
@@ -122,7 +122,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
                         .Where(z => z.Genre.GenreName == inputDto.Genre).ToList();
                 foreach (var item in tempSearchedByGenre)
                 {
-                    var mappedTemp = mapper.Map<SearchDetailFilterDto>(item);
+                    var mappedTemp = mapper.Map<MovieOutputDto>(item);
                     result.Add(mappedTemp);
                 }
 
@@ -130,7 +130,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
                         .Where(z => z.Actor.ActorName == inputDto.Actor).ToList();
                 foreach (var item in tempSearchedByActor)
                 {
-                    var mappedTemp = mapper.Map<SearchDetailFilterDto>(item);
+                    var mappedTemp = mapper.Map<MovieOutputDto>(item);
                     result.Add(mappedTemp);
                 }
 

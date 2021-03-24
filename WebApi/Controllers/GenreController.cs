@@ -28,10 +28,10 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        public async Task<Genre> Update(GenreInputDtos item)
+        public async Task<string> Update(GenreInputDtos item)
         {
             await GenreService.Update(item);
-            return item;
+            return $"the {item} has been updated";
         }
 
         [HttpDelete]

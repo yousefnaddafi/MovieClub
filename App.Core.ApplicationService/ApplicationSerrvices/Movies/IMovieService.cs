@@ -22,7 +22,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         Task<List<MovieRelatedDto>> GetNewComing();
         void RateByUser(RateByUserInputDto inputDto);
         Task<List<MovieCompareOutputDto>> Compare(MovieCompareInputDto inputDto);
-        List<SearchDetailFilterDto> Search(SearchMovieInputDto inputDto);
+        List<MovieOutputDto> Search(SearchMovieInputDto inputDto);
         Task<List<MovieOutputDto>> GetHighRate();
         Task SaveChangesAsync();
         Task<List<MovieRelatedDto>> MostVisited();

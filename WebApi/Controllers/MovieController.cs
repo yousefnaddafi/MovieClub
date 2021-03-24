@@ -103,7 +103,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("Search")]
-        public List<SearchDetailFilterDto> SearchMovies([FromBody] SearchMovieInputDto searchInput)
+        public List<MovieOutputDto> SearchMovies([FromBody] SearchMovieInputDto searchInput)
         {
             return moviesService.Search(searchInput);
         }
@@ -120,7 +120,7 @@ namespace WebApi.Controllers
             return moviesService.GetHighRate();
         }
         [HttpGet("MostVisited")]
-        public List<Movie> MostVisit()
+        public Task<List<MovieRelatedDto>> MostVisit()
         {
             return moviesService.MostVisited();
         }
