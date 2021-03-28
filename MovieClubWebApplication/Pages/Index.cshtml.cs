@@ -46,6 +46,12 @@ namespace MovieClubWebApplication.Pages
             movies = _movieService.MostVisited();
             movieHigh = await _movieService.GetHighRate();
         }   
+        public async Task<IActionResult> OnGetSearchMovie()
+        {
+            movieList = await _movieService.GetAll();
+            
+            return new JsonResult(movieList);
+        }
    }       
 } 
 

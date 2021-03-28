@@ -2,7 +2,7 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
-    }
+}
 
 
 <!--search bar-->
@@ -14,7 +14,7 @@
                     <div class="p-1 bg-light shadow-sm">
                         <div class="input-group">
                             <div class="input-group-append">
-                                <button type="submit" class="btn btn-link bg-primary text-dark">
+                                <button type="submit" class="btn btn-link bg-primary text-dark" id="Searchollah">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
@@ -40,6 +40,34 @@
     </div>
 </section>
 <!--advanced search-->
+
+@section scripts{
+    
+
+<script type="text/javascript">
+
+    $(function () {
+
+        $("searchField").keyup(function () {
+
+            $.ajax({
+
+                type: "POST",
+                url: "https://localhost:5001/api/Movie/Search",
+                data: data,
+                datatype: "html",
+                success: function (data) {
+                      $('#result').html(data);
+                       }
+                   });
+            });
+        });
+
+
+
+</script>
+}
+
 
 <section class="advanced search">
     <div class="container d-none d-md-block">
@@ -247,267 +275,267 @@
                         <p class="card-text text-right">@item.RateByUser:رای کاربران</p>
                     </div>
                 </div>
-            } 
+            }
 
-                <div class="row mt-3 py-1">
-                    <div class="col-12 text-center mt-3">
-                
-                         <a asp-page="/Movies/High rate/GethighRate" asp-route-id="Model.movieHigh.Id" class="btn btn-primary">ورود به آرشیو</a>  
-                    </div>
-                </div>
-                <hr />
-            
-                <div class="row mt-3 py-1">
-                    <div class="col-12 ">
-                        <h5>Popular Movies</h5>
-                    </div>
-                </div>
-                <hr>
-                @for (int i = 0; i < Model.movieOutputs.Count; i++)
-                {
-                    <div class="row mt-12 py-1">
-                        <div class="col-12">
-                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                </ol>
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img class="d-block w-100" src="@Model.movieOutputs[i].Image" alt="First slide">
+            <div class="row mt-3 py-1">
+                <div class="col-12 text-center mt-3">
 
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <h5></h5>
-                                            <p>...</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                }
-                <div class="row mt-3 py-1">
-                    <div class="col-12 text-center mt-3">
-                        <a asp-page="/Movies/Popular" asp-route-id="Model.movieOutputs.Id" class="btn btn-primary">ورود به آرشیو</a>
-                    </div>
+                    <a asp-page="/Movies/High rate/GethighRate" asp-route-id="Model.movieHigh.Id" class="btn btn-primary">ورود به آرشیو</a>
                 </div>
-                <hr />
-                <div class="row mt-3 py-1">
-                    <div class="col-12 text-right">
-                        <h5>Most Visited Movie</h5>
-                    </div>
-                </div>
-                <hr>
-                
-                <div class="row mt-3 py-1">
-                    <div class="col-12 text-center mt-3">
-                        <button type="submit" class="btn-outline-primary p-1 m-auto border-0 text-dark">ورود به آرشیو </button>
-                    </div>
-                </div>
-                <hr />
-                <div class="row mt-3 py-1">
-                    <div class="col-12 ">
-                        <h5>NewComming Movie</h5>
-                    </div>
-                </div>
-                <hr>
-                @foreach (var item in Model.movieOutput)
-                {
-                    <div class="row mt-3 py-1">
-                        <div class="col-4 text-right">
-                            <img class="d-block w-100" src="@item.Image" alt="First slide">
-                            <p class="card-text text-center"> @item.Title</p>
-                        </div>
-                    </div>
-                }
-                <hr>
-                <!--دسته بندی---->
-                <div class="row mt-3 py-1">
-                    <div class="col-12 text-right">
-                        <h5>دسته بندی</h5>
-                    </div>
-                </div>
-                <hr>
-                <div class="row py-1 text-right">
-                    <div class="row py-1">
-                        <div class="col-6">
-                            <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
-                                <a class="btn-link text-decoration-none" href="#">
-                                    اکشن 2000
-                                </a>
-                            </button>
-                        </div>
-                        <div class="col-6">
-                            <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
-                                <a class="btn-link text-decoration-none" href="#">
-                                    انیمیشن 1233
-                                </a>
-                            </button>
-                        </div>
-                        <div class="col-6">
-                            <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
-                                <a class="btn-link text-decoration-none" href="#">
-                                    معمایی 3215
-                                </a>
-                            </button>
-                        </div>
-                        <div class="col-6">
-                            <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
-                                <a class="btn-link text-decoration-none" href="#">
-                                    ورزشی 67323
-                                </a>
-                            </button>
-                        </div>
-                        <div class="col-6">
-                            <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
-                                <a class="btn-link text-decoration-none" href="#">
-                                    کمدی 754
-                                </a>
-                            </button>
-                        </div>
-                        <div class="col-6">
-                            <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
-                                <a class="btn-link text-decoration-none" href="#">
-                                    عاشقانه 2000
-                                </a>
-                            </button>
-                        </div>
-                        <div class="col-6">
-                            <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
-                                <a class="btn-link text-decoration-none" href="#">
-                                    هیجان انگیز 2000
-                                </a>
-                            </button>
-                        </div>
-                        <div class="col-6">
-                            <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
-                                <a class="btn-link text-decoration-none" href="#">
-                                    وسترن 2000
-                                </a>
-                            </button>
-                        </div>
-                        <div class="col-6">
-                            <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
-                                <a class="btn-link text-decoration-none" href="#">
-                                    علمی تخیلی 2000
-                                </a>
-                            </button>
-                        </div>
-                        <div class="col-6">
-                            <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
-                                <a class="btn-link text-decoration-none" href="#">
-                                    خانوادگی 2000
-                                </a>
-                            </button>
-                        </div>
-                        <div class="col-6">
-                            <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
-                                <a class="btn-link text-decoration-none" href="#">
-                                    خانوادگی 2000
-                                </a>
-                            </button>
-                        </div>
-                        <div class="col-6">
-                            <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
-                                <a class="btn-link text-decoration-none" href="#">
-                                    خانوادگی 2000
-                                </a>
-                            </button>
-                        </div>
-                        <div class="col-6">
-                            <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
-                                <a class="btn-link text-decoration-none" href="#">
-                                    خانوادگی 2000
-                                </a>
-                            </button>
-                        </div>
-                        <div class="col-6">
-                            <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
-                                <a class="btn-link text-decoration-none" href="#">
-                                    خانوادگی 2000
-                                </a>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <hr>
             </div>
+            <hr />
 
-
-
-                    <!--Movie-->
-
-
-                    <div class="col-lg-8 col-md-8 col-sm-12">
-                        <div id="carouselExampleIndicators1" class="carousel slide" data-ride="carousel">
+            <div class="row mt-3 py-1">
+                <div class="col-12 ">
+                    <h5>Popular Movies</h5>
+                </div>
+            </div>
+            <hr>
+            @for (int i = 0; i < Model.movieOutputs.Count; i++)
+            {
+                <div class="row mt-12 py-1">
+                    <div class="col-12">
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
-                                <li data-target="#carouselExampleIndicators1" data-slide-to="0" class="active"></li>
-                                <li data-target="#carouselExampleIndicators1" data-slide-to="1"></li>
-                                <li data-target="#carouselExampleIndicators1" data-slide-to="2"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                             </ol>
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img class="d-block w-100" src="Image/Movie/Horizontal/other_10.png" alt="First slide">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5></h5>
-                                        <p>...</p>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block w-100" src="Image/Movie/Horizontal/other_11.png" alt="Second slide">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5></h5>
-                                        <p>...</p>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block w-100" src="Image/Movie/Horizontal/other_8.png" alt="Third slide">
+                                    <img class="d-block w-100" src="@Model.movieOutputs[i].Image" alt="First slide">
+
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5></h5>
                                         <p>...</p>
                                     </div>
                                 </div>
                             </div>
-                            <a class="carousel-control-prev" href="#carouselExampleIndicators1" role="button" data-slide="prev">
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next" href="#carouselExampleIndicators1" role="button" data-slide="next">
+                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
                         </div>
-                        <hr>
-                        <h3 class="text-center bg-light">Movies</h3>
-                        <hr>
-                        @foreach (var item in Model.movieList)
-                        {
-                            <div class="card w-100 border-0 bg-light">
-                                <img class="card-img-top" src="@item.Image" style="border-radius: 1rem;" alt="Card image cap" href="./">
-                                <div class="card-body mt-3">
-                                    <a href="#" class="card-link">
-                                        <h5 class="card-title float-right d-inline"> @item.Title </h5>
-                                    </a>
-
-
-                                            <a asp-page="/Movies/Detail" asp-route-id="@item.Id" class="btn btn-primary">ادامه مطلب</a>
-                                            <a href="#" class="card-link"><i class="far fa-bell"></i></a>
-                                            <a href="#" class="card-link"><i class="far fa-comment-alt"></i></a>
-                                            <a href="#" class="card-link"><i class="far fa-heart"></i></a>
-                                            <a href="#" class="card-link"><i class="far fa-bookmark"></i></a>
-
-                                </div>
-                            </div>
-
-
-                        }
                     </div>
                 </div>
+            }
+            <div class="row mt-3 py-1">
+                <div class="col-12 text-center mt-3">
+                    <a asp-page="/Movies/Popular" asp-route-id="Model.movieOutputs.Id" class="btn btn-primary">ورود به آرشیو</a>
+                </div>
+            </div>
+            <hr />
+            <div class="row mt-3 py-1">
+                <div class="col-12 text-right">
+                    <h5>Most Visited Movie</h5>
+                </div>
+            </div>
+            <hr>
+
+            <div class="row mt-3 py-1">
+                <div class="col-12 text-center mt-3">
+                    <button type="submit" class="btn-outline-primary p-1 m-auto border-0 text-dark">ورود به آرشیو </button>
+                </div>
+            </div>
+            <hr />
+            <div class="row mt-3 py-1">
+                <div class="col-12 ">
+                    <h5>NewComming Movie</h5>
+                </div>
+            </div>
+            <hr>
+            @foreach (var item in Model.movieOutput)
+            {
+                <div class="row mt-3 py-1">
+                    <div class="col-4 text-right">
+                        <img class="d-block w-100" src="@item.Image" alt="First slide">
+                        <p class="card-text text-center"> @item.Title</p>
+                    </div>
+                </div>
+            }
+            <hr>
+            <!--دسته بندی---->
+            <div class="row mt-3 py-1">
+                <div class="col-12 text-right">
+                    <h5>دسته بندی</h5>
+                </div>
+            </div>
+            <hr>
+            <div class="row py-1 text-right">
+                <div class="row py-1">
+                    <div class="col-6">
+                        <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
+                            <a class="btn-link text-decoration-none" href="#">
+                                اکشن 2000
+                            </a>
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
+                            <a class="btn-link text-decoration-none" href="#">
+                                انیمیشن 1233
+                            </a>
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
+                            <a class="btn-link text-decoration-none" href="#">
+                                معمایی 3215
+                            </a>
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
+                            <a class="btn-link text-decoration-none" href="#">
+                                ورزشی 67323
+                            </a>
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
+                            <a class="btn-link text-decoration-none" href="#">
+                                کمدی 754
+                            </a>
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
+                            <a class="btn-link text-decoration-none" href="#">
+                                عاشقانه 2000
+                            </a>
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
+                            <a class="btn-link text-decoration-none" href="#">
+                                هیجان انگیز 2000
+                            </a>
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
+                            <a class="btn-link text-decoration-none" href="#">
+                                وسترن 2000
+                            </a>
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
+                            <a class="btn-link text-decoration-none" href="#">
+                                علمی تخیلی 2000
+                            </a>
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
+                            <a class="btn-link text-decoration-none" href="#">
+                                خانوادگی 2000
+                            </a>
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
+                            <a class="btn-link text-decoration-none" href="#">
+                                خانوادگی 2000
+                            </a>
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
+                            <a class="btn-link text-decoration-none" href="#">
+                                خانوادگی 2000
+                            </a>
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
+                            <a class="btn-link text-decoration-none" href="#">
+                                خانوادگی 2000
+                            </a>
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn p-1 mx-auto border-0 text-dark">
+                            <a class="btn-link text-decoration-none" href="#">
+                                خانوادگی 2000
+                            </a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+
+
+
+        <!--Movie-->
+
+
+        <div class="col-lg-8 col-md-8 col-sm-12">
+            <div id="carouselExampleIndicators1" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators1" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators1" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators1" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="Image/Movie/Horizontal/other_10.png" alt="First slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5></h5>
+                            <p>...</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="Image/Movie/Horizontal/other_11.png" alt="Second slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5></h5>
+                            <p>...</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="Image/Movie/Horizontal/other_8.png" alt="Third slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5></h5>
+                            <p>...</p>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators1" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators1" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <hr>
+            <h3 class="text-center bg-light">Movies</h3>
+            <hr>
+            @foreach (var item in Model.movieList)
+            {
+                <div class="card w-100 border-0 bg-light">
+                    <img class="card-img-top" src="@item.Image" style="border-radius: 1rem;" alt="Card image cap" href="./">
+                    <div class="card-body mt-3">
+                        <a href="#" class="card-link">
+                            <h5 class="card-title float-right d-inline"> @item.Title </h5>
+                        </a>
+
+
+                        <a asp-page="/Movies/Detail" asp-route-id="@item.Id" class="btn btn-primary">ادامه مطلب</a>
+                        <a href="#" class="card-link"><i class="far fa-bell"></i></a>
+                        <a href="#" class="card-link"><i class="far fa-comment-alt"></i></a>
+                        <a href="#" class="card-link"><i class="far fa-heart"></i></a>
+                        <a href="#" class="card-link"><i class="far fa-bookmark"></i></a>
+
+                    </div>
+                </div>
+
+
+            }
+        </div>
+    </div>
 </div>

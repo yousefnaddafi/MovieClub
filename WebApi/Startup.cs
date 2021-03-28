@@ -43,6 +43,13 @@ namespace WebApi
 
             services.AddAutoMapper(Assembly.GetAssembly(typeof(MappingConfiguration)));
             services.AddControllers();
+
+            services.AddCors(o => o.AddDefaultPolicy(builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +72,7 @@ namespace WebApi
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors();
 
             app.UseMiddleware<CustomExceptionHandlerMiddleware>();
 
