@@ -102,16 +102,19 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         public List<MovieOutputDto> Search(SearchMovieInputDto inputDto) {
             List<MovieOutputDto> result = new List<MovieOutputDto>();
 
-            if (actorMovieRepository.GetQuery().Include(x => x.Actor).Include(y => y.Movie).Select
-                    (z => z.Actor.ActorName == inputDto.Actor).FirstOrDefault() ||
-                genreMovieRepository.GetQuery().Include(x => x.Genre).Include(y => y.Movie).Select
-                    (z => z.Genre.GenreName == inputDto.Genre).FirstOrDefault() ||
-                movieRepository.GetQuery().Select(x => x.RateByUser == inputDto.RateByUser).FirstOrDefault() ||
-                movieRepository.GetQuery().Include(x => x.Director).Select
-                    (y => y.Director.DirectorName == inputDto.Director).FirstOrDefault())
-            {
+            //if (actorMovieRepository.GetQuery().Include(x => x.Actor).Include(y => y.Movie).Select
+            //        (z => z.Actor.ActorName == inputDto.Actor).FirstOrDefault() ||
+            //    genreMovieRepository.GetQuery().Include(x => x.Genre).Include(y => y.Movie).Select
+            //        (z => z.Genre.GenreName == inputDto.Genre).FirstOrDefault() ||
+            //    movieRepository.GetQuery().Select(x => x.RateByUser == inputDto.RateByUser).FirstOrDefault() ||
+            //    movieRepository.GetQuery().Include(x => x.Director).Select
+            //        (y => y.Director.DirectorName == inputDto.Director).FirstOrDefault())
+            //{
 
-                var tempSearchedByRateByUser = movieRepository.GetQuery().Where(x => x.RateByUser == inputDto.RateByUser).ToList();
+                var tempSearchedByRateByUser = movieRepository.GetQuery().Include(x=>x.Director)
+                .Include(v=>v.GenreMovies).ThenInclude(b=>b.Genre)
+                .Include(z=>z.ActorMovies).ThenInclude(o=>o.Actor)
+                .Where(x => x.Director.DirectorName == inputDto.Director).ToList();
                 foreach (var item in tempSearchedByRateByUser)
                 {
                     var mappedTemp = mapper.Map<MovieOutputDto>(item);
@@ -135,11 +138,11 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
                 }
 
                 return result;
-            }
-            else
-            {
-                throw new InvalidValuesException("Wrong Value");
-            }
+            //}
+            //else
+            //{
+            //    throw new InvalidValuesException("Wrong Value");
+            //}
             
         }
         public async Task<List<MovieOutputDto>> GetHighRate()
