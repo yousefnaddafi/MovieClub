@@ -1,0 +1,109 @@
+﻿@page
+@model MovieClubWebApplication.Pages.Movies.Compare_RazorModel
+@{ ViewData["Title"] = "comparemovie";
+}
+<h1>مقایسه</h1>
+<h4>فیلم ها </h4>
+<!----<hr />
+<dl class="row">
+    <dt class="col-sm-2">
+
+    </dt>
+    <dd class="col-sm-10">
+
+    </dd>
+</dl>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <label asp-for="inputcompares.MovieId1" class="control-label"></label>
+            <input asp-for="inputcompares.MovieId1" class="form-control" />
+            <span asp-validation-for="inputcompares.MovieId1" class="text-danger"></span>
+            <div class="form-group">
+                <label asp-for="movieOutput.ImdbRate" class="control-label"></label>
+                <input asp-for="movieOutput.ImdbRate" class="form-control" />
+                <span asp-validation-for="movieOutput.ImdbRate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="movieOutput.RateByUser" class="control-label"></label>
+                <input asp-for="movieOutput.RateByUser" class="form-control" />
+                <span asp-validation-for="movieOutput.RateByUser" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                foreach (var item in Model.compares)
+                {
+                    <label asp-for="" control-label"></label>
+                    <input asp-for="" class="form-control" />
+                    <span asp-validation-for="" class="text-danger"></span>
+                }
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="compare" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>-->
+<!----<dl class="row">
+    <dt class="col-sm-2">
+
+    </dt>
+    <dd class="col-sm-10">
+
+    </dd>
+</dl>
+<form>
+    <div class="row">
+        <div class="col-6">
+            <input type="text" class="form-control" placeholder="Title1">
+
+            <div class="form-group" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            </div>
+
+        <div class="col-6">
+            <input type="text" class="form-control" placeholder="Title2">
+
+
+        </div>
+</form>--->
+<div class="row justify-content-center" id="myModal">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">مقایسه </div>
+            <div class="card-body">
+                <form action="/Features/Compare2MoviesOutputRazor" target="_blank">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <label for="Title1">نام فیلم شماره 1 </label>
+                    <div class="input-group mb-3">
+
+                        <input type="text" class="form-control fixed-value" id="Title1" name="Title1" placeholder="نام فیلم شماره 1" aria-label="Recipient's username" aria-describedby="basic-addon2" value="">
+                    </div>
+
+                    <label for="Title2">نام فیلم شماره 2</label>
+                    <div class="input-group mb-3">
+
+                        <input type="text" class="form-control fixed-value" id="Title2" name="Title2" placeholder="نام فیلم شماره 2" aria-label="Recipient's username" aria-describedby="basic-addon2" value="">
+
+                    </div>
+
+                    <div class="card-footer">
+                        <input type="submit" value="مقایسه">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+Drag & drop your files here
+
+
+
+
+
+

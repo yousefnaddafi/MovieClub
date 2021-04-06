@@ -7,12 +7,12 @@ using App.Core.ApplicationService.Dtos.MovieDtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MovieClubWebApplication.Pages.Movies
+namespace MovieClubWebApplication.Pages.Features
 {
-    public class PopularModel : PageModel
+    public class GetRecentlyRazorModel : PageModel
     {
         private readonly IMovieService _movieService;
-        public PopularModel(IMovieService movieService)
+        public GetRecentlyRazorModel(IMovieService movieService)
         {
             _movieService = movieService;
         }
@@ -20,7 +20,7 @@ namespace MovieClubWebApplication.Pages.Movies
         public List<MovieRelatedDto> movieInput { get; set; }
         public async Task OnGetAsync()
         {
-            movieInput = await _movieService.GetPopular();         
+            movieInput = await _movieService.GetNewComing();
         }
     }
 }

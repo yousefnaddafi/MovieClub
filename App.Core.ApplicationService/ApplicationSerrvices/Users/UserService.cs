@@ -45,25 +45,25 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 
         }
 
-        public User Update(UserUpdateDto inputDto)
+        public async Task<User> Update(UserUpdateDto inputDto)
         {
 
             var RegisterUser = mapper.Map<User>(inputDto);
 
-            userRepository.Update(RegisterUser);
-            userRepository.Save();
+            await userRepository.Update(RegisterUser);
+            await userRepository.Save();
             return RegisterUser;
         }
 
-        public int Delete(int id)
+        public async Task<int> Delete(int id)
         {
             var item = userRepository.GetQuery().Where(x => x.Id == id).FirstOrDefault();
             if (item == null)
             {
                 throw new InvalidIdException("Wrong Id");
             }
-            userRepository.Delete(id);
-            userRepository.Save();
+            await userRepository.Delete(id);
+            await userRepository.Save();
             return id;
         }
 

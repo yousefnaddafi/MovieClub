@@ -44,9 +44,9 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete]
-        public int Delete(int id)
+        public async Task<int> Delete(int id)
         {
-            userService.Delete(id);
+          await userService.Delete(id);
             return id;
         }
 

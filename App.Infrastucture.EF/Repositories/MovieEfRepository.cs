@@ -43,9 +43,9 @@ namespace App.Infrastucture.EF.Repositories
              await this.dbContext.SaveChangesAsync();
         }
 
-        public T Update(T item)
+        public async Task<T> Update(T item)
         {
-            this.dbContext.Update(item);
+           this.dbContext.Update(item);
             return  item;
         }
 
