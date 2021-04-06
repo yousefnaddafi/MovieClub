@@ -37,9 +37,9 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        public User Update(UserUpdateDto inputDto)
+        public async Task<User> Update(UserUpdateDto inputDto)
         {
-            this.userService.Update(inputDto);
+            await this.userService.Update(inputDto);
             return mapper.Map<User>(inputDto);
         }
 
@@ -51,9 +51,9 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public Task<User> Get(int id)
+        public async Task<User> Get(int id)
         {
-            return userService.Get(id);
+            return await userService.Get(id);
         }
         [HttpPost("Login")]
         public async Task<UserLoginOutputDto> LoginUser(UserInputDto inputDto)
