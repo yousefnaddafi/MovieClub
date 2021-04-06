@@ -1,35 +1,42 @@
-﻿@page
+﻿@page "{id}"
 @model MovieClubWebApplication.Pages.GenreRazor.EditModel
 @{
     ViewData["Title"] = "Edit Genre";
 }
 
-<h1>ویرایش</h1>
-<h4>لیست همه ی ژانرها</h4>
+<h1>Edit</h1>
+
+<h4>Existing List</h4>
 <hr />
+<dl class="row">
+    <dt class="col-sm-2">
+
+    </dt>
+    <dd class="col-sm-10">
+
+    </dd>
+</dl>
 <div class="row">
     <div class="col-md-4">
         <form method="post">
+            <input hidden asp-for="inputDto.Id" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="genres.Id" />
+
+            
             <div class="form-group">
-                <label asp-for="genres.GenreName" class="control-label"></label>
-                <input asp-for="genres.GenreName" class="form-control" />
-                <span asp-validation-for="genres.GenreName" class="text-danger"></span>
+                <label asp-for="inputDto.GenreName" class="control-label"></label>
+                <input asp-for="inputDto.GenreName" class="form-control" />
+                <span asp-validation-for="inputDto.GenreName" class="text-danger"></span>
             </div>
+       
+
+
             <div class="form-group">
-                <input type="submit" value="Edit" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
+    <div class="form-group mt-5">
+        <button type="submit">Edit</button>
+    </div>
 </div>
-<div>
-    <a asp-page="./Index">صفحه ی اصلی</a>
-</div>
-
-@section Scripts
-{
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}

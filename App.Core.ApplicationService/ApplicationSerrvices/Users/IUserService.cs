@@ -11,11 +11,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
     public interface IUserService
     {
         Task Create(UserInputDto inputDto);
-        Task<User> Update(UserUpdateDto item);
+        Task<UserOutputDto> Update(UserUpdateDto item);
         Task<int> Delete(int id);
-        Task<User> Get(int id);
+        Task<UserOutputDto> Get(int id);
         Task<List<UserOutputDto>> GetAll();
         Task Insert(UserInputDto inputDto);
+
         Task AddFavorites(FavoriteInputDto inputDto);
     }
 }

@@ -11,21 +11,21 @@ namespace MovieClubWebApplication.Pages.User
 {
     public class DeleteModel : PageModel
     {
-       
+        private readonly IUserService userService;
+
         private readonly IUserService userService;
         public DeleteModel(IUserService _userService)
         {
             userService = _userService;
         }
+
         [BindProperty]
         public UserOutputDto tempUser { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int id)
-        {
+        public async Task<IActionResult> OnGetAsync(int id) {
             tempUser = await userService.Get(id);
 
-            if (tempUser == null)
-            {
+            if (tempUser == null) {
                 return RedirectToPage("/NotFound");
             }
 
@@ -36,8 +36,7 @@ namespace MovieClubWebApplication.Pages.User
         {
             int deletedUser = await userService.Delete(tempUser.Id);
 
-            if (deletedUser == 0)
-            {
+            if (deletedUser == 0) {
                 return NotFound();
             }
 

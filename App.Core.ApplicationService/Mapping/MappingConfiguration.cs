@@ -37,6 +37,7 @@ namespace App.Core.ApplicationService.Mapping
             CreateMap<User, UserOutputDto>()
                 .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
                 .ForMember(x => x.Email, o => o.MapFrom(z => z.Email))
+                .ForMember(x=> x.Password, o=> o.MapFrom(z=> z.Password))
                 ;
 
 
@@ -126,6 +127,11 @@ namespace App.Core.ApplicationService.Mapping
                .ForMember(x => x.GenreName, o => o.MapFrom(z => z.GenreName))
                .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
                ;
+
+            CreateMap<GenreUpdateDto, Genre>()
+                .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
+                .ForMember(x => x.GenreName, o => o.MapFrom(z => z.GenreName))
+                ;
 
             CreateMap<ActorMovieInputDto, ActorMovie>()
                 .ForMember(x => x.ActorId, o => o.MapFrom(z => z.ActorId))
