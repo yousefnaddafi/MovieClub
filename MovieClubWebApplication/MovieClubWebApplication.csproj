@@ -25,5 +25,13 @@
 
   <ItemGroup>
     <Folder Include="Pages\CommentRazor\" />
+    <Folder Include="Pages\Site\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Pages\User\Login.cshtml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Pages\User\Login.cshtml" />
+    <Content Remove="Pages\Drc\Detail.cshtml" />
   </ItemGroup>
 </Project>

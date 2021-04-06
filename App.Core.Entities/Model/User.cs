@@ -18,7 +18,5 @@ namespace App.Core.Entities.Model
         public UserLogin UserLogin { get; set; }
 
         public List<Favorite> Favorites { get; set; }
-
-
     }
 }

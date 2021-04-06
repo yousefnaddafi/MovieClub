@@ -1,9 +1,24 @@
-﻿@page
+﻿@page "{id}"
 @model MovieClubWebApplication.Pages.GenreRazor.DeleteModel
 @{
     ViewData["Title"] = "Delete Genre";
 }
 
+
+<h1>Delete Confirmation</h1>
+
+<div class="alert alert-danger">
+    <h5>Are you sure you wat to delete User - @Model.genreOutputDto.GenreName</h5>
+    <form method="post">
+        <button type="submit" class="btn btn-danger">Yes</button>
+        <a class="btn btn-primary" asp-page="/">No</a>
+    </form>
+</div>
+
+
+
+
+<!--
 <h1>حذف ژانر فیلم</h1>
 
 <h3>آیا مطمئن به حذف این ژانر هستید؟</h3>
@@ -33,4 +48,8 @@
     </form>
 
 
-</div>
+<
+  /div>
+
+
+    -->
