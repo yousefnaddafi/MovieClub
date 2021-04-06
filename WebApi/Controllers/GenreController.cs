@@ -14,37 +14,37 @@ namespace WebApi.Controllers
     [Route("api/[controller]")]
     public class GenreController : ControllerBase
     {
-        private readonly IGenreService GenreService;
+        private readonly IGenreService genreService;
 
-        public GenreController(IGenreService GenreService)
+        public GenreController(IGenreService _genreService)
         {
-            this.GenreService = GenreService;
+            this.genreService = _genreService;
         }
 
         [HttpPost]
-        public Task Create(GenreInputDtos inputDto)
+        public Task<int> Create(GenreInputDtos inputDto)
         {
-            return GenreService.Create(inputDto);
+            return genreService.Create(inputDto);
         }
 
         [HttpPut]
-        public async Task<string> Update(GenreInputDtos item)
+        public async Task<string> Update(GenreUpdateDto item)
         {
-            await GenreService.Update(item);
+            await genreService.Update(item);
             return $"the {item} has been updated";
         }
 
         [HttpDelete]
-        public int Delete(int id)
+        public async Task<int> Delete(int id)
         {
-            GenreService.Delete(id);
+            await genreService.Delete(id);
             return id;
         }
 
         [HttpGet]
-        public Task<GenreOutPutDto> Get(int id)
+        public async Task<GenreOutPutDto> Get(int id)
         {
-            return GenreService.Get(id);
+            return await genreService.Get(id);
         }
     }
 }
