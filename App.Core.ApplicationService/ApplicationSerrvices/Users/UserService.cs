@@ -67,18 +67,26 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
             return id;
         }
 
-        public Task<User> Get(int id)
+        public async Task<User> Get(int id)
         {
-            if (userRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
-            {
-                throw new InvalidIdException("Wrong Id");
-            }
-            return userRepository.Get(id);
+          =userRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            //{
+               // throw new InvalidIdException("Wrong Id");
+            //}
+            return await userRepository.Get(id);
         }
 
-        public Task<List<User>> GetAll()
+        public async Task<List<UserOutputDto>> GetAll()
         {
-            return userRepository.GetAll();
+            List<User> users = new List<User>();
+            users = userRepository.GetQuery().ToList();
+            List<UserOutputDto> result = new List<UserOutputDto>();
+            foreach(var item in users)
+            {
+                var mappedUser = mapper.Map<UserOutputDto>(item);
+                result.Add(mappedUser);
+            }
+            return result;
         }
         //
         public async Task Insert(UserInputDto inputDto)

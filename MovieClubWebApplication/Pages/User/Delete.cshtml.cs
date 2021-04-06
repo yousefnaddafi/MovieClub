@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using App.Core.ApplicationService.ApplicationSerrvices.Users;
+using App.Core.ApplicationService.Dtos.UserDto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -17,7 +18,7 @@ namespace MovieClubWebApplication.Pages.User
             userService = _userService;
         }
         [BindProperty]
-        public App.Core.Entities.Model.User tempUser { get; set; }
+        public UserOutputDto tempUser { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {

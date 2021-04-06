@@ -35,7 +35,7 @@ namespace MovieClubWebApplication.Pages.Drc
         public async Task<IActionResult> OnPostAsync()
         {
             directorId = await _directorService.Delete(directorId);
-            if (directorId == null)
+            if (directorId == 0)
             {
                 return RedirectToPage("/NotFound");
             }

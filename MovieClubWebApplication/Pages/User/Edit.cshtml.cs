@@ -29,7 +29,7 @@ namespace MovieClubWebApplication.Pages.User
                 return Page();
             }
 
-            userService.Update(inputDto);
+            await userService.Update(inputDto);
 
             return RedirectToPage("../User/Index");
         }

@@ -9,10 +9,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MovieClubWebApplication.Pages.Features
 {
-    public class GetRecentlyRazorModel : PageModel
+    public class RecentlyRazorModel : PageModel
     {
         private readonly IMovieService _movieService;
-        public GetRecentlyRazorModel(IMovieService movieService)
+        public RecentlyRazorModel(IMovieService movieService)
         {
             _movieService = movieService;
         }

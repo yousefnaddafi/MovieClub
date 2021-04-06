@@ -14,7 +14,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
         Task<User> Update(UserUpdateDto item);
         Task<int> Delete(int id);
         Task<User> Get(int id);
-        Task<List<User>> GetAll();
+        Task<List<UserOutputDto>> GetAll();
         Task Insert(UserInputDto inputDto);
         Task AddFavorites(FavoriteInputDto inputDto);
     }
