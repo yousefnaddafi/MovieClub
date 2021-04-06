@@ -9,8 +9,6 @@ namespace MovieClubWebApplication.Pages.Site
 {
     public class MovieDetailModel : PageModel
     {
-        public void OnGet()
-        {
-        }
+       
     }
 }
