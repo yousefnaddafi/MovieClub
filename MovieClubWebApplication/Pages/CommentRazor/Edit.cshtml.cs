@@ -19,7 +19,18 @@ namespace MovieClubWebApplication.Pages.CommentRazor
         }
 
         [BindProperty]
-        public CommentsUpdateDto inputDto { get; set; }
+        public CommentsOutputDto inputDto { get; set; }
+        public async Task<IActionResult> OnGetAsync(int id)
+        {
+            inputDto = await commentService.Get(id);
+
+            if (inputDto == null)
+            {
+                return RedirectToPage("/NotFound");
+            }
+
+            return Page();
+        }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -29,9 +40,19 @@ namespace MovieClubWebApplication.Pages.CommentRazor
                 return Page();
             }
 
-            commentService.Update(inputDto);
+            CommentsUpdateDto tempCommentUpdate = new CommentsUpdateDto();
+            tempCommentUpdate.Id = inputDto.Id;
+            tempCommentUpdate.MovieId = inputDto.MovieId;
+
+
+            await commentService.Update(tempCommentUpdate);
 
             return RedirectToPage("../User/Index");
         }
+
+
+        
+
+        
     }
 }

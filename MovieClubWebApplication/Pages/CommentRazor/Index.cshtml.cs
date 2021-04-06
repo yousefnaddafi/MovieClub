@@ -9,28 +9,21 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MovieClubWebApplication.Pages.CommentRazor
 {
-    public class CreateModel : PageModel
+    public class IndexModel : PageModel
     {
         private readonly ICommentService commentService;
 
-        public CreateModel(ICommentService _commentService)
+        public IndexModel(ICommentService _commentService)
         {
             commentService = _commentService;
         }
 
         [BindProperty]
-        public CommentsInputDto commentInput { get; set; }
+        public List<CommentsOutputDto> comments { get; set; }
 
-        public async Task<IActionResult> OnPost()
+        public async Task OnGetAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            await commentService.Create(commentInput);
-
-            return RedirectToPage("../CommentRazor/Index");
+            comments = await commentService.GetAll();
         }
     }
 }
