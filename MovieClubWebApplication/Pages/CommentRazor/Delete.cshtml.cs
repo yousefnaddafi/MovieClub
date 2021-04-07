@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using App.Core.ApplicationService.ApplicationSerrvices.Commentts;
+using App.Core.ApplicationService.Dtos.CommentDtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -18,18 +19,30 @@ namespace MovieClubWebApplication.Pages.CommentRazor
         }
 
         [BindProperty]
-        public int commnetId { get; set; }
+        public CommentsOutputDto tempUser { get; set; }
 
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (!ModelState.IsValid)
+            tempUser = await commentService.Get(id);
+
+            if (tempUser == null)
             {
-                return Page();
+                return RedirectToPage("/NotFound");
             }
 
-            commentService.Delete(id);
+            return Page();
+        }
 
-            return RedirectToPage("../User/Index");
+        public async Task<IActionResult> OnPostAsync()
+        {
+            int deletedUser = await commentService.Delete(tempUser.Id);
+
+            if (deletedUser == 0)
+            {
+                return NotFound();
+            }
+
+            return RedirectToPage("Index");
         }
     }
 }

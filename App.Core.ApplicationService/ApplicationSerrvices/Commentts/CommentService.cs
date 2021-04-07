@@ -19,43 +19,63 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Commentts
             mapper = _mapper;
         }
 
-        public async Task<string> Create(CommentsInputDto inputDto) {
+        public async Task Create(CommentsInputDto inputDto) {
             var temp = mapper.Map<Comment>(inputDto);
             commentRepository.Insert(temp);
             await commentRepository.Save();
-            return temp.Text;
         }
 
-        public Comment Update(CommentsUpdateDto commentsUpdateDto) {
+        public async Task<CommentsOutputDto> Update(CommentsUpdateDto commentsUpdateDto) {
             var tempComment = mapper.Map<Comment>(commentsUpdateDto);
-            commentRepository.Update(tempComment);
-            commentRepository.Save();
-            return tempComment;
+            await commentRepository.Update(tempComment);
+            await commentRepository.Save();
+            return mapper.Map<CommentsOutputDto>(tempComment);
         }
 
-        public int Delete(int id) {
-            commentRepository.Delete(id);
-            return id;
+        public async Task<int> Delete(int id) {
+            var item = commentRepository.GetQuery().FirstOrDefault(x => x.Id == id);
+            if (item != null)
+            {
+                await commentRepository.Delete(id);
+                await commentRepository.Save();
+                return id;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
-        public async Task<Comment> Get(int id) {
-            return await commentRepository.Get(id);
+        public async Task<CommentsOutputDto> Get(int id) {
+            var user = commentRepository.GetQuery().FirstOrDefault(x => x.Id == id);
+            var mappedUser = mapper.Map<CommentsOutputDto>(user);
+            return mappedUser;
         }
 
-        public Task<List<Comment>> GetAll() {
-            return commentRepository.GetAll();
+        public async Task<List<CommentsOutputDto>> GetAll() {
+            List<Comment> comments = new List<Comment>();
+            comments = commentRepository.GetQuery().ToList();
+
+            List<CommentsOutputDto> result = new List<CommentsOutputDto>();
+
+            foreach (var item in comments)
+            {
+                var mappedComment = mapper.Map<CommentsOutputDto>(item);
+                result.Add(mappedComment);
+            }
+
+            return result;
         }
 
         public List<Comment> GetQuery() {
             return commentRepository.GetQuery().ToList();
         }
 
-        public int AddComment(CommentsInputDto inputDto) {
+        public async Task Insert(CommentsInputDto inputDto) {
 
             var mappedComment = mapper.Map<Comment>(inputDto);
             commentRepository.Insert(mappedComment);
-            commentRepository.Save();
-            return mappedComment.Id;
+            await commentRepository.Save();
         }
 
 
