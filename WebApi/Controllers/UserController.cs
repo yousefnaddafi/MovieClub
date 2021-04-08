@@ -37,21 +37,21 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        public User Update(UserUpdateDto inputDto)
+        public async Task<UserOutputDto> Update(UserUpdateDto inputDto)
         {
-            this.userService.Update(inputDto);
-            return mapper.Map<User>(inputDto);
+            var result = await this.userService.Update(inputDto);
+            return result;
         }
 
         [HttpDelete]
-        public int Delete(int id)
+        public async Task<int> Delete(int id)
         {
-            userService.Delete(id);
+            await userService.Delete(id);
             return id;
         }
 
         [HttpGet]
-        public Task<User> Get(int id)
+        public Task<UserOutputDto> Get(int id)
         {
             return userService.Get(id);
         }

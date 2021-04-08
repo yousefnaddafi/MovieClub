@@ -13,7 +13,7 @@ namespace App.Core.ApplicationService.IRepositories
         void Insert(T item);
         Task<T> Get(int id);
         Task<List<T>> GetAll();
-        T Update(T item);
+        Task<T> Update(T item);
         Task Delete(int id);
         IQueryable<T> GetQuery();
         Task Save();

@@ -76,11 +76,11 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("Comments")]
-        public int CommentByUser([FromHeader] CheckLoginInputDto _checkLoginInputDto, [FromBody] CommentsInputDto _commentInputDto) {
+        public async Task CommentByUser([FromHeader] CheckLoginInputDto _checkLoginInputDto, [FromBody] CommentsInputDto _commentInputDto) {
             if (userLoginService.CheckToken(_checkLoginInputDto)) {
-                return commentService.AddComment(_commentInputDto);
+                await commentService.Insert(_commentInputDto);
             } else {
-                return 327; //ino bayad avaz konim
+                 //ino bayad avaz konim
             }
         }
 

@@ -11,11 +11,11 @@ namespace MovieClubWebApplication.Pages
 {
     public class LoginModel : PageModel
     {
-        private readonly IUserLoginService _loginService;
+        private readonly IUserLoginService loginService;
 
-        public LoginModel(IUserLoginService userLoginService)
+        public LoginModel(IUserLoginService _userLoginService)
         {
-            _loginService = userLoginService;
+            loginService = _userLoginService;
         }
 
         [BindProperty]
@@ -24,15 +24,15 @@ namespace MovieClubWebApplication.Pages
         [BindProperty]
         public int LoginState { get; set; } = 0;
 
-        public async  Task<IActionResult> OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
-               return Page() ;
+                return Page();
             }
             try
             {
-                await _loginService.Login(userInput);
+                await loginService.Login(userInput);
                 LoginState = 1;
 
                 return RedirectToPage("../Index");

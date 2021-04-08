@@ -1,0 +1,25 @@
+﻿@page
+@model MovieClubWebApplication.Pages.CommentRazor.IndexModel
+@{
+    ViewData["Title"] = "Comment";
+}
+<h3 class="text-center bg-light">فهرست ژانرها</h3>
+<hr>
+@foreach (var item in Model.comments)
+{
+    <div class="card w-100 border-0 bg-light">
+
+        <div class="card-body mt-3">
+            <a href="#" class="card-link">
+                <h5 class="card-title float-right d-inline"> @item.Text </h5>
+            </a>
+            <div class="card-footer text-center">
+                <a asp-page="/CommentRazor/Detail" asp-route-id="@item.Id" class="btn btn-primary m-1">جزییات</a>
+
+                <a asp-page="/CommenntRazor/Delete" asp-route-id="@item.Id" class="btn btn-primary m-1">حذف</a>
+
+                <a asp-page="/CommentRazor/Edit" asp-route-id="@item.Id" class="btn btn-primary m-1">تغییر</a>
+            </div>
+        </div>
+    </div>
+};

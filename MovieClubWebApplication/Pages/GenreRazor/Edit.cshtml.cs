@@ -12,21 +12,47 @@ namespace MovieClubWebApplication.Pages.GenreRazor
 {
     public class EditModel : PageModel
     {
-        private readonly IGenreService _genreService;
-        public EditModel(IGenreService genreService)
+        private readonly IGenreService genreService;
+
+        public EditModel(IGenreService _genreService)
         {
-            _genreService = genreService;
+            genreService = _genreService;
         }
+
         [BindProperty]
-        public GenreInputDtos genres { get; set; }
+        public GenreOutPutDto inputDto { get; set; }
+
+        //[BindProperty]
+        //public App.Core.Entities.Model.User tempUser { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(int id)
+        {
+            inputDto = await genreService.Get(id);
+
+            if (inputDto == null)
+            {
+                return RedirectToPage("/NotFound");
+            }
+
+            return Page();
+        }
+
+
         public async Task<IActionResult> OnPostAsync()
         {
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            await _genreService.Update(genres);
-            return RedirectToPage("../User/Index");
-        }        
+
+            GenreUpdateDto tempGenreUpdate = new GenreUpdateDto();
+            tempGenreUpdate.Id = inputDto.Id;
+            tempGenreUpdate.GenreName = inputDto.GenreName;
+
+            await genreService.Update(tempGenreUpdate);
+
+            return RedirectToPage("../GenreRazor/Index");
+        }
     }
 }

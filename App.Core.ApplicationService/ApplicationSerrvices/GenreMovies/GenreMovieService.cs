@@ -33,7 +33,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.GenreMovies
         public async Task<string> Update(GenreMovieUpdateDto item)
         {
             var GMovie = mapper.Map<GenreMovie>(item);
-            this.genreMovieRepository.Update(GMovie);
+           await this.genreMovieRepository.Update(GMovie);
           await genreMovieRepository.Save();
             return $"{item.Id }is update";
             ;

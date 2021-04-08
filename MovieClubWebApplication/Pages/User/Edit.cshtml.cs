@@ -19,7 +19,22 @@ namespace MovieClubWebApplication.Pages.User
         }
 
         [BindProperty]
-        public UserUpdateDto inputDto { get; set; }
+        public UserOutputDto inputDto { get; set; }
+
+        //[BindProperty]
+        //public App.Core.Entities.Model.User tempUser { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(int id)
+        {
+            inputDto = await userService.Get(id);
+
+            if (inputDto == null)
+            {
+                return RedirectToPage("/NotFound");
+            }
+
+            return Page();
+        }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -29,7 +44,12 @@ namespace MovieClubWebApplication.Pages.User
                 return Page();
             }
 
-            userService.Update(inputDto);
+            UserUpdateDto tempUserUpdate = new UserUpdateDto();
+            tempUserUpdate.Id = inputDto.Id;
+            tempUserUpdate.Email = inputDto.Email;
+            tempUserUpdate.Password = inputDto.Password;
+
+            await userService.Update(tempUserUpdate);
 
             return RedirectToPage("../User/Index");
         }

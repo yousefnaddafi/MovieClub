@@ -26,7 +26,7 @@ namespace MovieClubWebApplication.Pages.GenreRazor
                 return Page();
             }
             await _genreService.Create(GenreCreation);
-            return RedirectToPage("/Index");
+            return RedirectToPage("../GenreRazor/Index");
         }
     }
 }
