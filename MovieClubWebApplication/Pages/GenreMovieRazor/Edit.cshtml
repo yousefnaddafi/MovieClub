@@ -8,17 +8,18 @@
 <div class="row">
     <div class="col-md-4">
         <form method="post">
+            <input hidden asp-for="inputDto.Id" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
+
             <div class="form-group">
-                <label asp-for="gMovieUpdate.GenreId" class="control-label"></label>
-                <input asp-for="gMovieUpdate.GenreId" class="form-control" />
-                <span asp-validation-for="gMovieUpdate.GenreId" class="text-danger"></span>
+                <label asp-for="inputDto.GenreId" class="control-label"></label>
+                <input asp-for="inputDto.GenreId" class="form-control" />
+                <span asp-validation-for="inputDto.GenreId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="gMovieUpdate.MovieId" class="control-label"></label>
-                <input asp-for="gMovieUpdate.MovieId" class="form-control" />
-                <span asp-validation-for="gMovieUpdate.MovieId" class="text-danger"></span>
+                <label asp-for="inputDto.MovieId" class="control-label"></label>
+                <input asp-for="inputDto.MovieId" class="form-control" />
+                <span asp-validation-for="inputDto.MovieId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="ثبت" class="btn btn-primary" />

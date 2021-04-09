@@ -1,35 +1,38 @@
-﻿@page
+﻿@page "{id}"
 @model MovieClubWebApplication.Pages.Drc.EditModel
 @{
-    ViewData["Title"] = "Edit Director"; 
- }
+    ViewData["Title"] = "Edit Director";
+}
 
-<h1>ویرایش</h1>
-<h4>کارگردان های موجود </h4>
+<h1>Edit</h1>
+
+<h4>Existing List</h4>
 <hr />
+<dl class="row">
+    <dt class="col-sm-2">
+
+    </dt>
+    <dd class="col-sm-10">
+
+    </dd>
+</dl>
 <div class="row">
     <div class="col-md-4">
         <form method="post">
+            <input hidden asp-for="directorsEdit.Id" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="directorsEdit.Id" />
+
+
             <div class="form-group">
-                <label asp-for="directorsEdit.DirectorName" class="control-label"></label>
-                <input asp-for="directorsEdit.DirectorName" class="form-control" />
-                <span asp-validation-for="directorsEdit.DirectorName" class="text-danger"></span>
+                <label asp-for="directorsEdit.FullName" class="control-label"></label>
+                <input asp-for="directorsEdit.FullName" class="form-control" />
+                <span asp-validation-for="directorsEdit.FullName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="ثبت" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-<div>
-    <a asp-page="./Index">لیست تمام کارگردان ها</a>
-</div>
 
-@section Scripts 
-{
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-     }
-}
+

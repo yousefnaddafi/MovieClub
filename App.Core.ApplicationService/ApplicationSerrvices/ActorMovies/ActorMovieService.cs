@@ -16,7 +16,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.ActorMovies
         private readonly IMovieRepository<ActorMovie> ActorMovieRepository;
         private readonly IMapper mapper;
 
-        public ActorMovieService(IMovieRepository<ActorMovie> ActorMovieRepository,IMapper mapper)
+        public ActorMovieService(IMovieRepository<ActorMovie> ActorMovieRepository, IMapper mapper)
         {
             this.ActorMovieRepository = ActorMovieRepository;
             this.mapper = mapper;
@@ -25,46 +25,42 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.ActorMovies
         {
             var temp = mapper.Map<ActorMovie>(inputDto);
             ActorMovieRepository.Insert(temp);
-          await  ActorMovieRepository.Save();
+            await ActorMovieRepository.Save();
             return temp.Id;
         }
-        public ActorMovie Update(ActorMovie item)
+        public async Task<ActorMovieOutputDto> Update(ActorMovieUpdateDto item)
         {
-            this.ActorMovieRepository.Update(item);
-            ActorMovieRepository.Save();
-            return item;
+            var mappedActormovies = mapper.Map<ActorMovie>(item);
+            await this.ActorMovieRepository.Update(mappedActormovies);
+            await ActorMovieRepository.Save();
+            var mappedOutput = mapper.Map<ActorMovieOutputDto>(mappedActormovies);
+            return mappedOutput;
         }
-        public int Delete(int id)
+        public async Task<int> Delete(int id)
         {
-            
-            ActorMovieRepository.Delete(id);
+
+            await ActorMovieRepository.Delete(id);
             return id;
         }
-
-        public async Task<ActorMovieInputDto> Get(int id)
+        public async Task<ActorMovieOutputDto> Get(int id)
         {
-            if (ActorMovieRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
-            {
-                throw new InvalidIdException("Wrong Id");
-            }
             var actorMovies = ActorMovieRepository.GetQuery().FirstOrDefault(x => x.Id == id);
-
-            List<ActorMovieInputDto> result = new List<ActorMovieInputDto>();
-
-            var mappedActorMovies = mapper.Map<ActorMovieInputDto>(actorMovies);
+            List<ActorMovieOutputDto> result = new List<ActorMovieOutputDto>();
+            var mappedActorMovies = mapper.Map<ActorMovieOutputDto>(actorMovies);
             result.Add(mappedActorMovies);
             return mappedActorMovies;
         }
 
-        public async Task<List<ActorMovie>> GetAll()
+        public async Task<List<ActorMovieOutputDto>> GetAll()
         {
             var actorMovies = ActorMovieRepository.GetQuery().ToList();
-            List<ActorMovie> result = new List<ActorMovie>();
+            List<ActorMovieOutputDto> result = new List<ActorMovieOutputDto>();
 
             foreach (var item in actorMovies)
             {
-                
-                result.Add(item);
+
+                var mappedActorMovie = mapper.Map<ActorMovieOutputDto>(item);
+                result.Add(mappedActorMovie);
             }
 
             return result;

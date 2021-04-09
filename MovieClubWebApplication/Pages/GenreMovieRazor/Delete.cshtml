@@ -1,38 +1,13 @@
-﻿@page
+﻿@page "{id}"
 @model MovieClubWebApplication.Pages.GenreMovieRazor.DeleteModel
 @{
 }
-<h1>حذف ژانر فیلم</h1>
+<h1>Delete Confirmation</h1>
 
-<h3>آیا مطمئن به حذف این ژانرفیلم هستید؟</h3>
-<p>توجه: حذف این ژانرفیلم تمام فایل های مرتبط به آن را نیز حذف میکند</p>
-<div>
-    <h4>ژانرهای موجود</h4>
-    <hr />
-
-    <dl class="row">
-        <dt class="col-sm-2">
-
-        </dt>
-        <dd class="col-sm-10">
-
-        </dd>
-    </dl>
-
+<div class="alert alert-danger">
+    <h5>Are you sure you want to delete - @Model.genreMovieDLT.Id</h5>
     <form method="post">
-        <div class="form-group">
-            <input asp-for="genreMovieDLT.MovieId" placeholder="id e film baraye delete ro vared konid">
-            <span asp-validation-for="genreMovieDLT.MovieId" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <input asp-for="genreMovieDLT.GenreId" placeholder="id e genre baraye delete ro vared konid">
-            <span asp-validation-for="genreMovieDLT.GenreId" class="text-danger"></span>
-        </div>
-        <div class="form-group mt-5">
-            <button type="submit">حذف</button>
-            <a asp-page="./Index">برگشت به لیست موجود</a>
-        </div>
+        <button type="submit" class="btn btn-danger">Yes</button>
+        <a class="btn btn-primary" asp-page="/">No</a>
     </form>
-
-
 </div>

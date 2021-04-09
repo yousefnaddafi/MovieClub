@@ -51,7 +51,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public Task<UserOutputDto> Get(int id)
+        public async Task<UserOutputDto> Get(int id)
         {
             return await userService.Get(id);
         }

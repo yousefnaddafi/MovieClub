@@ -16,15 +16,37 @@ namespace MovieClubWebApplication.Pages.GenreMovieRazor
         {
             _genreMovieService = genreMovieService;
         }
-        public GenreMovieUpdateDto gMovieUpdate { get; set; }
+        [BindProperty]
+        public GenreMovieOutput inputDto { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(int id)
+        {
+            inputDto = await _genreMovieService.Get(id);
+
+            if (inputDto == null)
+            {
+                return RedirectToPage("/NotFound");
+            }
+
+            return Page();
+        }
+
         public async Task<IActionResult> OnPostAsync()
         {
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            await _genreMovieService.Update(gMovieUpdate);
-            return RedirectToPage("../Index"); 
+
+            GenreMovieUpdateDto editedGenreMovie = new GenreMovieUpdateDto();
+            editedGenreMovie.Id = inputDto.Id;
+            editedGenreMovie.MovieId = inputDto.MovieId;
+            editedGenreMovie.GenreId = inputDto.GenreId;
+
+            await _genreMovieService.Update(editedGenreMovie);
+
+            return RedirectToPage("../User/Index");
         }
     }
 }

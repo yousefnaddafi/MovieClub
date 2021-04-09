@@ -18,11 +18,11 @@ namespace MovieClubWebApplication.Pages.ActorMovieRazor
             _actorMovieService = actorMovieService;
         }
         [BindProperty]
-        public List<ActorMovie> actorMovies { get; set; }
+        public List<ActorMovieOutputDto> actorMovies { get; set; }
 
         public async Task OnGetAsync()
         {
-            actorMovies = await _actorMovieService.GetAll();
+            actorMovies =await _actorMovieService.GetAll();
         }
     }
 }

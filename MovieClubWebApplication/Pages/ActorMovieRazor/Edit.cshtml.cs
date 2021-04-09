@@ -20,7 +20,18 @@ namespace MovieClubWebApplication.Pages.ActorMovieRazor
         }
 
         [BindProperty]
-        public ActorMovie inputDto { get; set; }
+        public ActorMovieOutputDto inputDto { get; set; }
+        public async Task<IActionResult> OnGetAsync(int id)
+        {
+            inputDto = await actorMovieService.Get(id);
+
+            if (inputDto == null)
+            {
+                return RedirectToPage("/NotFound");
+            }
+
+            return Page();
+        }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -30,9 +41,14 @@ namespace MovieClubWebApplication.Pages.ActorMovieRazor
                 return Page();
             }
 
-            actorMovieService.Update(inputDto);
+            ActorMovieUpdateDto actorMovieUpdate = new ActorMovieUpdateDto();
+            actorMovieUpdate.Id = inputDto.id;
+            actorMovieUpdate.MovieId = inputDto.MovieId;
+            actorMovieUpdate.ActorId = inputDto.ActorId;
 
-            return RedirectToPage("../ActorMovie/Index");
-        }
+            await actorMovieService.Update(actorMovieUpdate);
+
+            return RedirectToPage("../User/Index");
+        }  
     }
 }

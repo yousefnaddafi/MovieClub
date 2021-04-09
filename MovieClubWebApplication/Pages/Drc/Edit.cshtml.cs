@@ -17,15 +17,35 @@ namespace MovieClubWebApplication.Pages.Drc
             _directorService = directorService;
         }
         [BindProperty]
-        public DirectorUpdateDto directorsEdit { get; set; }     
+        public DirectorOutputDto directorsEdit { get; set; }
+        public async Task<IActionResult> OnGetAsync(int id)
+        {
+            directorsEdit = await _directorService.Get(id);
+
+            if (directorsEdit == null)
+            {
+                return RedirectToPage("/NotFound");
+            }
+
+            return Page();
+        }
+
         public async Task<IActionResult> OnPostAsync()
         {
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            await _directorService.Update(directorsEdit);
-            return RedirectToPage("./Index");
+
+            DirectorUpdateDto directorsUpdate = new DirectorUpdateDto();
+            directorsUpdate.Id = directorsEdit.Id;
+            directorsUpdate.DirectorName = directorsEdit.FullName;
+
+
+            await _directorService.Update(directorsUpdate);
+
+            return RedirectToPage("../Drc/Index");
         }
     }
 }

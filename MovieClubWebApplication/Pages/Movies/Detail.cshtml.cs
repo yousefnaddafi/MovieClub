@@ -18,7 +18,6 @@ namespace MovieClubWebApplication.Pages.Movies
             _movieService = movieService;
         }
         [BindProperty]
-        // public int movieDetail { get; set; }
         public MovieOutputDto movieDetails { get; set; }
         public async Task<IActionResult> OnGetAsync(int? id)
         {

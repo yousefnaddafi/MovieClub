@@ -21,8 +21,7 @@ namespace MovieClubWebApplication.Pages.Drc
         }
         [BindProperty]
         public DirectorOutputDto directorDLT { get; set; }
-        [BindProperty]
-        public int directorId { get; set; }
+
         public async Task<IActionResult> OnGet(int id)
         {
             directorDLT = await _directorService.Get(id);
@@ -34,10 +33,10 @@ namespace MovieClubWebApplication.Pages.Drc
         }
         public async Task<IActionResult> OnPostAsync()
         {
-            directorId = await _directorService.Delete(directorId);
+            int directorId = await _directorService.Delete(directorDLT.Id);
             if (directorId == 0)
             {
-                return RedirectToPage("/NotFound");
+                return NotFound();
             }
             return RedirectToPage("./Index");
         }      

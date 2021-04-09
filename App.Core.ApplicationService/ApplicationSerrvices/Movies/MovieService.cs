@@ -52,9 +52,9 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         public async Task<string> Update(MovieInputUpdateDto inputDto)
         {
             var tempMovie = mapper.Map<Movie>(inputDto);
-            movieRepository.Update(tempMovie);
+           await movieRepository.Update(tempMovie);
            await movieRepository.Save();
-            return $"{inputDto.Title} was Upadated";
+            return $"{inputDto.Title} has been Upadated";
         }
 
         public async Task<int> Delete(int id)
@@ -138,11 +138,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
                 }
 
                 return result;
-            //}
-            //else
-            //{
-            //    throw new InvalidValuesException("Wrong Value");
-            //}
+     
             
         }
         public async Task<List<MovieOutputDto>> GetHighRate()
@@ -163,7 +159,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 
         public async Task<List<MovieRelatedDto>> GetPopular()
         {
-            var MostPopular = movieRepository.GetQuery().OrderByDescending(z => z.RateByUser).Take(5);
+            var MostPopular = movieRepository.GetQuery().OrderByDescending(z => z.RateByUser).Take(6);
             var Popular = new List<MovieRelatedDto>();
 
             foreach (var item in MostPopular)
@@ -179,7 +175,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 
         public async Task<List<MovieRelatedDto>> GetNewComing()
         {
-            var NewIncomeMovie = movieRepository.GetQuery().OrderByDescending(x => x.ProductYear).Take(5).ToList();
+            var NewIncomeMovie = movieRepository.GetQuery().OrderByDescending(x => x.ProductYear).Take(6).ToList();
             var Recently = new List<MovieRelatedDto>();
 
             foreach (var item in NewIncomeMovie)
@@ -192,27 +188,29 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             return Recently;
         }
 
-        public async Task<List<MovieCompareOutputDto>> Compare(MovieCompareInputDto inputDto)
+        public async Task<List<MovieOutputDto>> Compare(MovieCompareInputDto inputDto)
         {
-            if (movieRepository.GetQuery().Select(x => x.Id != inputDto.MovieId1).FirstOrDefault()||
-                movieRepository.GetQuery().Select(x => x.Id != inputDto.MovieId2).FirstOrDefault())
+            var item1 = movieRepository.GetQuery().Where(x => x.Title == inputDto.MovieTitle1).FirstOrDefault();
+            var item2 = movieRepository.GetQuery().Where(x => x.Title == inputDto.MovieTitle2).FirstOrDefault();
+
+            if (item1 == null || item2 == null)
             {
-                throw new InvalidIdException("Wrong Id");
+                return null;
             }
 
-            List<MovieCompareOutputDto> temp = new List<MovieCompareOutputDto>();
-            
-            var firstInputMovie = await movieRepository.Get(inputDto.MovieId1);
-            var secondInputMovie = await movieRepository.Get(inputDto.MovieId2);
-            var firstMovie = mapper.Map<MovieCompareOutputDto>(firstInputMovie);
-            var secondMovie = mapper.Map<MovieCompareOutputDto>(secondInputMovie);
+            List<MovieOutputDto> temp = new List<MovieOutputDto>();
+
+            var firstInputMovie = movieRepository.GetQuery().Where(x => x.Title == item1.Title).FirstOrDefault();
+            var secondInputMovie = movieRepository.GetQuery().Where(x => x.Title == item2.Title).FirstOrDefault();
+            var firstMovie = mapper.Map<MovieOutputDto>(firstInputMovie);
+            var secondMovie = mapper.Map<MovieOutputDto>(secondInputMovie);
             temp.Add(firstMovie);
             temp.Add(secondMovie);
             return temp;
         }
         public async Task<List<MovieRelatedDto>> MostVisited()
         {
-            var Most = movieRepository.GetQuery().OrderByDescending(x => x.VisitCount).Take(5).ToList();
+            var Most = movieRepository.GetQuery().OrderByDescending(x => x.VisitCount).Take(6).ToList();
             var MostVisit = new List<MovieRelatedDto>();
 
             foreach (var item in Most)
@@ -220,8 +218,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
                 var MappedMovie = mapper.Map<MovieRelatedDto>(item);
                 MostVisit.Add(MappedMovie);
             }
-            //await movieRepository.Save();
-
+            await movieRepository.Save();
             return MostVisit;
         }
 

@@ -17,15 +17,29 @@ namespace MovieClubWebApplication.Pages.GenreMovieRazor
             _genreMovieService = genreMovieService;
         }
         [BindProperty]
-        public GenreMovieInputDto genreMovieDLT { get; set; }
-        public async Task<IActionResult> OnPostAsync(int id)
+        public GenreMovieOutput  genreMovieDLT { get; set; }
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (!ModelState.IsValid)
+            genreMovieDLT = await _genreMovieService.Get(id);
+
+            if (genreMovieDLT == null)
             {
-                return Page();
+                return RedirectToPage("/NotFound");
             }
-            await _genreMovieService.Delete(id);
-            return RedirectToPage("../Index");
+
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            int deletedGenre = await _genreMovieService.Delete(genreMovieDLT.Id);
+
+            if (deletedGenre == 0)
+            {
+                return NotFound();
+            }
+
+            return RedirectToPage("Index");
         }
     }
 }

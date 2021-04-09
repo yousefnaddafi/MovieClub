@@ -16,6 +16,7 @@ namespace WebApi.Controllers
     {
         private readonly IGenreMovieService GenreMovieService;
 
+
         public GenreMovieController(IGenreMovieService GenreMovieService)
         {
             this.GenreMovieService = GenreMovieService;
@@ -28,23 +29,23 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        public GenreMovieUpdateDto Update(GenreMovieUpdateDto item)
+        public async Task<string> Update(GenreMovieUpdateDto item)
         {
-            this.GenreMovieService.Update(item);
-            return item;
+            await GenreMovieService.Update(item);
+            return $"this {item.Id} has been updated";
         }
 
         [HttpDelete]
-        public int Delete(int id)
+        public async Task<int> Delete(int id)
         {
-            GenreMovieService.Delete(id);
+           await GenreMovieService.Delete(id);
             return id;
         }
 
         [HttpGet]
-        public Task<GenreMovieInputDto> Get(int id)
+        public async Task<GenreMovieInputDto> Get(int id)
         {
-            return GenreMovieService.Get(id);
+            return await GenreMovieService.Get(id);
         }
     }
 }

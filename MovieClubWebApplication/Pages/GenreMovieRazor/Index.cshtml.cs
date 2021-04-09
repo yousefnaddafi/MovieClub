@@ -16,10 +16,11 @@ namespace MovieClubWebApplication.Pages.GenreMovieRazor
         {
             _genreMovieService = genreMovieService;
         }
-        public GenreMovieInputDto genreMovieInput { get; set; }
-        public async Task OnGetAsync(int id)
+        [BindProperty]
+        public List<GenreMovieOutput> genreMovieInput { get; set; }
+        public async Task OnGetAsync()
         {
-            genreMovieInput = await _genreMovieService.Get(id);          
+            genreMovieInput = await _genreMovieService.GetAll();          
         }
     }
 }

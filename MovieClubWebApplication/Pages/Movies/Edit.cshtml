@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id}"
 @model MovieClubWebApplication.Pages.Movies.EditModel
 @{
     ViewData["Title"] = "Edit";
@@ -46,19 +46,9 @@
                 <span asp-validation-for="movies.ProductYear" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="movies.DirectorId" class="control-label"></label>
-                <input asp-for="movies.DirectorId" class="form-control" />
-                <span asp-validation-for="movies.DirectorId" class="text-danger"></span>
-            </div>
-
-
-            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
-    </div>
-    <div class="form-group mt-5">
-        <button type="submit">Edit</button>
     </div>
 </div>
 

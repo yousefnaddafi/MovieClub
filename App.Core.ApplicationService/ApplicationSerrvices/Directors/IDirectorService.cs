@@ -11,11 +11,11 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
     public interface IDirectorService
     {
         Task<string> Create(DirectorInputDto inputDto);
-       Task<string> Update(DirectorUpdateDto item);
+        Task<string> Update(DirectorUpdateDto item);
         Task<int> Delete(int id);
         Task<DirectorOutputDto> Get(int id);
         Task<List<DirectorOutputDto>> GetAll();
-        List<Entities.Model.Directors> GetQuery();
+       // List<DirectorOutputDto> GetQuery();
         Task SaveChangesAsync();
 
     }

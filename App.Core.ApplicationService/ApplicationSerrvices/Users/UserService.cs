@@ -57,41 +57,22 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 
         public async Task<int> Delete(int id)
         {
-            //var item = userRepository.GetQuery().Where(x => x.Id == id).FirstOrDefault();
-            //if (item == null)
-            //{
-            //    throw new InvalidIdException("Wrong Id");
-            //}
-
             var item = userRepository.GetQuery().FirstOrDefault(x => x.Id == id);
+
             if (item != null)
             {
                 await userRepository.Delete(id);
-               await userRepository.Save();
+                await userRepository.Save();
                 return id;
             }
-            else {
+            else
+            {
                 return 0;
             }
-
-
         }
 
         public async Task<UserOutputDto> Get(int id)
         {
-            //if (userRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
-            //{
-            //    throw new InvalidIdException("Wrong Id");
-            //}
-
-
-
-            //var item = userRepository.Get(id);
-            //var tempUser = mapper.Map<UserOutputDto>(item);
-            //return tempUser;
-
-
-
             var user = userRepository.GetQuery().FirstOrDefault(x => x.Id == id);
             var mappedUser = mapper.Map<UserOutputDto>(user);
             return mappedUser;
@@ -112,7 +93,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 
             return result;
         }
-        //
+
         public async Task Insert(UserInputDto inputDto)
         {
             var RegisterUser = mapper.Map<User>(inputDto);
@@ -137,7 +118,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 
 
 
-            
-        
-    
+
+
+
 

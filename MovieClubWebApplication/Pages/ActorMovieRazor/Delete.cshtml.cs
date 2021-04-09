@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using App.Core.ApplicationService.ApplicationSerrvices.ActorMovies;
+using App.Core.ApplicationService.Dtos.ActorMovieDtos;
 using App.Core.Entities.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -17,41 +18,30 @@ namespace MovieClubWebApplication.Pages.ActorMovieRazor
             _actorMovieService = actorMovieService;
         }
         [BindProperty]
-        public ActorMovie actorMovieDLT { get; set; }
-        public string ErrorMessage { get; set; }
+        public ActorMovieOutputDto tempActorMovie { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id, bool? saveChangesError = false)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id == null)
+            tempActorMovie = await _actorMovieService.Get(id);
+
+            if (tempActorMovie == null)
             {
-                return NotFound();
+                return RedirectToPage("/NotFound");
             }
 
-            await _actorMovieService.Get(id.Value);
-
-            if (actorMovieDLT == null)
-            {
-                return NotFound();
-            }
-
-            if (saveChangesError.GetValueOrDefault())
-            {
-                ErrorMessage = "Delete failed. Try again";
-            }
             return Page();
         }
-        public async Task<IActionResult> OnPostAsync(int? id)
+
+        public async Task<IActionResult> OnPostAsync()
         {
-            if (id == null)
+            int deletedActorMovie = await _actorMovieService.Delete(tempActorMovie.id);
+
+            if (deletedActorMovie == 0)
             {
                 return NotFound();
             }
 
-            if (actorMovieDLT != null)
-            {
-                _actorMovieService.Delete(id.Value);
-            }
-            return RedirectToPage("/Index");
+            return RedirectToPage("Index");
         }
     }
 }

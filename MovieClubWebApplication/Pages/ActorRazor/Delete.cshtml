@@ -14,21 +14,4 @@
         <a class="btn btn-primary" asp-page="/Actor/Index">No</a>
     </form>
 </div>
-<div>
-    <h4>Existing List</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.actorDLT.ActorName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.actorDLT.ActorName)
-        </dd>
-    </dl>
 
-    <form method="post">
-        <input type="hidden" asp-for="actorDLT.Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> 
-        <a asp-page="./Index">All Lists</a>
-    </form>
-</div>

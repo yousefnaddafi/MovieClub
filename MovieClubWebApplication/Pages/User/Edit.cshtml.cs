@@ -21,9 +21,6 @@ namespace MovieClubWebApplication.Pages.User
         [BindProperty]
         public UserOutputDto inputDto { get; set; }
 
-        //[BindProperty]
-        //public App.Core.Entities.Model.User tempUser { get; set; }
-
         public async Task<IActionResult> OnGetAsync(int id)
         {
             inputDto = await userService.Get(id);

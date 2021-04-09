@@ -12,8 +12,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
     public interface IActorService
     {
         Task<int> Create(ActorInputDto inputDto);
-        Actor Update(ActorRazorDto item);
-        int Delete(int id);
+        Task<ActorOutputDto> Update(ActorRazorDto item);
+        Task<int> Delete(int id);
         Task<ActorOutputDto> Get(int id);
         Task<List<ActorOutputDto>> GetAll();
         List<Actor> GetQuery();

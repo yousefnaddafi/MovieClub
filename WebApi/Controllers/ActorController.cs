@@ -30,15 +30,15 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        public Actor Update(ActorRazorDto inputDto)
+        public async Task<ActorOutputDto> Update(ActorRazorDto inputDto)
         {
-            return actorService.Update(inputDto);
+            return await actorService.Update(inputDto);
         }
 
         [HttpDelete]
-        public int Delete(int id)
+        public async Task<int> Delete(int id)
         {
-            actorService.Delete(id);
+            await actorService.Delete(id);
             return id;
         }
 

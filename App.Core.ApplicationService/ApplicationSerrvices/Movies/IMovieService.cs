@@ -21,7 +21,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         Task<List<MovieRelatedDto>> GetPopular();
         Task<List<MovieRelatedDto>> GetNewComing();
         void RateByUser(RateByUserInputDto inputDto);
-        Task<List<MovieCompareOutputDto>> Compare(MovieCompareInputDto inputDto);
+        Task<List<MovieOutputDto>> Compare(MovieCompareInputDto inputDto);
         List<MovieOutputDto> Search(SearchMovieInputDto inputDto);
         Task<List<MovieOutputDto>> GetHighRate();
         Task SaveChangesAsync();

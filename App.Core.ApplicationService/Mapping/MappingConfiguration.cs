@@ -24,7 +24,7 @@ namespace App.Core.ApplicationService.Mapping
         public MappingConfiguration()
         {
             CreateMap<Movie, MovieCompareOutputDto>()
-                .ForMember(x => x.Genres, o => o.MapFrom(z => z.GenreMovies.Select(z=>z.Genre.GenreName)))
+                .ForMember(x => x.Genres, o => o.MapFrom(z => z.GenreMovies.Select(z => z.Genre.GenreName)))
                 .ForMember(x => x.RateByUsers, o => o.MapFrom(z => z.RateByUser))
                 .ForMember(x => x.VisitCounts, o => o.MapFrom(z => z.VisitCount))
                 ;
@@ -37,7 +37,7 @@ namespace App.Core.ApplicationService.Mapping
             CreateMap<User, UserOutputDto>()
                 .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
                 .ForMember(x => x.Email, o => o.MapFrom(z => z.Email))
-                .ForMember(x=> x.Password, o=> o.MapFrom(z=> z.Password))
+                .ForMember(x => x.Password, o => o.MapFrom(z => z.Password))
                 ;
 
 
@@ -46,7 +46,7 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.Email, o => o.MapFrom(z => z.Email))
                 .ForMember(x => x.Password, o => o.MapFrom(z => z.Password))
                 ;
-                      
+
             CreateMap<Movie, MovieRelatedDto>()
                 .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
                 .ForMember(x => x.ImdbRate, o => o.MapFrom(z => z.ImdbRate))
@@ -77,9 +77,9 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.DirectorId, o => o.MapFrom(z => z.DirectorId))
                 .ForMember(x => x.Image, o => o.MapFrom(z => z.Image))
                 ;
-           
-            CreateMap<DirectorInputDto,Directors>()
-                .ForMember(x=>x.DirectorName,o=>o.MapFrom(z=>z.FullName));
+
+            CreateMap<DirectorInputDto, Directors>()
+                .ForMember(x => x.DirectorName, o => o.MapFrom(z => z.FullName));
 
             CreateMap<Directors, DirectorOutputDto>()
                 .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
@@ -87,7 +87,7 @@ namespace App.Core.ApplicationService.Mapping
 
             CreateMap<DirectorUpdateDto, Directors>()
                .ForMember(x => x.DirectorName, o => o.MapFrom(z => z.DirectorName))
-               .ForMember(x=> x.Id , o=>o.MapFrom(z=>z.Id))
+               .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
                ;
 
             CreateMap<Actor, ActorOutputDto>()
@@ -95,10 +95,9 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
                 ;
 
-
             CreateMap<ActorRazorDto, Actor>()
                 .ForMember(x => x.ActorName, o => o.MapFrom(z => z.ActorName))
-                .ForMember(x=>x.Id,o=>o.MapFrom(z=>z.Id))
+                .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
                 ;
 
             CreateMap<ActorInputDto, Actor>()
@@ -137,6 +136,17 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.ActorId, o => o.MapFrom(z => z.ActorId))
                 .ForMember(x => x.MovieId, o => o.MapFrom(z => z.MovieId))
                 ;
+            CreateMap<ActorMovie, ActorMovieOutputDto>()
+                .ForMember(x => x.id, o => o.MapFrom(z => z.Id))
+                .ForMember(x => x.ActorId, o => o.MapFrom(z => z.ActorId))
+                .ForMember(x => x.MovieId, o => o.MapFrom(z => z.MovieId))
+                ;
+            CreateMap<ActorMovieUpdateDto, ActorMovie>()
+                .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
+                .ForMember(x => x.ActorId, o => o.MapFrom(z => z.ActorId))
+                .ForMember(x => x.MovieId, o => o.MapFrom(z => z.MovieId))
+                ;
+
             CreateMap<CountryMovieInputDto, CountryMovie>()
                 .ForMember(x => x.MovieId, o => o.MapFrom(z => z.MovieId))
                 .ForMember(x => x.CountryId, o => o.MapFrom(z => z.CountryId))
@@ -146,10 +156,10 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.ProductYear, o => o.MapFrom(z => z.ProductYear))
                 .ForMember(x => x.VisitCount, o => o.MapFrom(z => z.VisitCount))
                 .ForMember(x => x.ImdbRate, o => o.MapFrom(z => z.ImdbRate))
-                .ForMember(x => x.Summery, o => o.MapFrom(z => z.Summery))                
+                .ForMember(x => x.Summery, o => o.MapFrom(z => z.Summery))
                 .ForMember(x => x.RateByUser, o => o.MapFrom(z => z.RateByUser))
                 .ForMember(x => x.Actors, o => o.MapFrom(z => z.ActorMovies.Select(y => y.Actor.ActorName)))
-                .ForMember(x=>x.DirectorName, o=>o.MapFrom(z=>z.Director.DirectorName))
+                .ForMember(x => x.DirectorName, o => o.MapFrom(z => z.Director.DirectorName))
                 .ForMember(x => x.Genre, o => o.MapFrom(z => z.GenreMovies.Select(y => y.Genre.GenreName)))
                 ;
             CreateMap<Movie, SearchDetailFilterDto>()
@@ -166,7 +176,7 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.ProductYear, o => o.MapFrom(z => z.Movie.ProductYear))
                 .ForMember(x => x.Genres, o => o.MapFrom(z => z.Genre.GenreName))
                 .ForMember(x => x.Director, o => o.MapFrom(z => z.Movie.Director.DirectorName))
-                .ForMember(x => x.Actors, o => o.MapFrom(z => z.Movie.ActorMovies.Select(y=> y.Actor.ActorName)))
+                .ForMember(x => x.Actors, o => o.MapFrom(z => z.Movie.ActorMovies.Select(y => y.Actor.ActorName)))
                 ;
             CreateMap<GenreMovieInputDto, GenreMovie>()
                 .ForMember(x => x.GenreId, o => o.MapFrom(z => z.GenreId))
@@ -177,13 +187,17 @@ namespace App.Core.ApplicationService.Mapping
                 .ForMember(x => x.GenreId, o => o.MapFrom(z => z.GenreId))
                 .ForMember(x => x.MovieId, o => o.MapFrom(z => z.MovieId))
                 ;
-
+            CreateMap<GenreMovie, GenreMovieOutput>()
+              .ForMember(x => x.Id, o => o.MapFrom(z => z.Id))
+              .ForMember(x => x.GenreId, o => o.MapFrom(z => z.GenreId))
+              .ForMember(x => x.MovieId, o => o.MapFrom(z => z.MovieId))
+              ;
 
             CreateMap<ActorMovie, SearchDetailFilterDto>()
                 .ForMember(x => x.Title, o => o.MapFrom(z => z.Movie.Title))
                 .ForMember(x => x.RateByUser, o => o.MapFrom(z => z.Movie.RateByUser))
                 .ForMember(x => x.ProductYear, o => o.MapFrom(z => z.Movie.ProductYear))
-                .ForMember(x => x.Genres, o => o.MapFrom(z => z.Movie.GenreMovies.Select(y=> y.Genre.GenreName)))
+                .ForMember(x => x.Genres, o => o.MapFrom(z => z.Movie.GenreMovies.Select(y => y.Genre.GenreName)))
                 .ForMember(x => x.Director, o => o.MapFrom(z => z.Movie.Director.DirectorName))
                 .ForMember(x => x.Actors, o => o.MapFrom(z => z.Actor.ActorName))
                 ;
