@@ -41,7 +41,7 @@ namespace MovieClubWebApplication.Pages.ActorMovieRazor
                 return NotFound();
             }
 
-            return RedirectToPage("Index");
+            return RedirectToPage("/Index");
         }
     }
 }

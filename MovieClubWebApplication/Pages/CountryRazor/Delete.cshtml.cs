@@ -49,7 +49,7 @@ namespace MovieClubWebApplication.Pages.CountryRazor
 
             if (countryDLT != null)
             {
-                _countryService.Delete(id.Value);
+             await   _countryService.Delete(id.Value);
             }
             return RedirectToPage("/Index");
         }

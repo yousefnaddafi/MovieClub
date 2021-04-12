@@ -40,9 +40,9 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
         public async Task<string> Update(DirectorUpdateDto item)
         {
             var drc = mapper.Map<Entities.Model.Directors>(item);
-            await this.directorRepository.Update(drc);
+            await directorRepository.Update(drc);
             await directorRepository.Save();
-            return $"{item.Id}is update";
+            return $"{item.Id} updates";
         }
 
         public async Task<int> Delete(int id)
@@ -62,9 +62,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
 
         public async Task<DirectorOutputDto> Get(int id)
         {
-            var directorss = directorRepository.GetQuery().FirstOrDefault(x => x.Id == id);
-            var mappedDirectorss = mapper.Map<DirectorOutputDto>(directorss);
-            return mappedDirectorss;
+            var directors = directorRepository.GetQuery().FirstOrDefault(x => x.Id == id);
+
+            List<DirectorOutputDto> result = new List<DirectorOutputDto>();
+            var directorInputDto = mapper.Map<DirectorOutputDto>(directors);
+            result.Add(directorInputDto);
+            return directorInputDto;
         }
         public async Task<List<DirectorOutputDto>> GetAll()
         {
@@ -79,7 +82,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
 
             return result;
         }
-        public List<DirectorOutputDto> GetQuery()
+        public List<Entities.Model.Directors> GetQuery()
         {
             return directorRepository.GetQuery().ToList();
         }

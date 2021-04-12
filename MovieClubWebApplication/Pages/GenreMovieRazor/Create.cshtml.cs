@@ -16,7 +16,6 @@ namespace MovieClubWebApplication.Pages.GenreMovieRazor
         {
             _genreMovieService = genreMovieService;
         }
-
         [BindProperty]
         public GenreMovieInputDto genreMovieCreation { get; set; }
         public async Task<IActionResult> OnPostAsync()
@@ -26,7 +25,7 @@ namespace MovieClubWebApplication.Pages.GenreMovieRazor
                 return Page();
             }
             await _genreMovieService.Create(genreMovieCreation);
-            return RedirectToPage("../Index");
+            return RedirectToPage("/Index");
         }
     }
 }

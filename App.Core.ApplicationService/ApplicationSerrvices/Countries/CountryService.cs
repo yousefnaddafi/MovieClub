@@ -30,19 +30,19 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Countries
             return inputDto.CountryName;
         }
 
-        public Country Update(CountryRazorDto inputDto)
+        public async Task<string> Update(CountryRazorDto inputDto)
         {
             var country = mapper.Map<Country>(inputDto);
 
-            countryRepository.Update(country);
-            countryRepository.Save();
-            return country;
+           await countryRepository.Update(country);
+          await  countryRepository.Save();
+            return $"update {country.Id}";
         }
 
-        public int Delete(int id)
+        public async Task<int> Delete(int id)
         {
             
-            countryRepository.Delete(id);
+           await countryRepository.Delete(id);
             return id;
         }
 

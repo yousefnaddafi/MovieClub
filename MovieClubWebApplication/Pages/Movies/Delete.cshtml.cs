@@ -15,7 +15,7 @@ namespace MovieClubWebApplication.Pages.Movies
 
         public DeleteModel(IMovieService _movieService)
         {
-            this.movieService = _movieService;
+            movieService = _movieService;
         }
 
         [BindProperty]

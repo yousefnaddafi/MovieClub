@@ -43,7 +43,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<GenreMovieInputDto> Get(int id)
+        public async Task<GenreMovieOutput> Get(int id)
         {
             return await GenreMovieService.Get(id);
         }

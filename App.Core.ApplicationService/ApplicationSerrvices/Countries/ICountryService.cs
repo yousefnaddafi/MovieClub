@@ -11,8 +11,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Countries
     public interface ICountryService
     {
         Task<string> Create(CountryInputDTO inputDto);
-        Country Update(CountryRazorDto item);
-        int Delete(int id);
+       Task<string> Update(CountryRazorDto item);
+       Task<int> Delete(int id);
         Task<CountryOutputDto> Get(int id);
         Task<List<CountryOutputDto>> GetAll();
         List<Country> GetQuery();

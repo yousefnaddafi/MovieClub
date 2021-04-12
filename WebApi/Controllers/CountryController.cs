@@ -28,23 +28,23 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        public CountryRazorDto Update(CountryRazorDto inputDto)
+        public async Task<CountryRazorDto> Update(CountryRazorDto inputDto)
         {
-            countryService.Update(inputDto);
+           await countryService.Update(inputDto);
             return inputDto;
         }
 
         [HttpDelete]
-        public int Delete(int id)
+        public async Task<int> Delete(int id)
         {
-            countryService.Delete(id);
+          await  countryService.Delete(id);
             return id;
         }
 
         [HttpGet]
-        public Task<CountryOutputDto> Get(int id)
+        public async Task<CountryOutputDto> Get(int id)
         {
-            return countryService.Get(id);
+            return await countryService.Get(id);
         }
     }
 }
