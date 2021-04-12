@@ -17,15 +17,9 @@ namespace MovieClubWebApplication.Pages.Features
         }
         [BindProperty]
         public MovieCompareInputDto input { get; set; } = new MovieCompareInputDto();
-
         [BindProperty]
-        public MovieOutputDto movieOutputt { get; set; }
-        [BindProperty]
-
         public List<MovieOutputDto> movieOutput { get; set; }
 
-        [BindProperty]
-        public List<MovieCompareInputDto> myInPut { get; set; }
         public async Task<IActionResult> OnGet(string Title1, string Title2)
         {
             input.MovieTitle1 = Title1;

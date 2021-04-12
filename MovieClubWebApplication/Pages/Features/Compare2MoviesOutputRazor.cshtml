@@ -3,7 +3,6 @@
 @{ ViewData["Title"] = "CompareResult";
 }
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,14 +42,13 @@
                             </div>
                         </div>
                         <ul class="list-group list-group-flush">
-
                             <p class="card-text text-right"> @item.DirectorName :کارگردان </p>
                             <p class="card-text text-right"> @item.ProductYear :محصول سال</p>
                             <p class="card-text text-right"> @item.Summery :خلاصه </p>
                             <p class="card-text text-right"> @item.RateByUser رای کاربران </p>
                             <p class="card-text text-right">@item.ImdbRate :رای داوران </p>                  
                             <li class="list-group-item card-footer">
-                                <a asp-page="../Movies/Detail" asp-route-id="@item.Id" class="btn btn-primary">جزئیات</a>
+                            <a asp-page="../Movies/Detail" asp-route-id="@item.Id" class="btn btn-primary">جزئیات</a>
                             </li>
                         </ul>
                     </div>
