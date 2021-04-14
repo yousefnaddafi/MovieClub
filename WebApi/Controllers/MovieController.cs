@@ -97,7 +97,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("Search")]
-        public List<MovieOutputDto> SearchMovies([FromBody] SearchMovieInputDto searchInput)
+        public Task<List<MovieOutputDto>> SearchMovies([FromQuery] string searchInput)
         {
             return moviesService.Search(searchInput);
         }

@@ -99,7 +99,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             return movieRepository.GetQuery().ToList();
         }
 
-        public List<MovieOutputDto> Search(SearchMovieInputDto inputDto) {
+        public async Task<List<MovieOutputDto>> Search(string inputDto) {
             List<MovieOutputDto> result = new List<MovieOutputDto>();
 
             //if (actorMovieRepository.GetQuery().Include(x => x.Actor).Include(y => y.Movie).Select
@@ -110,11 +110,20 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             //    movieRepository.GetQuery().Include(x => x.Director).Select
             //        (y => y.Director.DirectorName == inputDto.Director).FirstOrDefault())
             //{
+               var tempSearchedByTitle = movieRepository.GetQuery().Include(x => x.Director)
+               .Include(v => v.GenreMovies).ThenInclude(b => b.Genre)
+               .Include(z => z.ActorMovies).ThenInclude(o => o.Actor)
+               .Where(x => x.Title.Contains(inputDto)).ToList();
+               foreach (var item in tempSearchedByTitle)
+                   {
+                      var mappedTemp = mapper.Map<MovieOutputDto>(item);
+                      result.Add(mappedTemp);
+                   }
 
                 var tempSearchedByRateByUser = movieRepository.GetQuery().Include(x=>x.Director)
                 .Include(v=>v.GenreMovies).ThenInclude(b=>b.Genre)
                 .Include(z=>z.ActorMovies).ThenInclude(o=>o.Actor)
-                .Where(x => x.Director.DirectorName == inputDto.Director).ToList();
+                .Where(x => x.Director.DirectorName.Contains(inputDto)).ToList();
                 foreach (var item in tempSearchedByRateByUser)
                 {
                     var mappedTemp = mapper.Map<MovieOutputDto>(item);
@@ -122,7 +131,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
                 }
 
                 var tempSearchedByGenre = genreMovieRepository.GetQuery().Include(x => x.Genre).Include(y => y.Movie)
-                        .Where(z => z.Genre.GenreName == inputDto.Genre).ToList();
+                        .Where(z => z.Genre.GenreName.Contains(inputDto)).Select(z=>z.Movie).ToList();
                 foreach (var item in tempSearchedByGenre)
                 {
                     var mappedTemp = mapper.Map<MovieOutputDto>(item);
@@ -130,14 +139,14 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
                 }
 
                 var tempSearchedByActor = actorMovieRepository.GetQuery().Include(x => x.Actor).Include(y => y.Movie)
-                        .Where(z => z.Actor.ActorName == inputDto.Actor).ToList();
+                        .Where(z => z.Actor.ActorName.Contains(inputDto)).Select(z => z.Movie).ToList();
                 foreach (var item in tempSearchedByActor)
                 {
                     var mappedTemp = mapper.Map<MovieOutputDto>(item);
                     result.Add(mappedTemp);
                 }
 
-                return result;
+                return  result;
      
             
         }

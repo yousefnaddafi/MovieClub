@@ -28,7 +28,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        public ActorMovie Update(ActorMovie item)
+        public ActorMovieUpdateDto Update(ActorMovieUpdateDto item)
         {
             this.ActorMovieService.Update(item);
             return item;
@@ -42,7 +42,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public Task<ActorMovieInputDto> Get(int id)
+        public Task<ActorMovieOutputDto> Get(int id)
         {
             return   ActorMovieService.Get(id);
         }

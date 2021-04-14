@@ -79,7 +79,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
 
             return result;
         }
-        public List<DirectorOutputDto> GetQuery()
+        public List<Entities.Model.Directors> GetQuery()
         {
             return directorRepository.GetQuery().ToList();
         }
