@@ -4,10 +4,10 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>جزئیات اطلاعات کارگردان</h1>
+<h1>Details</h1>
 
 <div>
-    <h4>لیست موجود</h4>
+    <h4>Existing List</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -19,6 +19,6 @@
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.directorDetail.Id"> Edit</a>
-    <a asp-page="./Delete" asp-route-id="@Model.directorDetail.Id"> Delete</a>
+    <a asp-page="Edit" asp-route-id="@Model.directorDetail">Edit this List</a>
+    <a asp-page="./Index">All Lists</a>|
 </div>

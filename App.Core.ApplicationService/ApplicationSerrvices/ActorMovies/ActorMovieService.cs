@@ -40,6 +40,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.ActorMovies
         {
 
             await ActorMovieRepository.Delete(id);
+            await ActorMovieRepository.Save();
             return id;
         }
         public async Task<ActorMovieOutputDto> Get(int id)
@@ -55,14 +56,12 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.ActorMovies
         {
             var actorMovies = ActorMovieRepository.GetQuery().ToList();
             List<ActorMovieOutputDto> result = new List<ActorMovieOutputDto>();
-
             foreach (var item in actorMovies)
             {
 
                 var mappedActorMovie = mapper.Map<ActorMovieOutputDto>(item);
                 result.Add(mappedActorMovie);
             }
-
             return result;
         }
         public List<ActorMovie> GetQuery()

@@ -15,7 +15,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
         Task<int> Delete(int id);
         Task<DirectorOutputDto> Get(int id);
         Task<List<DirectorOutputDto>> GetAll();
-        List<Entities.Model.Directors> GetQuery();
+       List<Entities.Model.Directors> GetQuery();
         Task SaveChangesAsync();
 
     }

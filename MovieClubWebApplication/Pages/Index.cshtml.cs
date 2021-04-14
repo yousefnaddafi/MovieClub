@@ -34,7 +34,7 @@ namespace MovieClubWebApplication.Pages
         [BindProperty]
         public List<MovieOutputDto> movieOutputs { get; set; }
         [BindProperty]
-        public Task<List<MovieRelatedDto>> movies { get; set; }
+        public List<MovieRelatedDto> movies { get; set; }
         [BindProperty]
         public List<MovieOutputDto> movieHigh { get; set; }
 
@@ -43,7 +43,7 @@ namespace MovieClubWebApplication.Pages
             movieList = await _movieService.GetAll();
             movieOutput =await _movieService.GetNewComing();
             movieOutputs = await _movieService.GetHighRate();
-            movies = _movieService.MostVisited();
+            movies =await _movieService.MostVisited();
             movieHigh = await _movieService.GetHighRate();
         }   
         public async Task<IActionResult> OnGetSearchMovie()

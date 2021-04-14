@@ -48,7 +48,7 @@ namespace MovieClubWebApplication.Pages.ActorMovieRazor
 
             await actorMovieService.Update(actorMovieUpdate);
 
-            return RedirectToPage("../User/Index");
+            return RedirectToPage("../ActorMovieRazor/Index");
         }  
     }
 }

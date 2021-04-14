@@ -281,7 +281,7 @@
 
             <div class="row mt-3 py-1 ">
                 <div class="col-12 text-center mt-3">
-                    <a asp-page="/Movies/HighRateRazor/GethighRate" asp-route-id="Model.movieOutputs.Id" class="btn btn-primary">ورود به آرشیو</a>
+                    <a asp-page="/Movies/HighRate/GethighRate" asp-route-id="Model.movieOutputs.Id" class="btn btn-primary">ورود به آرشیو</a>
                 </div>
             </div>
             <hr />
@@ -294,7 +294,7 @@
             <hr>
 
             <div class="row mt-3 py-1">
-                @foreach (var item in Model.movieList)
+                @foreach (var item in Model.movies)
                 {
                     <div class="col-4">
                         <img class="d-block w-100" src="@item.Image" style="width:100%; height:80%;">
@@ -316,18 +316,18 @@
             </div>
             <hr>
             <div class="row mt-3 py-1">
-                @for (int i = 0; i < Model.movieList.Count; i++)
+                @for (int i = 0; i < Model.movies.Count; i++)
                 {
                     <div class="col-4 text-center mt-3">
-                        <img class="d-block w-100" src="@Model.movieList[i].Image" style="width:50%; height:60%;">
-                        <p class="card-text text-center"> @Model.movieList[i].Title</p>
+                        <img class="d-block w-100" src="@Model.movies[i].Image" style="width:50%; height:60%;">
+                        <p class="card-text text-center"> @Model.movies[i].Title</p>
                     </div>
                 }
             </div>
 
             <div class="row mt-3 py-1">
                 <div class="col-12 text-center mt-3">
-                    <a asp-page="/Movies/Popular" asp-route-id="Model.movieOutputs.Id" class="btn btn-primary">ورود به آرشیو</a>
+                    <a asp-page="/Movies/MostVisitedRazor" asp-route-id="Model.movieOutputs.Id" class="btn btn-primary">ورود به آرشیو</a>
                 </div>
             </div>
             <hr />

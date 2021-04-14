@@ -15,6 +15,6 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.GenreMovies
         Task<int> Delete(int id);
         Task<GenreMovieOutput> Get(int id);
         Task<List<GenreMovieOutput>> GetAll();
-       // List<GenreMovieOutput> GetQuery();
+        List<GenreMovie> GetQuery();
     }
 }

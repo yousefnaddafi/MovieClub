@@ -1,4 +1,3 @@
-using App.Core.ApplicationService.ApplicationSerrvices.Movies;
 using App.Core.ApplicationService.Dtos.MovieDtos;
 using App.Core.ApplicationService.Dtos.ProductDtos;
 using App.Core.ApplicationService.IRepositories;
@@ -20,27 +19,22 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
     {
         private readonly IMovieRepository<Movie> movieRepository;
         private readonly IMovieRepository<ActorMovie> actorMovieRepository;
-      
         private readonly IMovieRepository<UserLogin> userLoginRepository;
         private readonly IMovieRepository<User> userRepository;
         private readonly IMapper mapper;
         private readonly IMovieRepository<GenreMovie> genreMovieRepository;
-
         public MovieService(IMovieRepository<Movie> _movieRepository,
             IMovieRepository<ActorMovie> _actorMovieRepository,
             IMapper _mapper,
             IMovieRepository<UserLogin> _userRepository,
-            IMovieRepository<GenreMovie> _genreMovieRepository
-            )
+            IMovieRepository<GenreMovie> _genreMovieRepository)
         {
             this.actorMovieRepository = _actorMovieRepository;
             this.movieRepository = _movieRepository;
-           
             this.userLoginRepository = _userRepository;
             this.mapper = _mapper;
             genreMovieRepository = _genreMovieRepository;
         }
-
         public async Task<int> Create(MovieInputDto inputDto)
         {
             var tempMovie = mapper.Map<Movie>(inputDto);
@@ -48,52 +42,49 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             await movieRepository.Save();
             return tempMovie.Id;
         }
-
         public async Task<string> Update(MovieInputUpdateDto inputDto)
         {
             var tempMovie = mapper.Map<Movie>(inputDto);
-           await movieRepository.Update(tempMovie);
-           await movieRepository.Save();
-            return $"{inputDto.Title} has been Upadated";
+            await movieRepository.Update(tempMovie);
+            await movieRepository.Save();
+            return $"{tempMovie.Title} has been Upadated";
         }
-
         public async Task<int> Delete(int id)
         {
             var item = movieRepository.GetQuery().Where(x => x.Id == id).FirstOrDefault();
-            if (item==null)
+            if (item == null)
             {
                 return 0;
             }
-          await  movieRepository.Delete(id);
-          await movieRepository.Save();
+            await movieRepository.Delete(id);
+            await movieRepository.Save();
             return id;
         }
-
         public async Task<MovieOutputDto> Get(int id)
         {
+            var item = movieRepository.GetQuery().Where(x => x.Id == id).FirstOrDefault();
+            if (item == null)
+            {
+                return null;
+            }
             var Mov = movieRepository.GetQuery().Include(x => x.ActorMovies).ThenInclude(z => z.Actor)
-                .Include(x => x.GenreMovies).ThenInclude(z => z.Genre).Include(o => o.Director).FirstOrDefault(x=>x.Id == id);
-            movieRepository.GetQuery().FirstOrDefault(x => x.Id==id).VisitCount += 1;
-            await movieRepository.Save();
-            return  mapper.Map<MovieOutputDto>(Mov);
+                     .Include(x => x.GenreMovies).ThenInclude(z => z.Genre).Include(o => o.Director)
+                     .FirstOrDefault(x => x.Id == id);
+            movieRepository.GetQuery().FirstOrDefault(x => x.Id == id).VisitCount += 1;
+            return mapper.Map<MovieOutputDto>(Mov);
         }
-
         public async Task<List<MovieOutputDto>> GetAll()
         {
-
-          var Moviesss = movieRepository.GetQuery().Include(x=>x.ActorMovies).ThenInclude(z=>z.Actor)
-                .Include(x=>x.GenreMovies).ThenInclude(z=>z.Genre).Include(o=>o.Director).ToList();
-             List <MovieOutputDto> result =  new List<MovieOutputDto>();
-
+            var Moviesss = movieRepository.GetQuery().Include(x => x.ActorMovies).ThenInclude(z => z.Actor)
+                          .Include(x => x.GenreMovies).ThenInclude(z => z.Genre).Include(o => o.Director).ToList();
+            List<MovieOutputDto> result = new List<MovieOutputDto>();
             foreach (var item in Moviesss)
             {
                 var mappedHighRateMovies = mapper.Map<MovieOutputDto>(item);
                 result.Add(mappedHighRateMovies);
             }
-            
-            return  result;
+            return result;
         }
-
         public List<Movie> GetQuery()
         {
             return movieRepository.GetQuery().ToList();
@@ -162,7 +153,6 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
                 var mappedHighRateMovies = mapper.Map<MovieOutputDto>(item);
                 result.Add(mappedHighRateMovies);
             }
-
             return result;
         }
 
@@ -177,8 +167,6 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
                 Popular.Add(MappedMovie);
             }
 
-            //await movieRepository.Save();
-
             return Popular;
         }
 
@@ -192,8 +180,6 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
                 var MappedMovie = mapper.Map<MovieRelatedDto>(item);
                 Recently.Add(MappedMovie);
             }
-            //await movieRepository.Save();
-
             return Recently;
         }
 
@@ -230,8 +216,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
             await movieRepository.Save();
             return MostVisit;
         }
-
-        public void RateByUser(RateByUserInputDto inputDto) {
+        public void RateByUser(RateByUserInputDto inputDto)
+        {
             int tempLastRateCounter = movieRepository.GetQuery().Where(x => x.Id == inputDto.MovieId).Select(y => y.RateCounter).FirstOrDefault();
             double tempLastRateByUser = movieRepository.GetQuery().Where(x => x.Id == inputDto.MovieId).Select(y => y.RateByUser).FirstOrDefault();
             int tempNewRateCounter = tempLastRateCounter + 1;
@@ -243,7 +229,6 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
 
             movieRepository.Update(tempMovie);
             movieRepository.Save();
-            
         }
         public List<Movie> GetFavorites(int id)
         {
@@ -268,7 +253,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Movies
         }
     }
 
-    
+
 
 }
 

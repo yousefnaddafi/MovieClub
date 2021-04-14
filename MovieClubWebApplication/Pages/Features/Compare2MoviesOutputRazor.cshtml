@@ -1,0 +1,61 @@
+﻿@page
+@model MovieClubWebApplication.Pages.Features.Compare2MoviesOutputRazorModel
+@{ ViewData["Title"] = "CompareResult";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+
+        .column {
+            float: left;
+            width: 50%;
+            padding: 10px;
+            height: 300px;
+        }
+
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model.movieOutput)
+            {
+                <div class="col-lg-4 mb-4">
+                    <div class="card card-outline-primary h-100">
+                        <h5 class="card-title float-right d-inline"> @item.Title </h5>
+                        <div class="card-body">
+                            <div class="display-4">
+                                <img class="card-img-top" src="@item.Image" style="border-radius: 1rem ;  width:50%; height:50%;" alt="Card image cap">
+                            </div>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <p class="card-text text-right"> @item.DirectorName :کارگردان </p>
+                            <p class="card-text text-right"> @item.ProductYear :محصول سال</p>
+                            <p class="card-text text-right"> @item.Summery :خلاصه </p>
+                            <p class="card-text text-right"> @item.RateByUser رای کاربران </p>
+                            <p class="card-text text-right">@item.ImdbRate :رای داوران </p>                  
+                            <li class="list-group-item card-footer">
+                            <a asp-page="../Movies/Detail" asp-route-id="@item.Id" class="btn btn-primary">جزئیات</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>
+

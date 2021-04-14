@@ -1,6 +1,5 @@
 ﻿using App.Core.ApplicationService.ApplicationSerrvices.Directors;
 using App.Core.ApplicationService.Dtos.DirectorDtos;
-using App.Core.Entities.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -30,7 +29,7 @@ namespace WebApi.Controllers
         [HttpPut]
         public async Task<string> Update(DirectorUpdateDto item)
         {
-            await this.DirectorService.Update(item);
+            await DirectorService.Update(item);
             return $"the {item.Id} has been updated";
         }
 

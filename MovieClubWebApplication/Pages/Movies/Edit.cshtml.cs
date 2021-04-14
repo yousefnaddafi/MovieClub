@@ -22,12 +22,16 @@ namespace MovieClubWebApplication.Pages.Movies
        
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            movies = await _movieService.Get(id);
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+           movies = await _movieService.Get(id);
 
-            if (movies == null)
+           /* if (movies == null)
             {
                 return RedirectToPage("/NotFound");
-            }
+            }*/
 
             return Page();
         }
