@@ -42,9 +42,9 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public Task<ActorMovieInputDto> Get(int id)
+        public Task<ActorMovieOutputDto> Get(int id)
         {
-            return await ActorMovieService.Get(id);
+            return ActorMovieService.Get(id);
         }
     }
 }
