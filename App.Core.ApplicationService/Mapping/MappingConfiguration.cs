@@ -8,7 +8,6 @@ using App.Core.ApplicationService.Dtos.GenreDto;
 using App.Core.ApplicationService.Dtos.MovieDtos;
 using App.Core.ApplicationService.Dtos.UserDto;
 using App.Core.ApplicationService.Dtos.UserLoginDtos;
-using App.Core.ApplicationService.Dtos.UserDto;
 using App.Core.Entities.Model;
 using AutoMapper;
 using System;
