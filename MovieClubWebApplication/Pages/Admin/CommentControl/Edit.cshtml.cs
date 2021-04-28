@@ -7,25 +7,24 @@ using App.Core.ApplicationService.Dtos.CommentDtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MovieClubWebApplication.Pages.CommentRazor
+namespace MovieClubWebApplication.Pages.Admin.CommentControl
 {
-    public class DeleteModel : PageModel
+    public class EditModel : PageModel
     {
         private readonly ICommentService commentService;
 
-        public DeleteModel(ICommentService _commentService)
+        public EditModel(ICommentService _commentService)
         {
             commentService = _commentService;
         }
 
         [BindProperty]
-        public CommentsOutputDto tempUser { get; set; }
-
+        public CommentsOutputDto inputDto { get; set; }
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            tempUser = await commentService.Get(id);
+            inputDto = await commentService.Get(id);
 
-            if (tempUser == null)
+            if (inputDto == null)
             {
                 return RedirectToPage("/NotFound");
             }
@@ -35,14 +34,25 @@ namespace MovieClubWebApplication.Pages.CommentRazor
 
         public async Task<IActionResult> OnPostAsync()
         {
-            int deletedUser = await commentService.Delete(tempUser.Id);
 
-            if (deletedUser == 0)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                return Page();
             }
 
-            return RedirectToPage("Index");
+            CommentsUpdateDto tempCommentUpdate = new CommentsUpdateDto();
+            tempCommentUpdate.Id = inputDto.Id;
+            tempCommentUpdate.MovieId = inputDto.MovieId;
+
+
+            await commentService.Update(tempCommentUpdate);
+
+            return RedirectToPage("../User/Index");
         }
+
+
+        
+
+        
     }
 }

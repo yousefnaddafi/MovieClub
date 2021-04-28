@@ -10,7 +10,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MovieClubWebApplication.Pages.Drc
+namespace MovieClubWebApplication.Pages.Admin.DrcControl
 {
     public class DetailModel : PageModel
     {

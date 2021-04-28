@@ -7,7 +7,7 @@ using App.Core.ApplicationService.Dtos.DirectorDtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MovieClubWebApplication.Pages.Drc
+namespace MovieClubWebApplication.Pages.Admin.DrcControl
 {
     public class IndexModel : PageModel
     {

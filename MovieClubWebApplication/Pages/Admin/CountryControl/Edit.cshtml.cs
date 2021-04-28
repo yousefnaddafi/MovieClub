@@ -8,7 +8,7 @@ using App.Core.Entities.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MovieClubWebApplication.Pages.CountryRazor
+namespace MovieClubWebApplication.Pages.Admin.CountryControl
 {
     
         public class EditModel : PageModel

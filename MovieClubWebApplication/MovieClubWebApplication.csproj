@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\CommentRazor\" />
     <Folder Include="Pages\Site\" />
   </ItemGroup>
   <ItemGroup>
@@ -32,6 +31,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Pages\User\Login.cshtml" />
-    <Content Remove="Pages\Drc\Detail.cshtml" />
+    <Content Remove="Pages\Admin\DrcControl\Detail.cshtml" />
   </ItemGroup>
 </Project>

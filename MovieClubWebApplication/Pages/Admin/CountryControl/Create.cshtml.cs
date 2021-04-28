@@ -8,7 +8,7 @@ using App.Core.ApplicationService.Dtos.CountryDtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MovieClubWebApplication.Pages.CountryRazor
+namespace MovieClubWebApplication.Pages.Admin.CountryControl
 {
     public class CreateModel : PageModel
     {
