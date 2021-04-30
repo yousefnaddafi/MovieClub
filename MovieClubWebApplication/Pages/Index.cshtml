@@ -468,7 +468,7 @@
             <hr>
             <h3 class="text-center bg-light">Movies</h3>
             <hr>
-            @for (int i = 0; i <= 3; i++)
+            @for (int i = 0; i < 3; i++)
             {
                 <div class="card w-50 border-0 bg-light">
                     <img class="card-img-top" src="@Model.movieList[i].Image" style="width:100%; height:10%;" asp-page="/Movies/Detail" asp-route-id="@Model.movieList[i].Id">
