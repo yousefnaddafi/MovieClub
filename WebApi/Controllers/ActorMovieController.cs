@@ -24,27 +24,27 @@ namespace WebApi.Controllers
         [HttpPost]
         public async Task Create(ActorMovieInputDto inputDto)
         {
-           await ActorMovieService.Create(inputDto);
+            await ActorMovieService.Create(inputDto);
         }
 
         [HttpPut]
-        public ActorMovie Update(ActorMovie item)
+        public async Task<string> Update(ActorMovieUpdateDto item)
         {
-            this.ActorMovieService.Update(item);
-            return item;
+           await ActorMovieService.Update(item);
+            return $"this data {item.Id} has been updated" ;
         }
 
         [HttpDelete]
-        public int Delete(int id)
+        public async Task<int> Delete(int id)
         {
-            ActorMovieService.Delete(id);
+            await ActorMovieService.Delete(id);
             return id;
         }
 
         [HttpGet]
-        public Task<ActorMovieInputDto> Get(int id)
+        public Task<ActorMovieOutputDto> Get(int id)
         {
-            return   ActorMovieService.Get(id);
+            return ActorMovieService.Get(id);
         }
     }
 }

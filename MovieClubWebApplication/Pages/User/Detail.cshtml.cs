@@ -20,7 +20,7 @@ namespace MovieClubWebApplication.Pages.User
             userService = _userService;
             mapper = _mapper;
         }
-
+        [BindProperty]
         public UserOutputDto userOutputDto { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)

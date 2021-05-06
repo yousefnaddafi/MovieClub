@@ -1,6 +1,5 @@
 ﻿using App.Core.ApplicationService.ApplicationSerrvices.Directors;
 using App.Core.ApplicationService.Dtos.DirectorDtos;
-using App.Core.Entities.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,29 +21,29 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public Task Create(DirectorInputDto inputDto)
+        public async Task Create(DirectorInputDto inputDto)
         {
-           return DirectorService.Create(inputDto);
+            await DirectorService.Create(inputDto);
         }
 
         [HttpPut]
-        public DirectorUpdateDto Update(DirectorUpdateDto item)
+        public async Task<string> Update(DirectorUpdateDto item)
         {
-            this.DirectorService.Update(item);
-            return item;
+            await DirectorService.Update(item);
+            return $"the {item.Id} has been updated";
         }
 
         [HttpDelete]
-        public int Delete(int id)
+        public async Task<int> Delete(int id)
         {
-            DirectorService.Delete(id);
+            await DirectorService.Delete(id);
             return id;
         }
 
         [HttpGet]
-        public Task<DirectorOutputDto> Get(int id)
+        public async Task<DirectorOutputDto> Get(int id)
         {
-            return DirectorService.Get(id);
+            return await DirectorService.Get(id);
         }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App.Core.ApplicationService.ApplicationSerrvices.Users;
 using App.Core.ApplicationService.ApplicationSerrvices.UsersLogin;
 using App.Core.ApplicationService.Dtos.UserDto;
 using Microsoft.AspNetCore.Mvc;
@@ -11,38 +12,19 @@ namespace MovieClubWebApplication.Pages.User
 {
     public class IndexModel : PageModel
     {
-        private readonly IUserLoginService loginService;
+        private readonly IUserService userService;
 
-        public IndexModel(IUserLoginService _userLoginService)
+        public IndexModel(IUserService _userService)
         {
-            loginService = _userLoginService;
+            userService = _userService;
         }
 
         [BindProperty]
-        public UserInputDto userInput { get; set; }
+        public List<UserOutputDto> users { get; set; }
 
-        [BindProperty]
-        public int LoginState { get; set; } = 0;
-
-        public async Task<IActionResult> OnPost()
+        public async Task OnGetAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-            try
-            {
-                await loginService.Login(userInput);
-                LoginState = 1;
-
-                return RedirectToPage("../Index");
-            }
-            catch
-            {
-                LoginState = -1;
-                ViewData["Error"] = "login failed!";
-                return Page();
-            }
+            users = await userService.GetAll();
         }
     }
 }

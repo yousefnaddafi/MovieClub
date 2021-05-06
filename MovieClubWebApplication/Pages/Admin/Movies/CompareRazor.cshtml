@@ -1,0 +1,45 @@
+﻿@page
+@model MovieClubWebApplication.Pages.Movies.Compare_RazorModel
+@{ ViewData["Title"] = "comparemovie";
+}
+<h1>مقایسه</h1>
+<h4>فیلم ها </h4>
+
+<div class="row justify-content-center" id="myModal">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">مقایسه </div>
+            <div class="card-body">
+                <form action="/Features/Compare2MoviesOutputRazor" target="_blank">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <label for="Title1">نام فیلم شماره 1 </label>
+                    <div class="input-group mb-3">
+
+                        <input type="text" class="form-control fixed-value" id="Title1" name="Title1" placeholder="نام فیلم شماره 1" aria-label="Recipient's username" aria-describedby="basic-addon2" value="">
+                    </div>
+
+                    <label for="Title2">نام فیلم شماره 2</label>
+                    <div class="input-group mb-3">
+
+                        <input type="text" class="form-control fixed-value" id="Title2" name="Title2" placeholder="نام فیلم شماره 2" aria-label="Recipient's username" aria-describedby="basic-addon2" value="">
+
+                    </div>
+
+                    <div class="card-footer">
+                        <input type="submit" value="مقایسه">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+

@@ -29,43 +29,62 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Genres
             await genreRepository.Save();
             return temp.Id;
         }
-        public async Task<string> Update(GenreInputDtos item)
+        public async Task<string> Update(GenreUpdateDto item)
         {
             var eddition = mapper.Map<Genre>(item);
-            genreRepository.Update(eddition);
+            await genreRepository.Update(eddition);
             await genreRepository.Save();
             return $"{item.Id}is update";
 
         }
         public async Task<int> Delete(int id)
         {
-            if (genreRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            //if (genreRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            //{
+            //    throw new InvalidIdException("Wrong Id");
+            //}
+            //await genreRepository.Delete(id);
+            //return id;
+
+
+            var item = genreRepository.GetQuery().FirstOrDefault(x => x.Id == id);
+            if (item != null)
             {
-                throw new InvalidIdException("Wrong Id");
+                await genreRepository.Delete(id);
+                await genreRepository.Save();
+                return id;
             }
-            await genreRepository.Delete(id);
-            return id;
+            else
+            {
+                return 0;
+            }
         }
         public async Task<GenreOutPutDto> Get(int id)
         {
-            if (genreRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
-            {
-                throw new InvalidIdException("Wrong Id");
-            }
-            var genres = genreRepository.GetQuery().FirstOrDefault(x => x.Id == id);
-            List<GenreOutPutDto> result = new List<GenreOutPutDto>();
-            var mappedGenres = mapper.Map<GenreOutPutDto>(genres);
-            result.Add(mappedGenres);
-            return mappedGenres;
+            //genreRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+
+            //    throw new InvalidIdException("Wrong Id");
+
+            //var genres = genreRepository.GetQuery().FirstOrDefault(x => x.Id == id);
+            //List<GenreOutPutDto> result = new List<GenreOutPutDto>();
+            //var mappedGenres = mapper.Map<GenreOutPutDto>(genres);
+            //result.Add(mappedGenres);
+            //return mappedGenres;
+
+
+
+            var genre = genreRepository.GetQuery().FirstOrDefault(x => x.Id == id);
+            var mappedUser = mapper.Map<GenreOutPutDto>(genre);
+            return mappedUser;
         }
         public async Task<List<GenreOutPutDto>> GetAll()
         {
-            var genre = genreRepository.GetQuery().Select(x => x.GenreName).ToList();
             List<GenreOutPutDto> result = new List<GenreOutPutDto>();
+            var genre = genreRepository.GetQuery().ToList();
             foreach (var item in genre)
             {
-                var mappedDirectors = mapper.Map<GenreOutPutDto>(item);
-                result.Add(mappedDirectors);
+                var mappedGenre = mapper.Map<GenreOutPutDto>(item);
+                result.Add(mappedGenre);
             }
             return result;
         }

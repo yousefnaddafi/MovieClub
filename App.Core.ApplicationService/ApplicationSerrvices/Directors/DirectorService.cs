@@ -40,47 +40,35 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
         public async Task<string> Update(DirectorUpdateDto item)
         {
             var drc = mapper.Map<Entities.Model.Directors>(item);
-            this.directorRepository.Update(drc);
+            await directorRepository.Update(drc);
             await directorRepository.Save();
-            return $"{item.Id}is update";
+            return $"{item.Id} updates";
         }
 
         public async Task<int> Delete(int id)
         {
-            // var dltDirector = directorRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault();
-            //if(dltDirector.ToString()==null)
-            //{
-            //  return 0;
-
-            //}
             var directortoDelete = directorRepository.GetQuery().FirstOrDefault(x => x.Id == id);
-            if(directortoDelete != null)
+            if (directortoDelete != null)
             {
-               await directorRepository.Delete(id);  
-               await directorRepository.Save();
+                await directorRepository.Delete(id);
+                await directorRepository.Save();
+                return id;
             }
-
-          return id;
-        
-          
+            else
+            {
+                return 0;
+            }
         }
 
         public async Task<DirectorOutputDto> Get(int id)
         {
-            //if (directorRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
-            //{
-            //    throw new InvalidIdException("Wrong Id");
-            //}
-            var directorss = directorRepository.GetQuery().FirstOrDefault(x => x.Id == id);
+            var directors = directorRepository.GetQuery().FirstOrDefault(x => x.Id == id);
 
             List<DirectorOutputDto> result = new List<DirectorOutputDto>();
-
-            var mappedDirectorss = mapper.Map<DirectorOutputDto>(directorss);
-            result.Add(mappedDirectorss);
-            return mappedDirectorss;
+            var directorInputDto = mapper.Map<DirectorOutputDto>(directors);
+            result.Add(directorInputDto);
+            return directorInputDto;
         }
-
-
         public async Task<List<DirectorOutputDto>> GetAll()
         {
             var directorrr = directorRepository.GetQuery().ToList();
@@ -97,7 +85,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Directors
         public List<Entities.Model.Directors> GetQuery()
         {
             return directorRepository.GetQuery().ToList();
-        }        
+        }
         public async Task SaveChangesAsync()
         {
             await directorRepository.Save();

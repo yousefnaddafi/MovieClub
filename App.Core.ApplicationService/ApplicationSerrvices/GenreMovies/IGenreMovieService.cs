@@ -13,8 +13,8 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.GenreMovies
         Task<int> Create(GenreMovieInputDto inputDto);
         Task<string> Update(GenreMovieUpdateDto item);
         Task<int> Delete(int id);
-        Task<GenreMovieInputDto> Get(int id);
-        Task<List<GenreMovie>> GetAll();
+        Task<GenreMovieOutput> Get(int id);
+        Task<List<GenreMovieOutput>> GetAll();
         List<GenreMovie> GetQuery();
     }
 }

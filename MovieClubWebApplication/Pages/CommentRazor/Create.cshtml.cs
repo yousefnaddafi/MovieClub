@@ -30,7 +30,7 @@ namespace MovieClubWebApplication.Pages.CommentRazor
 
             await commentService.Create(commentInput);
 
-            return RedirectToPage("../User/Index");
+            return RedirectToPage("../CommentRazor/Index");
         }
     }
 }

@@ -20,12 +20,8 @@ namespace WebApi.Controllers
     {
         private readonly IUserService userService;
         private readonly IUserLoginService userLoginService;
-        
-        private readonly IMapper mapper;
-
-        public UserController(IUserService _userService, IUserLoginService _userLoginService, IMapper mapper)
+        public UserController(IUserService _userService, IUserLoginService _userLoginService)
         {
-            this.mapper = mapper;
             userService = _userService;
             userLoginService = _userLoginService;
         }
@@ -37,23 +33,23 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        public User Update(UserUpdateDto inputDto)
+        public async Task<UserOutputDto> Update(UserUpdateDto inputDto)
         {
-            this.userService.Update(inputDto);
-            return mapper.Map<User>(inputDto);
+            var result = await this.userService.Update(inputDto);
+            return result;
         }
 
         [HttpDelete]
-        public int Delete(int id)
+        public async Task<int> Delete(int id)
         {
-            userService.Delete(id);
+            await userService.Delete(id);
             return id;
         }
 
         [HttpGet]
-        public Task<User> Get(int id)
+        public async Task<UserOutputDto> Get(int id)
         {
-            return userService.Get(id);
+            return await userService.Get(id);
         }
         [HttpPost("Login")]
         public async Task<UserLoginOutputDto> LoginUser(UserInputDto inputDto)

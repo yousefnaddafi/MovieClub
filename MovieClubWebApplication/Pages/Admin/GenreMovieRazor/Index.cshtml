@@ -1,0 +1,33 @@
+﻿@page
+@model MovieClubWebApplication.Pages.GenreMovieRazor.IndexModel
+@{
+    ViewData["Title"] = "GenreMovies";
+}
+<h3 class="text-center bg-light">فهرست ژانرفیلم ها</h3>
+<h3 class="text-center bg-light">فهرست ژانرها</h3>
+<hr>
+@foreach (var item in Model.genreMovieInput)
+{
+    <div class="card w-100 border-0 bg-light">
+
+        <div class="card-body mt-3">
+            <a class="card-link">
+                <h5 class="card-title float-right d-inline"> @item.GenreId </h5>
+            </a>
+            <a class="card-link">
+                <h5 class="card-title float-right d-inline"> @item.MovieId </h5>
+            </a>
+            <div class="card-footer text-center">
+                <a asp-page="/GenreMovieRazor/Detail" asp-route-id="@item.Id" class="btn btn-primary m-1">جزییات</a>
+
+                <a asp-page="/GenreMovieRazor/Delete" asp-route-id="@item.Id" class="btn btn-primary m-1">حذف</a>
+
+                <a asp-page="/GenreRazor/Edit" asp-route-id="@item.Id" class="btn btn-primary m-1">تغییر</a>
+                <!--- <a href="#" class="card-link"><i class="far fa-bell"></i></a>
+         <a href="#" class="card-link"><i class="far fa-comment-alt"></i></a>
+         <a href="#" class="card-link"><i class="far fa-heart"></i></a>
+         <a href="#" class="card-link"><i class="far fa-bookmark"></i></a>-->
+            </div>
+        </div>
+    </div>
+};>

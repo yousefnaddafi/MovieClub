@@ -16,7 +16,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.GenreMovies
         private readonly IMovieRepository<GenreMovie> genreMovieRepository;
         private readonly IMapper mapper;
 
-        public GenreMovieService(IMovieRepository<GenreMovie> _genreMovieRepository,IMapper mapper)
+        public GenreMovieService(IMovieRepository<GenreMovie> _genreMovieRepository, IMapper mapper)
         {
             this.genreMovieRepository = _genreMovieRepository;
             this.mapper = mapper;
@@ -33,39 +33,35 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.GenreMovies
         public async Task<string> Update(GenreMovieUpdateDto item)
         {
             var GMovie = mapper.Map<GenreMovie>(item);
-            this.genreMovieRepository.Update(GMovie);
-          await genreMovieRepository.Save();
-            return $"{item.Id }is update";
+            await this.genreMovieRepository.Update(GMovie);
+            await genreMovieRepository.Save();
+            return $"{item.Id } is update";
             ;
         }
 
         public async Task<int> Delete(int id)
         {
-           var input= genreMovieRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault();
-           if(input==null)
-            {
-                return 0;
-            }
-         await genreMovieRepository.Delete(id);
-         await genreMovieRepository.Save();
+            await genreMovieRepository.Delete(id);
             return id;
         }
-
-        public async Task<GenreMovieInputDto> Get(int id)
+        public async Task<GenreMovieOutput> Get(int id)
         {
-
-          var GenresMovies = genreMovieRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault();
-                    
-            var mappedDirectorss = mapper.Map<GenreMovieInputDto>(GenresMovies);
-            List<GenreMovieInputDto> result = new List<GenreMovieInputDto>();
-            result.Add(mappedDirectorss);
-            return mappedDirectorss;
-           
+            var GenresMovies = genreMovieRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault();
+            List<GenreMovieOutput> result = new List<GenreMovieOutput>();
+            var mappedGenreMovie = mapper.Map<GenreMovieOutput>(GenresMovies);
+            result.Add(mappedGenreMovie);
+            return mappedGenreMovie;
         }
-
-        public Task<List<GenreMovie>> GetAll()
+        public async Task<List<GenreMovieOutput>> GetAll()
         {
-            return genreMovieRepository.GetAll();
+            var genreMovies = genreMovieRepository.GetQuery().ToList();
+            List<GenreMovieOutput> result = new List<GenreMovieOutput>();
+            foreach (var item in genreMovies)
+            {
+                var mappedGenreMovie = mapper.Map<GenreMovieOutput>(item);
+                result.Add(mappedGenreMovie);
+            }
+            return result;
         }
 
         public List<GenreMovie> GetQuery()

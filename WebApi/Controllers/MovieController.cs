@@ -1,11 +1,5 @@
-﻿using App.Core.ApplicationService.ApplicationSerrvices.ActorMovies;
-using App.Core.ApplicationService.ApplicationSerrvices.Actors;
-using App.Core.ApplicationService.ApplicationSerrvices.Commentts;
-using App.Core.ApplicationService.ApplicationSerrvices.Countries;
+﻿using App.Core.ApplicationService.ApplicationSerrvices.Commentts;
 using App.Core.ApplicationService.ApplicationSerrvices.CountryMovies;
-using App.Core.ApplicationService.ApplicationSerrvices.Directors;
-using App.Core.ApplicationService.ApplicationSerrvices.GenreMovies;
-using App.Core.ApplicationService.ApplicationSerrvices.Genres;
 using App.Core.ApplicationService.ApplicationSerrvices.Movies;
 using App.Core.ApplicationService.ApplicationSerrvices.UsersLogin;
 using App.Core.ApplicationService.Dtos.CommentDtos;
@@ -51,16 +45,16 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        public async Task<Movie> Update(MovieInputUpdateDto inputDto)
+        public async Task<string> Update(MovieInputUpdateDto inputDto)
         {
-          await  moviesService.Update(inputDto);
-            return  mapper.Map<Movie>(inputDto); 
+            await moviesService.Update(inputDto);
+            return $"the {inputDto.Id} has been updated";
         }
 
         [HttpDelete]
-        public int Delete(int id)
+        public async Task<int> Delete(int id)
         {
-            moviesService.Delete(id);
+           await moviesService.Delete(id);
             return id;
         }
 
@@ -76,34 +70,34 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("Comments")]
-        public int CommentByUser([FromHeader] CheckLoginInputDto _checkLoginInputDto, [FromBody] CommentsInputDto _commentInputDto) {
+        public async Task CommentByUser([FromHeader] CheckLoginInputDto _checkLoginInputDto, [FromBody] CommentsInputDto _commentInputDto) {
             if (userLoginService.CheckToken(_checkLoginInputDto)) {
-                return commentService.AddComment(_commentInputDto);
+                await commentService.Insert(_commentInputDto);
             } else {
-                return 327; //ino bayad avaz konim
+                 //ino bayad avaz konim
             }
         }
 
         [HttpPost("Compare")]
-        public async Task<List<MovieCompareOutputDto>> Compare([FromBody] MovieCompareInputDto inputDto)
+        public async Task<List<MovieOutputDto>> Compare([FromBody] MovieCompareInputDto inputDto)
         {
             return await moviesService.Compare(inputDto);
         }
 
         [HttpGet("Recently")]
-        public Task<List<MovieRelatedDto>> GetNewComing()
+        public async Task<List<MovieRelatedDto>> GetNewComing()
         {
-            return moviesService.GetNewComing();
+            return await moviesService.GetNewComing();
         }
 
         [HttpGet("Popular")]
-        public Task<List<MovieRelatedDto>> GetPopular()
+        public async Task<List<MovieRelatedDto>> GetPopular()
         {
-            return moviesService.GetPopular();
+           return await moviesService.GetPopular();
         }
 
         [HttpPost("Search")]
-        public List<SearchDetailFilterDto> SearchMovies([FromBody] SearchMovieInputDto searchInput)
+        public Task<List<MovieOutputDto>> SearchMovies([FromQuery] string searchInput)
         {
             return moviesService.Search(searchInput);
         }
@@ -115,14 +109,14 @@ namespace WebApi.Controllers
             return countryMovieService.GetCountries(countryInput);
         }
         [HttpGet("HighRate")]
-        public Task<List<MovieOutputDto>> BestRateMovie()
+        public async Task<List<MovieOutputDto>> BestRateMovie()
         {
-            return moviesService.GetHighRate();
+            return await moviesService.GetHighRate();
         }
         [HttpGet("MostVisited")]
-        public List<Movie> MostVisit()
+        public async Task<List<MovieRelatedDto>> MostVisit()
         {
-            return moviesService.MostVisited();
+            return await moviesService.MostVisited();
         }
         [HttpPost("RateByUser")]
         public void RateByUser([FromHeader] CheckLoginInputDto _checkLoginInputDto, [FromBody] RateByUserInputDto _rateByUserInputDto)

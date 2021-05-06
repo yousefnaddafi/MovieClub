@@ -13,12 +13,12 @@ using System.Threading.Tasks;
 
 namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
 {
-    public class ActorService: IActorService
+    public class ActorService : IActorService
     {
         private readonly IMovieRepository<Actor> actorRepository;
         private readonly IMapper mapper;
 
-        public ActorService(IMovieRepository<Actor> _actorRepository,IMapper mapper)
+        public ActorService(IMovieRepository<Actor> _actorRepository, IMapper mapper)
         {
             this.actorRepository = _actorRepository;
             this.mapper = mapper;
@@ -32,24 +32,34 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
             return temp.Id;
         }
 
-        public Actor Update(ActorRazorDto inputDto)
+        public async Task<ActorOutputDto> Update(ActorRazorDto inputDto)
         {
             var actor = mapper.Map<Actor>(inputDto);
-
-            actorRepository.Update(actor);
-            actorRepository.Save();
-            return actor;
+            await actorRepository.Update(actor);
+            var actorRazor = mapper.Map<ActorOutputDto>(actor);
+            await actorRepository.Save();
+            return actorRazor;
         }
 
-        public int Delete(int id)
+        public async Task<int> Delete(int id)
         {
-            actorRepository.Delete(id);
-            return id;
+            var item = actorRepository.GetQuery().FirstOrDefault(x => x.Id == id);
+
+            if (item != null)
+            {
+                await actorRepository.Delete(id);
+                await actorRepository.Save();
+                return id;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         public async Task<ActorOutputDto> Get(int id)
         {
-           
+
             var actors = actorRepository.GetQuery().FirstOrDefault(x => x.Id == id);
 
             List<ActorOutputDto> result = new List<ActorOutputDto>();
@@ -70,10 +80,11 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Actors
                 result.Add(actorOpD);
             }
 
-            return  result;
+            return result;
         }
 
-        public List<Actor> GetQuery() {
+        public List<Actor> GetQuery()
+        {
             return actorRepository.GetQuery().ToList();
         }
 

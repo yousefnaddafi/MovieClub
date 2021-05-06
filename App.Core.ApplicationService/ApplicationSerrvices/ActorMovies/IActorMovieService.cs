@@ -11,10 +11,10 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.ActorMovies
     public interface IActorMovieService
     {
         Task<int> Create(ActorMovieInputDto inputDto);
-        ActorMovie Update(ActorMovie item);
-        int Delete(int id);
-        Task<ActorMovieInputDto> Get(int id);
-        Task<List<ActorMovie>> GetAll();
+        Task<ActorMovieOutputDto> Update(ActorMovieUpdateDto item);
+        Task<int> Delete(int id);
+        Task<ActorMovieOutputDto> Get(int id);
+        Task<List<ActorMovieOutputDto>> GetAll();
         List<ActorMovie> GetQuery();
     }
 }

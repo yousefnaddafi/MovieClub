@@ -20,7 +20,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
         private readonly IMovieRepository<Favorite> FavoriteRepository;
 
 
-        public UserService(IMovieRepository<User> _repository,IMovieRepository<Favorite> FavRepository ,IMapper mapper)
+        public UserService(IMovieRepository<User> _repository, IMovieRepository<Favorite> FavRepository, IMapper mapper)
         {
             FavoriteRepository = FavRepository;
             userRepository = _repository;
@@ -35,7 +35,7 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 
                 userRepository.Insert(RegisterUser);
                 await userRepository.Save();
-              
+
             }
             catch (Exception ex)
             {
@@ -45,42 +45,55 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 
         }
 
-        public User Update(UserUpdateDto inputDto)
+        public async Task<UserOutputDto> Update(UserUpdateDto inputDto)
         {
 
-            var RegisterUser = mapper.Map<User>(inputDto);
+            var mappedUser = mapper.Map<User>(inputDto);
 
-            userRepository.Update(RegisterUser);
-            userRepository.Save();
-            return RegisterUser;
+            await userRepository.Update(mappedUser);
+            await userRepository.Save();
+            return mapper.Map<UserOutputDto>(mappedUser);
         }
 
-        public int Delete(int id)
+        public async Task<int> Delete(int id)
         {
-            var item = userRepository.GetQuery().Where(x => x.Id == id).FirstOrDefault();
-            if (item == null)
+            var item = userRepository.GetQuery().FirstOrDefault(x => x.Id == id);
+
+            if (item != null)
             {
-                throw new InvalidIdException("Wrong Id");
+                await userRepository.Delete(id);
+                await userRepository.Save();
+                return id;
             }
-            userRepository.Delete(id);
-            userRepository.Save();
-            return id;
-        }
-
-        public Task<User> Get(int id)
-        {
-            if (userRepository.GetQuery().Select(x => x.Id != id).FirstOrDefault())
+            else
             {
-                throw new InvalidIdException("Wrong Id");
+                return 0;
             }
-            return userRepository.Get(id);
         }
 
-        public Task<List<User>> GetAll()
+        public async Task<UserOutputDto> Get(int id)
         {
-            return userRepository.GetAll();
+            var user = userRepository.GetQuery().FirstOrDefault(x => x.Id == id);
+            var mappedUser = mapper.Map<UserOutputDto>(user);
+            return mappedUser;
         }
-        //
+
+        public async Task<List<UserOutputDto>> GetAll()
+        {
+            List<User> users = new List<User>();
+            users = userRepository.GetQuery().ToList();
+
+            List<UserOutputDto> result = new List<UserOutputDto>();
+
+            foreach (var item in users)
+            {
+                var mappedUser = mapper.Map<UserOutputDto>(item);
+                result.Add(mappedUser);
+            }
+
+            return result;
+        }
+
         public async Task Insert(UserInputDto inputDto)
         {
             var RegisterUser = mapper.Map<User>(inputDto);
@@ -90,22 +103,22 @@ namespace App.Core.ApplicationService.ApplicationSerrvices.Users
 
         public async Task AddFavorites(FavoriteInputDto inputDto)
         {
-            foreach(var item in inputDto.Favorites)
+            foreach (var item in inputDto.Favorites)
             {
                 var Fav = new Favorite();
                 Fav.GenreTitle = item;
-                Fav.UserId= inputDto.UserId;
+                Fav.UserId = inputDto.UserId;
                 FavoriteRepository.Insert(Fav);
                 await FavoriteRepository.Save();
             }
-            
+
         }
     }
 }
 
 
 
-            
-        
-    
+
+
+
 
