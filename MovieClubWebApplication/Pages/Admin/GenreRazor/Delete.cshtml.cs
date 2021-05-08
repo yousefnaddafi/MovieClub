@@ -8,7 +8,7 @@ using App.Core.Entities.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MovieClubWebApplication.Pages.GenreRazor
+namespace MovieClubWebApplication.Pages.Admin.GenreRazor
 {
     public class DeleteModel : PageModel
     {

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
 
-namespace MovieClubWebApplication.Pages.Movies
+namespace MovieClubWebApplication.Pages.Admin.Movies
 {
     public class Compare_RazorModel : PageModel
     {

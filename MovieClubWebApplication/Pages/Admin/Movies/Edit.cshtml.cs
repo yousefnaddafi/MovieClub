@@ -8,7 +8,7 @@ using App.Core.Entities.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MovieClubWebApplication.Pages.Movies
+namespace MovieClubWebApplication.Pages.Admin.Movies
 {
     public class EditModel : PageModel
     {
@@ -19,6 +19,10 @@ namespace MovieClubWebApplication.Pages.Movies
         }
         [BindProperty]
         public MovieOutputDto movies { get; set; }
+        [BindProperty]
+        public MovieInputUpdateDto movieedit { get; set; }
+        [BindProperty]
+        public bool State { get; set; }
        
         public async Task<IActionResult> OnGetAsync(int id)
         {
@@ -39,23 +43,34 @@ namespace MovieClubWebApplication.Pages.Movies
         public async Task<IActionResult> OnPostAsync()
         {
 
-            if (!ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid)
+                {
+                    return Page();
+                }
+
+                /*   MovieInputUpdateDto movieUpdate = new MovieInputUpdateDto();
+                   movieUpdate.Id = movies.Id;
+                   movieUpdate.Title = movies.Title;
+                   movieUpdate.Summery = movies.Summery;
+                   movieUpdate.ImdbRate = movies.ImdbRate;
+                   movieUpdate.ProductYear = movies.ProductYear;
+
+                   */
+
+                await _movieService.Update(movieedit);
+                State = true;
+
+                return RedirectToPage("/Movies/Index");
+
+            }
+            catch (Exception e)
+            {
+                State = false;
+                ViewData["Error"] = e.Message;
                 return Page();
             }
-
-            MovieInputUpdateDto movieUpdate = new MovieInputUpdateDto();
-            movieUpdate.Id = movies.Id;
-            movieUpdate.Title = movies.Title;
-            movieUpdate.Summery = movies.Summery;
-            movieUpdate.ImdbRate = movies.ImdbRate;
-            movieUpdate.ProductYear = movies.ProductYear;
-
-
-
-            await _movieService.Update(movieUpdate);
-
-            return RedirectToPage("/Movies/Index");
         }
     }
     

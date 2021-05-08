@@ -8,7 +8,7 @@ using App.Core.Entities.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MovieClubWebApplication.Pages.Features
+namespace MovieClubWebApplication.Pages.Admin.Movies
 {
     public class MostVisitedRazorModel : PageModel
     {

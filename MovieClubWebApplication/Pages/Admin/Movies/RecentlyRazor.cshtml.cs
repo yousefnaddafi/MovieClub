@@ -7,7 +7,7 @@ using App.Core.ApplicationService.Dtos.MovieDtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MovieClubWebApplication.Pages.Features
+namespace MovieClubWebApplication.Pages.Admin.Movies
 {
     public class RecentlyRazorModel : PageModel
     {

@@ -1,5 +1,5 @@
 ﻿@page 
-@model MovieClubWebApplication.Pages.Movies.EditModel
+@model MovieClubWebApplication.Pages.Admin.Movies.EditModel
 @{
     ViewData["Title"] = "Edit";
 }
@@ -43,6 +43,10 @@
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
+            @if (Model.State==false)
+            {
+                <p>@ViewBag.Error</p>
+            }
         </form>
     </div>
 </div>

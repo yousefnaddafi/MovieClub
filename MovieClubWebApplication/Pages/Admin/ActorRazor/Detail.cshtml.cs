@@ -8,7 +8,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MovieClubWebApplication.Pages.ActorRazor
+namespace MovieClubWebApplication.Pages.Admin.ActorRazor
 {
     public class DetailModel : PageModel
     {

@@ -8,7 +8,7 @@ using App.Core.Entities.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MovieClubWebApplication.Pages.Admin.Movies
+namespace MovieClubWebApplication.Pages.Admin.Admin.Movies
 {
     public class DetailModel : PageModel
     {

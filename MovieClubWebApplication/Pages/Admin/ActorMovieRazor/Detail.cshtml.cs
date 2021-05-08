@@ -7,7 +7,7 @@ using App.Core.ApplicationService.Dtos.ActorMovieDtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MovieClubWebApplication.Pages.ActorMovieRazor
+namespace MovieClubWebApplication.Pages.Admin.ActorMovieRazor
 {
     public class DetailModel : PageModel
     {
